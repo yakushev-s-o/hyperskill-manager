@@ -1,8 +1,12 @@
 package com.yakushevso;
 
+import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.common.reflect.TypeToken;
+import com.yakushevso.data.Answer;
+import com.yakushevso.data.Data;
+import com.yakushevso.data.Matrix;
+import com.yakushevso.data.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -13,11 +17,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.yakushevso.data.Step;
-import com.yakushevso.data.Data;
-import com.yakushevso.data.Answer;
-import com.yakushevso.data.Matrix;
 
 import static com.yakushevso.Util.*;
 
@@ -95,7 +94,14 @@ public class Automation {
         for (Answer answer : answers) {
             if (!answer.isChecked()) {
                 driver.get(answer.getUrl());
-                waitDownloadElement("//div[@class='step-problem']");
+
+                try {
+                    waitDownloadElement("//div[@class='step-problem']");
+                } catch (Exception e) {
+                    System.out.println("Error step = " + answer.getUrl());
+                    continue;
+                }
+
                 delay(500);
 
                 if (checkButtons()) {
@@ -362,7 +368,7 @@ public class Automation {
     // Select responses in matched test
     private void sendMatch(String[][] correctAnswers) {
         for (int i = 1; i <= correctAnswers.length; i++) {
-            String question = "/html/body/div[1]/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div/div[1]" +
+            String question = "/html/body/div/main/div/div/div/div/div[4]/div/div/div[1]/div/div/div[1]" +
                     "/div[" + i + "]/span";
             WebElement element1 = driver.findElement(By.xpath(question));
             String text1 = element1.getText();
@@ -381,11 +387,11 @@ public class Automation {
 
             while (checkTrue) {
                 for (int j = 1; j <= correctAnswers.length; j++) {
-                    String answer = "/html/body/div[1]/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div/div[2]" +
+                    String answer = "/html/body/div/main/div/div/div/div/div[4]/div/div/div[1]/div/div/div[2]" +
                             "/div/div[" + j + "]/div/span";
-                    String upArrow = "/html/body/div[1]/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div/div[2]" +
+                    String upArrow = "/html/body/div/main/div/div/div/div/div[4]/div/div/div[1]/div/div/div[2]" +
                             "/div/div[" + j + "]/div/div[2]/button[" + 1 + "]";
-                    String downArrow = "/html/body/div[1]/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div/div[2]" +
+                    String downArrow = "/html/body/div/main/div/div/div/div/div[4]/div/div/div[1]/div/div/div[2]" +
                             "/div/div[" + j + "]/div/div[2]/button[" + 2 + "]";
                     WebElement element2 = driver.findElement(By.xpath(answer));
                     String text2 = element2.getText();
@@ -426,11 +432,11 @@ public class Automation {
 
             while (checkTrue) {
                 for (int j = 1; j <= correctAnswers.length; j++) {
-                    String upArrow = "/html/body/div[1]/div[1]/div/div/div/div[4]/div/div/div[1]/div[1]/div/div/span" +
+                    String upArrow = "/html/body/div/main/div/div/div/div/div[4]/div/div/div[1]/div[1]/div/div/span" +
                             "/div[" + j + "]/div[3]/button[" + 1 + "]";
-                    String downArrow = "/html/body/div[1]/div[1]/div/div/div/div[4]/div/div/div[1]/div[1]/div/div/span" +
+                    String downArrow = "/html/body/div/main/div/div/div/div/div[4]/div/div/div[1]/div[1]/div/div/span" +
                             "/div[" + j + "]/div[3]/button[" + 2 + "]";
-                    String answer = "/html/body/div[1]/div[1]/div/div/div/div[4]/div/div/div[1]/div[1]/div/div/span" +
+                    String answer = "/html/body/div/main/div/div/div/div/div[4]/div/div/div[1]/div[1]/div/div/span" +
                             "/div[" + j + "]/div[2]/span";
                     WebElement element = driver.findElement(By.xpath(answer));
 
@@ -491,7 +497,7 @@ public class Automation {
                 for (Matrix matrix : matrixList) {
                     if (matrix.getName_row().equals(nameRow.get(0).getText()) &&
                             matrix.getName_columns().equals(columnsArr.get(j).getText()) && matrix.isCheck()) {
-                        String s = "/html/body/div[1]/div[1]/div/div/div/div[4]/div/div/div[1]/div[1]/div/table" +
+                        String s = "/html/body/div/main/div/div/div[1]/div/div[4]/div/div/div[1]/div[1]/div/table" +
                                 "/tbody/tr[" + i + "]/td[" + (j + 1) + "]/div/div";
                         WebElement checkbox = driver.findElement(By.xpath(s));
                         checkbox.click();

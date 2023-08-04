@@ -5,13 +5,18 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         try (Scanner sc = new Scanner(System.in)) {
-            System.out.println("Enter track number:");
+            System.out.println("Enter track number (https://hyperskill.org/tracks):");
 
             int track = sc.nextInt();
 
             Automation test = new Automation();
             SavePages save = new SavePages();
             Util util = new Util(track);
+
+            // Close old drivers
+            while (util.isProcessRunning()) {
+                util.closeProcess();
+            }
 
             while (true) {
                 System.out.println("""
@@ -67,6 +72,8 @@ public class Main {
                 } else if (mode == 5) {
                     System.exit(0);
                 }
+
+                System.out.println("Completed!\n");
             }
         }
     }

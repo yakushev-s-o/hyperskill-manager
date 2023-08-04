@@ -23,7 +23,7 @@ import com.yakushevso.data.Topic;
 
 public class Util {
     public static WebDriver driver;
-    private static final String CHROMEDRIVER_PATH = "C:/tools/chromedriver_win32/chromedriver.exe";
+    private static final String CHROMEDRIVER_PATH = "D:/tools/chromedriver_win32/chromedriver.exe";
     public static final String SITE_LINK = "https://hyperskill.org/";
     public static String JSON_PATH;
     public static String DATA_PATH;
@@ -310,6 +310,36 @@ public class Util {
             Thread.sleep(ms);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    // Close process
+    public void closeProcess() {
+        try {
+            ProcessBuilder builder = new ProcessBuilder("taskkill", "/F", "/IM", "chromedriver.exe");
+            builder.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Check running process
+    public boolean isProcessRunning() {
+        try {
+            ProcessBuilder builder = new ProcessBuilder("tasklist");
+            Process process = builder.start();
+            InputStream inputStream = process.getInputStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (line.contains("chromedriver.exe")) {
+                    return true;
+                }
+            }
+            return false;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
         }
     }
 }
