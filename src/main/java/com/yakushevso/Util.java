@@ -25,6 +25,8 @@ public class Util {
     public static WebDriver driver;
     private static final String CHROMEDRIVER_PATH = "D:/tools/chromedriver_win32/chromedriver.exe";
     public static final String SITE_LINK = "https://hyperskill.org/";
+    private static final String LOGIN = "yakushevso@ya.ru";
+    private static final String PASSWORD = "{yx#e%B9~SGl4@Cr";
     public static String JSON_PATH;
     public static String DATA_PATH;
     public static String FOLDER_PATH;
@@ -62,8 +64,8 @@ public class Util {
         WebElement passwordField = driver.findElement(By.xpath("//input[@type='password']"));
         WebElement signInButton = driver.findElement(By.xpath("//button[@data-cy='submitButton']"));
 
-        emailField.sendKeys("yakushevso@ya.ru");
-        passwordField.sendKeys("{yx#e%B9~SGl4@Cr");
+        emailField.sendKeys(LOGIN);
+        passwordField.sendKeys(PASSWORD);
         signInButton.click();
 
         waitDownloadElement("//h1[@data-cy='curriculum-header']");
