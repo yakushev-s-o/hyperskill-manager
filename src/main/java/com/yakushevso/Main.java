@@ -7,7 +7,7 @@ public class Main {
         try (Scanner sc = new Scanner(System.in)) {
             System.out.println("Enter track number (https://hyperskill.org/tracks):");
 
-            int track = sc.nextInt();
+            String track = sc.nextLine();
 
             Automation test = new Automation();
             SavePages save = new SavePages();

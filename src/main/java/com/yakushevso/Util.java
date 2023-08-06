@@ -13,8 +13,7 @@ import java.io.*;
 import java.lang.reflect.Type;
 import java.net.URL;
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import com.yakushevso.data.Data;
 import com.yakushevso.data.Step;
@@ -23,18 +22,17 @@ import com.yakushevso.data.Topic;
 
 public class Util {
     public static WebDriver driver;
-    private static final String CHROMEDRIVER_PATH = "D:/tools/chromedriver_win32/chromedriver.exe";
-    public static final String SITE_LINK = "https://hyperskill.org/";
-    private static final String LOGIN = "yakushevso@ya.ru";
-    private static final String PASSWORD = "{yx#e%B9~SGl4@Cr";
+    private static String LOGIN;
+    private static String PASSWORD;
+    private static String CHROMEDRIVER_PATH;
+    public static String SITE_LINK;
+    public static String FOLDER_PATH;
     public static String JSON_PATH;
     public static String DATA_PATH;
-    public static String FOLDER_PATH;
 
-    public Util(int track) {
-        JSON_PATH = "src/main/resources/answer-list-" + track + ".json";
-        DATA_PATH = "src/main/resources/data-list-" + track + ".json";
-        FOLDER_PATH = "C:/Users/Admin/Desktop/track/" + track + "/";
+    public Util(String track) {
+        initSettings();
+        setSettings(track);
     }
 
     public void createDriver(boolean hide) {
@@ -342,6 +340,56 @@ public class Util {
         } catch (Exception e) {
             e.printStackTrace();
             return false;
+        }
+    }
+
+    // Create settings file
+    private void initSettings() {
+        File file = new File("src/main/resources/settings.json");
+
+        if (!file.exists() || file.length() == 0) {
+            LinkedHashMap<String, String> settingsData = new LinkedHashMap<>();
+
+            settingsData.put("login", "");
+            settingsData.put("password", "");
+            settingsData.put("chromedriver_path", "D:/tools/chromedriver_win32/chromedriver.exe");
+            settingsData.put("folder_path", "C:/Users/Admin/Desktop/track/TRACK_NUMBER/");
+            settingsData.put("json_path", "src/main/resources/answer-list-TRACK_NUMBER.json");
+            settingsData.put("data_path", "src/main/resources/data-list-TRACK_NUMBER.json");
+            settingsData.put("site_link", "https://hyperskill.org/");
+
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+            try {
+                FileWriter writer = new FileWriter(file);
+                gson.toJson(settingsData, writer);
+                writer.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    // Set settings
+    private void setSettings(String track) {
+        Gson gson = new Gson();
+        File file = new File("src/main/resources/settings.json");
+
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            JsonElement jsonElement = gson.fromJson(reader, JsonElement.class);
+            JsonObject obj = jsonElement.getAsJsonObject();
+
+            LOGIN = obj.get("login").getAsString();
+            PASSWORD = obj.get("password").getAsString();
+            CHROMEDRIVER_PATH = obj.get("chromedriver_path").getAsString();
+            FOLDER_PATH = obj.get("folder_path").getAsString().replace("TRACK_NUMBER", track);
+            JSON_PATH = obj.get("json_path").getAsString().replace("TRACK_NUMBER", track);
+            DATA_PATH = obj.get("data_path").getAsString().replace("TRACK_NUMBER", track);
+            SITE_LINK = obj.get("site_link").getAsString();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
     }
 }
