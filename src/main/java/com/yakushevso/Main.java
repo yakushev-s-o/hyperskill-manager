@@ -20,31 +20,37 @@ public class Main {
 
             while (true) {
                 System.out.println("""
-                        Select mode:
+                        
                         1. Get data
                         2. Save pages
-                        3. Get the right answers
-                        4. Answer tests
-                        5. Exit""");
+                        3. Get answers
+                        4. Send answers
+                        5. Exit
+                        
+                        Enter mode number:""");
 
                 int mode = sc.nextInt();
 
                 if (mode == 1) {
                     util.createDriver(true);
+                    System.out.println("In progress...");
                     util.login();
                     util.getData(12);
                 } else if (mode == 2) {
                     System.out.println("""
-                        Select mode:
+
                         1. Save topics
                         2. Save projects
                         3. Save stages
                         4. Save themes
-                        5. Save all""");
+                        5. Save all
+                        
+                        Enter mode number:""");
 
                     int saveMode = sc.nextInt();
 
                     util.createDriver(false);
+                    System.out.println("In progress...");
                     util.login();
 
                     if (saveMode == 1) {
@@ -62,18 +68,20 @@ public class Main {
                         save.saveSteps();
                     }
                 } else if (mode == 3) {
-                    util.createDriver(true);
+                    util.createDriver(false);
+                    System.out.println("In progress...");
                     util.login();
                     test.getAnswers();
                 } else if (mode == 4) {
                     util.createDriver(false);
+                    System.out.println("In progress...");
                     util.login();
                     test.sendAnswers();
                 } else if (mode == 5) {
                     System.exit(0);
                 }
 
-                System.out.println("Completed!\n");
+                System.out.println("Completed!");
             }
         }
     }

@@ -340,10 +340,12 @@ public class Automation {
         List<WebElement> count = driver.findElements(By.xpath("//div[@class='left-side__line']"));
 
         for (int i = 1; i <= count.size(); i++) {
-            String question = "/html/body/div[1]/div[1]/div/div/div/div[4]/div/div/div[1]/div[1]/div/div[1]" +
-                    "/div[" + i + "]/span";
-            String answer = "/html/body/div[1]/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div/div[2]/div" +
-                    "/div[" + i + "]/div/span";
+            // /html/body/div/main/div/div/div/div/div[4]/div/div/div[1]/div[1]/div/div[1]/div[1]/span
+            String question = "/html/body/div/main/div/div/div/div/div[4]/div/div/div[1]/div[1]/div/div[1]/" +
+                    "div[" + i + "]/span";
+            // /html/body/div/main/div/div/div/div/div[4]/div/div/div[1]/div[1]/div/div[2]/div/div[1]/div/span
+            String answer = "/html/body/div/main/div/div/div/div/div[4]/div/div/div[1]/div[1]/div/div[2]/div/" +
+                    "div[" + i + "]/div/span";
             WebElement element1 = driver.findElement(By.xpath(question));
             WebElement element2 = driver.findElement(By.xpath(answer));
 

@@ -2896,5 +2896,178 @@
       "An abstract class can have abstract and non-abstract instance methods.",
       "It\u0027s needed to write the keyword abstract to declare a class as abstract."
     ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3760",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "class Main {\n  public static void main(String[] args) {\n    System.out.println(\"WE NEED TO\\n\\nLEARN JAVA\\n\\nAS QUICKLY AS POSSIBLE\");\n  }\n}"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/26368",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "class Main {\n    public static void main(String[] args) {\n        //write your code here\n        System.out.println(\"\"\"\n                        1 2 3\n                        4 5 6\n                        7 8 9\n                        * 0 #\"\"\");\n    }\n}"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2917",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "_var",
+      "var3"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2068",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "30"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3440",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "int"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/10990",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "import java.util.Scanner;\n\npublic class Main {\n\n    /**\n     * The method calculates the sum of integers in a given range\n     * \n     * @param from inclusive\n     * @param to exclusive\n     *\n     * @return the sum (long)\n     */\n    public static long sumInRange(int from, int to) {\n        // write your code here\n        long res \u003d 0;\n        for(int i \u003d from; i \u003c to; i++) {\n            res +\u003d i;\n        }\n\n        return res;\n    }\n\n    /* Do not change code below */\n    public static void main(String[] args) {\n        final Scanner scanner \u003d new Scanner(System.in);\n\n        int from \u003d scanner.nextInt();\n        int to \u003d scanner.nextInt();\n\n        System.out.println(sumInRange(from, to));\n    } \n}"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2754",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "public static long method(long l) { return 1L; }",
+      "public static void method(String s, int i) { }",
+      "public static void method(int i, String s) { }"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/1957",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "int numbers[] \u003d new int[10];",
+      "int[] numbers \u003d new int[20];"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2127",
+    "checked": false,
+    "mode": 6,
+    "answerListArr": [
+      [
+        "numbers[0]",
+        "1"
+      ],
+      [
+        "numbers[6]",
+        "4"
+      ],
+      [
+        "numbers.length",
+        "7"
+      ],
+      [
+        "numbers[7]",
+        "ArrayIndexOutOfBoundsException"
+      ]
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2715",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "Arrays.equals(numbers1, numbers1)",
+      "Arrays.equals(numbers1, numbers2)"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2747",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "public void method(long... longNumbers)",
+      "public void method(long[] longNumbers)"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/1970",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "It represents a single character such as \u00270\u0027, \u0027A\u0027, \u0027b\u0027.",
+      "It may be considered as an unsigned integer value in the range from 0 to 65535.",
+      "It has a minimum value of \u0027\\u0000\u0027 and a maximum value of \u0027\\uffff\u0027."
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3767",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "The JVM understands bytecode.",
+      "The JVM provides platform independence for Java programs.",
+      "To run a compiled Java program, a JVM must be installed on the computer."
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/17539",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "approachLanding",
+      "takeOff"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2987",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "News news \u003d new News(\"A title\", \"A text\");"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/31392",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "The \u0027setAge()\u0027 method is an example of a setter with validation to prevent setting invalid age.",
+      "The principle of encapsulation is maintained by making the \u0027name\u0027 and \u0027age\u0027 fields private and accessing them through public methods."
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3008",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "In the body of doSomething you can access the field TEXT.",
+      "In the body of doDo you can directly invoke the method doSomething.",
+      "In the body of doDo you can access the field TEXT."
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3290",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "A static method can be accessed by the class name and doesn\u0027t need an object.",
+      "A static field has the same value for all instances of the class."
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2573",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "It\u0027s possible to mix built-in and external annotations in a .java file.",
+      "Some annotations can mark classes, methods, fields, and variables."
+    ]
   }
 ]
