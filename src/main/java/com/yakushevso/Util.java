@@ -73,15 +73,16 @@ public class Util {
     public void getData(int track) {
         Topic topic = getTopics(track);
         List<Project> projects = getProjects(track);
-        //List<Step> steps = getSteps(topic);
+        List<Step> steps = getSteps(topic);
 
         try (FileWriter writer = new FileWriter(DATA_PATH)) {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
-//            gson.toJson(new Data(topic, projects, steps), writer);
-            gson.toJson(new Data(topic, projects, null), writer);
+            gson.toJson(new Data(topic, projects, steps), writer);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        driver.quit();
     }
 
     // Get the list of topics
@@ -140,24 +141,22 @@ public class Util {
 
         driver.get(urlTrack);
 
-        // Getting JSON as a string
-        String pageSource = driver.getPageSource();
-
-        // Truncating the source code of the page to pure JSON
-        String json = pageSource.substring(pageSource.indexOf("{"), pageSource.lastIndexOf("}") + 1);
+        // Get page content as text
+        String json = driver.findElement(By.tagName("pre")).getText();
 
         // Get JSON object from text
-        JsonElement trackJsonElement = JsonParser.parseString(json);
-        JsonObject trackJsonObject = trackJsonElement.getAsJsonObject();
-        JsonArray trackProjectsArray = trackJsonObject.getAsJsonArray("tracks");
+        JsonElement trackElement = JsonParser.parseString(json);
+        JsonObject trackObj = trackElement.getAsJsonObject().getAsJsonArray("tracks").get(0).getAsJsonObject();
 
-        // Get an array of projects
-        for (JsonElement projectElement : trackProjectsArray) {
-            JsonObject projectObj = projectElement.getAsJsonObject();
-            JsonArray projectArray = projectObj.getAsJsonArray("projects");
+        // Get an object of projects_by_level
+        JsonObject projectsByLevel = trackObj.getAsJsonObject("projects_by_level");
+
+        // Iterate over all keys in projects_by_level
+        for (Map.Entry<String, JsonElement> entry : projectsByLevel.entrySet()) {
+            JsonArray projects = entry.getValue().getAsJsonArray();
 
             // Getting data from projects
-            for (JsonElement projectName : projectArray) {
+            for (JsonElement projectName : projects) {
                 String urlProject = "https://hyperskill.org/api/projects/" + projectName.getAsInt() + "?format=json";
                 driver.get(urlProject);
                 String projectPageSource = driver.getPageSource();
@@ -182,8 +181,6 @@ public class Util {
                 }
             }
         }
-
-        driver.quit();
 
         return projectList;
     }
@@ -245,8 +242,6 @@ public class Util {
                 steps.add(new Step(id, title, listStepTrue, listStepFalse));
             }
         }
-
-        driver.quit();
 
         return steps;
     }
