@@ -7,7 +7,7 @@ public class Main {
         try (Scanner sc = new Scanner(System.in)) {
             System.out.println("Enter track number (https://hyperskill.org/tracks):");
 
-            String track = sc.nextLine();
+            int track = sc.nextInt();
 
             Automation test = new Automation();
             SavePages save = new SavePages();
@@ -32,10 +32,10 @@ public class Main {
                 int mode = sc.nextInt();
 
                 if (mode == 1) {
-                    util.createDriver(true);
+                    util.createDriver(false);
                     System.out.println("In progress...");
                     util.login();
-                    util.getData(12);
+                    util.getData(track);
                 } else if (mode == 2) {
                     System.out.println("""
 

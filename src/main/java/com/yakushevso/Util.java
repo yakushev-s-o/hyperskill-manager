@@ -30,23 +30,23 @@ public class Util {
     public static String JSON_PATH;
     public static String DATA_PATH;
 
-    public Util(String track) {
+    public Util(int track) {
         initSettings();
         setSettings(track);
     }
 
-    public void createDriver(boolean hide) {
+    public void createDriver(boolean visible) {
         // Set path to browser driver
         System.setProperty("webdriver.chrome.driver", CHROMEDRIVER_PATH);
         ChromeOptions options = new ChromeOptions();
 
         // Create an instance of the driver in the background if "true"
-        if (hide) {
+        if (visible) {
+            options.addArguments("--start-maximized");
+        } else {
             options.addArguments("--headless");
             options.addArguments("--disable-gpu");
             options.addArguments("--window-size=1920,1080");
-        } else {
-            options.addArguments("--start-maximized");
         }
 
         driver = new ChromeDriver(options);
@@ -73,11 +73,12 @@ public class Util {
     public void getData(int track) {
         Topic topic = getTopics(track);
         List<Project> projects = getProjects(track);
-        List<Step> steps = getSteps(topic);
+        //List<Step> steps = getSteps(topic);
 
         try (FileWriter writer = new FileWriter(DATA_PATH)) {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            gson.toJson(new Data(topic, projects, steps), writer);
+//            gson.toJson(new Data(topic, projects, steps), writer);
+            gson.toJson(new Data(topic, projects, null), writer);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -132,55 +133,57 @@ public class Util {
     }
 
     // Get a list of projects
-    private List<Project> getProjects(int track) {
+    public List<Project> getProjects(int track) {
         List<Project> projectList = new ArrayList<>();
 
         String urlTrack = "https://hyperskill.org/api/tracks/" + track + "?format=json";
 
-        // Get JSON object with data
-        try (InputStream trackInputStream = new URL(urlTrack).openStream()) {
-            JsonElement trackJsonElement = JsonParser.parseReader(new InputStreamReader(trackInputStream));
-            JsonObject trackJsonObject = trackJsonElement.getAsJsonObject();
+        driver.get(urlTrack);
 
-            // Get an array of projects
-            JsonArray trackProjectsArray = trackJsonObject.getAsJsonArray("tracks");
+        // Getting JSON as a string
+        String pageSource = driver.getPageSource();
 
-            for (JsonElement projectElement : trackProjectsArray) {
-                JsonObject projectObj = projectElement.getAsJsonObject();
-                JsonArray projectArray = projectObj.getAsJsonArray("projects");
+        // Truncating the source code of the page to pure JSON
+        String json = pageSource.substring(pageSource.indexOf("{"), pageSource.lastIndexOf("}") + 1);
 
-                for (JsonElement projectName : projectArray) {
-                    String urlProject = "https://hyperskill.org/api/projects/" + projectName + "?format=json";
+        // Get JSON object from text
+        JsonElement trackJsonElement = JsonParser.parseString(json);
+        JsonObject trackJsonObject = trackJsonElement.getAsJsonObject();
+        JsonArray trackProjectsArray = trackJsonObject.getAsJsonArray("tracks");
 
-                    // Get JSON object with data
-                    try (InputStream projectInputStream = new URL(urlProject).openStream()) {
-                        JsonElement projectJsonElement = JsonParser.parseReader(new InputStreamReader(projectInputStream));
-                        JsonObject projectJsonObject = projectJsonElement.getAsJsonObject();
+        // Get an array of projects
+        for (JsonElement projectElement : trackProjectsArray) {
+            JsonObject projectObj = projectElement.getAsJsonObject();
+            JsonArray projectArray = projectObj.getAsJsonArray("projects");
 
-                        // Get the project data array
-                        JsonArray projectDataArray = projectJsonObject.getAsJsonArray("projects");
+            // Getting data from projects
+            for (JsonElement projectName : projectArray) {
+                String urlProject = "https://hyperskill.org/api/projects/" + projectName.getAsInt() + "?format=json";
+                driver.get(urlProject);
+                String projectPageSource = driver.getPageSource();
+                String projectJson = projectPageSource.substring(projectPageSource.indexOf("{"), projectPageSource.lastIndexOf("}") + 1);
 
-                        for (JsonElement projectElement1 : projectDataArray) {
-                            JsonObject projectObj1 = projectElement1.getAsJsonObject();
+                JsonElement projectJsonElement = JsonParser.parseString(projectJson);
+                JsonObject projectJsonObject = projectJsonElement.getAsJsonObject();
+                JsonArray projectDataArray = projectJsonObject.getAsJsonArray("projects");
 
-                            int projectId = projectObj1.get("id").getAsInt();
-                            String projectTitle = projectObj1.get("title").getAsString();
-                            List<String> stagesIds = new ArrayList<>();
+                for (JsonElement projectElement1 : projectDataArray) {
+                    JsonObject projectObj1 = projectElement1.getAsJsonObject();
 
-                            for (JsonElement stageId : projectObj1.getAsJsonArray("stages_ids")) {
-                                stagesIds.add(String.valueOf(stageId));
-                            }
+                    int projectId = projectObj1.get("id").getAsInt();
+                    String projectTitle = projectObj1.get("title").getAsString();
+                    List<String> stagesIds = new ArrayList<>();
 
-                            projectList.add(new Project(projectId, projectTitle, stagesIds));
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                    for (JsonElement stageId : projectObj1.getAsJsonArray("stages_ids")) {
+                        stagesIds.add(stageId.getAsString());
                     }
+
+                    projectList.add(new Project(projectId, projectTitle, stagesIds));
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
+
+        driver.quit();
 
         return projectList;
     }
@@ -371,7 +374,7 @@ public class Util {
     }
 
     // Set settings
-    private void setSettings(String track) {
+    private void setSettings(int track) {
         Gson gson = new Gson();
         File file = new File("src/main/resources/settings.json");
 
@@ -383,9 +386,9 @@ public class Util {
             LOGIN = obj.get("login").getAsString();
             PASSWORD = obj.get("password").getAsString();
             CHROMEDRIVER_PATH = obj.get("chromedriver_path").getAsString();
-            FOLDER_PATH = obj.get("folder_path").getAsString().replace("TRACK_NUMBER", track);
-            JSON_PATH = obj.get("json_path").getAsString().replace("TRACK_NUMBER", track);
-            DATA_PATH = obj.get("data_path").getAsString().replace("TRACK_NUMBER", track);
+            FOLDER_PATH = obj.get("folder_path").getAsString().replace("TRACK_NUMBER", String.valueOf(track));
+            JSON_PATH = obj.get("json_path").getAsString().replace("TRACK_NUMBER", String.valueOf(track));
+            DATA_PATH = obj.get("data_path").getAsString().replace("TRACK_NUMBER", String.valueOf(track));
             SITE_LINK = obj.get("site_link").getAsString();
 
         } catch (FileNotFoundException e) {
