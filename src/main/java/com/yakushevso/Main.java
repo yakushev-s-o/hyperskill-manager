@@ -20,14 +20,12 @@ public class Main {
 
             while (true) {
                 System.out.println("""
-                        
+                        Enter mode number:
                         1. Get data
                         2. Save pages
                         3. Get answers
                         4. Send answers
-                        5. Exit
-                        
-                        Enter mode number:""");
+                        5. Exit""");
 
                 int mode = sc.nextInt();
 
@@ -38,14 +36,12 @@ public class Main {
                     util.getData(track);
                 } else if (mode == 2) {
                     System.out.println("""
-
-                        1. Save topics
-                        2. Save projects
-                        3. Save stages
-                        4. Save themes
-                        5. Save all
-                        
-                        Enter mode number:""");
+                            Enter mode number:
+                            1. Save topics
+                            2. Save projects
+                            3. Save stages
+                            4. Save themes
+                            5. Save all""");
 
                     int saveMode = sc.nextInt();
 
@@ -60,16 +56,16 @@ public class Main {
                     } else if (saveMode == 3) {
                         save.saveStages();
                     } else if (saveMode == 4) {
-                        save.saveSteps();
+                        save.saveThemes();
                     } else if (saveMode == 5) {
                         save.saveTopics();
                         save.saveProjects();
                         save.saveStages();
-                        save.saveSteps();
+                        save.saveThemes();
                     }
                 } else if (mode == 3) {
                     util.createDriver(false);
-                    System.out.println("In progress...");
+                    System.out.println("n progress...");
                     util.login();
                     test.getAnswers();
                 } else if (mode == 4) {
@@ -82,6 +78,8 @@ public class Main {
                 }
 
                 System.out.println("Completed!");
+
+                util.closeDriver();
             }
         }
     }

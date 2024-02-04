@@ -7,6 +7,7 @@ import org.openqa.selenium.interactions.Actions;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 import com.yakushevso.data.Data;
 import com.yakushevso.data.Step;
@@ -22,13 +23,11 @@ public class SavePages {
         for (String topic : data.getTopic_relations().getTopics()) {
             if (isFileExists(FOLDER_PATH + "knowledge-map/", topic)) {
                 driver.get(SITE_LINK + "knowledge-map/" + topic);
-                waitDownloadElement("//ol[@class='breadcrumb mb-4']");
+                waitDownloadElement("//div[@class='knowledge-map-node']");
                 delay(1000);
                 save("knowledge-map/", topic);
             }
         }
-
-        driver.quit();
     }
 
     // Save pages with projects
@@ -38,13 +37,27 @@ public class SavePages {
         for (Project project : data.getProjects()) {
             if (isFileExists(FOLDER_PATH + "projects/", String.valueOf(project.getId()))) {
                 driver.get(SITE_LINK + "projects/" + project.getId());
-                waitDownloadElement("//a[@click-event-target='back_to_projects']");
+                waitDownloadElement("//button[@class='btn section-collapse-title d-flex align-items-baseline btn-link']");
+
+                List<WebElement> stageProjectClose = driver.findElements(By.xpath("//button[@class='btn " +
+                        "section-collapse-title d-flex align-items-baseline btn-link']//div[@class='icon tw-text-sm']"));
+
+                Actions actions = new Actions(driver);
+                while (stageProjectClose.size() > 0) {
+                    for (WebElement stage : stageProjectClose) {
+                        actions.moveToElement(stage).click().perform();
+                        delay(1000);
+                    }
+
+                    stageProjectClose = driver.findElements(By.xpath("//button[@class='btn " +
+                            "section-collapse-title d-flex align-items-baseline btn-link']//div[@class='icon tw-text-sm']"));
+                }
+
                 delay(1000);
+
                 save("projects/", String.valueOf(project.getId()));
             }
         }
-
-        driver.quit();
     }
 
     // Save project milestones
@@ -61,12 +74,10 @@ public class SavePages {
                 }
             }
         }
-
-        driver.quit();
     }
 
     // Save pages with topics
-    public void saveSteps() {
+    public void saveThemes() {
         Data data = getFileData(Data.class, DATA_PATH);
 
         for (Step steps : data.getSteps()) {
@@ -77,17 +88,17 @@ public class SavePages {
                 // Check if the theory is solved
                 if (isHideTheory()) {
                     Actions actions = new Actions(driver);
-                    WebElement element = driver.findElement(By.xpath("//a[@class='ml-3'][text()=' Expand all ']"));
+                    WebElement element = driver.findElement(
+                            By.xpath("//a[@class='ml-3' and starts-with(normalize-space(text()), 'Expand all')]"));
                     actions.moveToElement(element).click().perform();
-                    waitDownloadElement("//button[@click-event-target='start_praticting']");
+                    waitDownloadElement("//button[@click-event-target='start_practicing']");
                 }
 
                 delay(1000);
+
                 save("learn/step/", String.valueOf(steps.getId()));
             }
         }
-
-        driver.quit();
     }
 
     // Check if the file exists
@@ -109,7 +120,7 @@ public class SavePages {
     // Check if the page is fully expanded
     private boolean isHideTheory() {
         try {
-            driver.findElement(By.xpath("//a[@class='ml-3'][text()=' Expand all ']"));
+            driver.findElement(By.xpath("//a[@class='ml-3' and starts-with(normalize-space(text()), 'Expand all')]"));
             return true;
         } catch (Exception e) {
             return false;

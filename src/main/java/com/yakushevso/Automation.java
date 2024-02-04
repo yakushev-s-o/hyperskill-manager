@@ -45,8 +45,6 @@ public class Automation {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        driver.quit();
     }
 
     // Get the correct answer using the appropriate method
@@ -127,8 +125,6 @@ public class Automation {
                 delay(500);
             }
         }
-
-        driver.quit();
     }
 
     // Check the buttons, if there is "continue", then return "false", the rest perform actions and return "true"

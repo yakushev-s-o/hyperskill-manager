@@ -11,7 +11,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.*;
 import java.lang.reflect.Type;
-import java.net.URL;
 import java.time.Duration;
 import java.util.*;
 
@@ -81,8 +80,6 @@ public class Util {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        driver.quit();
     }
 
     // Get the list of topics
@@ -95,38 +92,39 @@ public class Util {
 
         // While there is a next page, we loop
         while (isNext) {
-            String url = "https://hyperskill.org/api/topic-relations?format=json&track_id=" + track +
-                    "&page_size=100&page=" + i++ + "";
+            String urlTopics = "https://hyperskill.org/api/topic-relations?format=json&track_id="
+                    + track + "&page_size=100&page=" + i++ + "";
 
-            // Get JSON object with data
-            try (InputStream inputStream = new URL(url).openStream()) {
-                JsonElement jsonElement = JsonParser.parseReader(new InputStreamReader(inputStream));
-                JsonObject jsonObject = jsonElement.getAsJsonObject();
+            driver.get(urlTopics);
 
-                // Check if there is a next data page
-                if (!jsonObject.getAsJsonObject("meta").get("has_next").getAsBoolean()) {
-                    isNext = false;
-                }
+            // Get page content as text
+            String json = driver.findElement(By.tagName("pre")).getText();
 
-                // Get an array of topics
-                JsonArray topicRelationsArr = jsonObject.getAsJsonArray("topic-relations");
+            // Get JSON object from text
+            JsonElement topicsElement = JsonParser.parseString(json);
+            JsonObject topicsObject = topicsElement.getAsJsonObject();
 
-                for (JsonElement element : topicRelationsArr) {
-                    JsonObject obj = element.getAsJsonObject();
-                    listTopic.add(String.valueOf(obj.get("id")));
+            // Check if there is a next data page
+            if (!topicsObject.getAsJsonObject("meta").get("has_next").getAsBoolean()) {
+                isNext = false;
+            }
 
-                    // Check if the topic is a parent
-                    if (obj.get("parent_id").isJsonNull()) {
-                        JsonArray descendantsArr = obj.getAsJsonArray("descendants");
+            // Get an array of topics
+            JsonArray topicRelationsArr = topicsObject.getAsJsonArray("topic-relations");
 
-                        // Get an array of child topics
-                        for (JsonElement s : descendantsArr) {
-                            listDescendants.add(String.valueOf(s));
-                        }
+            for (JsonElement element : topicRelationsArr) {
+                JsonObject obj = element.getAsJsonObject();
+                listTopic.add(String.valueOf(obj.get("id")));
+
+                // Check if the topic is a parent
+                if (obj.get("parent_id").isJsonNull()) {
+                    JsonArray descendantsArr = obj.getAsJsonArray("descendants");
+
+                    // Get an array of child topics
+                    for (JsonElement s : descendantsArr) {
+                        listDescendants.add(String.valueOf(s));
                     }
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
             }
         }
 
@@ -350,7 +348,7 @@ public class Util {
 
             settingsData.put("login", "");
             settingsData.put("password", "");
-            settingsData.put("chromedriver_path", "D:/tools/chromedriver_win32/chromedriver.exe");
+            settingsData.put("chromedriver_path", "C:/tools/chromedriver_win32/chromedriver.exe");
             settingsData.put("folder_path", "C:/Users/Admin/Desktop/track/TRACK_NUMBER/");
             settingsData.put("json_path", "src/main/resources/answer-list-TRACK_NUMBER.json");
             settingsData.put("data_path", "src/main/resources/data-list-TRACK_NUMBER.json");
@@ -389,5 +387,10 @@ public class Util {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    // Close ChromeDriver
+    public void closeDriver() {
+        driver.quit();
     }
 }
