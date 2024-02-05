@@ -23,8 +23,14 @@ public class SavePages {
         for (String topic : data.getTopic_relations().getTopics()) {
             if (isFileExists(FOLDER_PATH + "knowledge-map/", topic)) {
                 driver.get(SITE_LINK + "knowledge-map/" + topic);
+
                 waitDownloadElement("//div[@class='knowledge-map-node']");
                 delay(1000);
+
+                if (isVisibleElement("//div[@class='loader-body card card-body']")) {
+                    waitDownloadElement("//div[@class='topic-block']");
+                }
+
                 save("knowledge-map/", topic);
             }
         }
@@ -37,30 +43,28 @@ public class SavePages {
         for (Project project : data.getProjects()) {
             if (isFileExists(FOLDER_PATH + "projects/", String.valueOf(project.getId()))) {
                 driver.get(SITE_LINK + "projects/" + project.getId());
-                waitDownloadElement("//button[@class='btn section-collapse-title d-flex align-items-baseline btn-link']");
+                waitDownloadElement("//div[@class='collapse show']");
 
                 List<WebElement> stageProjectClose = driver.findElements(By.xpath("//button[@class='btn " +
                         "section-collapse-title d-flex align-items-baseline btn-link']//div[@class='icon tw-text-sm']"));
 
                 Actions actions = new Actions(driver);
-                while (stageProjectClose.size() > 0) {
-                    for (WebElement stage : stageProjectClose) {
-                        actions.moveToElement(stage).click().perform();
+                for (WebElement stage : stageProjectClose) {
+                    actions.moveToElement(stage).click().perform();
+                    delay(1000);
+
+                    // Check for the throbber element
+                    while (isVisibleElement("//div[@class='collapse show']//div[@class='loader-body']")) {
                         delay(1000);
                     }
-
-                    stageProjectClose = driver.findElements(By.xpath("//button[@class='btn " +
-                            "section-collapse-title d-flex align-items-baseline btn-link']//div[@class='icon tw-text-sm']"));
                 }
-
-                delay(1000);
 
                 save("projects/", String.valueOf(project.getId()));
             }
         }
     }
 
-    // Save project milestones
+    // Save project stages
     public void saveStages() {
         Data data = getFileData(Data.class, DATA_PATH);
 
@@ -85,8 +89,8 @@ public class SavePages {
                 driver.get(SITE_LINK + "learn/step/" + steps.getId());
                 waitDownloadElement("//a[@class='text-gray']");
 
-                // Check if the theory is solved
-                if (isHideTheory()) {
+                // Check if the theory is solved and the page is fully expanded
+                if (isVisibleElement("//a[@class='ml-3' and starts-with(normalize-space(text()), 'Expand all')]")) {
                     Actions actions = new Actions(driver);
                     WebElement element = driver.findElement(
                             By.xpath("//a[@class='ml-3' and starts-with(normalize-space(text()), 'Expand all')]"));
@@ -117,10 +121,10 @@ public class SavePages {
         return true;
     }
 
-    // Check if the page is fully expanded
-    private boolean isHideTheory() {
+    // Check for element visibility
+    private boolean isVisibleElement(String element) {
         try {
-            driver.findElement(By.xpath("//a[@class='ml-3' and starts-with(normalize-space(text()), 'Expand all')]"));
+            driver.findElement(By.xpath(element));
             return true;
         } catch (Exception e) {
             return false;
