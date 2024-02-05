@@ -19,6 +19,10 @@ public class Step {
         return stepListTrue;
     }
 
+    public List<String> getStepListFalse() {
+        return stepListFalse;
+    }
+
     public int getId() {
         return id;
     }

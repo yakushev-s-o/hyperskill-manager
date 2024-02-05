@@ -5,7 +5,7 @@ import java.util.List;
 public class Project {
     int id;
     String title;
-    List<String>  stages_ids;
+    List<String> stages_ids;
 
     public Project(int id, String title, List<String> stages_ids) {
         this.id = id;

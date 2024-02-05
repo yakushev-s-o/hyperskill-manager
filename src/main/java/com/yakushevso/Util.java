@@ -68,7 +68,11 @@ public class Util {
 
         waitDownloadElement("//h1[@data-cy='curriculum-header']");
 
-        closeBanner();
+        // Close banner "Save streak"
+        closeBanner("//button[@class='btn btn-outline-dark' and text()= 'No, thanks']");
+
+        // Close banner "You probably already know this topic"
+        closeBanner("//button[@class='btn btn-outline-dark' and text()= 'Continue with theory']");
     }
 
     // Get track data and write to file
@@ -83,6 +87,20 @@ public class Util {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        System.out.printf("""
+                =======================
+                Topics: %d
+                Projects: %d
+                Theory: %d
+                Solved steps: %d
+                Unresolved steps: %d
+                =======================""",
+                topic.getTopics().size(),
+                projects.size(),
+                steps.size(),
+                steps.stream().mapToInt(countStep -> countStep.getStepListTrue().size()).sum(),
+                steps.stream().mapToInt(countStep -> countStep.getStepListFalse().size()).sum());
     }
 
     // Get the list of topics
@@ -398,10 +416,10 @@ public class Util {
     }
 
     // Close drop-down banner
-    private void closeBanner() {
+    private void closeBanner(String element) {
         try {
             delay(5000);
-            WebElement banner = driver.findElement(By.xpath("//button[@class='btn btn-outline-dark' and text()= 'No, thanks']"));
+            WebElement banner = driver.findElement(By.xpath(element));
             Actions actions = new Actions(driver);
             actions.moveToElement(banner).click().perform();
         } catch (Exception ignored) {}
