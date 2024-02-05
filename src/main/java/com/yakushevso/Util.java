@@ -346,8 +346,8 @@ public class Util {
         if (!file.exists() || file.length() == 0) {
             LinkedHashMap<String, String> settingsData = new LinkedHashMap<>();
 
-            settingsData.put("login", "");
-            settingsData.put("password", "");
+            settingsData.put("login", "YOUR_LOGIN");
+            settingsData.put("password", "YOUR_PASSWORD");
             settingsData.put("chromedriver_path", "C:/tools/chromedriver_win32/chromedriver.exe");
             settingsData.put("folder_path", "C:/Users/Admin/Desktop/track/TRACK_NUMBER/");
             settingsData.put("json_path", "src/main/resources/answer-list-TRACK_NUMBER.json");
