@@ -80,27 +80,59 @@ public class Util {
         Topic topic = getTopics(track);
         List<Project> projects = getProjects(track);
         List<Step> steps = getSteps(topic);
+        List<Step> stepsAdditional = getStepsAdditional(topic, steps);
+
 
         try (FileWriter writer = new FileWriter(DATA_PATH)) {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            gson.toJson(new Data(topic, projects, steps), writer);
+            gson.toJson(new Data(topic, projects, steps, stepsAdditional), writer);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+        printProgress(topic, projects, steps, stepsAdditional, track);
+    }
+
+    private void printProgress(Topic topic, List<Project> projects, List<Step> steps,
+                               List<Step> stepsAdditional, int track) {
+        String urlProgress = "https://hyperskill.org/api/progresses/track-" + track + "?format=json";
+
+        driver.get(urlProgress);
+
+        // Get page content as text
+        String json = driver.findElement(By.tagName("pre")).getText();
+
+        // Get JSON object from text
+        JsonElement progressElement = JsonParser.parseString(json);
+        JsonObject progressObj = progressElement.getAsJsonObject()
+                .getAsJsonArray("progresses").get(0).getAsJsonObject();
+
+        int stepsSolved = steps.stream().mapToInt(countStep -> countStep.getStepListTrue().size()).sum();
+        int stepsUnresolved = steps.stream().mapToInt(countStep -> countStep.getStepListFalse().size()).sum();
+
         System.out.printf("""
-                =======================
-                Topics: %d
-                Projects: %d
-                Theory: %d
-                Solved steps: %d
-                Unresolved steps: %d
-                =======================""",
+                        =======================
+                        Topics: %d
+                        Projects: %d
+                        Completed projects: %d
+                        Theory: %d
+                        Learned theory: %d
+                        Skipped theory: %d
+                        Steps: %d
+                        Solved steps: %d
+                        Unresolved steps: %d
+                        Additional step: %d
+                        =======================""",
                 topic.getTopics().size(),
                 projects.size(),
+                progressObj.getAsJsonArray("completed_projects").size(),
                 steps.size(),
-                steps.stream().mapToInt(countStep -> countStep.getStepListTrue().size()).sum(),
-                steps.stream().mapToInt(countStep -> countStep.getStepListFalse().size()).sum());
+                progressObj.get("learned_topics_count").getAsInt(),
+                progressObj.get("skipped_topics_count").getAsInt(),
+                stepsSolved + stepsUnresolved,
+                stepsSolved,
+                stepsUnresolved,
+                stepsAdditional.size());
     }
 
     // Get the list of topics
@@ -165,7 +197,8 @@ public class Util {
 
         // Get JSON object from text
         JsonElement trackElement = JsonParser.parseString(json);
-        JsonObject trackObj = trackElement.getAsJsonObject().getAsJsonArray("tracks").get(0).getAsJsonObject();
+        JsonObject trackObj = trackElement.getAsJsonObject()
+                .getAsJsonArray("tracks").get(0).getAsJsonObject();
 
         // Get an object of projects_by_level
         JsonObject projectsByLevel = trackObj.getAsJsonObject("projects_by_level");
@@ -176,10 +209,12 @@ public class Util {
 
             // Getting data from projects
             for (JsonElement projectName : projects) {
-                String urlProject = "https://hyperskill.org/api/projects/" + projectName.getAsInt() + "?format=json";
+                String urlProject = "https://hyperskill.org/api/projects/"
+                        + projectName.getAsInt() + "?format=json";
                 driver.get(urlProject);
                 String projectPageSource = driver.getPageSource();
-                String projectJson = projectPageSource.substring(projectPageSource.indexOf("{"), projectPageSource.lastIndexOf("}") + 1);
+                String projectJson = projectPageSource.substring(projectPageSource.indexOf("{"),
+                        projectPageSource.lastIndexOf("}") + 1);
 
                 JsonElement projectJsonElement = JsonParser.parseString(projectJson);
                 JsonObject projectJsonObject = projectJsonElement.getAsJsonObject();
@@ -188,15 +223,16 @@ public class Util {
                 for (JsonElement projectElement1 : projectDataArray) {
                     JsonObject projectObj1 = projectElement1.getAsJsonObject();
 
-                    int projectId = projectObj1.get("id").getAsInt();
-                    String projectTitle = projectObj1.get("title").getAsString();
+                    int id = projectObj1.get("id").getAsInt();
+                    String title = projectObj1.get("title").getAsString();
                     List<String> stagesIds = new ArrayList<>();
 
                     for (JsonElement stageId : projectObj1.getAsJsonArray("stages_ids")) {
                         stagesIds.add(stageId.getAsString());
                     }
 
-                    projectList.add(new Project(projectId, projectTitle, stagesIds));
+                    projectList.add(new Project(id, SITE_LINK + "projects/" + id,
+                            title, stagesIds));
                 }
             }
         }
@@ -258,11 +294,101 @@ public class Util {
                     }
                 }
 
-                steps.add(new Step(id, title, listStepTrue, listStepFalse));
+                steps.add(new Step(id, Integer.parseInt(topic),
+                        SITE_LINK + "learn/step/" + id, title, listStepTrue, listStepFalse));
             }
         }
 
         return steps;
+    }
+
+    private List<Step> getStepsAdditional(Topic topics, List<Step> step) {
+        List<Step> stepsAdditional = new ArrayList<>();
+
+        for (String topic : topics.getDescendants()) {
+            String url1 = "https://hyperskill.org/api/topics?format=json&ids=" + topic;
+
+            driver.get(url1);
+
+            // Get page content as text
+            String pageSource1 = driver.findElement(By.tagName("pre")).getText();
+
+            // Get JSON object with data
+            JsonElement jsonElement1 = JsonParser.parseString(pageSource1);
+            JsonObject jsonObject1 = jsonElement1.getAsJsonObject();
+
+            // Get array followers
+            JsonObject topicObject1 = jsonObject1.getAsJsonArray("topics").get(0).getAsJsonObject();
+            JsonArray followers = topicObject1.getAsJsonArray("followers");
+
+            for (JsonElement checkFollowers : followers) {
+                boolean checkFoll = true;
+                for (Step checkStep : step) {
+                    if (checkFollowers.getAsInt() == checkStep.getTopic()) {
+                        checkFoll = false;
+                        break;
+                    }
+                }
+
+                if (checkFoll) {
+                    System.out.println(checkFollowers.getAsInt());
+
+                    int i = 1;
+                    boolean isNext = true;
+
+                    // While there is a next page, we loop
+                    while (isNext) {
+                        String url2 = "https://hyperskill.org/api/steps?format=json&topic=" + checkFollowers +
+                                "&page_size=100&page=" + i++ + "";
+
+                        driver.get(url2);
+
+                        // Get page content as text
+                        String pageSource2 = driver.findElement(By.tagName("pre")).getText();
+
+                        // Get JSON object
+                        JsonElement jsonElement2 = JsonParser.parseString(pageSource2);
+                        JsonObject jsonObject2 = jsonElement2.getAsJsonObject();
+
+                        // Check if there is a next data page
+                        if (!jsonObject2.getAsJsonObject("meta").get("has_next").getAsBoolean()) {
+                            isNext = false;
+                        }
+
+                        int id = 0;
+                        String title = "";
+                        List<String> listStepTrue = new ArrayList<>();
+                        List<String> listStepFalse = new ArrayList<>();
+
+                        // Get an array of steps
+                        JsonArray topicRelationsArr = jsonObject2.getAsJsonArray("steps");
+
+                        for (JsonElement element : topicRelationsArr) {
+                            JsonObject obj = element.getAsJsonObject();
+
+                            // Check the step type (theory or practice)
+                            if (obj.get("type").getAsString().equals("theory")) {
+                                // If the type is a theory, then get the theory ID and name
+                                id = obj.get("topic_theory").getAsInt();
+                                title = obj.get("title").getAsString();
+                            } else if (obj.get("type").getAsString().equals("practice")) {
+                                // Divide the lists into completed and uncompleted
+                                if (obj.get("is_completed").getAsBoolean()) {
+                                    // If "practice", then add practice ID
+                                    listStepTrue.add(obj.get("id").getAsString());
+                                } else {
+                                    listStepFalse.add(obj.get("id").getAsString());
+                                }
+                            }
+                        }
+
+                        stepsAdditional.add(new Step(id, Integer.parseInt(topic),
+                                SITE_LINK + "learn/step/" + id, title, listStepTrue, listStepFalse));
+                    }
+                }
+            }
+        }
+        return stepsAdditional;
     }
 
     // Get a list of objects from a file
@@ -422,6 +548,7 @@ public class Util {
             WebElement banner = driver.findElement(By.xpath(element));
             Actions actions = new Actions(driver);
             actions.moveToElement(banner).click().perform();
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+        }
     }
 }
