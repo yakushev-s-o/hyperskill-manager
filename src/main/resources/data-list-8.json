@@ -1,119 +1,119 @@
 {
   "topic_relations": {
     "topics": [
-      "1162",
-      "1163",
-      "73",
-      "74",
-      "252",
-      "1164",
-      "35",
-      "196",
-      "1258",
-      "153",
-      "306",
-      "3",
-      "95",
-      "187",
-      "1215",
-      "188",
-      "126",
-      "2944",
-      "13",
-      "251",
-      "1262",
-      "1263",
-      "195",
-      "1264",
-      "1268",
-      "61",
-      "1260",
-      "258",
-      "477",
-      "1356",
-      "2679",
-      "262",
-      "174",
-      "1269",
-      "386",
-      "355"
+      1162,
+      1163,
+      73,
+      74,
+      252,
+      1164,
+      35,
+      196,
+      1258,
+      153,
+      306,
+      3,
+      95,
+      187,
+      1215,
+      188,
+      126,
+      2944,
+      13,
+      251,
+      1262,
+      1263,
+      195,
+      1264,
+      1268,
+      61,
+      1260,
+      258,
+      477,
+      1356,
+      2679,
+      262,
+      174,
+      1269,
+      386,
+      355
     ],
     "descendants": [
-      "15",
-      "147",
-      "148",
-      "193",
-      "14",
-      "30",
-      "113",
-      "1248",
-      "112",
-      "146",
-      "27",
-      "87",
-      "88",
-      "25",
-      "152",
-      "307",
-      "90",
-      "89",
-      "19",
-      "33",
-      "161",
-      "32",
-      "1033",
-      "1038",
-      "1",
-      "985",
-      "37",
-      "309",
-      "4",
-      "99",
-      "31",
-      "9",
-      "571",
-      "191",
-      "115",
-      "7",
-      "116",
-      "17",
-      "28",
-      "24",
-      "8",
-      "120",
-      "127",
-      "96",
-      "38",
-      "201",
-      "149",
-      "163",
-      "60",
-      "59",
-      "65",
-      "164",
-      "97",
-      "480",
-      "876",
-      "192",
-      "102",
-      "513",
-      "172",
-      "173",
-      "1087",
-      "1088",
-      "12",
-      "518",
-      "177",
-      "98",
-      "165",
-      "260",
-      "387",
-      "356",
-      "770",
-      "875",
-      "391",
-      "36",
-      "308"
+      15,
+      147,
+      148,
+      193,
+      14,
+      30,
+      113,
+      1248,
+      112,
+      146,
+      27,
+      87,
+      88,
+      25,
+      152,
+      307,
+      90,
+      89,
+      19,
+      33,
+      161,
+      32,
+      1033,
+      1038,
+      1,
+      985,
+      37,
+      309,
+      4,
+      99,
+      31,
+      9,
+      571,
+      191,
+      115,
+      7,
+      116,
+      17,
+      28,
+      24,
+      8,
+      120,
+      127,
+      96,
+      38,
+      201,
+      149,
+      163,
+      60,
+      59,
+      65,
+      164,
+      97,
+      480,
+      876,
+      192,
+      102,
+      513,
+      172,
+      173,
+      1087,
+      1088,
+      12,
+      518,
+      177,
+      98,
+      165,
+      260,
+      387,
+      356,
+      770,
+      875,
+      391,
+      36,
+      308
     ]
   },
   "projects": [
@@ -245,8 +245,10 @@
     {
       "id": 38627,
       "topic": 15,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/38627",
       "theory": "Introduction to Java",
+      "learned_theory": false,
       "stepListTrue": [
         "4709",
         "18464"
@@ -264,8 +266,10 @@
     {
       "id": 3522,
       "topic": 147,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3522",
       "theory": "Basic literals: numbers, strings and characters",
+      "learned_theory": true,
       "stepListTrue": [
         "3224",
         "3227",
@@ -285,8 +289,10 @@
     {
       "id": 3521,
       "topic": 148,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3521",
       "theory": "Writing first program",
+      "learned_theory": true,
       "stepListTrue": [
         "2506",
         "3757",
@@ -309,8 +315,10 @@
     {
       "id": 3749,
       "topic": 193,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3749",
       "theory": "Printing data",
+      "learned_theory": true,
       "stepListTrue": [
         "34802",
         "2509",
@@ -338,8 +346,10 @@
     {
       "id": 3518,
       "topic": 14,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3518",
       "theory": "Types and variables",
+      "learned_theory": true,
       "stepListTrue": [
         "2085",
         "2082",
@@ -349,7 +359,7 @@
         "5029"
       ],
       "stepListFalse": [
-        "42955",
+        "43043",
         "38675",
         "38404",
         "38407",
@@ -363,8 +373,10 @@
     {
       "id": 3520,
       "topic": 30,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3520",
       "theory": "Comments",
+      "learned_theory": true,
       "stepListTrue": [
         "1976",
         "1978",
@@ -376,7 +388,7 @@
         "2501"
       ],
       "stepListFalse": [
-        "41922",
+        "43045",
         "38411",
         "38408",
         "38409",
@@ -390,8 +402,10 @@
     {
       "id": 9055,
       "topic": 113,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/9055",
       "theory": "Reading user\u0027s input with Scanner",
+      "learned_theory": true,
       "stepListTrue": [
         "2921",
         "2922",
@@ -415,8 +429,10 @@
     {
       "id": 12411,
       "topic": 1248,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/12411",
       "theory": "Coding style conventions",
+      "learned_theory": true,
       "stepListTrue": [
         "12414",
         "12416",
@@ -436,8 +452,10 @@
     {
       "id": 3513,
       "topic": 112,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3513",
       "theory": "Naming variables",
+      "learned_theory": true,
       "stepListTrue": [
         "2910",
         "2915",
@@ -459,8 +477,10 @@
     {
       "id": 3519,
       "topic": 146,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3519",
       "theory": "Arithmetic operations",
+      "learned_theory": true,
       "stepListTrue": [
         "2012",
         "3211",
@@ -483,8 +503,10 @@
     {
       "id": 3565,
       "topic": 27,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3565",
       "theory": "Integer types and operations",
+      "learned_theory": true,
       "stepListTrue": [
         "2013",
         "2209",
@@ -508,8 +530,10 @@
     {
       "id": 3516,
       "topic": 87,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3516",
       "theory": "Boolean type and operations. True and false",
+      "learned_theory": true,
       "stepListTrue": [
         "2268",
         "2266",
@@ -531,8 +555,10 @@
     {
       "id": 3512,
       "topic": 88,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3512",
       "theory": "Comparing values. Relational operators",
+      "learned_theory": true,
       "stepListTrue": [
         "2053",
         "2054",
@@ -558,8 +584,10 @@
     {
       "id": 3503,
       "topic": 25,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3503",
       "theory": "Conditional statement",
+      "learned_theory": true,
       "stepListTrue": [
         "1979",
         "1982",
@@ -585,8 +613,10 @@
     {
       "id": 3506,
       "topic": 152,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3506",
       "theory": "One-line condition with ternary operator",
+      "learned_theory": true,
       "stepListTrue": [
         "1981",
         "2666",
@@ -605,8 +635,10 @@
     {
       "id": 5008,
       "topic": 307,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/5008",
       "theory": "Increment and decrement",
+      "learned_theory": true,
       "stepListTrue": [
         "2015",
         "5009",
@@ -627,8 +659,10 @@
     {
       "id": 3498,
       "topic": 90,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3498",
       "theory": "While and do-while loops",
+      "learned_theory": true,
       "stepListTrue": [
         "2026",
         "2027",
@@ -650,8 +684,10 @@
     {
       "id": 3505,
       "topic": 89,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3505",
       "theory": "For-loop",
+      "learned_theory": true,
       "stepListTrue": [
         "1996",
         "1998",
@@ -678,8 +714,10 @@
     {
       "id": 3507,
       "topic": 19,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3507",
       "theory": "Break and continue. Branching",
+      "learned_theory": true,
       "stepListTrue": [
         "2154",
         "2665",
@@ -708,8 +746,10 @@
     {
       "id": 3504,
       "topic": 33,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3504",
       "theory": "Multiple conditions: switch",
+      "learned_theory": true,
       "stepListTrue": [
         "2297",
         "2299",
@@ -735,8 +775,10 @@
     {
       "id": 3532,
       "topic": 161,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3532",
       "theory": "Data types and their sizes",
+      "learned_theory": true,
       "stepListTrue": [
         "2016",
         "2047",
@@ -760,8 +802,10 @@
     {
       "id": 3510,
       "topic": 32,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3510",
       "theory": "Type casting",
+      "learned_theory": true,
       "stepListTrue": [
         "2310",
         "3389"
@@ -780,8 +824,10 @@
     {
       "id": 10973,
       "topic": 1033,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/10973",
       "theory": "Calling methods",
+      "learned_theory": true,
       "stepListTrue": [
         "30024",
         "10974",
@@ -803,8 +849,10 @@
     {
       "id": 10982,
       "topic": 1038,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/10982",
       "theory": "Declaring methods",
+      "learned_theory": true,
       "stepListTrue": [
         "10984",
         "10989",
@@ -828,8 +876,10 @@
     {
       "id": 3489,
       "topic": 1,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3489",
       "theory": "Method \"main\"",
+      "learned_theory": true,
       "stepListTrue": [
         "2070",
         "2301",
@@ -853,8 +903,10 @@
     {
       "id": 10570,
       "topic": 985,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/10570",
       "theory": "Functional decomposition",
+      "learned_theory": true,
       "stepListTrue": [
         "10571",
         "10572",
@@ -874,8 +926,10 @@
     {
       "id": 3525,
       "topic": 37,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3525",
       "theory": "Overloading",
+      "learned_theory": true,
       "stepListTrue": [
         "2246",
         "2247",
@@ -902,8 +956,10 @@
     {
       "id": 5035,
       "topic": 309,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/5035",
       "theory": "Primitive and reference types",
+      "learned_theory": true,
       "stepListTrue": [
         "29752",
         "2260",
@@ -924,8 +980,10 @@
     {
       "id": 3511,
       "topic": 4,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3511",
       "theory": "Array",
+      "learned_theory": true,
       "stepListTrue": [
         "1957",
         "2127",
@@ -937,9 +995,9 @@
         "3392"
       ],
       "stepListFalse": [
+        "34367",
         "42021",
         "38495",
-        "34367",
         "32708",
         "1958",
         "2707",
@@ -950,8 +1008,10 @@
     {
       "id": 3594,
       "topic": 99,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3594",
       "theory": "Arrays as parameters",
+      "learned_theory": true,
       "stepListTrue": [
         "41487",
         "2036",
@@ -977,8 +1037,10 @@
     {
       "id": 3514,
       "topic": 31,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3514",
       "theory": "Characters",
+      "learned_theory": true,
       "stepListTrue": [
         "1972",
         "2155",
@@ -999,8 +1061,10 @@
     {
       "id": 3523,
       "topic": 9,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3523",
       "theory": "String",
+      "learned_theory": true,
       "stepListTrue": [
         "2718",
         "2719",
@@ -1027,8 +1091,10 @@
     {
       "id": 7427,
       "topic": 571,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/7427",
       "theory": "Constants. Final variables",
+      "learned_theory": true,
       "stepListTrue": [
         "7428",
         "7429",
@@ -1048,8 +1114,10 @@
     {
       "id": 3739,
       "topic": 191,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3739",
       "theory": "Write, compile, and run",
+      "learned_theory": true,
       "stepListTrue": [
         "2493",
         "2494",
@@ -1071,8 +1139,10 @@
     {
       "id": 3618,
       "topic": 115,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3618",
       "theory": "Defining classes",
+      "learned_theory": true,
       "stepListTrue": [
         "1974",
         "2939",
@@ -1097,8 +1167,10 @@
     {
       "id": 3621,
       "topic": 7,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3621",
       "theory": "Grouping classes with packages",
+      "learned_theory": true,
       "stepListTrue": [
         "2042",
         "2043",
@@ -1129,8 +1201,10 @@
     {
       "id": 3495,
       "topic": 116,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3495",
       "theory": "Instance methods",
+      "learned_theory": true,
       "stepListTrue": [
         "2956",
         "2950",
@@ -1154,8 +1228,10 @@
     {
       "id": 3535,
       "topic": 17,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3535",
       "theory": "Initializing new instances. Constructor",
+      "learned_theory": true,
       "stepListTrue": [
         "1983",
         "1985",
@@ -1185,8 +1261,10 @@
     {
       "id": 3589,
       "topic": 28,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3589",
       "theory": "Access modifiers",
+      "learned_theory": true,
       "stepListTrue": [
         "2123",
         "2126",
@@ -1213,8 +1291,10 @@
     {
       "id": 3599,
       "topic": 24,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3599",
       "theory": "Getters and setters",
+      "learned_theory": true,
       "stepListTrue": [
         "3019",
         "3020",
@@ -1236,8 +1316,10 @@
     {
       "id": 3583,
       "topic": 8,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3583",
       "theory": "Inheritance",
+      "learned_theory": true,
       "stepListTrue": [
         "2205",
         "3046",
@@ -1258,8 +1340,10 @@
     {
       "id": 3538,
       "topic": 120,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3538",
       "theory": "Multiple constructors",
+      "learned_theory": true,
       "stepListTrue": [
         "1986",
         "2172",
@@ -1283,8 +1367,10 @@
     {
       "id": 3588,
       "topic": 127,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3588",
       "theory": "Keyword \"super\"",
+      "learned_theory": true,
       "stepListTrue": [
         "2009",
         "2204",
@@ -1308,8 +1394,10 @@
     {
       "id": 4727,
       "topic": 96,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/4727",
       "theory": "Objects and their properties",
+      "learned_theory": true,
       "stepListTrue": [
         "29809",
         "2050",
@@ -1332,8 +1420,10 @@
     {
       "id": 3534,
       "topic": 38,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3534",
       "theory": "Static members",
+      "learned_theory": true,
       "stepListTrue": [
         "2058",
         "2059",
@@ -1356,8 +1446,10 @@
     {
       "id": 3812,
       "topic": 201,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3812",
       "theory": "StringBuilder",
+      "learned_theory": true,
       "stepListTrue": [
         "3813",
         "3815",
@@ -1380,8 +1472,10 @@
     {
       "id": 3499,
       "topic": 149,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3499",
       "theory": "Basic terms: JVM, JRE, JDK",
+      "learned_theory": true,
       "stepListTrue": [
         "40118",
         "40120",
@@ -1399,8 +1493,10 @@
     {
       "id": 3536,
       "topic": 163,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3536",
       "theory": "Errors in programs",
+      "learned_theory": true,
       "stepListTrue": [
         "3478",
         "3476",
@@ -1420,8 +1516,10 @@
     {
       "id": 3497,
       "topic": 60,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3497",
       "theory": "First glance at exceptions",
+      "learned_theory": true,
       "stepListTrue": [
         "6963",
         "6964",
@@ -1443,8 +1541,10 @@
     {
       "id": 3570,
       "topic": 59,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3570",
       "theory": "Hierarchy of exceptions",
+      "learned_theory": true,
       "stepListTrue": [
         "2461",
         "2463",
@@ -1469,8 +1569,10 @@
     {
       "id": 3552,
       "topic": 65,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3552",
       "theory": "Exception handling",
+      "learned_theory": true,
       "stepListTrue": [
         "2475",
         "2478",
@@ -1499,8 +1601,10 @@
     {
       "id": 1945,
       "topic": 164,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/1945",
       "theory": "NullPointerException",
+      "learned_theory": true,
       "stepListTrue": [
         "2052",
         "1947",
@@ -1520,8 +1624,10 @@
     {
       "id": 3602,
       "topic": 97,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3602",
       "theory": "Iterating over arrays",
+      "learned_theory": true,
       "stepListTrue": [
         "1960",
         "2134",
@@ -1553,8 +1659,10 @@
     {
       "id": 8977,
       "topic": 480,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/8977",
       "theory": "Command line overview",
+      "learned_theory": true,
       "stepListTrue": [
         "8978",
         "19905",
@@ -1574,8 +1682,10 @@
     {
       "id": 9746,
       "topic": 876,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/9746",
       "theory": "Parameters and options",
+      "learned_theory": true,
       "stepListTrue": [
         "9748",
         "9751"
@@ -1594,8 +1704,10 @@
     {
       "id": 3746,
       "topic": 192,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3746",
       "theory": "Running programs on your computer",
+      "learned_theory": true,
       "stepListTrue": [
         "2024",
         "2492",
@@ -1616,8 +1728,10 @@
     {
       "id": 3553,
       "topic": 102,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3553",
       "theory": "Throwing exceptions",
+      "learned_theory": true,
       "stepListTrue": [
         "2465",
         "2816",
@@ -1637,8 +1751,10 @@
     {
       "id": 15639,
       "topic": 513,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/15639",
       "theory": "Custom exceptions",
+      "learned_theory": true,
       "stepListTrue": [
         "15640",
         "15642",
@@ -1656,8 +1772,10 @@
     {
       "id": 3635,
       "topic": 172,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3635",
       "theory": "File class",
+      "learned_theory": true,
       "stepListTrue": [
         "30887",
         "3625",
@@ -1677,8 +1795,10 @@
     {
       "id": 3636,
       "topic": 173,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3636",
       "theory": "Reading files",
+      "learned_theory": true,
       "stepListTrue": [
         "4842",
         "4841",
@@ -1699,8 +1819,10 @@
     {
       "id": 11514,
       "topic": 1087,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/11514",
       "theory": "Combining constants with enum",
+      "learned_theory": true,
       "stepListTrue": [
         "11516",
         "11517",
@@ -1720,8 +1842,10 @@
     {
       "id": 11523,
       "topic": 1088,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/11523",
       "theory": "Fields and methods in enum",
+      "learned_theory": true,
       "stepListTrue": [
         "11524",
         "11525",
@@ -1740,8 +1864,10 @@
     {
       "id": 1933,
       "topic": 12,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/1933",
       "theory": "Multidimensional array",
+      "learned_theory": true,
       "stepListTrue": [
         "1935",
         "1925",
@@ -1769,8 +1895,10 @@
     {
       "id": 7046,
       "topic": 518,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/7046",
       "theory": "Formatted output",
+      "learned_theory": true,
       "stepListTrue": [
         "7047",
         "7049",
@@ -1793,8 +1921,10 @@
     {
       "id": 3652,
       "topic": 177,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3652",
       "theory": "Writing files",
+      "learned_theory": true,
       "stepListTrue": [
         "3651",
         "3657",
@@ -1812,8 +1942,10 @@
     {
       "id": 3551,
       "topic": 98,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3551",
       "theory": "Processing strings",
+      "learned_theory": true,
       "stepListTrue": [
         "2064",
         "2282",
@@ -1842,8 +1974,10 @@
     {
       "id": 1940,
       "topic": 165,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/1940",
       "theory": "Array exceptions",
+      "learned_theory": true,
       "stepListTrue": [
         "2470",
         "2471",
@@ -1862,8 +1996,10 @@
     {
       "id": 37202,
       "topic": 260,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/37202",
       "theory": "IntelliJ IDEA",
+      "learned_theory": false,
       "stepListTrue": [
         "3807",
         "3809",
@@ -1881,8 +2017,10 @@
     {
       "id": 5819,
       "topic": 387,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/5819",
       "theory": "IntelliJ IDEA basics",
+      "learned_theory": true,
       "stepListTrue": [
         "5821",
         "5822",
@@ -1899,8 +2037,10 @@
     {
       "id": 5533,
       "topic": 356,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/5533",
       "theory": "What are streams",
+      "learned_theory": true,
       "stepListTrue": [
         "5534",
         "5535",
@@ -1917,8 +2057,10 @@
     {
       "id": 9723,
       "topic": 770,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/9723",
       "theory": "Input streams",
+      "learned_theory": true,
       "stepListTrue": [
         "9096",
         "9097",
@@ -1937,8 +2079,10 @@
     {
       "id": 9734,
       "topic": 875,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/9734",
       "theory": "Try with resources",
+      "learned_theory": true,
       "stepListTrue": [
         "9736",
         "9737",
@@ -1959,8 +2103,10 @@
     {
       "id": 5839,
       "topic": 391,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/5839",
       "theory": "JetBrains Academy plugin",
+      "learned_theory": true,
       "stepListTrue": [
         "5840",
         "14948",
@@ -1976,8 +2122,10 @@
     {
       "id": 3517,
       "topic": 36,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3517",
       "theory": "Floating-point types",
+      "learned_theory": true,
       "stepListTrue": [
         "2182",
         "2186",
@@ -2001,8 +2149,10 @@
     {
       "id": 10545,
       "topic": 308,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/10545",
       "theory": "Numeric literals",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "10546",
@@ -2018,108 +2168,12 @@
   ],
   "stepsAdditional": [
     {
-      "id": 3489,
-      "topic": 1,
-      "url": "https://hyperskill.org/learn/step/3489",
-      "theory": "Method \"main\"",
-      "stepListTrue": [
-        "2070",
-        "2301",
-        "2304",
-        "2505",
-        "2507",
-        "2508",
-        "4336"
-      ],
-      "stepListFalse": [
-        "41270",
-        "35257",
-        "32787",
-        "2072",
-        "2073",
-        "2302",
-        "3408",
-        "4335"
-      ]
-    },
-    {
-      "id": 15639,
-      "topic": 513,
-      "url": "https://hyperskill.org/learn/step/15639",
-      "theory": "Custom exceptions",
-      "stepListTrue": [
-        "15640",
-        "15642",
-        "15643",
-        "15644",
-        "15645",
-        "15646"
-      ],
-      "stepListFalse": [
-        "32572",
-        "31795",
-        "15641"
-      ]
-    },
-    {
-      "id": 9723,
-      "topic": 770,
-      "url": "https://hyperskill.org/learn/step/9723",
-      "theory": "Input streams",
-      "stepListTrue": [
-        "9096",
-        "9097",
-        "9098",
-        "9721"
-      ],
-      "stepListFalse": [
-        "32449",
-        "31748",
-        "30877",
-        "9099",
-        "9720",
-        "9722"
-      ]
-    },
-    {
-      "id": 0,
-      "topic": 3,
-      "url": "https://hyperskill.org/learn/step/0",
-      "theory": "",
-      "stepListTrue": [],
-      "stepListFalse": []
-    },
-    {
-      "id": 3511,
-      "topic": 4,
-      "url": "https://hyperskill.org/learn/step/3511",
-      "theory": "Array",
-      "stepListTrue": [
-        "1957",
-        "2127",
-        "2128",
-        "2706",
-        "2710",
-        "3388",
-        "3391",
-        "3392"
-      ],
-      "stepListFalse": [
-        "42021",
-        "38495",
-        "34367",
-        "32708",
-        "1958",
-        "2707",
-        "2708",
-        "2709"
-      ]
-    },
-    {
       "id": 18883,
       "topic": 2053,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/18883",
       "theory": "Switch pattern matching",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "18884",
@@ -2134,8 +2188,10 @@
     {
       "id": 3572,
       "topic": 5,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3572",
       "theory": "Method overriding",
+      "learned_theory": true,
       "stepListTrue": [
         "2198",
         "2200",
@@ -2161,34 +2217,12 @@
       ]
     },
     {
-      "id": 7046,
-      "topic": 518,
-      "url": "https://hyperskill.org/learn/step/7046",
-      "theory": "Formatted output",
-      "stepListTrue": [
-        "7047",
-        "7049",
-        "7050",
-        "7052",
-        "7053"
-      ],
-      "stepListFalse": [
-        "42965",
-        "38258",
-        "27352",
-        "7048",
-        "7051",
-        "29690",
-        "29691",
-        "29692",
-        "29693"
-      ]
-    },
-    {
       "id": 3595,
       "topic": 6,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3595",
       "theory": "Wrapping classes. Boxing",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "37132",
@@ -2206,144 +2240,12 @@
       ]
     },
     {
-      "id": 3621,
-      "topic": 7,
-      "url": "https://hyperskill.org/learn/step/3621",
-      "theory": "Grouping classes with packages",
-      "stepListTrue": [
-        "2042",
-        "2043",
-        "2252",
-        "2976",
-        "3409",
-        "9896"
-      ],
-      "stepListFalse": [
-        "42532",
-        "39778",
-        "32862",
-        "33597",
-        "2040",
-        "2041",
-        "2250",
-        "2251",
-        "2253",
-        "2254",
-        "2255",
-        "2973",
-        "2974",
-        "2975",
-        "9897",
-        "9898"
-      ]
-    },
-    {
-      "id": 3583,
-      "topic": 8,
-      "url": "https://hyperskill.org/learn/step/3583",
-      "theory": "Inheritance",
-      "stepListTrue": [
-        "2205",
-        "3046",
-        "3047",
-        "3048",
-        "3424",
-        "8309"
-      ],
-      "stepListFalse": [
-        "42838",
-        "32974",
-        "2202",
-        "2203",
-        "3045",
-        "3049"
-      ]
-    },
-    {
-      "id": 10973,
-      "topic": 1033,
-      "url": "https://hyperskill.org/learn/step/10973",
-      "theory": "Calling methods",
-      "stepListTrue": [
-        "30024",
-        "10974",
-        "10975",
-        "10977",
-        "10978",
-        "10979",
-        "10980",
-        "10981"
-      ],
-      "stepListFalse": [
-        "38505",
-        "41041",
-        "32813",
-        "29812",
-        "30882"
-      ]
-    },
-    {
-      "id": 3523,
-      "topic": 9,
-      "url": "https://hyperskill.org/learn/step/3523",
-      "theory": "String",
-      "stepListTrue": [
-        "2718",
-        "2719",
-        "2720",
-        "2721",
-        "3414",
-        "3418"
-      ],
-      "stepListFalse": [
-        "33488",
-        "36464",
-        "32743",
-        "2062",
-        "2712",
-        "2713",
-        "2714",
-        "2716",
-        "2717",
-        "3415",
-        "3416",
-        "3417"
-      ]
-    },
-    {
-      "id": 1933,
-      "topic": 12,
-      "url": "https://hyperskill.org/learn/step/1933",
-      "theory": "Multidimensional array",
-      "stepListTrue": [
-        "1935",
-        "1925",
-        "1928",
-        "12439"
-      ],
-      "stepListFalse": [
-        "42026",
-        "36384",
-        "33050",
-        "1934",
-        "1936",
-        "1937",
-        "1926",
-        "1927",
-        "1929",
-        "1930",
-        "12438",
-        "12440",
-        "12441",
-        "12442",
-        "12443"
-      ]
-    },
-    {
       "id": 37818,
       "topic": 3597,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/37818",
       "theory": "Introduction to Redis",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "37819",
@@ -2359,121 +2261,12 @@
       ]
     },
     {
-      "id": 3518,
-      "topic": 14,
-      "url": "https://hyperskill.org/learn/step/3518",
-      "theory": "Types and variables",
-      "stepListTrue": [
-        "2085",
-        "2082",
-        "2314",
-        "2486",
-        "2512",
-        "5029"
-      ],
-      "stepListFalse": [
-        "42955",
-        "38675",
-        "38404",
-        "38407",
-        "38405",
-        "38406",
-        "2315",
-        "2485",
-        "2487"
-      ]
-    },
-    {
-      "id": 10982,
-      "topic": 1038,
-      "url": "https://hyperskill.org/learn/step/10982",
-      "theory": "Declaring methods",
-      "stepListTrue": [
-        "10984",
-        "10989",
-        "10993",
-        "10995"
-      ],
-      "stepListFalse": [
-        "41253",
-        "32801",
-        "32834",
-        "10983",
-        "10986",
-        "10987",
-        "10988",
-        "10990",
-        "10991",
-        "10992",
-        "10994"
-      ]
-    },
-    {
-      "id": 3535,
-      "topic": 17,
-      "url": "https://hyperskill.org/learn/step/3535",
-      "theory": "Initializing new instances. Constructor",
-      "stepListTrue": [
-        "1983",
-        "1985",
-        "2158",
-        "2160",
-        "2171",
-        "2173",
-        "2983",
-        "2986"
-      ],
-      "stepListFalse": [
-        "42533",
-        "41048",
-        "32828",
-        "32842",
-        "32875",
-        "1984",
-        "2159",
-        "2984",
-        "2985",
-        "2987",
-        "3401",
-        "3457",
-        "3458"
-      ]
-    },
-    {
-      "id": 3507,
-      "topic": 19,
-      "url": "https://hyperskill.org/learn/step/3507",
-      "theory": "Break and continue. Branching",
-      "stepListTrue": [
-        "2154",
-        "2665",
-        "2731",
-        "2733",
-        "3393"
-      ],
-      "stepListFalse": [
-        "42968",
-        "41544",
-        "39589",
-        "39593",
-        "39594",
-        "39592",
-        "39591",
-        "39590",
-        "32753",
-        "1967",
-        "2231",
-        "2153",
-        "2664",
-        "2732",
-        "3820"
-      ]
-    },
-    {
       "id": 12593,
       "topic": 1299,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/12593",
       "theory": "Class Loader",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "12594",
@@ -2490,8 +2283,10 @@
     {
       "id": 3515,
       "topic": 20,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3515",
       "theory": "Bitwise and bit-shift operations",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "25417",
@@ -2516,8 +2311,10 @@
     {
       "id": 24863,
       "topic": 2580,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/24863",
       "theory": "Jakarta EE overview",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "24864",
@@ -2533,209 +2330,12 @@
       ]
     },
     {
-      "id": 3599,
-      "topic": 24,
-      "url": "https://hyperskill.org/learn/step/3599",
-      "theory": "Getters and setters",
-      "stepListTrue": [
-        "3019",
-        "3020",
-        "3021",
-        "3022",
-        "3023",
-        "3024",
-        "8261"
-      ],
-      "stepListFalse": [
-        "42050",
-        "38506",
-        "32936",
-        "31392",
-        "30981",
-        "30028"
-      ]
-    },
-    {
-      "id": 3503,
-      "topic": 25,
-      "url": "https://hyperskill.org/learn/step/3503",
-      "theory": "Conditional statement",
-      "stepListTrue": [
-        "1979",
-        "1982",
-        "2164",
-        "2165",
-        "2167",
-        "3395"
-      ],
-      "stepListFalse": [
-        "41804",
-        "40336",
-        "39565",
-        "39566",
-        "39564",
-        "32648",
-        "2163",
-        "2166",
-        "2169",
-        "2170",
-        "2735"
-      ]
-    },
-    {
-      "id": 3565,
-      "topic": 27,
-      "url": "https://hyperskill.org/learn/step/3565",
-      "theory": "Integer types and operations",
-      "stepListTrue": [
-        "2013",
-        "2209",
-        "2211",
-        "2212",
-        "2220"
-      ],
-      "stepListFalse": [
-        "38423",
-        "38424",
-        "38900",
-        "2316",
-        "2210",
-        "2213",
-        "2214",
-        "2217",
-        "2218",
-        "2924"
-      ]
-    },
-    {
-      "id": 3589,
-      "topic": 28,
-      "url": "https://hyperskill.org/learn/step/3589",
-      "theory": "Access modifiers",
-      "stepListTrue": [
-        "2123",
-        "2126",
-        "2977",
-        "2978",
-        "2979",
-        "2981",
-        "2982",
-        "3423"
-      ],
-      "stepListFalse": [
-        "35325",
-        "41518",
-        "32887",
-        "1954",
-        "1955",
-        "1956",
-        "2124",
-        "2125",
-        "2980",
-        "6695"
-      ]
-    },
-    {
-      "id": 3520,
-      "topic": 30,
-      "url": "https://hyperskill.org/learn/step/3520",
-      "theory": "Comments",
-      "stepListTrue": [
-        "1976",
-        "1978",
-        "2161",
-        "2497",
-        "2498",
-        "2499",
-        "2500",
-        "2501"
-      ],
-      "stepListFalse": [
-        "41922",
-        "38411",
-        "38408",
-        "38409",
-        "38410",
-        "1977",
-        "2162",
-        "2495",
-        "2496"
-      ]
-    },
-    {
-      "id": 3514,
-      "topic": 31,
-      "url": "https://hyperskill.org/learn/step/3514",
-      "theory": "Characters",
-      "stepListTrue": [
-        "1972",
-        "2155",
-        "3386",
-        "5021"
-      ],
-      "stepListFalse": [
-        "38398",
-        "42166",
-        "33539",
-        "1970",
-        "1971",
-        "2688",
-        "2693",
-        "5022"
-      ]
-    },
-    {
-      "id": 3510,
-      "topic": 32,
-      "url": "https://hyperskill.org/learn/step/3510",
-      "theory": "Type casting",
-      "stepListTrue": [
-        "2310",
-        "3389"
-      ],
-      "stepListFalse": [
-        "39569",
-        "42329",
-        "32701",
-        "39568",
-        "39567",
-        "2699",
-        "2700",
-        "39595"
-      ]
-    },
-    {
-      "id": 3504,
-      "topic": 33,
-      "url": "https://hyperskill.org/learn/step/3504",
-      "theory": "Multiple conditions: switch",
-      "stepListTrue": [
-        "2297",
-        "2299",
-        "2300",
-        "2737",
-        "2738",
-        "3481"
-      ],
-      "stepListFalse": [
-        "42167",
-        "35322",
-        "39581",
-        "39580",
-        "32779",
-        "32758",
-        "2067",
-        "2068",
-        "2298",
-        "2739",
-        "2740"
-      ]
-    },
-    {
       "id": 12691,
       "topic": 1313,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/12691",
       "theory": "Introduction to Node.js",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "38328",
@@ -2754,8 +2354,10 @@
     {
       "id": 17015,
       "topic": 1826,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/17015",
       "theory": "Homebrew package manager",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "17016",
@@ -2771,95 +2373,12 @@
       ]
     },
     {
-      "id": 0,
-      "topic": 35,
-      "url": "https://hyperskill.org/learn/step/0",
-      "theory": "",
-      "stepListTrue": [],
-      "stepListFalse": []
-    },
-    {
-      "id": 3517,
-      "topic": 36,
-      "url": "https://hyperskill.org/learn/step/3517",
-      "theory": "Floating-point types",
-      "stepListTrue": [
-        "2182",
-        "2186",
-        "2673",
-        "2703",
-        "2704",
-        "3454"
-      ],
-      "stepListFalse": [
-        "36567",
-        "1994",
-        "1991",
-        "2702",
-        "2705",
-        "3453",
-        "3796",
-        "5013",
-        "5014"
-      ]
-    },
-    {
-      "id": 3525,
-      "topic": 37,
-      "url": "https://hyperskill.org/learn/step/3525",
-      "theory": "Overloading",
-      "stepListTrue": [
-        "2246",
-        "2247",
-        "2248",
-        "2749",
-        "2751",
-        "3449",
-        "3451"
-      ],
-      "stepListFalse": [
-        "42942",
-        "38434",
-        "32803",
-        "2037",
-        "2038",
-        "2039",
-        "2750",
-        "2752",
-        "2753",
-        "2754",
-        "3450"
-      ]
-    },
-    {
-      "id": 3534,
-      "topic": 38,
-      "url": "https://hyperskill.org/learn/step/3534",
-      "theory": "Static members",
-      "stepListTrue": [
-        "2058",
-        "2059",
-        "3012",
-        "12513",
-        "14279"
-      ],
-      "stepListFalse": [
-        "41178",
-        "32968",
-        "2277",
-        "2280",
-        "3008",
-        "3009",
-        "3010",
-        "3013",
-        "3290"
-      ]
-    },
-    {
       "id": 25049,
       "topic": 2598,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/25049",
       "theory": "Introduction to Kotlin decompiling",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "25050",
@@ -2877,8 +2396,10 @@
     {
       "id": 4875,
       "topic": 295,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/4875",
       "theory": "Threads as objects",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "31721",
@@ -2894,8 +2415,10 @@
     {
       "id": 4910,
       "topic": 301,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/4910",
       "theory": "Random class",
+      "learned_theory": true,
       "stepListTrue": [
         "4913",
         "4912",
@@ -2915,8 +2438,10 @@
     {
       "id": 15155,
       "topic": 1582,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/15155",
       "theory": "Package manager yum/dnf",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "15156",
@@ -2934,8 +2459,10 @@
     {
       "id": 4942,
       "topic": 303,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/4942",
       "theory": "Sockets",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "4943",
@@ -2947,40 +2474,12 @@
       ]
     },
     {
-      "id": 0,
-      "topic": 306,
-      "url": "https://hyperskill.org/learn/step/0",
-      "theory": "",
-      "stepListTrue": [],
-      "stepListFalse": []
-    },
-    {
-      "id": 5008,
-      "topic": 307,
-      "url": "https://hyperskill.org/learn/step/5008",
-      "theory": "Increment and decrement",
-      "stepListTrue": [
-        "2015",
-        "5009",
-        "5010",
-        "5011",
-        "6584",
-        "23176"
-      ],
-      "stepListFalse": [
-        "42833",
-        "35153",
-        "12427",
-        "12428",
-        "23177",
-        "23178"
-      ]
-    },
-    {
       "id": 31559,
       "topic": 3124,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/31559",
       "theory": "Node Version Manager",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "31560",
@@ -2998,32 +2497,12 @@
       ]
     },
     {
-      "id": 5035,
-      "topic": 309,
-      "url": "https://hyperskill.org/learn/step/5035",
-      "theory": "Primitive and reference types",
-      "stepListTrue": [
-        "29752",
-        "2260",
-        "2263",
-        "5036",
-        "16579",
-        "16580",
-        "16581"
-      ],
-      "stepListFalse": [
-        "41254",
-        "38240",
-        "32815",
-        "2264",
-        "5037"
-      ]
-    },
-    {
       "id": 5075,
       "topic": 314,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/5075",
       "theory": "Gradle: overview",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "42905",
@@ -3041,80 +2520,12 @@
       ]
     },
     {
-      "id": 7427,
-      "topic": 571,
-      "url": "https://hyperskill.org/learn/step/7427",
-      "theory": "Constants. Final variables",
-      "stepListTrue": [
-        "7428",
-        "7429",
-        "7430",
-        "7431",
-        "7432",
-        "7433",
-        "12977"
-      ],
-      "stepListFalse": [
-        "41729",
-        "33666",
-        "32870",
-        "29808"
-      ]
-    },
-    {
-      "id": 3570,
-      "topic": 59,
-      "url": "https://hyperskill.org/learn/step/3570",
-      "theory": "Hierarchy of exceptions",
-      "stepListTrue": [
-        "2461",
-        "2463",
-        "2464",
-        "2808",
-        "2810",
-        "2812",
-        "16171",
-        "16173"
-      ],
-      "stepListFalse": [
-        "40975",
-        "32970",
-        "2462",
-        "2467",
-        "2468",
-        "2483",
-        "2811",
-        "16172"
-      ]
-    },
-    {
-      "id": 3497,
-      "topic": 60,
-      "url": "https://hyperskill.org/learn/step/3497",
-      "theory": "First glance at exceptions",
-      "stepListTrue": [
-        "6963",
-        "6964",
-        "6965",
-        "12686",
-        "19627"
-      ],
-      "stepListFalse": [
-        "36912",
-        "33598",
-        "2472",
-        "3444",
-        "28737",
-        "28738",
-        "28739",
-        "28740"
-      ]
-    },
-    {
       "id": 19365,
       "topic": 2108,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/19365",
       "theory": "java.util.Arrays",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "34757",
@@ -3133,18 +2544,12 @@
       ]
     },
     {
-      "id": 0,
-      "topic": 61,
-      "url": "https://hyperskill.org/learn/step/0",
-      "theory": "",
-      "stepListTrue": [],
-      "stepListFalse": []
-    },
-    {
       "id": 11505,
       "topic": 1086,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/11505",
       "theory": "Inner classes",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "11506",
@@ -3160,8 +2565,10 @@
     {
       "id": 12886,
       "topic": 1342,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/12886",
       "theory": "Checking External Resource",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "12887",
@@ -3174,31 +2581,12 @@
       ]
     },
     {
-      "id": 11514,
-      "topic": 1087,
-      "url": "https://hyperskill.org/learn/step/11514",
-      "theory": "Combining constants with enum",
-      "stepListTrue": [
-        "11516",
-        "11517",
-        "11518",
-        "11519",
-        "11520",
-        "11521"
-      ],
-      "stepListFalse": [
-        "35104",
-        "41045",
-        "30493",
-        "27290",
-        "11515"
-      ]
-    },
-    {
       "id": 5135,
       "topic": 319,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/5135",
       "theory": "Call stack",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "5136",
@@ -3214,60 +2602,12 @@
       ]
     },
     {
-      "id": 11523,
-      "topic": 1088,
-      "url": "https://hyperskill.org/learn/step/11523",
-      "theory": "Fields and methods in enum",
-      "stepListTrue": [
-        "11524",
-        "11525",
-        "11526",
-        "11527",
-        "11528",
-        "11529",
-        "11530"
-      ],
-      "stepListFalse": [
-        "31272",
-        "30676",
-        "11522"
-      ]
-    },
-    {
-      "id": 3552,
-      "topic": 65,
-      "url": "https://hyperskill.org/learn/step/3552",
-      "theory": "Exception handling",
-      "stepListTrue": [
-        "2475",
-        "2478",
-        "2479",
-        "2829",
-        "2830"
-      ],
-      "stepListFalse": [
-        "32978",
-        "34228",
-        "33115",
-        "39608",
-        "33064",
-        "33023",
-        "2474",
-        "2476",
-        "2481",
-        "2826",
-        "2827",
-        "2828",
-        "3445",
-        "3446",
-        "3447"
-      ]
-    },
-    {
       "id": 3501,
       "topic": 66,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3501",
       "theory": "Math library",
+      "learned_theory": true,
       "stepListTrue": [
         "2029",
         "2030",
@@ -3286,8 +2626,10 @@
     {
       "id": 17316,
       "topic": 1862,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/17316",
       "theory": "Text blocks",
+      "learned_theory": true,
       "stepListTrue": [
         "17317",
         "17319",
@@ -3310,8 +2652,10 @@
     {
       "id": 3619,
       "topic": 72,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3619",
       "theory": "Thread management",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "2530",
@@ -3327,18 +2671,12 @@
       ]
     },
     {
-      "id": 0,
-      "topic": 74,
-      "url": "https://hyperskill.org/learn/step/0",
-      "theory": "",
-      "stepListTrue": [],
-      "stepListFalse": []
-    },
-    {
       "id": 11635,
       "topic": 1100,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/11635",
       "theory": "Lambda expressions",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "41921",
@@ -3355,18 +2693,12 @@
       ]
     },
     {
-      "id": 0,
-      "topic": 1356,
-      "url": "https://hyperskill.org/learn/step/0",
-      "theory": "",
-      "stepListTrue": [],
-      "stepListFalse": []
-    },
-    {
       "id": 3622,
       "topic": 78,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3622",
       "theory": "Adding annotations",
+      "learned_theory": true,
       "stepListTrue": [
         "2570",
         "2575",
@@ -3390,8 +2722,10 @@
     {
       "id": 9519,
       "topic": 849,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/9519",
       "theory": "Connecting to a database with JDBC",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "9520",
@@ -3405,111 +2739,12 @@
       ]
     },
     {
-      "id": 3516,
-      "topic": 87,
-      "url": "https://hyperskill.org/learn/step/3516",
-      "theory": "Boolean type and operations. True and false",
-      "stepListTrue": [
-        "2268",
-        "2266",
-        "2683",
-        "2684"
-      ],
-      "stepListFalse": [
-        "39579",
-        "41026",
-        "39578",
-        "39577",
-        "32740",
-        "2660",
-        "2662",
-        "2685",
-        "3387"
-      ]
-    },
-    {
-      "id": 3512,
-      "topic": 88,
-      "url": "https://hyperskill.org/learn/step/3512",
-      "theory": "Comparing values. Relational operators",
-      "stepListTrue": [
-        "2053",
-        "2054",
-        "2273",
-        "2274",
-        "2676"
-      ],
-      "stepListFalse": [
-        "39575",
-        "41012",
-        "41456",
-        "39576",
-        "39574",
-        "32719",
-        "2271",
-        "2272",
-        "2275",
-        "2276",
-        "3736",
-        "5016"
-      ]
-    },
-    {
-      "id": 3505,
-      "topic": 89,
-      "url": "https://hyperskill.org/learn/step/3505",
-      "theory": "For-loop",
-      "stepListTrue": [
-        "1996",
-        "1998",
-        "1999",
-        "2187",
-        "2189",
-        "2191",
-        "2192",
-        "2193",
-        "2194",
-        "2742"
-      ],
-      "stepListFalse": [
-        "40337",
-        "41757",
-        "39584",
-        "39583",
-        "39582",
-        "36872",
-        "2188",
-        "2743"
-      ]
-    },
-    {
-      "id": 3498,
-      "topic": 90,
-      "url": "https://hyperskill.org/learn/step/3498",
-      "theory": "While and do-while loops",
-      "stepListTrue": [
-        "2026",
-        "2027",
-        "2028",
-        "2234"
-      ],
-      "stepListFalse": [
-        "39588",
-        "39587",
-        "39586",
-        "39585",
-        "39500",
-        "2225",
-        "2226",
-        "2227",
-        "2230"
-      ]
-    },
-    {
       "id": 19707,
       "topic": 2142,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/19707",
       "theory": "Sealed classes and interfaces",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "19708",
@@ -3525,42 +2760,12 @@
       ]
     },
     {
-      "id": 0,
-      "topic": 95,
-      "url": "https://hyperskill.org/learn/step/0",
-      "theory": "",
-      "stepListTrue": [],
-      "stepListFalse": []
-    },
-    {
-      "id": 4727,
-      "topic": 96,
-      "url": "https://hyperskill.org/learn/step/4727",
-      "theory": "Objects and their properties",
-      "stepListTrue": [
-        "29809",
-        "2050",
-        "3413",
-        "3659",
-        "5038",
-        "5039",
-        "12689",
-        "12690",
-        "19626"
-      ],
-      "stepListFalse": [
-        "32952",
-        "41554",
-        "38507",
-        "32931",
-        "32914"
-      ]
-    },
-    {
       "id": 5514,
       "topic": 352,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/5514",
       "theory": "The basic window in Swing",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "5515",
@@ -3573,73 +2778,12 @@
       ]
     },
     {
-      "id": 3602,
-      "topic": 97,
-      "url": "https://hyperskill.org/learn/step/3602",
-      "theory": "Iterating over arrays",
-      "stepListTrue": [
-        "1960",
-        "2134",
-        "2142",
-        "3280",
-        "10613"
-      ],
-      "stepListFalse": [
-        "32781",
-        "32760",
-        "32816",
-        "35323",
-        "2129",
-        "2130",
-        "2131",
-        "2132",
-        "2133",
-        "2135",
-        "2136",
-        "2137",
-        "2139",
-        "2140",
-        "2141",
-        "3281",
-        "3663",
-        "3795"
-      ]
-    },
-    {
-      "id": 3551,
-      "topic": 98,
-      "url": "https://hyperskill.org/learn/step/3551",
-      "theory": "Processing strings",
-      "stepListTrue": [
-        "2064",
-        "2282",
-        "2283",
-        "2292",
-        "2293",
-        "2294",
-        "3287",
-        "3288",
-        "3789",
-        "3791"
-      ],
-      "stepListFalse": [
-        "40976",
-        "33150",
-        "2281",
-        "2285",
-        "2286",
-        "2288",
-        "2291",
-        "2295",
-        "2296",
-        "3660"
-      ]
-    },
-    {
       "id": 5527,
       "topic": 354,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/5527",
       "theory": "Facade",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "5528",
@@ -3654,8 +2798,10 @@
     {
       "id": 17477,
       "topic": 1890,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/17477",
       "theory": "Stack trace",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "17478",
@@ -3670,8 +2816,10 @@
     {
       "id": 13148,
       "topic": 1378,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/13148",
       "theory": "Package manager APT",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "13149",
@@ -3687,63 +2835,12 @@
       ]
     },
     {
-      "id": 3594,
-      "topic": 99,
-      "url": "https://hyperskill.org/learn/step/3594",
-      "theory": "Arrays as parameters",
-      "stepListTrue": [
-        "41487",
-        "2036",
-        "2245",
-        "2748",
-        "2755",
-        "2756",
-        "2757",
-        "2758",
-        "2759",
-        "2761",
-        "2954"
-      ],
-      "stepListFalse": [
-        "32820",
-        "32835",
-        "2747",
-        "2744",
-        "2745",
-        "2760"
-      ]
-    },
-    {
-      "id": 0,
-      "topic": 355,
-      "url": "https://hyperskill.org/learn/step/0",
-      "theory": "",
-      "stepListTrue": [],
-      "stepListFalse": []
-    },
-    {
-      "id": 5533,
-      "topic": 356,
-      "url": "https://hyperskill.org/learn/step/5533",
-      "theory": "What are streams",
-      "stepListTrue": [
-        "5534",
-        "5535",
-        "5536",
-        "8855",
-        "18457"
-      ],
-      "stepListFalse": [
-        "18454",
-        "18455",
-        "18456"
-      ]
-    },
-    {
       "id": 8147,
       "topic": 100,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/8147",
       "theory": "Serialization basics",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "2778",
@@ -3763,8 +2860,10 @@
     {
       "id": 11845,
       "topic": 1126,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/11845",
       "theory": "Nested classes",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "11846",
@@ -3779,31 +2878,12 @@
       ]
     },
     {
-      "id": 3553,
-      "topic": 102,
-      "url": "https://hyperskill.org/learn/step/3553",
-      "theory": "Throwing exceptions",
-      "stepListTrue": [
-        "2465",
-        "2816",
-        "2832",
-        "2835",
-        "3293"
-      ],
-      "stepListFalse": [
-        "2466",
-        "2473",
-        "2814",
-        "2815",
-        "2833",
-        "7004"
-      ]
-    },
-    {
       "id": 9699,
       "topic": 871,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/9699",
       "theory": "Optional",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "9700",
@@ -3818,8 +2898,10 @@
     {
       "id": 3592,
       "topic": 104,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3592",
       "theory": "LocalDate",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "2843",
@@ -3843,8 +2925,10 @@
     {
       "id": 19793,
       "topic": 2153,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/19793",
       "theory": "Enumset",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "19794",
@@ -3863,8 +2947,10 @@
     {
       "id": 3593,
       "topic": 106,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3593",
       "theory": "LocalTime",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "2869",
@@ -3884,8 +2970,10 @@
     {
       "id": 13231,
       "topic": 1386,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/13231",
       "theory": "What is MongoDB",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "13232",
@@ -3901,32 +2989,12 @@
       ]
     },
     {
-      "id": 9734,
-      "topic": 875,
-      "url": "https://hyperskill.org/learn/step/9734",
-      "theory": "Try with resources",
-      "stepListTrue": [
-        "9736",
-        "9737",
-        "9738",
-        "13211"
-      ],
-      "stepListFalse": [
-        "9735",
-        "9740",
-        "13209",
-        "13210",
-        "25728",
-        "25729",
-        "25730",
-        "25731"
-      ]
-    },
-    {
       "id": 3609,
       "topic": 108,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3609",
       "theory": "Reflection basics",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "42892",
@@ -3947,30 +3015,12 @@
       ]
     },
     {
-      "id": 9746,
-      "topic": 876,
-      "url": "https://hyperskill.org/learn/step/9746",
-      "theory": "Parameters and options",
-      "stepListTrue": [
-        "9748",
-        "9751"
-      ],
-      "stepListFalse": [
-        "39997",
-        "38318",
-        "39993",
-        "39996",
-        "39995",
-        "32618",
-        "9750",
-        "9753"
-      ]
-    },
-    {
       "id": 15580,
       "topic": 1644,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/15580",
       "theory": "Getting information about processes",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "15581",
@@ -3985,8 +3035,10 @@
     {
       "id": 3566,
       "topic": 111,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3566",
       "theory": "Command-line arguments",
+      "learned_theory": true,
       "stepListTrue": [
         "3334",
         "3336",
@@ -4001,58 +3053,12 @@
       ]
     },
     {
-      "id": 3513,
-      "topic": 112,
-      "url": "https://hyperskill.org/learn/step/3513",
-      "theory": "Naming variables",
-      "stepListTrue": [
-        "2910",
-        "2915",
-        "2916",
-        "2918"
-      ],
-      "stepListFalse": [
-        "42894",
-        "39831",
-        "38417",
-        "38420",
-        "38418",
-        "38419",
-        "2919",
-        "2912",
-        "2914"
-      ]
-    },
-    {
-      "id": 9055,
-      "topic": 113,
-      "url": "https://hyperskill.org/learn/step/9055",
-      "theory": "Reading user\u0027s input with Scanner",
-      "stepListTrue": [
-        "2921",
-        "2922",
-        "2923",
-        "8301",
-        "8302",
-        "8303",
-        "9056",
-        "9057"
-      ],
-      "stepListFalse": [
-        "42957",
-        "38677",
-        "38413",
-        "38414",
-        "38412",
-        "32664",
-        "9261"
-      ]
-    },
-    {
       "id": 11896,
       "topic": 1137,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/11896",
       "theory": "Anonymous class",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "41841",
@@ -4071,8 +3077,10 @@
     {
       "id": 13309,
       "topic": 1393,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/13309",
       "theory": "Help files",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "13310",
@@ -4085,61 +3093,12 @@
       ]
     },
     {
-      "id": 3618,
-      "topic": 115,
-      "url": "https://hyperskill.org/learn/step/3618",
-      "theory": "Defining classes",
-      "stepListTrue": [
-        "1974",
-        "2939",
-        "2944",
-        "2946",
-        "2947",
-        "2949"
-      ],
-      "stepListFalse": [
-        "42331",
-        "41070",
-        "32888",
-        "32922",
-        "34830",
-        "32872",
-        "2940",
-        "2942",
-        "2945",
-        "2948"
-      ]
-    },
-    {
-      "id": 3495,
-      "topic": 116,
-      "url": "https://hyperskill.org/learn/step/3495",
-      "theory": "Instance methods",
-      "stepListTrue": [
-        "2956",
-        "2950",
-        "2951",
-        "2952",
-        "2955",
-        "2957",
-        "2988",
-        "2989",
-        "3279",
-        "3778",
-        "3779"
-      ],
-      "stepListFalse": [
-        "42899",
-        "32944",
-        "32889",
-        "2953"
-      ]
-    },
-    {
       "id": 29304,
       "topic": 2936,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/29304",
       "theory": "Atomics",
+      "learned_theory": true,
       "stepListTrue": [],
       "stepListFalse": [
         "38331",
@@ -4156,35 +3115,12 @@
       ]
     },
     {
-      "id": 3538,
-      "topic": 120,
-      "url": "https://hyperskill.org/learn/step/3538",
-      "theory": "Multiple constructors",
-      "stepListTrue": [
-        "1986",
-        "2172",
-        "3005",
-        "3007",
-        "3285",
-        "3286"
-      ],
-      "stepListFalse": [
-        "32929",
-        "34219",
-        "40419",
-        "32912",
-        "32966",
-        "29745",
-        "2174",
-        "2175",
-        "3006"
-      ]
-    },
-    {
       "id": 3533,
       "topic": 121,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3533",
       "theory": "Initialization blocks",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "2060",
@@ -4202,8 +3138,10 @@
     {
       "id": 3615,
       "topic": 124,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3615",
       "theory": "Declaring functionality with interfaces",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "42846",
@@ -4223,8 +3161,10 @@
     {
       "id": 32394,
       "topic": 3197,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/32394",
       "theory": "Greedy algorithms",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "32395",
@@ -4243,8 +3183,10 @@
     {
       "id": 3502,
       "topic": 125,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3502",
       "theory": "Class files and Bytecode",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "2994",
@@ -4258,8 +3200,10 @@
     {
       "id": 32406,
       "topic": 3198,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/32406",
       "theory": "Running a pod with a simple application",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "32407",
@@ -4275,69 +3219,12 @@
       ]
     },
     {
-      "id": 3588,
-      "topic": 127,
-      "url": "https://hyperskill.org/learn/step/3588",
-      "theory": "Keyword \"super\"",
-      "stepListTrue": [
-        "2009",
-        "2204",
-        "3044",
-        "3041",
-        "3042",
-        "3448"
-      ],
-      "stepListFalse": [
-        "33021",
-        "32976",
-        "40221",
-        "32962",
-        "3039",
-        "2206",
-        "3043",
-        "3040",
-        "23200"
-      ]
-    },
-    {
-      "id": 0,
-      "topic": 2944,
-      "url": "https://hyperskill.org/learn/step/0",
-      "theory": "",
-      "stepListTrue": [],
-      "stepListFalse": []
-    },
-    {
-      "id": 0,
-      "topic": 386,
-      "url": "https://hyperskill.org/learn/step/0",
-      "theory": "",
-      "stepListTrue": [],
-      "stepListFalse": []
-    },
-    {
-      "id": 5819,
-      "topic": 387,
-      "url": "https://hyperskill.org/learn/step/5819",
-      "theory": "IntelliJ IDEA basics",
-      "stepListTrue": [
-        "5821",
-        "5822",
-        "16097",
-        "16098",
-        "16100"
-      ],
-      "stepListFalse": [
-        "5820",
-        "16099",
-        "18312"
-      ]
-    },
-    {
       "id": 5824,
       "topic": 388,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/5824",
       "theory": "Navigation through code",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "5825",
@@ -4352,8 +3239,10 @@
     {
       "id": 15647,
       "topic": 1671,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/15647",
       "theory": "Modules",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "15648",
@@ -4367,27 +3256,12 @@
       ]
     },
     {
-      "id": 5839,
-      "topic": 391,
-      "url": "https://hyperskill.org/learn/step/5839",
-      "theory": "JetBrains Academy plugin",
-      "stepListTrue": [
-        "5840",
-        "14948",
-        "14949",
-        "14950"
-      ],
-      "stepListFalse": [
-        "5841",
-        "5842",
-        "14951"
-      ]
-    },
-    {
       "id": 33203,
       "topic": 3213,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/33203",
       "theory": "Readline module",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "33204",
@@ -4406,8 +3280,10 @@
     {
       "id": 13775,
       "topic": 1425,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/13775",
       "theory": "Debugging techniques",
+      "learned_theory": true,
       "stepListTrue": [
         "13777",
         "13778",
@@ -4429,55 +3305,12 @@
       ]
     },
     {
-      "id": 3519,
-      "topic": 146,
-      "url": "https://hyperskill.org/learn/step/3519",
-      "theory": "Arithmetic operations",
-      "stepListTrue": [
-        "2012",
-        "3211",
-        "3213",
-        "3218"
-      ],
-      "stepListFalse": [
-        "42958",
-        "41187",
-        "39560",
-        "39562",
-        "36871",
-        "39561",
-        "39563",
-        "29748",
-        "3209",
-        "3216"
-      ]
-    },
-    {
-      "id": 3522,
-      "topic": 147,
-      "url": "https://hyperskill.org/learn/step/3522",
-      "theory": "Basic literals: numbers, strings and characters",
-      "stepListTrue": [
-        "3224",
-        "3227",
-        "3229",
-        "3232",
-        "3480"
-      ],
-      "stepListFalse": [
-        "39111",
-        "39367",
-        "3228",
-        "3230",
-        "39423",
-        "39424"
-      ]
-    },
-    {
       "id": 12135,
       "topic": 1171,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/12135",
       "theory": "First program in bash",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "39833",
@@ -4496,53 +3329,12 @@
       ]
     },
     {
-      "id": 3521,
-      "topic": 148,
-      "url": "https://hyperskill.org/learn/step/3521",
-      "theory": "Writing first program",
-      "stepListTrue": [
-        "2506",
-        "3757",
-        "3758",
-        "3772",
-        "3773"
-      ],
-      "stepListFalse": [
-        "38267",
-        "32628",
-        "32658",
-        "32598",
-        "2303",
-        "3233",
-        "3240",
-        "3756",
-        "10831"
-      ]
-    },
-    {
-      "id": 3499,
-      "topic": 149,
-      "url": "https://hyperskill.org/learn/step/3499",
-      "theory": "Basic terms: JVM, JRE, JDK",
-      "stepListTrue": [
-        "40118",
-        "40120",
-        "2022",
-        "2223"
-      ],
-      "stepListFalse": [
-        "40119",
-        "40121",
-        "2020",
-        "2491",
-        "13173"
-      ]
-    },
-    {
       "id": 3509,
       "topic": 150,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3509",
       "theory": "JVM components",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "2019",
@@ -4566,8 +3358,10 @@
     {
       "id": 3494,
       "topic": 151,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3494",
       "theory": "Infinity and Not a Number",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "1995",
@@ -4584,30 +3378,12 @@
       ]
     },
     {
-      "id": 3506,
-      "topic": 152,
-      "url": "https://hyperskill.org/learn/step/3506",
-      "theory": "One-line condition with ternary operator",
-      "stepListTrue": [
-        "1981",
-        "2666",
-        "3268",
-        "3269",
-        "3271",
-        "3275",
-        "3276",
-        "3412"
-      ],
-      "stepListFalse": [
-        "41347",
-        "3270"
-      ]
-    },
-    {
       "id": 26422,
       "topic": 2712,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/26422",
       "theory": "Thread-safe singleton",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "26423",
@@ -4623,18 +3399,12 @@
       ]
     },
     {
-      "id": 0,
-      "topic": 153,
-      "url": "https://hyperskill.org/learn/step/0",
-      "theory": "",
-      "stepListTrue": [],
-      "stepListFalse": []
-    },
-    {
       "id": 12172,
       "topic": 1178,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/12172",
       "theory": "Introduction to Heroku",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "12173",
@@ -4652,8 +3422,10 @@
     {
       "id": 23429,
       "topic": 2459,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/23429",
       "theory": "Introduction to NIO",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "23430",
@@ -4670,8 +3442,10 @@
     {
       "id": 3555,
       "topic": 156,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3555",
       "theory": "Singleton",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "3311",
@@ -4686,35 +3460,12 @@
       ]
     },
     {
-      "id": 3532,
-      "topic": 161,
-      "url": "https://hyperskill.org/learn/step/3532",
-      "theory": "Data types and their sizes",
-      "stepListTrue": [
-        "2016",
-        "2047",
-        "2668",
-        "2669",
-        "2674",
-        "3382",
-        "3383",
-        "12979"
-      ],
-      "stepListFalse": [
-        "41484",
-        "32810",
-        "32792",
-        "32775",
-        "1992",
-        "2670",
-        "2675"
-      ]
-    },
-    {
       "id": 3508,
       "topic": 162,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3508",
       "theory": "BigInteger",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "2262",
@@ -4731,72 +3482,12 @@
       ]
     },
     {
-      "id": 3536,
-      "topic": 163,
-      "url": "https://hyperskill.org/learn/step/3536",
-      "theory": "Errors in programs",
-      "stepListTrue": [
-        "3478",
-        "3476",
-        "3477",
-        "3750",
-        "3751",
-        "3753",
-        "12472"
-      ],
-      "stepListFalse": [
-        "38321",
-        "29954",
-        "29772",
-        "3752"
-      ]
-    },
-    {
-      "id": 1945,
-      "topic": 164,
-      "url": "https://hyperskill.org/learn/step/1945",
-      "theory": "NullPointerException",
-      "stepListTrue": [
-        "2052",
-        "1947",
-        "1946",
-        "1944",
-        "3822",
-        "13206",
-        "13821"
-      ],
-      "stepListFalse": [
-        "39024",
-        "1943",
-        "3783",
-        "13207"
-      ]
-    },
-    {
-      "id": 1940,
-      "topic": 165,
-      "url": "https://hyperskill.org/learn/step/1940",
-      "theory": "Array exceptions",
-      "stepListTrue": [
-        "2470",
-        "2471",
-        "2803",
-        "1942",
-        "1939",
-        "3821"
-      ],
-      "stepListFalse": [
-        "34831",
-        "2804",
-        "3782",
-        "12688"
-      ]
-    },
-    {
       "id": 3567,
       "topic": 166,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3567",
       "theory": "ArrayList",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "2321",
@@ -4814,11 +3505,13 @@
     {
       "id": 3492,
       "topic": 167,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3492",
       "theory": "Introduction to generic programming",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
-        "37222",
+        "43050",
         "2089",
         "3530",
         "2087",
@@ -4833,8 +3526,10 @@
     {
       "id": 12196,
       "topic": 1192,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/12196",
       "theory": "create-react-app",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "12197",
@@ -4849,8 +3544,10 @@
     {
       "id": 13961,
       "topic": 1451,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/13961",
       "theory": "Working with file modes and permissions",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "13962",
@@ -4866,53 +3563,12 @@
       ]
     },
     {
-      "id": 3635,
-      "topic": 172,
-      "url": "https://hyperskill.org/learn/step/3635",
-      "theory": "File class",
-      "stepListTrue": [
-        "30887",
-        "3625",
-        "3626",
-        "3627",
-        "3628",
-        "7699",
-        "7700",
-        "8093",
-        "8094",
-        "8095"
-      ],
-      "stepListFalse": [
-        "42053"
-      ]
-    },
-    {
-      "id": 3636,
-      "topic": 173,
-      "url": "https://hyperskill.org/learn/step/3636",
-      "theory": "Reading files",
-      "stepListTrue": [
-        "4842",
-        "4841",
-        "3632",
-        "4839",
-        "8431",
-        "8432"
-      ],
-      "stepListFalse": [
-        "42029",
-        "4840",
-        "4838",
-        "8430",
-        "8433",
-        "8434"
-      ]
-    },
-    {
       "id": 16020,
       "topic": 1709,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/16020",
       "theory": "Run the \"hello-world\" docker container",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "16021",
@@ -4925,18 +3581,12 @@
       ]
     },
     {
-      "id": 0,
-      "topic": 174,
-      "url": "https://hyperskill.org/learn/step/0",
-      "theory": "",
-      "stepListTrue": [],
-      "stepListFalse": []
-    },
-    {
       "id": 13983,
       "topic": 1455,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/13983",
       "theory": "Reducing boilerplate code with Lombok",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "13984",
@@ -4951,8 +3601,10 @@
     {
       "id": 3638,
       "topic": 175,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3638",
       "theory": "File hierarchies",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "3637",
@@ -4968,8 +3620,10 @@
     {
       "id": 16036,
       "topic": 1712,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/16036",
       "theory": "Switch expression",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "16037",
@@ -4987,8 +3641,10 @@
     {
       "id": 3648,
       "topic": 176,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3648",
       "theory": "Managing files",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "3647",
@@ -5005,29 +3661,12 @@
       ]
     },
     {
-      "id": 3652,
-      "topic": 177,
-      "url": "https://hyperskill.org/learn/step/3652",
-      "theory": "Writing files",
-      "stepListTrue": [
-        "3651",
-        "3657",
-        "8465",
-        "8467"
-      ],
-      "stepListFalse": [
-        "3650",
-        "8464",
-        "8466",
-        "8468",
-        "8469"
-      ]
-    },
-    {
       "id": 3670,
       "topic": 178,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3670",
       "theory": "Regexps in Java",
+      "learned_theory": true,
       "stepListTrue": [
         "3668",
         "3669",
@@ -5047,8 +3686,10 @@
     {
       "id": 14190,
       "topic": 1460,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/14190",
       "theory": "Archiving and extracting data",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "14191",
@@ -5062,10 +3703,33 @@
       ]
     },
     {
+      "id": 36876,
+      "topic": 3513,
+      "learned_topic": false,
+      "url": "https://hyperskill.org/learn/step/36876",
+      "theory": "A topic on a ternary, binary search problem",
+      "learned_theory": false,
+      "stepListTrue": [],
+      "stepListFalse": [
+        "36877",
+        "36878",
+        "36879",
+        "36880",
+        "36881",
+        "36882",
+        "36883",
+        "36884",
+        "36885",
+        "36886"
+      ]
+    },
+    {
       "id": 3712,
       "topic": 185,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3712",
       "theory": "Patterns and Matcher",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "3713",
@@ -5081,8 +3745,10 @@
     {
       "id": 3716,
       "topic": 186,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/3716",
       "theory": "Match results",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "3717",
@@ -5097,8 +3763,10 @@
     {
       "id": 18139,
       "topic": 1979,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/18139",
       "theory": "Types of references",
+      "learned_theory": true,
       "stepListTrue": [
         "18141"
       ],
@@ -5114,26 +3782,12 @@
       ]
     },
     {
-      "id": 0,
-      "topic": 187,
-      "url": "https://hyperskill.org/learn/step/0",
-      "theory": "",
-      "stepListTrue": [],
-      "stepListFalse": []
-    },
-    {
-      "id": 0,
-      "topic": 188,
-      "url": "https://hyperskill.org/learn/step/0",
-      "theory": "",
-      "stepListTrue": [],
-      "stepListFalse": []
-    },
-    {
       "id": 6230,
       "topic": 444,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/6230",
       "theory": "Installing packages with pip",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "36566",
@@ -5153,8 +3807,10 @@
     {
       "id": 14268,
       "topic": 1470,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/14268",
       "theory": "Java 11 HTTP client",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "34583",
@@ -5172,8 +3828,10 @@
     {
       "id": 16223,
       "topic": 1727,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/16223",
       "theory": "Walking through directories in the command line",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "16224",
@@ -5189,69 +3847,12 @@
       ]
     },
     {
-      "id": 3746,
-      "topic": 192,
-      "url": "https://hyperskill.org/learn/step/3746",
-      "theory": "Running programs on your computer",
-      "stepListTrue": [
-        "2024",
-        "2492",
-        "3406",
-        "3407"
-      ],
-      "stepListFalse": [
-        "40422",
-        "41639",
-        "34717",
-        "33178",
-        "2071",
-        "2224",
-        "3768",
-        "3769"
-      ]
-    },
-    {
-      "id": 3749,
-      "topic": 193,
-      "url": "https://hyperskill.org/learn/step/3749",
-      "theory": "Printing data",
-      "stepListTrue": [
-        "34802",
-        "2509",
-        "3236",
-        "3759",
-        "3761",
-        "3763",
-        "3764",
-        "26367"
-      ],
-      "stepListFalse": [
-        "42940",
-        "41630",
-        "38676",
-        "32629",
-        "3235",
-        "3760",
-        "26365",
-        "26366",
-        "26368",
-        "26369",
-        "26370"
-      ]
-    },
-    {
-      "id": 0,
-      "topic": 196,
-      "url": "https://hyperskill.org/learn/step/0",
-      "theory": "",
-      "stepListTrue": [],
-      "stepListFalse": []
-    },
-    {
       "id": 23950,
       "topic": 2503,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/23950",
       "theory": "Docker build and docker tag",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "23951",
@@ -5266,51 +3867,32 @@
       ]
     },
     {
-      "id": 3812,
-      "topic": 201,
-      "url": "https://hyperskill.org/learn/step/3812",
-      "theory": "StringBuilder",
-      "stepListTrue": [
-        "3813",
-        "3815",
-        "3816",
-        "3817",
-        "12514",
-        "23735",
-        "23737"
-      ],
-      "stepListFalse": [
-        "41492",
-        "3814",
-        "3818",
-        "12515",
-        "23734",
-        "23736",
-        "23738"
-      ]
-    },
-    {
       "id": 4284,
       "topic": 202,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/4284",
       "theory": "Build tools",
-      "stepListTrue": [],
-      "stepListFalse": [
+      "learned_theory": true,
+      "stepListTrue": [
         "34701",
-        "4287",
         "4288",
         "7852",
         "16513",
-        "16514",
         "16515",
         "16516"
+      ],
+      "stepListFalse": [
+        "4287",
+        "16514"
       ]
     },
     {
       "id": 4282,
       "topic": 205,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/4282",
       "theory": "The simplest project with Maven",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "4293",
@@ -5325,8 +3907,10 @@
     {
       "id": 4311,
       "topic": 207,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/4311",
       "theory": "JAR files",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "41354",
@@ -5344,8 +3928,10 @@
     {
       "id": 10484,
       "topic": 976,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/10484",
       "theory": "The main() function",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "10485",
@@ -5363,8 +3949,10 @@
     {
       "id": 18329,
       "topic": 2001,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/18329",
       "theory": "Records",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "18330",
@@ -5377,10 +3965,33 @@
       ]
     },
     {
+      "id": 37206,
+      "topic": 3538,
+      "learned_topic": false,
+      "url": "https://hyperskill.org/learn/step/37206",
+      "theory": "Run and debug with IntelliJ IDEA",
+      "learned_theory": false,
+      "stepListTrue": [],
+      "stepListFalse": [
+        "37207",
+        "37208",
+        "37209",
+        "37210",
+        "37211",
+        "37212",
+        "37213",
+        "37214",
+        "37215",
+        "37216"
+      ]
+    },
+    {
       "id": 8837,
       "topic": 724,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/8837",
       "theory": "Output streams",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "8838",
@@ -5396,52 +4007,12 @@
       ]
     },
     {
-      "id": 10570,
-      "topic": 985,
-      "url": "https://hyperskill.org/learn/step/10570",
-      "theory": "Functional decomposition",
-      "stepListTrue": [
-        "10571",
-        "10572",
-        "10574",
-        "10575",
-        "10576",
-        "10577",
-        "10578"
-      ],
-      "stepListFalse": [
-        "41271",
-        "36365",
-        "32843",
-        "32373"
-      ]
-    },
-    {
-      "id": 12411,
-      "topic": 1248,
-      "url": "https://hyperskill.org/learn/step/12411",
-      "theory": "Coding style conventions",
-      "stepListTrue": [
-        "12414",
-        "12416",
-        "12418"
-      ],
-      "stepListFalse": [
-        "39557",
-        "41493",
-        "36696",
-        "39556",
-        "39559",
-        "39558",
-        "35253",
-        "12417"
-      ]
-    },
-    {
       "id": 14495,
       "topic": 1504,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/14495",
       "theory": "Searching files",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "39787",
@@ -5460,8 +4031,10 @@
     {
       "id": 10630,
       "topic": 999,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/10630",
       "theory": "IntelliJ IDEA run configurations",
+      "learned_theory": true,
       "stepListTrue": [
         "10632",
         "10633",
@@ -5480,8 +4053,10 @@
     {
       "id": 27737,
       "topic": 2791,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/27737",
       "theory": "Setting up a server with HttpServer",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "34726",
@@ -5505,8 +4080,10 @@
     {
       "id": 16528,
       "topic": 1769,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/16528",
       "theory": "Memento",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "16529",
@@ -5524,8 +4101,10 @@
     {
       "id": 6692,
       "topic": 491,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/6692",
       "theory": "Protected modifier",
+      "learned_theory": true,
       "stepListTrue": [
         "6693",
         "6694",
@@ -5544,42 +4123,12 @@
       ]
     },
     {
-      "id": 0,
-      "topic": 1262,
-      "url": "https://hyperskill.org/learn/step/0",
-      "theory": "",
-      "stepListTrue": [],
-      "stepListFalse": []
-    },
-    {
-      "id": 0,
-      "topic": 1263,
-      "url": "https://hyperskill.org/learn/step/0",
-      "theory": "",
-      "stepListTrue": [],
-      "stepListFalse": []
-    },
-    {
-      "id": 0,
-      "topic": 1264,
-      "url": "https://hyperskill.org/learn/step/0",
-      "theory": "",
-      "stepListTrue": [],
-      "stepListFalse": []
-    },
-    {
-      "id": 0,
-      "topic": 1269,
-      "url": "https://hyperskill.org/learn/step/0",
-      "theory": "",
-      "stepListTrue": [],
-      "stepListFalse": []
-    },
-    {
       "id": 18747,
       "topic": 2041,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/18747",
       "theory": "Passing arguments to method",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "18748",
@@ -5596,8 +4145,10 @@
     {
       "id": 30833,
       "topic": 3071,
+      "learned_topic": false,
       "url": "https://hyperskill.org/learn/step/30833",
       "theory": "Hashing java.security.MessageDigest",
+      "learned_theory": false,
       "stepListTrue": [],
       "stepListFalse": [
         "30834",

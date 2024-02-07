@@ -65,7 +65,7 @@ public class Main {
                     }
                 } else if (mode == 3) {
                     util.createDriver(false);
-                    System.out.println("n progress...");
+                    System.out.println("In progress...");
                     util.login();
                     test.getAnswers();
                 } else if (mode == 4) {
@@ -77,7 +77,7 @@ public class Main {
                     System.exit(0);
                 }
 
-                System.out.println("\nCompleted!\n");
+                System.out.println("Completed!");
 
                 util.closeDriver();
             }

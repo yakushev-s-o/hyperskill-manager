@@ -20,8 +20,8 @@ public class SavePages {
     public void saveTopics() {
         Data data = getFileData(Data.class, DATA_PATH);
 
-        for (String topic : data.getTopic_relations().getTopics()) {
-            if (isFileExists(FOLDER_PATH + "knowledge-map/", topic)) {
+        for (Integer topic : data.getTopic_relations().getTopics()) {
+            if (isFileExists(FOLDER_PATH + "knowledge-map/", String.valueOf(topic))) {
                 driver.get(SITE_LINK + "knowledge-map/" + topic);
 
                 waitDownloadElement("//div[@class='knowledge-map-node']");
@@ -31,7 +31,7 @@ public class SavePages {
                     waitDownloadElement("//div[@class='topic-block']");
                 }
 
-                save("knowledge-map/", topic);
+                save("knowledge-map/", String.valueOf(topic));
             }
         }
     }
