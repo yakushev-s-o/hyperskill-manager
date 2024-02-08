@@ -2,7 +2,7 @@ package com.yakushevso.data;
 
 import java.util.List;
 
-public record Project(int id, String url, String title,
+public record Project(int id, boolean completed, String url, String title,
                       List<String> stages_ids) {
 
     public int getId() {

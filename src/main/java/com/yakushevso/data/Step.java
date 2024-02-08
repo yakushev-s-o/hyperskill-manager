@@ -2,8 +2,8 @@ package com.yakushevso.data;
 
 import java.util.List;
 
-public record Step(int id, int topic, boolean learned_topic,
-                   String url, String theory, boolean learned_theory,
+public record Step(int id, int topic, boolean learned_topic, boolean skipped_topic,
+                   float capacity_topic, String url, String theory, boolean learned_theory,
                    List<String> stepListTrue, List<String> stepListFalse) {
 
     public List<String> getStepListTrue() {
@@ -18,5 +18,6 @@ public record Step(int id, int topic, boolean learned_topic,
         return id;
     }
 
-    public int getTopic() {return topic;}
+    public int getTopic() {
+        return topic;}
 }

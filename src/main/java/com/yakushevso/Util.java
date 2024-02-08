@@ -93,82 +93,6 @@ public class Util {
         printProgress(topic, projects, steps, additionalSteps, track);
     }
 
-    // Print statistics of the received data
-    private void printProgress(Topic topic, List<Project> projects, List<Step> steps,
-                               List<Step> additionalSteps, int track) {
-        String urlProgress = "https://hyperskill.org/api/progresses/track-" + track + "?format=json";
-
-        driver.get(urlProgress);
-
-        // Get page content as text
-        String jsonProgress = driver.findElement(By.tagName("pre")).getText();
-
-        // Get JSON object from text
-        JsonElement progressElement = JsonParser.parseString(jsonProgress);
-        JsonObject progressObj = progressElement.getAsJsonObject()
-                .getAsJsonArray("progresses").get(0).getAsJsonObject();
-
-        String urlCurrent = "https://hyperskill.org/api/profiles/current?format=json";
-
-        driver.get(urlCurrent);
-
-        // Get page content as text
-        String jsonCurrent = driver.findElement(By.tagName("pre")).getText();
-
-        // Get JSON object from text
-        JsonElement currentElement = JsonParser.parseString(jsonCurrent);
-        JsonObject currentObj = currentElement.getAsJsonObject()
-                 .getAsJsonArray("profiles").get(0).getAsJsonObject()
-                .getAsJsonObject("gamification");
-
-        int stepsSolved = steps.stream().mapToInt(countStep -> countStep.getStepListTrue().size()).sum();
-        int stepsUnresolved = steps.stream().mapToInt(countStep -> countStep.getStepListFalse().size()).sum();
-        int stepsAdditionalSolved = additionalSteps.stream().mapToInt(countStep -> countStep.getStepListTrue().size()).sum();
-        int stepsAdditionalUnresolved = additionalSteps.stream().mapToInt(countStep -> countStep.getStepListFalse().size()).sum();
-
-        System.out.printf("""
-                        ================================
-                        Track %d
-                        ================================
-                        Knowledge-map:          %d
-                        Topics                  %d+%d/%d
-                        Projects:               %d/%d
-                        Theory:                 %d/%d
-                        Steps:                  %d/%d
-                        ================================
-                        Additional topics:      %d/%d
-                        Additional theory:      %d/%d
-                        Additional steps:       %d/%d
-                        =================================
-                        All completed topics:   %d
-                        All completed projects: %d
-                        All completed theory:   %d
-                        All solved steps:       %d
-                        ================================
-                        """,
-                track,
-                topic.getTopics().size(),
-                progressObj.get("learned_topics_count").getAsInt(),
-                progressObj.get("skipped_topics_count").getAsInt(),
-                topic.getDescendants().size(),
-                progressObj.getAsJsonArray("completed_projects").size(),
-                projects.size(),
-                0,
-                0,
-                stepsSolved,
-                stepsSolved + stepsUnresolved,
-                0,
-                0,
-                0,
-                additionalSteps.size(),
-                stepsAdditionalSolved,
-                stepsAdditionalSolved + stepsAdditionalUnresolved,
-                currentObj.get("passed_topics").getAsInt(),
-                currentObj.get("passed_projects").getAsInt(),
-                currentObj.get("passed_theories").getAsInt(),
-                currentObj.get("passed_problems").getAsInt());
-    }
-
     // Get the list of topics
     private Topic getTopics(int track) {
         List<Integer> listTopic = new ArrayList<>();
@@ -191,11 +115,6 @@ public class Util {
             JsonElement topicsElement = JsonParser.parseString(json);
             JsonObject topicsObject = topicsElement.getAsJsonObject();
 
-            // Check if there is a next data page
-            if (!topicsObject.getAsJsonObject("meta").get("has_next").getAsBoolean()) {
-                isNext = false;
-            }
-
             // Get an array of topics
             JsonArray topicRelationsArr = topicsObject.getAsJsonArray("topic-relations");
 
@@ -212,6 +131,11 @@ public class Util {
                         listDescendants.add(s.getAsInt());
                     }
                 }
+            }
+
+            // Check if there is a next data page
+            if (!topicsObject.getAsJsonObject("meta").get("has_next").getAsBoolean()) {
+                isNext = false;
             }
         }
 
@@ -242,32 +166,34 @@ public class Util {
             JsonArray projects = entry.getValue().getAsJsonArray();
 
             // Getting data from projects
-            for (JsonElement projectName : projects) {
+            for (JsonElement project : projects) {
                 String urlProject = "https://hyperskill.org/api/projects/"
-                        + projectName.getAsInt() + "?format=json";
+                        + project.getAsInt() + "?format=json";
+
                 driver.get(urlProject);
-                String projectPageSource = driver.getPageSource();
-                String projectJson = projectPageSource.substring(projectPageSource.indexOf("{"),
-                        projectPageSource.lastIndexOf("}") + 1);
 
-                JsonElement projectJsonElement = JsonParser.parseString(projectJson);
-                JsonObject projectJsonObject = projectJsonElement.getAsJsonObject();
-                JsonArray projectDataArray = projectJsonObject.getAsJsonArray("projects");
+                // Get page content as text
+                String jsonProject = driver.findElement(By.tagName("pre")).getText();
 
-                for (JsonElement projectElement1 : projectDataArray) {
-                    JsonObject projectObj1 = projectElement1.getAsJsonObject();
+                // Get JSON object from text
+                JsonElement projectElement = JsonParser.parseString(jsonProject);
+                JsonObject projectObj = projectElement.getAsJsonObject()
+                        .getAsJsonArray("projects").get(0).getAsJsonObject();
 
-                    int id = projectObj1.get("id").getAsInt();
-                    String title = projectObj1.get("title").getAsString();
-                    List<String> stagesIds = new ArrayList<>();
+                int id = projectObj.get("id").getAsInt();
+                String title = projectObj.get("title").getAsString();
+                List<String> stagesIds = new ArrayList<>();
 
-                    for (JsonElement stageId : projectObj1.getAsJsonArray("stages_ids")) {
-                        stagesIds.add(stageId.getAsString());
-                    }
-
-                    projectList.add(new Project(id, SITE_LINK + "projects/" + id,
-                            title, stagesIds));
+                for (JsonElement stageId : projectObj.getAsJsonArray("stages_ids")) {
+                    stagesIds.add(stageId.getAsString());
                 }
+
+                JsonObject progressObj = getProgress("https://hyperskill.org/api/progresses" +
+                        "?format=json&ids=project-" + project);
+                boolean completed = progressObj.get("is_completed").getAsBoolean();
+
+                projectList.add(new Project(id, completed, SITE_LINK + "projects/" + id,
+                        title, stagesIds));
             }
         }
 
@@ -276,16 +202,17 @@ public class Util {
 
     // Get a list of topics and tasks
     private List<Step> getSteps(Topic topics) {
-        List<Step> steps = new ArrayList<>();
+        List<Step> listSteps = new ArrayList<>();
 
         for (Integer topic : topics.getDescendants()) {
-            int i = 1;
+            JsonArray listStep = new JsonArray();
             boolean isNext = true;
+            int pageNum = 1;
 
             // While there is a next page, we loop
             while (isNext) {
                 String url = "https://hyperskill.org/api/steps?format=json&topic=" + topic +
-                        "&page_size=100&page=" + i++ + "";
+                        "&page_size=100&page=" + pageNum++ + "";
 
                 driver.get(url);
 
@@ -296,51 +223,59 @@ public class Util {
                 JsonElement jsonElement = JsonParser.parseString(pageSource);
                 JsonObject jsonObject = jsonElement.getAsJsonObject();
 
+                // Add a step to the array list
+                for (JsonElement element : jsonObject.getAsJsonArray("steps")) {
+                    listStep.add(element);
+                }
+
                 // Check if there is a next data page
                 if (!jsonObject.getAsJsonObject("meta").get("has_next").getAsBoolean()) {
                     isNext = false;
                 }
+            }
 
-                int id = 0;
-                String title = "";
-                boolean learnedTheory = false;
-                boolean learnedTopic = false;
-                List<String> listStepTrue = new ArrayList<>();
-                List<String> listStepFalse = new ArrayList<>();
+            int theory = 0;
+            String titleTheory = "";
+            boolean learnedTheory = false;
+            List<String> listStepTrue = new ArrayList<>();
+            List<String> listStepFalse = new ArrayList<>();
 
-                // Get an array of steps
-                JsonArray topicRelationsArr = jsonObject.getAsJsonArray("steps");
+            // Get detailed information on the step
+            for (JsonElement step : listStep) {
+                JsonObject objStep = step.getAsJsonObject();
 
-                for (JsonElement element : topicRelationsArr) {
-                    JsonObject obj = element.getAsJsonObject();
-
-                    // Check the step type (theory or practice)
-                    if (obj.get("type").getAsString().equals("theory")) {
-                        // If the type is a theory, then get the theory ID and name
-                        id = obj.get("topic_theory").getAsInt();
-                        title = obj.get("title").getAsString();
-                        learnedTheory = obj.get("is_completed").getAsBoolean();
-                    } else if (obj.get("type").getAsString().equals("practice")) {
-                        // Divide the lists into completed and uncompleted
-                        if (obj.get("is_completed").getAsBoolean()) {
-                            // If "practice", then add practice ID
-                            listStepTrue.add(obj.get("id").getAsString());
-                        } else {
-                            listStepFalse.add(obj.get("id").getAsString());
-                        }
+                // Check the step type (theory or practice)
+                if (objStep.get("type").getAsString().equals("theory")) {
+                    // If the type is a theory, then get the theory ID and name
+                    theory = objStep.get("topic_theory").getAsInt();
+                    titleTheory = objStep.get("title").getAsString();
+                    learnedTheory = objStep.get("is_completed").getAsBoolean();
+                } else if (objStep.get("type").getAsString().equals("practice")) {
+                    // Divide the lists into completed and uncompleted
+                    if (objStep.get("is_completed").getAsBoolean()) {
+                        // If "practice", then add practice ID
+                        listStepTrue.add(objStep.get("id").getAsString());
+                    } else {
+                        listStepFalse.add(objStep.get("id").getAsString());
                     }
                 }
-
-                if (listStepFalse.isEmpty() && learnedTheory) {
-                    learnedTopic = true;
-                }
-
-                steps.add(new Step(id, topic, learnedTopic, SITE_LINK + "learn/step/" + id,
-                        title, learnedTheory, listStepTrue, listStepFalse));
             }
+
+            JsonObject progressObj = getProgress("https://hyperskill.org/api/progresses" +
+                    "?format=json&ids=topic-" + topic);
+
+            // Progress of the topic
+            float capacityTopic = progressObj.get("capacity").getAsFloat();
+            boolean learnedTopic = progressObj.get("is_learned").getAsBoolean();
+            boolean skippedTopic = progressObj.get("is_skipped").getAsBoolean();
+
+            listSteps.add(new Step(theory, topic, learnedTopic, skippedTopic, capacityTopic,
+                    SITE_LINK + "learn/step/" + theory, titleTheory,
+                    learnedTheory, listStepTrue, listStepFalse));
+
         }
 
-        return steps;
+        return listSteps;
     }
 
     // Get a list of topics and tasks outside track
@@ -387,6 +322,89 @@ public class Util {
         }
 
         return new Topic(null, additionalTopic);
+    }
+
+    private JsonObject getProgress(String urlTopic) {
+        driver.get(urlTopic);
+
+        // Get page content as text
+        String jsonProgress = driver.findElement(By.tagName("pre")).getText();
+
+        // Get JSON object from text
+        JsonElement progressElement = JsonParser.parseString(jsonProgress);
+        return progressElement.getAsJsonObject()
+                .getAsJsonArray("progresses").get(0).getAsJsonObject();
+    }
+
+    // Print statistics of the received data
+    private void printProgress(Topic topic, List<Project> projects, List<Step> steps,
+                               List<Step> additionalSteps, int track) {
+
+        JsonObject progressObj = getProgress("https://hyperskill.org/api/progresses" +
+                "/track-" + track + "?format=json");
+
+        String urlCurrent = "https://hyperskill.org/api/profiles/current?format=json";
+
+        driver.get(urlCurrent);
+
+        // Get page content as text
+        String jsonCurrent = driver.findElement(By.tagName("pre")).getText();
+
+        // Get JSON object from text
+        JsonElement currentElement = JsonParser.parseString(jsonCurrent);
+        JsonObject currentObj = currentElement.getAsJsonObject()
+                .getAsJsonArray("profiles").get(0).getAsJsonObject()
+                .getAsJsonObject("gamification");
+
+        int stepsSolved = steps.stream().mapToInt(countStep -> countStep.getStepListTrue().size()).sum();
+        int stepsUnresolved = steps.stream().mapToInt(countStep -> countStep.getStepListFalse().size()).sum();
+        int stepsAdditionalSolved = additionalSteps.stream().mapToInt(countStep -> countStep.getStepListTrue().size()).sum();
+        int stepsAdditionalUnresolved = additionalSteps.stream().mapToInt(countStep -> countStep.getStepListFalse().size()).sum();
+        long completedTheory = steps.stream().filter(Step::learned_theory).count();
+        long completedAdditionalTopics = additionalSteps.stream().filter(Step::learned_topic).count();
+        long completedAdditionalTheory = additionalSteps.stream().filter(Step::learned_theory).count();
+
+        System.out.printf("""
+                        ================================
+                        Track %d
+                        ================================
+                        Knowledge-map:          %d
+                        Topics                  %d+%d/%d
+                        Projects:               %d/%d
+                        Theory:                 %d/%d
+                        Steps:                  %d/%d
+                        ================================
+                        Additional topics:      %d/%d
+                        Additional theory:      %d/%d
+                        Additional steps:       %d/%d
+                        =================================
+                        All completed topics:   %d
+                        All completed projects: %d
+                        All completed theory:   %d
+                        All solved steps:       %d
+                        ================================
+                        """,
+                track,
+                topic.getTopics().size(),
+                progressObj.get("learned_topics_count").getAsInt(),
+                progressObj.get("skipped_topics_count").getAsInt(),
+                topic.getDescendants().size(),
+                progressObj.getAsJsonArray("completed_projects").size(),
+                projects.size(),
+                completedTheory,
+                topic.getDescendants().size(),
+                stepsSolved,
+                stepsSolved + stepsUnresolved,
+                completedAdditionalTopics,
+                additionalSteps.size(),
+                completedAdditionalTheory,
+                additionalSteps.size(),
+                stepsAdditionalSolved,
+                stepsAdditionalSolved + stepsAdditionalUnresolved,
+                currentObj.get("passed_topics").getAsInt(),
+                currentObj.get("passed_projects").getAsInt(),
+                currentObj.get("passed_theories").getAsInt(),
+                currentObj.get("passed_problems").getAsInt());
     }
 
     // Get a list of objects from a file
