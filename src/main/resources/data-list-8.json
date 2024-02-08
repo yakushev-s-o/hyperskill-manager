@@ -260,7 +260,7 @@
       "capacity_topic": 1.0,
       "url": "https://hyperskill.org/learn/step/38627",
       "theory": "Introduction to Java",
-      "learned_theory": false,
+      "learned_theory": true,
       "stepListTrue": [
         "4709",
         "18464"
@@ -460,6 +460,7 @@
       "theory": "Coding style conventions",
       "learned_theory": true,
       "stepListTrue": [
+        "35253",
         "12414",
         "12416",
         "12418"
@@ -471,7 +472,6 @@
         "39556",
         "39559",
         "39558",
-        "35253",
         "12417"
       ]
     },
@@ -1117,7 +1117,8 @@
         "1972",
         "2155",
         "3386",
-        "5021"
+        "5021",
+        "5022"
       ],
       "stepListFalse": [
         "38398",
@@ -1126,8 +1127,7 @@
         "1970",
         "1971",
         "2688",
-        "2693",
-        "5022"
+        "2693"
       ]
     },
     {
@@ -2146,7 +2146,7 @@
       "capacity_topic": 1.0,
       "url": "https://hyperskill.org/learn/step/37202",
       "theory": "IntelliJ IDEA",
-      "learned_theory": false,
+      "learned_theory": true,
       "stepListTrue": [
         "3807",
         "3809",
@@ -2456,11 +2456,13 @@
       "topic": 20,
       "learned_topic": false,
       "skipped_topic": false,
-      "capacity_topic": 0.1,
+      "capacity_topic": 0.306,
       "url": "https://hyperskill.org/learn/step/3515",
       "theory": "Bitwise and bit-shift operations",
-      "learned_theory": false,
-      "stepListTrue": [],
+      "learned_theory": true,
+      "stepListTrue": [
+        "2678"
+      ],
       "stepListFalse": [
         "25417",
         "25415",
@@ -2470,7 +2472,6 @@
         "2143",
         "2144",
         "2677",
-        "2678",
         "2679",
         "2680",
         "2681",

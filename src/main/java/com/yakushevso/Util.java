@@ -14,6 +14,7 @@ import java.io.*;
 import java.lang.reflect.Type;
 import java.time.Duration;
 import java.util.*;
+import java.util.prefs.Preferences;
 
 import com.yakushevso.data.Data;
 import com.yakushevso.data.Step;
@@ -29,10 +30,14 @@ public class Util {
     public static String FOLDER_PATH;
     public static String JSON_PATH;
     public static String DATA_PATH;
+    private final Preferences prefs;
+    private final int track;
 
     public Util(int track) {
+        this.track = track;
         initSettings();
         setSettings(track);
+        prefs = Preferences.userRoot().node(Util.class.getName());
     }
 
     public void createDriver(boolean visible) {
@@ -76,7 +81,7 @@ public class Util {
     }
 
     // Get track data and write to file
-    public void getData(int track) {
+    public void getData() {
         Topic topic = getTopics(track);
         List<Project> projects = getProjects(track);
         List<Step> steps = getSteps(topic);
@@ -90,8 +95,20 @@ public class Util {
             e.printStackTrace();
         }
 
-        printProgress(topic, projects, steps, additionalSteps, track);
+        // Save statistics using Preferences (HKEY_CURRENT_USER\Software\JavaSoft\Prefs)
+        prefs.put("statistics-track-" + track, getProgress(topic, projects, steps, additionalSteps, track));
     }
+
+    // Print the latest statistics
+    public void printStats() {
+        String savedString = prefs.get("statistics-track-" + track, "There are no statistics, update the data!");
+        System.out.println(savedString);
+    }
+    public void printStats(int track) {
+        String savedString = prefs.get("statistics-track-" + track, "There are no statistics, update the data!");
+        System.out.println(savedString);
+    }
+
 
     // Get the list of topics
     private Topic getTopics(int track) {
@@ -337,7 +354,7 @@ public class Util {
     }
 
     // Print statistics of the received data
-    private void printProgress(Topic topic, List<Project> projects, List<Step> steps,
+    private String getProgress(Topic topic, List<Project> projects, List<Step> steps,
                                List<Step> additionalSteps, int track) {
 
         JsonObject progressObj = getProgress("https://hyperskill.org/api/progresses" +
@@ -364,12 +381,12 @@ public class Util {
         long completedAdditionalTopics = additionalSteps.stream().filter(Step::learned_topic).count();
         long completedAdditionalTheory = additionalSteps.stream().filter(Step::learned_theory).count();
 
-        System.out.printf("""
+        return String.format("""
                         ================================
                         Track %d
                         ================================
                         Knowledge-map:          %d
-                        Topics                  %d+%d/%d
+                        Topics                  %d/%d
                         Projects:               %d/%d
                         Theory:                 %d/%d
                         Steps:                  %d/%d
@@ -377,17 +394,15 @@ public class Util {
                         Additional topics:      %d/%d
                         Additional theory:      %d/%d
                         Additional steps:       %d/%d
-                        =================================
+                        ================================
                         All completed topics:   %d
                         All completed projects: %d
                         All completed theory:   %d
                         All solved steps:       %d
-                        ================================
-                        """,
+                        ================================""",
                 track,
                 topic.getTopics().size(),
                 progressObj.get("learned_topics_count").getAsInt(),
-                progressObj.get("skipped_topics_count").getAsInt(),
                 topic.getDescendants().size(),
                 progressObj.getAsJsonArray("completed_projects").size(),
                 projects.size(),
@@ -554,7 +569,9 @@ public class Util {
 
     // Close ChromeDriver
     public void closeDriver() {
-        driver.quit();
+        if (driver != null) {
+            driver.quit();
+        }
     }
 
     // Close drop-down banner
