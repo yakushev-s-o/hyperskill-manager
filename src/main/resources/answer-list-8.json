@@ -1,0 +1,8 @@
+[
+  {
+    "url": "https://hyperskill.org/learn/step/4709",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "class Main {\n    public static void main(String[] args) {\n        System.out.println(\"Hello, Sergey!\");\n    }\n}"
+  }
+]

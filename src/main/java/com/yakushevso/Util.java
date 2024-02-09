@@ -104,11 +104,6 @@ public class Util {
         String savedString = prefs.get("statistics-track-" + track, "There are no statistics, update the data!");
         System.out.println(savedString);
     }
-    public void printStats(int track) {
-        String savedString = prefs.get("statistics-track-" + track, "There are no statistics, update the data!");
-        System.out.println(savedString);
-    }
-
 
     // Get the list of topics
     private Topic getTopics(int track) {
@@ -484,36 +479,6 @@ public class Util {
             Thread.sleep(ms);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
-        }
-    }
-
-    // Close process
-    public void closeProcess() {
-        try {
-            ProcessBuilder builder = new ProcessBuilder("taskkill", "/F", "/IM", "chromedriver.exe");
-            builder.start();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    // Check running process
-    public boolean isProcessRunning() {
-        try {
-            ProcessBuilder builder = new ProcessBuilder("tasklist");
-            Process process = builder.start();
-            InputStream inputStream = process.getInputStream();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                if (line.contains("chromedriver.exe")) {
-                    return true;
-                }
-            }
-            return false;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
         }
     }
 

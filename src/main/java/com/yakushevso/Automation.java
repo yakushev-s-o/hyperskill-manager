@@ -32,7 +32,13 @@ public class Automation {
             for (Step steps : data.getSteps()) {
                 for (String step : steps.getStepListTrue()) {
                     // Skip if there is a match between links in the file
-                    if (!isMatchLink(step)) {
+                    if (getFileData(new TypeToken<List<Answer>>() {}.getType(), JSON_PATH) == null) {
+                        driver.get(SITE_LINK + "learn/step/" + step);
+                        waitDownloadElement("//div[@class='step-problem']");
+                        delay(500);
+                        List<Answer> listAnswers = new ArrayList<>();
+                        saveToFile(getAnswer(step), listAnswers, JSON_PATH);
+                    } else if (!isMatchLink(step)) {
                         driver.get(SITE_LINK + "learn/step/" + step);
                         waitDownloadElement("//div[@class='step-problem']");
                         delay(500);
@@ -59,7 +65,7 @@ public class Automation {
         final String MATRIX_MORE = "Choose one or more options for each row";
         final String MATRIX_ONE = "Choose one option for each row";
 
-        WebElement element = driver.findElement(By.xpath("//div[@class='mb-1 text-gray']/span"));
+        WebElement element = driver.findElement(By.xpath("//div[@class='tw-text-lg']"));
         String page = SITE_LINK + "learn/step/" + step;
         String text = element.getText();
 
