@@ -1,8 +1,7 @@
 package com.yakushevso;
 
 import com.google.common.reflect.TypeToken;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.google.gson.*;
 import com.yakushevso.data.Answer;
 import com.yakushevso.data.Data;
 import com.yakushevso.data.Matrix;
@@ -30,9 +29,13 @@ public class Automation {
             data = gson.fromJson(reader, Data.class);
 
             for (Step steps : data.getSteps()) {
-                for (String step : steps.getStepListTrue()) {
+//                for (String step : steps.getStepListTrue()) {
+                String[] test = new String[]{"18464", "3480", "4709", "3211",
+                        "2512", "3224", "8301", "2248", "3478", "34802", "40118"};
+                for (String step : test) {
                     // Skip if there is a match between links in the file
-                    if (getFileData(new TypeToken<List<Answer>>() {}.getType(), JSON_PATH) == null) {
+                    if (getFileData(new TypeToken<List<Answer>>() {
+                    }.getType(), JSON_PATH) == null) {
                         driver.get(SITE_LINK + "learn/step/" + step);
                         waitDownloadElement("//div[@class='step-problem']");
                         delay(500);
@@ -70,11 +73,11 @@ public class Automation {
         String text = element.getText();
 
         if (text.equals(SINGLE)) {
-            return new Answer(page, 1, getTestSingle());
+            return new Answer(page, 1, getTestSingle(step));
         } else if (text.equals(MULTIPLE)) {
-            return new Answer(page, 2, getTestMultiple());
+            return new Answer(page, 2, getTestMultiple(step));
         } else if (text.contains(CODE)) {
-            return new Answer(page, 3, getCode());
+            return new Answer(page, 3, getCode(step));
         } else if (text.equals(TEXT_NUM)) {
             return new Answer(page, 4, getTextNum());
         } else if (text.equals(TEXT_SHORT)) {
@@ -203,16 +206,52 @@ public class Automation {
     }
 
     // Get one response from the test
-    private String getTestSingle() {
-        waitDownloadElement("//div[@class='submission submission-correct']");
+    private String getTestSingle(String step) {
+        List<String> optionsList = new ArrayList<>();
+        List<Boolean> choicesList = new ArrayList<>();
 
-        List<WebElement> elements = driver.findElements(By.xpath("//input[@type='radio']"));
+        String urlAttempts = "https://hyperskill.org/api/attempts?format=json&page_size=100&step="
+                + step + "&user=" + 370575247;
 
-        for (WebElement answer : elements) {
-            if (answer.getAttribute("checked") != null) {
-                WebElement text = answer.findElement(By.xpath("./following-sibling::label/div"));
+        driver.get(urlAttempts);
 
-                return text.getText();
+        // Get page content as text
+        String jsonAttempts = driver.findElement(By.tagName("pre")).getText();
+
+        // Get JSON object from text
+        JsonElement attemptsElement = JsonParser.parseString(jsonAttempts);
+        JsonObject attemptsObject = attemptsElement.getAsJsonObject();
+        JsonObject attempts = attemptsObject.getAsJsonArray("attempts").get(0).getAsJsonObject();
+        JsonObject dataset = attempts.getAsJsonObject("dataset");
+        JsonArray options = dataset.getAsJsonArray("options");
+
+        for (JsonElement option : options) {
+            optionsList.add(option.getAsString());
+        }
+
+        String urlSubmissions = "https://hyperskill.org/api/submissions?format=json&page_size=100&step="
+                + step + "&user=" + 370575247;
+
+        driver.get(urlSubmissions);
+
+        // Get page content as text
+        String jsonSubmissions = driver.findElement(By.tagName("pre")).getText();
+
+        // Get JSON object from text
+        JsonElement submissionsElement = JsonParser.parseString(jsonSubmissions);
+        JsonObject submissionsObject = submissionsElement.getAsJsonObject();
+        JsonObject submissions = submissionsObject.getAsJsonArray("submissions").get(0).getAsJsonObject();
+        JsonObject reply = submissions.getAsJsonObject("reply");
+        JsonArray choices = reply.getAsJsonArray("choices");
+
+        for (JsonElement choice : choices) {
+            choicesList.add(choice.getAsBoolean());
+        }
+
+
+        for (int j = 0; j < choicesList.size(); j++) {
+            if (choicesList.get(j)) {
+                return optionsList.get(j);
             }
         }
 
@@ -234,16 +273,52 @@ public class Automation {
     }
 
     // Get multiple responses from the test
-    private String[] getTestMultiple() {
-        waitDownloadElement("//label[@class='custom-control-label']");
-
+    private String[] getTestMultiple(String step) {
+        List<String> optionsList = new ArrayList<>();
+        List<Boolean> choicesList = new ArrayList<>();
         List<String> correctAnswers = new ArrayList<>();
-        List<WebElement> elements = driver.findElements(By.xpath("//input[@type='checkbox']"));
 
-        for (WebElement answer : elements) {
-            if (answer.getAttribute("checked") != null) {
-                WebElement text = answer.findElement(By.xpath("./following-sibling::label/div"));
-                correctAnswers.add(text.getText());
+        String urlAttempts = "https://hyperskill.org/api/attempts?format=json&page_size=100&step="
+                + step + "&user=" + 370575247;
+
+        driver.get(urlAttempts);
+
+        // Get page content as text
+        String jsonAttempts = driver.findElement(By.tagName("pre")).getText();
+
+        // Get JSON object from text
+        JsonElement attemptsElement = JsonParser.parseString(jsonAttempts);
+        JsonObject attemptsObject = attemptsElement.getAsJsonObject();
+        JsonObject attempts = attemptsObject.getAsJsonArray("attempts").get(0).getAsJsonObject();
+        JsonObject dataset = attempts.getAsJsonObject("dataset");
+        JsonArray options = dataset.getAsJsonArray("options");
+
+        for (JsonElement option : options) {
+            optionsList.add(option.getAsString());
+        }
+
+        String urlSubmissions = "https://hyperskill.org/api/submissions?format=json&page_size=100&step="
+                + step + "&user=" + 370575247;
+
+        driver.get(urlSubmissions);
+
+        // Get page content as text
+        String jsonSubmissions = driver.findElement(By.tagName("pre")).getText();
+
+        // Get JSON object from text
+        JsonElement submissionsElement = JsonParser.parseString(jsonSubmissions);
+        JsonObject submissionsObject = submissionsElement.getAsJsonObject();
+        JsonObject submissions = submissionsObject.getAsJsonArray("submissions").get(0).getAsJsonObject();
+        JsonObject reply = submissions.getAsJsonObject("reply");
+        JsonArray choices = reply.getAsJsonArray("choices");
+
+        for (JsonElement choice : choices) {
+            choicesList.add(choice.getAsBoolean());
+        }
+
+        for (int j = 0; j < choicesList.size(); j++) {
+            if (choicesList.get(j)) {
+                correctAnswers.add(optionsList.get(j));
             }
         }
 
@@ -282,11 +357,22 @@ public class Automation {
     }
 
     // Get the response from the field with the code
-    private String getCode() {
-        waitDownloadElement("//div[@class='cm-content']");
+    private String getCode(String step) {
+        String urlSubmissions = "https://hyperskill.org/api/submissions?format=json&page_size=100&step="
+                + step + "&user=" + 370575247;
 
-        WebElement element = driver.findElement(By.xpath("//div[@class='cm-content']"));
-        return element.getText();
+        driver.get(urlSubmissions);
+
+        // Get page content as text
+        String json = driver.findElement(By.tagName("pre")).getText();
+
+        // Get JSON object from text
+        JsonElement submissionsElement = JsonParser.parseString(json);
+        JsonObject submissionsObject = submissionsElement.getAsJsonObject();
+        JsonObject submissions = submissionsObject.getAsJsonArray("submissions").get(0).getAsJsonObject();
+        JsonObject reply = submissions.getAsJsonObject("reply");
+
+        return reply.get("code").getAsString();
     }
 
     // Write the answer in the field with the code

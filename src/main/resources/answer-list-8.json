@@ -1,8 +1,22 @@
 [
   {
+    "url": "https://hyperskill.org/learn/step/18464",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "Write Once Run Anywhere "
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3480",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "\"short string\""
+    ]
+  },
+  {
     "url": "https://hyperskill.org/learn/step/4709",
     "checked": false,
     "mode": 3,
-    "answerStr": "class Main {\n    public static void main(String[] args) {\n        System.out.println(\"Hello, Sergey!\");\n    }\n}"
+    "answerStr": "class Main {\n    public static void main(String[] args) {\n        System.out.println(\"Hello, Sergey!\");\n    }\n}\n\n\n\n"
   }
 ]
