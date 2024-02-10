@@ -72,12 +72,6 @@ public class Util {
         signInButton.click();
 
         waitDownloadElement("//h1[@data-cy='curriculum-header']");
-
-        // Close banner "Save streak"
-        closeBanner("//button[@class='btn btn-outline-dark' and text()= 'No, thanks']");
-
-        // Close banner "You probably already know this topic"
-        closeBanner("//button[@class='btn btn-outline-dark' and text()= 'Continue with theory']");
     }
 
     // Get track data and write to file
@@ -96,7 +90,7 @@ public class Util {
         }
 
         // Save statistics using Preferences (HKEY_CURRENT_USER\Software\JavaSoft\Prefs)
-        prefs.put("statistics-track-" + track, getProgress(topic, projects, steps, additionalSteps, track));
+        prefs.put("statistics-track-" + track, getStatistics(topic, projects, steps, additionalSteps, track));
     }
 
     // Print the latest statistics
@@ -336,42 +330,21 @@ public class Util {
         return new Topic(null, additionalTopic);
     }
 
-    private JsonObject getProgress(String urlTopic) {
-        driver.get(urlTopic);
-
-        // Get page content as text
-        String jsonProgress = driver.findElement(By.tagName("pre")).getText();
-
-        // Get JSON object from text
-        JsonElement progressElement = JsonParser.parseString(jsonProgress);
-        return progressElement.getAsJsonObject()
-                .getAsJsonArray("progresses").get(0).getAsJsonObject();
-    }
-
     // Print statistics of the received data
-    private String getProgress(Topic topic, List<Project> projects, List<Step> steps,
-                               List<Step> additionalSteps, int track) {
+    private String getStatistics(Topic topic, List<Project> projects, List<Step> steps,
+                                 List<Step> additionalSteps, int track) {
+        JsonObject currentObj = getCurrent().getAsJsonObject("gamification");
+        JsonObject progressObj = getProgress("https://hyperskill.org/api/progresses"
+                + "/track-" + track + "?format=json");
 
-        JsonObject progressObj = getProgress("https://hyperskill.org/api/progresses" +
-                "/track-" + track + "?format=json");
-
-        String urlCurrent = "https://hyperskill.org/api/profiles/current?format=json";
-
-        driver.get(urlCurrent);
-
-        // Get page content as text
-        String jsonCurrent = driver.findElement(By.tagName("pre")).getText();
-
-        // Get JSON object from text
-        JsonElement currentElement = JsonParser.parseString(jsonCurrent);
-        JsonObject currentObj = currentElement.getAsJsonObject()
-                .getAsJsonArray("profiles").get(0).getAsJsonObject()
-                .getAsJsonObject("gamification");
-
-        int stepsSolved = steps.stream().mapToInt(countStep -> countStep.getStepListTrue().size()).sum();
-        int stepsUnresolved = steps.stream().mapToInt(countStep -> countStep.getStepListFalse().size()).sum();
-        int stepsAdditionalSolved = additionalSteps.stream().mapToInt(countStep -> countStep.getStepListTrue().size()).sum();
-        int stepsAdditionalUnresolved = additionalSteps.stream().mapToInt(countStep -> countStep.getStepListFalse().size()).sum();
+        int stepsSolved = steps.stream().mapToInt(countStep -> countStep
+                .getStepListTrue().size()).sum();
+        int stepsUnresolved = steps.stream().mapToInt(countStep -> countStep
+                .getStepListFalse().size()).sum();
+        int stepsAdditionalSolved = additionalSteps.stream().mapToInt(countStep -> countStep
+                .getStepListTrue().size()).sum();
+        int stepsAdditionalUnresolved = additionalSteps.stream().mapToInt(countStep -> countStep
+                .getStepListFalse().size()).sum();
         long completedTheory = steps.stream().filter(Step::learned_theory).count();
         long completedAdditionalTopics = additionalSteps.stream().filter(Step::learned_topic).count();
         long completedAdditionalTheory = additionalSteps.stream().filter(Step::learned_theory).count();
@@ -415,6 +388,30 @@ public class Util {
                 currentObj.get("passed_projects").getAsInt(),
                 currentObj.get("passed_theories").getAsInt(),
                 currentObj.get("passed_problems").getAsInt());
+    }
+
+    private JsonObject getProgress(String urlTopic) {
+        driver.get(urlTopic);
+
+        // Get page content as text
+        String jsonProgress = driver.findElement(By.tagName("pre")).getText();
+
+        // Get JSON object from text
+        JsonElement progressElement = JsonParser.parseString(jsonProgress);
+        return progressElement.getAsJsonObject()
+                .getAsJsonArray("progresses").get(0).getAsJsonObject();
+    }
+
+    public static JsonObject getCurrent() {
+        driver.get("https://hyperskill.org/api/profiles/current?format=json");
+
+        // Get page content as text
+        String jsonCurrent = driver.findElement(By.tagName("pre")).getText();
+
+        // Get JSON object from text
+        JsonElement currentElement = JsonParser.parseString(jsonCurrent);
+        return currentElement.getAsJsonObject()
+                .getAsJsonArray("profiles").get(0).getAsJsonObject();
     }
 
     // Get a list of objects from a file
@@ -466,11 +463,36 @@ public class Util {
     // Check if the element has loaded
     public static boolean waitDownloadElement(String xpath) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        return wait.until(ExpectedConditions.and(
+
+        if (wait.until(ExpectedConditions.and(
                 ExpectedConditions.presenceOfElementLocated(By.xpath(xpath)),
                 ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)),
-                ExpectedConditions.elementToBeClickable(By.xpath(xpath))
-        ));
+                ExpectedConditions.elementToBeClickable(By.xpath(xpath))))) {
+            return true;
+        } else {
+            // Close banner "Do you want to pick up where you left off?"
+            closeBanner("//button[@class='btn btn-outline-dark' and text()= 'No, thanks']");
+
+            // Close banner "You probably already know this topic"
+            closeBanner("//button[@class='btn btn-outline-dark' and text()= 'Continue with theory']");
+
+            delay(1000);
+
+            return wait.until(ExpectedConditions.and(
+                    ExpectedConditions.presenceOfElementLocated(By.xpath(xpath)),
+                    ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)),
+                    ExpectedConditions.elementToBeClickable(By.xpath(xpath))));
+        }
+    }
+
+    // Close drop-down banner
+    private static void closeBanner(String element) {
+        try {
+            WebElement banner = driver.findElement(By.xpath(element));
+            Actions actions = new Actions(driver);
+            actions.moveToElement(banner).click().perform();
+        } catch (Exception ignored) {
+        }
     }
 
     // Delay between transitions
@@ -536,17 +558,6 @@ public class Util {
     public void closeDriver() {
         if (driver != null) {
             driver.quit();
-        }
-    }
-
-    // Close drop-down banner
-    private void closeBanner(String element) {
-        try {
-            delay(5000);
-            WebElement banner = driver.findElement(By.xpath(element));
-            Actions actions = new Actions(driver);
-            actions.moveToElement(banner).click().perform();
-        } catch (Exception ignored) {
         }
     }
 }

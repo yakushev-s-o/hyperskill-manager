@@ -18,5 +18,195 @@
     "checked": false,
     "mode": 3,
     "answerStr": "class Main {\n    public static void main(String[] args) {\n        System.out.println(\"Hello, Sergey!\");\n    }\n}\n\n\n\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3211",
+    "checked": false,
+    "mode": 4,
+    "answerStr": "-1000"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2512",
+    "checked": false,
+    "mode": 5,
+    "answerStr": "5"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3224",
+    "checked": false,
+    "mode": 6,
+    "answerListArr": [
+      [
+        "String",
+        "\"464531######0207\""
+      ],
+      [
+        "Number",
+        "100_000_000"
+      ],
+      [
+        "Character",
+        "\u0027H\u0027"
+      ],
+      [
+        "Invalid literal",
+        "\u0027text\u0027"
+      ]
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/8301",
+    "checked": false,
+    "mode": 7,
+    "answerArr": [
+      "Read data from the standard input",
+      "Process data",
+      "Print data to the standard output",
+      "Enjoy the result"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2248",
+    "checked": false,
+    "mode": 8,
+    "matrixList": [
+      {
+        "name_row": "float val \u003d 2F; toString(val);",
+        "name_columns": "toString(int num)",
+        "check": false
+      },
+      {
+        "name_row": "float val \u003d 2F; toString(val);",
+        "name_columns": "toString(long num)",
+        "check": false
+      },
+      {
+        "name_row": "float val \u003d 2F; toString(val);",
+        "name_columns": "None of these",
+        "check": true
+      },
+      {
+        "name_row": "long val \u003d 2L; toString(val);",
+        "name_columns": "toString(int num)",
+        "check": false
+      },
+      {
+        "name_row": "long val \u003d 2L; toString(val);",
+        "name_columns": "toString(long num)",
+        "check": true
+      },
+      {
+        "name_row": "long val \u003d 2L; toString(val);",
+        "name_columns": "None of these",
+        "check": false
+      },
+      {
+        "name_row": "int val \u003d 2; toString(val);",
+        "name_columns": "toString(int num)",
+        "check": true
+      },
+      {
+        "name_row": "int val \u003d 2; toString(val);",
+        "name_columns": "toString(long num)",
+        "check": false
+      },
+      {
+        "name_row": "int val \u003d 2; toString(val);",
+        "name_columns": "None of these",
+        "check": false
+      },
+      {
+        "name_row": "byte val \u003d 2; toString(val);",
+        "name_columns": "toString(int num)",
+        "check": true
+      },
+      {
+        "name_row": "byte val \u003d 2; toString(val);",
+        "name_columns": "toString(long num)",
+        "check": false
+      },
+      {
+        "name_row": "byte val \u003d 2; toString(val);",
+        "name_columns": "None of these",
+        "check": false
+      },
+      {
+        "name_row": "char val \u003d 2; toString(val);",
+        "name_columns": "toString(int num)",
+        "check": true
+      },
+      {
+        "name_row": "char val \u003d 2; toString(val);",
+        "name_columns": "toString(long num)",
+        "check": false
+      },
+      {
+        "name_row": "char val \u003d 2; toString(val);",
+        "name_columns": "None of these",
+        "check": false
+      },
+      {
+        "name_row": "double val \u003d 2; toString(val);",
+        "name_columns": "toString(int num)",
+        "check": false
+      },
+      {
+        "name_row": "double val \u003d 2; toString(val);",
+        "name_columns": "toString(long num)",
+        "check": false
+      },
+      {
+        "name_row": "double val \u003d 2; toString(val);",
+        "name_columns": "None of these",
+        "check": true
+      }
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3478",
+    "checked": false,
+    "mode": 8,
+    "matrixList": [
+      {
+        "name_row": "incorrect keyword",
+        "name_columns": "compile-time",
+        "check": true
+      },
+      {
+        "name_row": "incorrect keyword",
+        "name_columns": "run-time (\"bugs\")",
+        "check": false
+      },
+      {
+        "name_row": "incorrect text output",
+        "name_columns": "compile-time",
+        "check": false
+      },
+      {
+        "name_row": "incorrect text output",
+        "name_columns": "run-time (\"bugs\")",
+        "check": true
+      },
+      {
+        "name_row": "missed semi-colon",
+        "name_columns": "compile-time",
+        "check": true
+      },
+      {
+        "name_row": "missed semi-colon",
+        "name_columns": "run-time (\"bugs\")",
+        "check": false
+      },
+      {
+        "name_row": "a program cannot open a file",
+        "name_columns": "compile-time",
+        "check": false
+      },
+      {
+        "name_row": "a program cannot open a file",
+        "name_columns": "run-time (\"bugs\")",
+        "check": true
+      }
+    ]
   }
 ]

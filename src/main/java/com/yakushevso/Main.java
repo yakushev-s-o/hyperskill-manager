@@ -46,6 +46,8 @@ public class Main {
                 case 0 -> System.exit(0);
                 default -> System.out.println("Invalid option, please try again.");
             }
+
+            System.out.println("Completed!");
         }
     }
 
