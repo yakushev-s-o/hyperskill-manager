@@ -443,12 +443,9 @@ public class Util {
     }
 
     // Save the object to a JSON file
-    public static <T> void saveToFile(T answer, List<T> list, String path) {
+    public static <T> void saveToFile(List<T> list, String path) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         File file = new File(path);
-
-        // Append new data to existing ones in memory
-        list.add(answer);
 
         // Write updated data to file
         try {
