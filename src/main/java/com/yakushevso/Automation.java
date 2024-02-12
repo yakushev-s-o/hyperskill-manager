@@ -645,45 +645,55 @@ public class Automation {
 
     // Select responses in lines test
     private void sendLines(String[][] correctAnswers) {
-        for (int i = 0; i < correctAnswers.length; i++) {
-            boolean checkTrue = true;
+        for (String[] correctAnswer : correctAnswers) {
+            int position = 0;
 
-            while (checkTrue) {
-                for (int j = 1; j < correctAnswers.length; j++) {
-                    // /html/body/div[1]/main/div/div/div[1]/div/div[4]/div/div/div[1]/div[1]/div/div/span/div[1]/div[1]/button[1]
-                    String leftLevel = "/html/body/div[1]/main/div/div/div[1]/div/div[4]/div/div/div[1]/div[1]/div/div" +
-                            "/span/div[" + j + "]/div[1]/button[" + 1 + "]";
+            for (int j = 1; j <= correctAnswers.length; j++) {
+                // /html/body/div[1]/main/div/div/div/div/div[4]/div/div/div[1]/div[1]/div/div/span/div[1]/div[2]
+                String line = "/html/body/div[1]/main/div/div/div/div/div[4]/div/div/div[1]/div[1]/div/div/" +
+                        "span/div[" + j + "]/div[2]";
 
-                    // /html/body/div[1]/main/div/div/div[1]/div/div[4]/div/div/div[1]/div[1]/div/div/span/div[1]/div[1]/button[2]
-                    String rightLevel = "/html/body/div[1]/main/div/div/div[1]/div/div[4]/div/div/div[1]/div[1]/div/div" +
-                            "/span/div[" + j + "]/div[1]/button[" + 2 + "]";
+                WebElement element = driver.findElement(By.xpath(line));
 
-                    // /html/body/div[1]/main/div/div/div[1]/div/div[4]/div/div/div[1]/div[1]/div/div/span/div[2]/div[3]/button[1]
-                    String upArrow = "/html/body/div[1]/main/div/div/div[1]/div/div[4]/div/div/div[1]/div[1]/div/div/" +
-                            "span/div[" + j + "]/div[3]/button[1]";
+                if (element.getText().equals(correctAnswer[0])) {
+                    position = j;
+                    break;
+                }
+            }
 
-                    // /html/body/div[1]/main/div/div/div[1]/div/div[4]/div/div/div[1]/div[1]/div/div/span/div[1]/div[3]/button[2]
-                    String downArrow = "/html/body/div[1]/main/div/div/div[1]/div/div[4]/div/div/div[1]/div[1]/div/div/" +
-                            "span/div[" + j + "]/div[3]/button[2]";
+            boolean check = true;
+            while (check) {
+//                // /html/body/div[1]/main/div/div/div[1]/div/div[4]/div/div/div[1]/div[1]/div/div/span/div[1]/div[1]/button[1]
+//                String leftLevel = "/html/body/div[1]/main/div/div/div[1]/div/div[4]/div/div/div[1]/div[1]/div/div" +
+//                        "/span/div[" + position + "]/div[1]/button[" + 1 + "]";
+//
+//                // /html/body/div[1]/main/div/div/div[1]/div/div[4]/div/div/div[1]/div[1]/div/div/span/div[1]/div[1]/button[2]
+//                String rightLevel = "/html/body/div[1]/main/div/div/div[1]/div/div[4]/div/div/div[1]/div[1]/div/div" +
+//                        "/span/div[" + position + "]/div[1]/button[" + 2 + "]";
 
-                    // /html/body/div[1]/main/div/div/div[1]/div/div[4]/div/div/div[1]/div[1]/div/div/span/div[1]/div[2]
-                    String line = "/html/body/div[1]/main/div/div/div[1]/div/div[4]/div/div/div[1]/div[1]/div/div/" +
-                            "span/div[" + j + "]/div[2]";
+                // /html/body/div[1]/main/div/div/div[1]/div/div[4]/div/div/div[1]/div[1]/div/div/span/div[2]/div[3]/button[1]
+                String upArrow = "/html/body/div[1]/main/div/div/div[1]/div/div[4]/div/div/div[1]/div[1]/div/div/" +
+                        "span/div[" + position + "]/div[3]/button[1]";
 
-                    WebElement element = driver.findElement(By.xpath(line));
+                // /html/body/div[1]/main/div/div/div[1]/div/div[4]/div/div/div[1]/div[1]/div/div/span/div[1]/div[3]/button[2]
+                String downArrow = "/html/body/div[1]/main/div/div/div[1]/div/div[4]/div/div/div[1]/div[1]/div/div/" +
+                        "span/div[" + position + "]/div[3]/button[2]";
 
-                    if (element.getText().equals(correctAnswers[i][0])) {
-                        if (j - 1 != Integer.parseInt(correctAnswers[i][1])) {
-                            Actions actions = new Actions(driver);
-                            WebElement arrow = driver.findElement(By.xpath(
-                                    j - 1 > Integer.parseInt(correctAnswers[i][1]) ? upArrow : downArrow));
-                            actions.moveToElement(arrow).click().perform();
+                if (position - 1 != Integer.parseInt(correctAnswer[1])) {
+                    Actions actions = new Actions(driver);
+                    WebElement arrow;
 
-                            if (j - 1 == Integer.parseInt(correctAnswers[i][1])) {
-                                checkTrue = false;
-                            }
-                        }
+                    if (position - 1 > Integer.parseInt(correctAnswer[1])) {
+                        arrow = driver.findElement(By.xpath(upArrow));
+                        position--;
+                    } else {
+                        arrow = driver.findElement(By.xpath(downArrow));
+                        position++;
                     }
+
+                    actions.moveToElement(arrow).click().perform();
+                } else {
+                    check = false;
                 }
             }
         }

@@ -250,7 +250,7 @@
   },
   {
     "url": "https://hyperskill.org/learn/step/41487",
-    "checked": false,
+    "checked": true,
     "mode": 10,
     "answerArr": [
       "public static void",

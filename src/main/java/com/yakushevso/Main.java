@@ -139,7 +139,7 @@ public class Main {
         System.out.println("In progress...");
         util.login();
         test.sendAnswers();
-        util.closeDriver();
+//        util.closeDriver();
     }
 
     private static void checkInputNum() {
