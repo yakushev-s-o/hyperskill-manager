@@ -81,7 +81,6 @@ public class Util {
         List<Step> steps = getSteps(topic);
         List<Step> additionalSteps = getSteps(getAdditionalTopics(topic, steps));
 
-
         try (FileWriter writer = new FileWriter(DATA_PATH)) {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             gson.toJson(new Data(topic, projects, steps, additionalSteps), writer);

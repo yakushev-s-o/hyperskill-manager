@@ -33,23 +33,23 @@ public class Automation {
         try (FileReader reader = new FileReader(DATA_PATH)) {
             Data data = gson.fromJson(reader, Data.class);
 
-            for (Step steps : data.getSteps()) {
-                for (String step : steps.getStepListTrue()) {
-//                String[] test = new String[]{"18464", "3480", "4709", "3211",
-//                        "2512", "3224", "8301", "2248", "3478", "34802", "40118"};
-//                for (String step : test) {
-                    System.out.println(step);
-                    if (fileNotExistsOrEmpty || isNotMatchStep(step)) {
-                        if (!fileNotExistsOrEmpty) {
-                            listAnswers = getFileData(new TypeToken<List<Answer>>() {
-                            }.getType(), JSON_PATH);
-                        }
-                        listAnswers.add(getAnswer(userId, step));
-                        saveToFile(listAnswers, JSON_PATH);
-                        fileNotExistsOrEmpty = false;
+//            for (Step steps : data.getSteps()) {
+//                for (String step : steps.getStepListTrue()) {
+            String[] test = new String[]{"18464", "3758", "4709", "3211",
+                    "2512", "3224", "8301", "2248", "3478", "34802", "41487"};
+            for (String step : test) {
+                System.out.println(step);
+                if (fileNotExistsOrEmpty || isNotMatchStep(step)) {
+                    if (!fileNotExistsOrEmpty) {
+                        listAnswers = getFileData(new TypeToken<List<Answer>>() {
+                        }.getType(), JSON_PATH);
                     }
+                    listAnswers.add(getAnswer(userId, step));
+                    saveToFile(listAnswers, JSON_PATH);
+                    fileNotExistsOrEmpty = false;
                 }
             }
+//            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -104,9 +104,9 @@ public class Automation {
         } else if (text.equals("table")) {
             return new Answer(page, 8, getMatrix(userId, step));
         } else if (text.equals("parsons")) {
-            return new Answer(page, 9, "ANSWER_NOT_FOUND");
+            return new Answer(page, 9, getLines(userId, step));
         } else if (text.equals("fill-blanks")) {
-            return new Answer(page, 10, "ANSWER_NOT_FOUND");
+            return new Answer(page, 10, getComponents(userId, step));
         }
 
         return new Answer(page, 0, "ANSWER_NOT_FOUND");
@@ -140,15 +140,19 @@ public class Automation {
                         case 6 -> sendMatch(answer.getAnswerListArr());
                         case 7 -> sendSort(answer.getAnswerArr());
                         case 8 -> sendMatrix(answer.getMatrixAnswer());
+                        case 9 -> sendLines(answer.getAnswerListArr());
+//                        case 10 -> sendComponents(answer.getAnswerArr());
                     }
 
-                    clickOnButtonSend();
+//                    clickOnButtonSend();
                 }
 
                 // Set value checked
-                if (waitDownloadElement("//strong[@class='text-success' and text()=' Correct. ']")) {
-                    setChecked(answer);
-                }
+//                if (waitDownloadElement("//strong[@class='text-success' and text()=' Correct. ']")) {
+//                    setChecked(answer);
+//                }
+
+                setChecked(answer);
 
                 delay(500);
             }
@@ -293,13 +297,9 @@ public class Automation {
         waitDownloadElement("//label[@class='custom-control-label']");
 
         Actions actions = new Actions(driver);
-        List<WebElement> elements = driver.findElements(By.xpath("//label[@class='custom-control-label']"));
-
-        for (WebElement text : elements) {
-            if (text.getText().equals(answer)) {
-                actions.moveToElement(text).click().perform();
-            }
-        }
+        WebElement element = driver.findElement(By.xpath("//label[@class='custom-control-label']" +
+                "//div[text()= '" + answer + "']"));
+        actions.moveToElement(element).click().perform();
     }
 
     // Get multiple responses from the test
@@ -336,33 +336,14 @@ public class Automation {
     }
 
     // Select multiple answers in the test
-    private void sendTestMultiple(String[] answer) {
+    private void sendTestMultiple(String[] answers) {
         waitDownloadElement("//label[@class='custom-control-label']");
 
-        for (String text : answer) {
+        for (String answer : answers) {
             Actions actions = new Actions(driver);
-            WebElement input;
-
-            if (text.contains("\n")) {
-                StringBuilder str = new StringBuilder("//label[@class='custom-control-label']");
-                String[] textAnswer = text.split("\n");
-
-                for (String value : textAnswer) {
-                    str.append("[contains(normalize-space(),'").append(value).append("')]");
-                }
-
-                input = driver.findElement(By.xpath(String.valueOf(str)));
-            } else {
-                if (text.contains("'")) {
-                    input = driver.findElement(By.xpath("//label[@class='custom-control-label']" +
-                            "[normalize-space()=\"" + text + "\"]"));
-                } else {
-                    input = driver.findElement(By.xpath("//label[@class='custom-control-label']" +
-                            "[normalize-space()='" + text + "']"));
-                }
-            }
-
-            actions.moveToElement(input).click().perform();
+            WebElement element = driver.findElement(By.xpath("//label[@class='custom-control-label']" +
+                    "//div[text()= '" + answer + "']"));
+            actions.moveToElement(element).click().perform();
         }
     }
 
@@ -461,7 +442,8 @@ public class Automation {
     // Select responses in matched test
     private void sendMatch(String[][] correctAnswers) {
         for (int i = 1; i <= correctAnswers.length; i++) {
-            String question = "/html/body/div/main/div/div/div/div/div[4]/div/div/div[1]/div/div/div[1]" +
+            // /html/body/div/main/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/div[1]/div[1]/span
+            String question = "/html/body/div/main/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/div[1]/" +
                     "/div[" + i + "]/span";
             WebElement element1 = driver.findElement(By.xpath(question));
             String text1 = element1.getText();
@@ -480,11 +462,14 @@ public class Automation {
 
             while (checkTrue) {
                 for (int j = 1; j <= correctAnswers.length; j++) {
-                    String answer = "/html/body/div/main/div/div/div/div/div[4]/div/div/div[1]/div/div/div[2]" +
+                    // /html/body/div/main/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/div[2]/div/div[1]/div/span
+                    String answer = "/html/body/div/main/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/div[2]" +
                             "/div/div[" + j + "]/div/span";
-                    String upArrow = "/html/body/div/main/div/div/div/div/div[4]/div/div/div[1]/div/div/div[2]" +
+                    // /html/body/div/main/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/div[2]/div/div[2]/div/div[2]/button[1]
+                    String upArrow = "/html/body/div/main/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/div[2]" +
                             "/div/div[" + j + "]/div/div[2]/button[" + 1 + "]";
-                    String downArrow = "/html/body/div/main/div/div/div/div/div[4]/div/div/div[1]/div/div/div[2]" +
+                    // /html/body/div/main/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/div[2]/div/div[2]/div/div[2]/button[2]
+                    String downArrow = "/html/body/div/main/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/div[2]" +
                             "/div/div[" + j + "]/div/div[2]/button[" + 2 + "]";
                     WebElement element2 = driver.findElement(By.xpath(answer));
                     String text2 = element2.getText();
@@ -544,12 +529,15 @@ public class Automation {
 
             while (checkTrue) {
                 for (int j = 1; j <= correctAnswers.length; j++) {
-                    String upArrow = "/html/body/div/main/div/div/div/div/div[4]/div/div/div[1]/div[1]/div/div/span" +
-                            "/div[" + j + "]/div[3]/button[" + 1 + "]";
-                    String downArrow = "/html/body/div/main/div/div/div/div/div[4]/div/div/div[1]/div[1]/div/div/span" +
-                            "/div[" + j + "]/div[3]/button[" + 2 + "]";
-                    String answer = "/html/body/div/main/div/div/div/div/div[4]/div/div/div[1]/div[1]/div/div/span" +
-                            "/div[" + j + "]/div[2]/span";
+                    // /html/body/div/main/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/span/div[2]/div[2]/button[1]
+                    String upArrow = "/html/body/div/main/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/span" +
+                            "/div[" + j + "]/div[2]/button[" + 1 + "]";
+                    // /html/body/div/main/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/span/div[2]/div[2]/button[2]
+                    String downArrow = "/html/body/div/main/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/span" +
+                            "/div[" + j + "]/div[2]/button[" + 2 + "]";
+                    // /html/body/div/main/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/span/div[1]/div[1]/div[2]/span
+                    String answer = "/html/body/div/main/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/span/" +
+                            "div[" + j + "]/div[1]/div[2]/span";
                     WebElement element = driver.findElement(By.xpath(answer));
 
                     if (element.getText().equals(correctAnswers[i - 1])) {
@@ -608,7 +596,8 @@ public class Automation {
                 for (Matrix matrix : matrixList) {
                     if (matrix.getName_row().equals(nameRow.get(0).getText()) &&
                             matrix.getName_columns().equals(columnsArr.get(j).getText()) && matrix.isCheck()) {
-                        String s = "/html/body/div/main/div/div/div[1]/div/div[4]/div/div/div[1]/div[1]/div/table" +
+                        // /html/body/div/main/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/table/tbody/tr[1]/td[2]/div/div
+                        String s = "/html/body/div/main/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/table" +
                                 "/tbody/tr[" + i + "]/td[" + (j + 1) + "]/div/div";
                         WebElement checkbox = driver.findElement(By.xpath(s));
                         checkbox.click();
@@ -616,6 +605,108 @@ public class Automation {
                 }
             }
         }
+    }
+
+    // Get a list of correct answers from the test with lines
+    private String[][] getLines(int userId, String step) {
+        List<String> attemptsList = new ArrayList<>();
+        List<JsonElement> submissionsList = new ArrayList<>();
+        List<String[]> answersList = new ArrayList<>();
+
+        // Forming a list of possible answers
+        JsonArray attempts = getAttempts(userId, step);
+        JsonObject dataset = attempts.get(0).getAsJsonObject().get("dataset").getAsJsonObject();
+        JsonArray attemptsLines = dataset.getAsJsonArray("lines");
+
+        // Forming a list of possible answers
+        for (JsonElement line : attemptsLines) {
+            attemptsList.add(line.getAsString());
+        }
+
+        // Determining the correct answers
+        JsonArray submissions = getSubmissions(userId, step);
+        JsonArray submissionsLines = submissions.get(0).getAsJsonObject().get("reply")
+                .getAsJsonObject().getAsJsonArray("lines");
+
+        for (JsonElement line : submissionsLines) {
+            submissionsList.add(line);
+        }
+
+        for (int i = 0; i < attemptsList.size(); i++) {
+            answersList.add(new String[]{
+                    attemptsList.get(i),
+                    submissionsList.get(i).getAsJsonObject().get("line_number").getAsString(),
+                    submissionsList.get(i).getAsJsonObject().get("level").getAsString(),
+            });
+        }
+
+        return answersList.toArray(new String[0][]);
+    }
+
+    // Select responses in lines test
+    private void sendLines(String[][] correctAnswers) {
+        for (int i = 0; i < correctAnswers.length; i++) {
+            boolean checkTrue = true;
+
+            while (checkTrue) {
+                for (int j = 1; j < correctAnswers.length; j++) {
+                    // /html/body/div[1]/main/div/div/div[1]/div/div[4]/div/div/div[1]/div[1]/div/div/span/div[1]/div[1]/button[1]
+                    String leftLevel = "/html/body/div[1]/main/div/div/div[1]/div/div[4]/div/div/div[1]/div[1]/div/div" +
+                            "/span/div[" + j + "]/div[1]/button[" + 1 + "]";
+
+                    // /html/body/div[1]/main/div/div/div[1]/div/div[4]/div/div/div[1]/div[1]/div/div/span/div[1]/div[1]/button[2]
+                    String rightLevel = "/html/body/div[1]/main/div/div/div[1]/div/div[4]/div/div/div[1]/div[1]/div/div" +
+                            "/span/div[" + j + "]/div[1]/button[" + 2 + "]";
+
+                    // /html/body/div[1]/main/div/div/div[1]/div/div[4]/div/div/div[1]/div[1]/div/div/span/div[2]/div[3]/button[1]
+                    String upArrow = "/html/body/div[1]/main/div/div/div[1]/div/div[4]/div/div/div[1]/div[1]/div/div/" +
+                            "span/div[" + j + "]/div[3]/button[1]";
+
+                    // /html/body/div[1]/main/div/div/div[1]/div/div[4]/div/div/div[1]/div[1]/div/div/span/div[1]/div[3]/button[2]
+                    String downArrow = "/html/body/div[1]/main/div/div/div[1]/div/div[4]/div/div/div[1]/div[1]/div/div/" +
+                            "span/div[" + j + "]/div[3]/button[2]";
+
+                    // /html/body/div[1]/main/div/div/div[1]/div/div[4]/div/div/div[1]/div[1]/div/div/span/div[1]/div[2]
+                    String line = "/html/body/div[1]/main/div/div/div[1]/div/div[4]/div/div/div[1]/div[1]/div/div/" +
+                            "span/div[" + j + "]/div[2]";
+
+                    WebElement element = driver.findElement(By.xpath(line));
+
+                    if (element.getText().equals(correctAnswers[i][0])) {
+                        if (j - 1 != Integer.parseInt(correctAnswers[i][1])) {
+                            Actions actions = new Actions(driver);
+                            WebElement arrow = driver.findElement(By.xpath(
+                                    j - 1 > Integer.parseInt(correctAnswers[i][1]) ? upArrow : downArrow));
+                            actions.moveToElement(arrow).click().perform();
+
+                            if (j - 1 == Integer.parseInt(correctAnswers[i][1])) {
+                                checkTrue = false;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // Get a list of correct answers from the test with components
+    private String[] getComponents(int userId, String step) {
+        List<String> answersList = new ArrayList<>();
+
+        // Determining the correct answers
+        JsonArray submissions = getSubmissions(userId, step);
+        JsonArray blanks = submissions.get(0).getAsJsonObject().get("reply")
+                .getAsJsonObject().getAsJsonArray("blanks");
+
+        for (JsonElement blank : blanks) {
+            answersList.add(blank.getAsString());
+        }
+
+        return answersList.toArray(new String[0]);
+    }
+
+    private void sendComponents(String[] correctAnswers) {
+
     }
 
     // Click on the "Send" button

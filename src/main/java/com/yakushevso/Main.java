@@ -71,7 +71,12 @@ public class Main {
                     util.printStats();
                     util.closeDriver();
                 }
-                case 2 -> util.printStats();
+                case 2 -> {
+                    util.createDriver(false);
+                    System.out.println("In progress...");
+                    util.login();
+                    util.printStats();
+                }
                 case 0 -> {
                     return;
                 }
