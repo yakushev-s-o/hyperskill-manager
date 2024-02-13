@@ -33,23 +33,27 @@ public class Automation {
         try (FileReader reader = new FileReader(DATA_PATH)) {
             Data data = gson.fromJson(reader, Data.class);
 
-//            for (Step steps : data.getSteps()) {
-//                for (String step : steps.getStepListTrue()) {
-            String[] test = new String[]{"18464", "3758", "4709", "3211",
-                    "2512", "3224", "8301", "2248", "3478", "34802", "41487"};
-            for (String step : test) {
-                System.out.println(step);
-                if (fileNotExistsOrEmpty || isNotMatchStep(step)) {
-                    if (!fileNotExistsOrEmpty) {
-                        listAnswers = getFileData(new TypeToken<List<Answer>>() {
-                        }.getType(), JSON_PATH);
+            for (Step steps : data.getSteps()) {
+                for (String step : steps.getStepListTrue()) {
+                    if (fileNotExistsOrEmpty || isNotMatchStep(step)) {
+                        if (!fileNotExistsOrEmpty) {
+                            listAnswers = getFileData(new TypeToken<List<Answer>>() {
+                            }.getType(), JSON_PATH);
+                        }
+
+                        Answer answer = getAnswer(userId, step);
+
+                        if (answer == null) {
+                            System.out.println("ANSWER_NOT_FOUND: " + SITE_LINK + "learn/step/" + step);
+                            continue;
+                        }
+
+                        listAnswers.add(answer);
+                        saveToFile(listAnswers, JSON_PATH);
+                        fileNotExistsOrEmpty = false;
                     }
-                    listAnswers.add(getAnswer(userId, step));
-                    saveToFile(listAnswers, JSON_PATH);
-                    fileNotExistsOrEmpty = false;
                 }
             }
-//            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -109,7 +113,7 @@ public class Automation {
             return new Answer(page, 10, getComponents(userId, step));
         }
 
-        return new Answer(page, 0, "ANSWER_NOT_FOUND");
+        return null;
     }
 
     // Fill in the correct answers from the file on the site
@@ -124,30 +128,35 @@ public class Automation {
                 try {
                     waitDownloadElement("//div[@class='step-problem']");
                 } catch (Exception e) {
-                    System.out.println("Error step = " + answer.getUrl());
+                    System.out.println("LOADING_ERROR: " + answer.getUrl());
                     continue;
                 }
 
                 delay(500);
 
                 if (checkButtons()) {
-                    switch (answer.getMode()) {
-                        case 1 -> sendTestSingle(answer.getAnswerStr());
-                        case 2 -> sendTestMultiple(answer.getAnswerArr());
-                        case 3 -> sendCode(answer.getAnswerStr());
-                        case 4 -> sendTextNum(answer.getAnswerStr());
-                        case 5 -> sendTextShort(answer.getAnswerStr());
-                        case 6 -> sendMatch(answer.getAnswerListArr());
-                        case 7 -> sendSort(answer.getAnswerArr());
-                        case 8 -> sendMatrix(answer.getMatrixAnswer());
-                        case 9 -> sendLines(answer.getAnswerListArr());
-//                        case 10 -> sendComponents(answer.getAnswerArr());
+                    try {
+                        switch (answer.getMode()) {
+                            case 1 -> sendTestSingle(answer.getAnswerStr());
+                            case 2 -> sendTestMultiple(answer.getAnswerArr());
+                            case 3 -> sendCode(answer.getAnswerStr());
+                            case 4 -> sendTextNum(answer.getAnswerStr());
+                            case 5 -> sendTextShort(answer.getAnswerStr());
+                            case 6 -> sendMatch(answer.getAnswerListArr());
+                            case 7 -> sendSort(answer.getAnswerArr());
+                            case 8 -> sendMatrix(answer.getMatrixAnswer());
+                            case 9 -> sendLines(answer.getAnswerListArr());
+                            case 10 -> sendComponents(answer.getAnswerArr());
+                        }
+                    } catch (Exception e) {
+                        System.out.println("RESPONSE_ERROR: " + answer.getUrl());
+                        continue;
                     }
 
 //                    clickOnButtonSend();
                 }
 
-                // Set value checked
+//                // Set value checked
 //                if (waitDownloadElement("//strong[@class='text-success' and text()=' Correct. ']")) {
 //                    setChecked(answer);
 //                }
@@ -192,6 +201,14 @@ public class Automation {
         return true;
     }
 
+    // Click on the "Send" button
+    private void clickOnButtonSend() {
+        Actions actions = new Actions(driver);
+        WebElement signInButton = driver.findElement(By.xpath("//button[@id='sendBtn']"));
+        actions.moveToElement(signInButton).click().perform();
+        delay(500);
+    }
+
     // Set the "check" value in the object to "true"
     private void setChecked(Answer a) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -226,6 +243,32 @@ public class Automation {
         }
 
         return true;
+    }
+
+    // Remove unnecessary characters
+    private String formatText(String text) {
+        text = text.replaceAll("\u0026amp;", "\u0026")
+                .replaceAll("\u0026gt;", "\u003e")
+                .replaceAll("\u0026lt;", "\u003c")
+                .replaceAll("\u0026le;", "\u2264")
+                .replaceAll("\u0026ge;", "\u2265")
+                .replaceAll("\u0026#x27", "\u0027")
+                .replaceAll("\u003cbr\u003e", "")
+                .replaceAll("\u003cb\u003e", "")
+                .replaceAll("\u003c/b\u003e", "")
+                .replaceAll("<code>", "")
+                .replaceAll("</code>", "")
+                .replaceAll("&quot;", "\"");
+
+        if (text.startsWith(" ")) {
+            text = text.substring(1);
+        }
+
+        if (text.endsWith(" ")) {
+            text = text.substring(0, text.length() - 1);
+        }
+
+        return text;
     }
 
     // Get a list of attempts
@@ -271,7 +314,7 @@ public class Automation {
         JsonArray options = dataset.getAsJsonArray("options");
 
         for (JsonElement option : options) {
-            optionsList.add(option.getAsString());
+            optionsList.add(formatText(option.getAsString()));
         }
 
         // Determining the correct answer
@@ -297,8 +340,16 @@ public class Automation {
         waitDownloadElement("//label[@class='custom-control-label']");
 
         Actions actions = new Actions(driver);
-        WebElement element = driver.findElement(By.xpath("//label[@class='custom-control-label']" +
-                "//div[text()= '" + answer + "']"));
+        WebElement element;
+
+        if (answer.contains("'")) {
+            element = driver.findElement(By.xpath("//label[@class='custom-control-label']" +
+                    "[.//*[normalize-space()=\"" + answer + "\"]]"));
+        } else {
+            element = driver.findElement(By.xpath("//label[@class='custom-control-label']" +
+                    "[.//*[normalize-space()='" + answer + "']]"));
+        }
+
         actions.moveToElement(element).click().perform();
     }
 
@@ -314,7 +365,7 @@ public class Automation {
         JsonArray options = dataset.getAsJsonArray("options");
 
         for (JsonElement option : options) {
-            optionsList.add(option.getAsString());
+            optionsList.add(formatText(option.getAsString()));
         }
 
         // Determining the correct answers
@@ -341,8 +392,16 @@ public class Automation {
 
         for (String answer : answers) {
             Actions actions = new Actions(driver);
-            WebElement element = driver.findElement(By.xpath("//label[@class='custom-control-label']" +
-                    "//div[text()= '" + answer + "']"));
+            WebElement element;
+
+            if (answer.contains("'")) {
+                element = driver.findElement(By.xpath("//label[@class='custom-control-label']" +
+                        "[.//*[normalize-space()=\"" + answer + "\"]]"));
+            } else {
+                element = driver.findElement(By.xpath("//label[@class='custom-control-label']" +
+                        "[.//*[normalize-space()='" + answer + "']]"));
+            }
+
             actions.moveToElement(element).click().perform();
         }
     }
@@ -432,7 +491,7 @@ public class Automation {
 
         for (int i = 0; i < optionsList.size(); i++) {
             answersList.add(new String[]{
-                    optionsList.get(i).getAsJsonObject().get("first").getAsString(),
+                    formatText(optionsList.get(i).getAsJsonObject().get("first").getAsString()),
                     optionsList.get(choicesList.get(i)).getAsJsonObject().get("second").getAsString()});
         }
 
@@ -442,39 +501,31 @@ public class Automation {
     // Select responses in matched test
     private void sendMatch(String[][] correctAnswers) {
         for (int i = 1; i <= correctAnswers.length; i++) {
-            // /html/body/div/main/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/div[1]/div[1]/span
-            String question = "/html/body/div/main/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/div[1]/" +
-                    "/div[" + i + "]/span";
-            WebElement element1 = driver.findElement(By.xpath(question));
-            String text1 = element1.getText();
-
+            WebElement question = driver.findElement(By.xpath("//div[@class='step-problem']" +
+                    "/div/div[1]/div[" + i + "]/span"));
+            String textQuestion = question.getText();
             String[] res = null;
 
             for (String[] ans : correctAnswers) {
                 res = ans;
 
-                if (res[0].equals(text1)) {
+                if (res[0].equals(textQuestion)) {
                     break;
                 }
             }
 
             boolean checkTrue = true;
-
             while (checkTrue) {
                 for (int j = 1; j <= correctAnswers.length; j++) {
-                    // /html/body/div/main/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/div[2]/div/div[1]/div/span
-                    String answer = "/html/body/div/main/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/div[2]" +
-                            "/div/div[" + j + "]/div/span";
-                    // /html/body/div/main/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/div[2]/div/div[2]/div/div[2]/button[1]
-                    String upArrow = "/html/body/div/main/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/div[2]" +
-                            "/div/div[" + j + "]/div/div[2]/button[" + 1 + "]";
-                    // /html/body/div/main/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/div[2]/div/div[2]/div/div[2]/button[2]
-                    String downArrow = "/html/body/div/main/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/div[2]" +
-                            "/div/div[" + j + "]/div/div[2]/button[" + 2 + "]";
-                    WebElement element2 = driver.findElement(By.xpath(answer));
-                    String text2 = element2.getText();
+                    String upArrow = "//div[@class='step-problem']" +
+                            "/div/div[2]/div/div[" + j + "]/div/div[2]/button[1]";
+                    String downArrow = "//div[@class='step-problem']" +
+                            "/div/div[2]/div/div[" + j + "]/div/div[2]/button[2]";
+                    WebElement answer = driver.findElement(By.xpath("//div[@class='step-problem']" +
+                            "//div/div[2]/div/div[" + j + "]/div/span"));
+                    String textAnswer = answer.getText();
 
-                    if (text2.equals(res[1])) {
+                    if (textAnswer.equals(res[1])) {
                         if (i != j) {
                             Actions actions = new Actions(driver);
                             WebElement arrow = driver.findElement(By.xpath(i < j ? upArrow : downArrow));
@@ -525,22 +576,18 @@ public class Automation {
     // Select answers in the sorted test
     private void sendSort(String[] correctAnswers) {
         for (int i = 1; i <= correctAnswers.length; i++) {
-            boolean checkTrue = true;
 
+            boolean checkTrue = true;
             while (checkTrue) {
                 for (int j = 1; j <= correctAnswers.length; j++) {
-                    // /html/body/div/main/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/span/div[2]/div[2]/button[1]
-                    String upArrow = "/html/body/div/main/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/span" +
-                            "/div[" + j + "]/div[2]/button[" + 1 + "]";
-                    // /html/body/div/main/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/span/div[2]/div[2]/button[2]
-                    String downArrow = "/html/body/div/main/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/span" +
-                            "/div[" + j + "]/div[2]/button[" + 2 + "]";
-                    // /html/body/div/main/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/span/div[1]/div[1]/div[2]/span
-                    String answer = "/html/body/div/main/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/span/" +
-                            "div[" + j + "]/div[1]/div[2]/span";
-                    WebElement element = driver.findElement(By.xpath(answer));
+                    String upArrow = "//div[@class='step-problem']" +
+                            "/div/span/div[" + j + "]/div[2]/button[1]";
+                    String downArrow = "//div[@class='step-problem']" +
+                            "/div/span/div[" + j + "]/div[2]/button[2]";
+                    WebElement answer = driver.findElement(By.xpath("//div[@class='step-problem']" +
+                            "/div/span/div[" + j + "]/div[1]/div[2]/span"));
 
-                    if (element.getText().equals(correctAnswers[i - 1])) {
+                    if (answer.getText().equals(correctAnswers[i - 1])) {
                         if (i != j) {
                             Actions actions = new Actions(driver);
                             WebElement arrow = driver.findElement(By.xpath(i < j ? upArrow : downArrow));
@@ -595,10 +642,10 @@ public class Automation {
 
                 for (Matrix matrix : matrixList) {
                     if (matrix.getName_row().equals(nameRow.get(0).getText()) &&
-                            matrix.getName_columns().equals(columnsArr.get(j).getText()) && matrix.isCheck()) {
-                        // /html/body/div/main/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/table/tbody/tr[1]/td[2]/div/div
-                        String s = "/html/body/div/main/div/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/table" +
-                                "/tbody/tr[" + i + "]/td[" + (j + 1) + "]/div/div";
+                            matrix.getName_columns().equals(columnsArr.get(j)
+                                    .getText()) && matrix.isCheck()) {
+                        String s = "//div[@class='table-problem']" +
+                                "/table/tbody/tr[" + i + "]/td[" + (j + 1) + "]/div/div";
                         WebElement checkbox = driver.findElement(By.xpath(s));
                         checkbox.click();
                     }
@@ -620,7 +667,7 @@ public class Automation {
 
         // Forming a list of possible answers
         for (JsonElement line : attemptsLines) {
-            attemptsList.add(line.getAsString());
+            attemptsList.add(formatText(line.getAsString()));
         }
 
         // Determining the correct answers
@@ -648,12 +695,12 @@ public class Automation {
         for (String[] correctAnswer : correctAnswers) {
             int position = 0;
 
+            // Determine the current line position
             for (int j = 1; j <= correctAnswers.length; j++) {
-                // /html/body/div[1]/main/div/div/div/div/div[4]/div/div/div[1]/div[1]/div/div/span/div[1]/div[2]
-                String line = "/html/body/div[1]/main/div/div/div/div/div[4]/div/div/div[1]/div[1]/div/div/" +
-                        "span/div[" + j + "]/div[2]";
+                String line = "//div[@class='parsons-problem']//div/span/div[" + j + "]/div[2]";
 
-                WebElement element = driver.findElement(By.xpath(line));
+                WebElement element;
+                element = driver.findElement(By.xpath(line));
 
                 if (element.getText().equals(correctAnswer[0])) {
                     position = j;
@@ -663,22 +710,13 @@ public class Automation {
 
             boolean check = true;
             while (check) {
-//                // /html/body/div[1]/main/div/div/div[1]/div/div[4]/div/div/div[1]/div[1]/div/div/span/div[1]/div[1]/button[1]
-//                String leftLevel = "/html/body/div[1]/main/div/div/div[1]/div/div[4]/div/div/div[1]/div[1]/div/div" +
-//                        "/span/div[" + position + "]/div[1]/button[" + 1 + "]";
-//
-//                // /html/body/div[1]/main/div/div/div[1]/div/div[4]/div/div/div[1]/div[1]/div/div/span/div[1]/div[1]/button[2]
-//                String rightLevel = "/html/body/div[1]/main/div/div/div[1]/div/div[4]/div/div/div[1]/div[1]/div/div" +
-//                        "/span/div[" + position + "]/div[1]/button[" + 2 + "]";
+                String upArrow = "//div[@class='parsons-problem']" +
+                        "//div/span/div[" + position + "]/div[3]/button[1]";
 
-                // /html/body/div[1]/main/div/div/div[1]/div/div[4]/div/div/div[1]/div[1]/div/div/span/div[2]/div[3]/button[1]
-                String upArrow = "/html/body/div[1]/main/div/div/div[1]/div/div[4]/div/div/div[1]/div[1]/div/div/" +
-                        "span/div[" + position + "]/div[3]/button[1]";
+                String downArrow = "//div[@class='parsons-problem']" +
+                        "//div/span/div[" + position + "]/div[3]/button[2]";
 
-                // /html/body/div[1]/main/div/div/div[1]/div/div[4]/div/div/div[1]/div[1]/div/div/span/div[1]/div[3]/button[2]
-                String downArrow = "/html/body/div[1]/main/div/div/div[1]/div/div[4]/div/div/div[1]/div[1]/div/div/" +
-                        "span/div[" + position + "]/div[3]/button[2]";
-
+                // Change the line position
                 if (position - 1 != Integer.parseInt(correctAnswer[1])) {
                     Actions actions = new Actions(driver);
                     WebElement arrow;
@@ -692,7 +730,18 @@ public class Automation {
                     }
 
                     actions.moveToElement(arrow).click().perform();
+                    delay(500);
                 } else {
+                    String rightLevel = "//div[@class='parsons-problem']" +
+                            "//div/span/div[" + position + "]/div[1]/button[2]";
+
+                    // Change indentation position
+                    for (int i = 0; i < Integer.parseInt(correctAnswer[2]); i++) {
+                        Actions actions = new Actions(driver);
+                        WebElement level = driver.findElement(By.xpath(rightLevel));
+                        actions.moveToElement(level).click().perform();
+                    }
+
                     check = false;
                 }
             }
@@ -715,14 +764,13 @@ public class Automation {
         return answersList.toArray(new String[0]);
     }
 
+    // Select responses in components test
     private void sendComponents(String[] correctAnswers) {
-
-    }
-
-    // Click on the "Send" button
-    private void clickOnButtonSend() {
-        Actions actions = new Actions(driver);
-        WebElement signInButton = driver.findElement(By.xpath("//button[@id='sendBtn']"));
-        actions.moveToElement(signInButton).click().perform();
+        for (String answer : correctAnswers) {
+            Actions actions = new Actions(driver);
+            WebElement element = driver.findElement(By.xpath(
+                    "//span[@class='draggable' and text()='" + answer + "']"));
+            actions.moveToElement(element).click().perform();
+        }
     }
 }
