@@ -252,7 +252,7 @@ public class Automation {
                 .replaceAll("\u0026lt;", "\u003c")
                 .replaceAll("\u0026le;", "\u2264")
                 .replaceAll("\u0026ge;", "\u2265")
-                .replaceAll("\u0026#x27", "\u0027")
+                .replaceAll("\u0026#x27;", "\u0027")
                 .replaceAll("\u003cbr\u003e", "")
                 .replaceAll("\u003cb\u003e", "")
                 .replaceAll("\u003c/b\u003e", "")
