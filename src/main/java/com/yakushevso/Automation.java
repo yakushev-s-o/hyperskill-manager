@@ -92,25 +92,55 @@ public class Automation {
         String text = getType(step);
 
         if (text.equals("choice")) {
-            return new Answer(page, 1, getTestSingle(userId, step));
+            String answer = getTestSingle(userId, step);
+            if (answer != null) {
+                return new Answer(page, 1, answer);
+            }
         } else if (text.equals("multiple_choice")) {
-            return new Answer(page, 2, getTestMultiple(userId, step));
+            String[] answer = getTestMultiple(userId, step);
+            if (answer != null) {
+                return new Answer(page, 2, answer);
+            }
         } else if (text.contains("code")) {
-            return new Answer(page, 3, getCode(userId, step));
+            String answer = getCode(userId, step);
+            if (answer != null) {
+                return new Answer(page, 3, answer);
+            }
         } else if (text.equals("number")) {
-            return new Answer(page, 4, getTextNum(userId, step));
+            String answer = getTextNum(userId, step);
+            if (answer != null) {
+                return new Answer(page, 4, answer);
+            }
         } else if (text.equals("string")) {
-            return new Answer(page, 5, getTextShort(userId, step));
+            String answer = getTextShort(userId, step);
+            if (answer != null) {
+                return new Answer(page, 5, answer);
+            }
         } else if (text.equals("matching")) {
-            return new Answer(page, 6, getMatch(userId, step));
+            String[][] answer = getMatch(userId, step);
+            if (answer != null) {
+                return new Answer(page, 6, answer);
+            }
         } else if (text.equals("sorting")) {
-            return new Answer(page, 7, getSort(userId, step));
+            String[] answer = getSort(userId, step);
+            if (answer != null) {
+                return new Answer(page, 7, answer);
+            }
         } else if (text.equals("table")) {
-            return new Answer(page, 8, getMatrix(userId, step));
+            List<Matrix> answer = getMatrix(userId, step);
+            if (answer != null) {
+                return new Answer(page, 8, answer);
+            }
         } else if (text.equals("parsons")) {
-            return new Answer(page, 9, getLines(userId, step));
+            String[][] answer = getLines(userId, step);
+            if (answer != null) {
+                return new Answer(page, 9, answer);
+            }
         } else if (text.equals("fill-blanks")) {
-            return new Answer(page, 10, getComponents(userId, step));
+            String[] answer = getComponents(userId, step);
+            if (answer != null) {
+                return new Answer(page, 10, answer);
+            }
         }
 
         return null;
@@ -150,18 +180,17 @@ public class Automation {
                         }
                     } catch (Exception e) {
                         System.out.println("RESPONSE_ERROR: " + answer.getUrl());
+                        e.printStackTrace();
                         continue;
                     }
 
-//                    clickOnButtonSend();
+                    clickOnButtonSend();
                 }
 
-//                // Set value checked
-//                if (waitDownloadElement("//strong[@class='text-success' and text()=' Correct. ']")) {
-//                    setChecked(answer);
-//                }
-
-                setChecked(answer);
+                // Set value checked
+                if (waitDownloadElement("//strong[@class='text-success' and text()=' Correct. ']")) {
+                    setChecked(answer);
+                }
 
                 delay(500);
             }
@@ -312,27 +341,30 @@ public class Automation {
         JsonArray attempts = getAttempts(userId, step);
         JsonObject dataset = attempts.get(0).getAsJsonObject().get("dataset").getAsJsonObject();
         JsonArray options = dataset.getAsJsonArray("options");
+        String status = attempts.get(0).getAsJsonObject().get("status").getAsString();
 
-        for (JsonElement option : options) {
-            optionsList.add(formatText(option.getAsString()));
-        }
+        if ("active".equals(status)) {
+            for (JsonElement option : options) {
+                optionsList.add(formatText(option.getAsString()));
+            }
 
-        // Determining the correct answer
-        JsonArray submissions = getSubmissions(userId, step);
-        JsonArray choices = submissions.get(0).getAsJsonObject().get("reply")
-                .getAsJsonObject().getAsJsonArray("choices");
+            // Determining the correct answer
+            JsonArray submissions = getSubmissions(userId, step);
+            JsonArray choices = submissions.get(0).getAsJsonObject().get("reply")
+                    .getAsJsonObject().getAsJsonArray("choices");
 
-        for (JsonElement choice : choices) {
-            choicesList.add(choice.getAsBoolean());
-        }
+            for (JsonElement choice : choices) {
+                choicesList.add(choice.getAsBoolean());
+            }
 
-        for (int i = 0; i < choicesList.size(); i++) {
-            if (choicesList.get(i)) {
-                return optionsList.get(i);
+            for (int i = 0; i < choicesList.size(); i++) {
+                if (choicesList.get(i)) {
+                    return optionsList.get(i);
+                }
             }
         }
 
-        return "";
+        return null;
     }
 
     // Select one answer in the test
@@ -363,27 +395,33 @@ public class Automation {
         JsonArray attempts = getAttempts(userId, step);
         JsonObject dataset = attempts.get(0).getAsJsonObject().get("dataset").getAsJsonObject();
         JsonArray options = dataset.getAsJsonArray("options");
+        String status = attempts.get(0).getAsJsonObject().get("status").getAsString();
 
-        for (JsonElement option : options) {
-            optionsList.add(formatText(option.getAsString()));
-        }
+        if ("active".equals(status)) {
 
-        // Determining the correct answers
-        JsonArray submissions = getSubmissions(userId, step);
-        JsonArray choices = submissions.get(0).getAsJsonObject().get("reply")
-                .getAsJsonObject().getAsJsonArray("choices");
-
-        for (JsonElement choice : choices) {
-            choicesList.add(choice.getAsBoolean());
-        }
-
-        for (int i = 0; i < choicesList.size(); i++) {
-            if (choicesList.get(i)) {
-                answersList.add(optionsList.get(i));
+            for (JsonElement option : options) {
+                optionsList.add(formatText(option.getAsString()));
             }
+
+            // Determining the correct answers
+            JsonArray submissions = getSubmissions(userId, step);
+            JsonArray choices = submissions.get(0).getAsJsonObject().get("reply")
+                    .getAsJsonObject().getAsJsonArray("choices");
+
+            for (JsonElement choice : choices) {
+                choicesList.add(choice.getAsBoolean());
+            }
+
+            for (int i = 0; i < choicesList.size(); i++) {
+                if (choicesList.get(i)) {
+                    answersList.add(optionsList.get(i));
+                }
+            }
+
+            return answersList.toArray(new String[0]);
         }
 
-        return answersList.toArray(new String[0]);
+        return null;
     }
 
     // Select multiple answers in the test
@@ -408,11 +446,19 @@ public class Automation {
 
     // Get the response from the field with the code
     private String getCode(int userId, String step) {
-        // Determining the correct answer
-        JsonArray submissions = getSubmissions(userId, step);
+        JsonArray attempts = getAttempts(userId, step);
+        String status = attempts.get(0).getAsJsonObject().get("status").getAsString();
 
-        return submissions.get(0).getAsJsonObject().get("reply")
-                .getAsJsonObject().get("code").getAsString();
+        if ("active".equals(status)) {
+
+            // Determining the correct answer
+            JsonArray submissions = getSubmissions(userId, step);
+
+            return submissions.get(0).getAsJsonObject().get("reply")
+                    .getAsJsonObject().get("code").getAsString();
+        }
+
+        return null;
     }
 
     // Write the answer in the field with the code
@@ -432,11 +478,19 @@ public class Automation {
 
     // Get response from text field
     private String getTextNum(int userId, String step) {
-        // Determining the correct answer
-        JsonArray submissions = getSubmissions(userId, step);
+        JsonArray attempts = getAttempts(userId, step);
+        String status = attempts.get(0).getAsJsonObject().get("status").getAsString();
 
-        return submissions.get(0).getAsJsonObject().get("reply")
-                .getAsJsonObject().get("number").getAsString();
+        if ("active".equals(status)) {
+
+            // Determining the correct answer
+            JsonArray submissions = getSubmissions(userId, step);
+
+            return submissions.get(0).getAsJsonObject().get("reply")
+                    .getAsJsonObject().get("number").getAsString();
+        }
+
+        return null;
     }
 
     // Write the answer to the text field
@@ -449,11 +503,19 @@ public class Automation {
 
     // Get response from text field
     private String getTextShort(int userId, String step) {
-        // Determining the correct answer
-        JsonArray submissions = getSubmissions(userId, step);
+        JsonArray attempts = getAttempts(userId, step);
+        String status = attempts.get(0).getAsJsonObject().get("status").getAsString();
 
-        return submissions.get(0).getAsJsonObject().get("reply")
-                .getAsJsonObject().get("text").getAsString();
+        if ("active".equals(status)) {
+
+            // Determining the correct answer
+            JsonArray submissions = getSubmissions(userId, step);
+
+            return submissions.get(0).getAsJsonObject().get("reply")
+                    .getAsJsonObject().get("text").getAsString();
+        }
+
+        return null;
     }
 
     // Write the answer to the text field
@@ -474,28 +536,34 @@ public class Automation {
         JsonArray attempts = getAttempts(userId, step);
         JsonObject dataset = attempts.get(0).getAsJsonObject().get("dataset").getAsJsonObject();
         JsonArray pairs = dataset.getAsJsonArray("pairs");
+        String status = attempts.get(0).getAsJsonObject().get("status").getAsString();
 
-        // Forming a list of possible answers
-        for (JsonElement option : pairs) {
-            optionsList.add(option);
+        if ("active".equals(status)) {
+
+            // Forming a list of possible answers
+            for (JsonElement option : pairs) {
+                optionsList.add(option);
+            }
+
+            // Determining the correct answers
+            JsonArray submissions = getSubmissions(userId, step);
+            JsonArray ordering = submissions.get(0).getAsJsonObject().get("reply")
+                    .getAsJsonObject().getAsJsonArray("ordering");
+
+            for (JsonElement order : ordering) {
+                choicesList.add(order.getAsInt());
+            }
+
+            for (int i = 0; i < optionsList.size(); i++) {
+                answersList.add(new String[]{
+                        formatText(optionsList.get(i).getAsJsonObject().get("first").getAsString()),
+                        optionsList.get(choicesList.get(i)).getAsJsonObject().get("second").getAsString()});
+            }
+
+            return answersList.toArray(new String[0][]);
         }
 
-        // Determining the correct answers
-        JsonArray submissions = getSubmissions(userId, step);
-        JsonArray ordering = submissions.get(0).getAsJsonObject().get("reply")
-                .getAsJsonObject().getAsJsonArray("ordering");
-
-        for (JsonElement order : ordering) {
-            choicesList.add(order.getAsInt());
-        }
-
-        for (int i = 0; i < optionsList.size(); i++) {
-            answersList.add(new String[]{
-                    formatText(optionsList.get(i).getAsJsonObject().get("first").getAsString()),
-                    optionsList.get(choicesList.get(i)).getAsJsonObject().get("second").getAsString()});
-        }
-
-        return answersList.toArray(new String[0][]);
+        return null;
     }
 
     // Select responses in matched test
@@ -548,29 +616,35 @@ public class Automation {
         JsonArray attempts = getAttempts(userId, step);
         JsonObject dataset = attempts.get(0).getAsJsonObject().get("dataset").getAsJsonObject();
         JsonArray options = dataset.getAsJsonArray("options");
+        String status = attempts.get(0).getAsJsonObject().get("status").getAsString();
 
-        // Forming a list of possible answers
-        for (JsonElement option : options) {
-            optionsList.add(option.getAsString());
+        if ("active".equals(status)) {
+
+            // Forming a list of possible answers
+            for (JsonElement option : options) {
+                optionsList.add(option.getAsString());
+            }
+
+            // Determining the correct answers
+            JsonArray submissions = getSubmissions(userId, step);
+            JsonArray ordering = submissions.get(0).getAsJsonObject().get("reply")
+                    .getAsJsonObject().getAsJsonArray("ordering");
+
+            for (JsonElement order : ordering) {
+                choicesList.add(order.getAsInt());
+            }
+
+            // Pre-filling an array with a null value
+            List<String> answersList = new ArrayList<>(Collections.nCopies(optionsList.size(), null));
+
+            for (int i = 0; i < optionsList.size(); i++) {
+                answersList.set(choicesList.get(i), optionsList.get(i));
+            }
+
+            return answersList.toArray(new String[0]);
         }
 
-        // Determining the correct answers
-        JsonArray submissions = getSubmissions(userId, step);
-        JsonArray ordering = submissions.get(0).getAsJsonObject().get("reply")
-                .getAsJsonObject().getAsJsonArray("ordering");
-
-        for (JsonElement order : ordering) {
-            choicesList.add(order.getAsInt());
-        }
-
-        // Pre-filling an array with a null value
-        List<String> answersList = new ArrayList<>(Collections.nCopies(optionsList.size(), null));
-
-        for (int i = 0; i < optionsList.size(); i++) {
-            answersList.set(choicesList.get(i), optionsList.get(i));
-        }
-
-        return answersList.toArray(new String[0]);
+        return null;
     }
 
     // Select answers in the sorted test
@@ -605,26 +679,34 @@ public class Automation {
     private List<Matrix> getMatrix(int userId, String step) {
         List<Matrix> answersList = new ArrayList<>();
 
-        // Determining the correct answers
-        JsonArray submissions = getSubmissions(userId, step);
-        JsonArray choices = submissions.get(0).getAsJsonObject().get("reply")
-                .getAsJsonObject().getAsJsonArray("choices");
+        JsonArray attempts = getAttempts(userId, step);
+        String status = attempts.get(0).getAsJsonObject().get("status").getAsString();
 
-        for (JsonElement choice : choices) {
-            String name_row = choice.getAsJsonObject().get("name_row").getAsString();
-            String name_columns;
-            boolean check;
+        if ("active".equals(status)) {
 
-            JsonArray columns = choice.getAsJsonObject().get("columns").getAsJsonArray();
-            for (JsonElement colum : columns) {
-                name_columns = colum.getAsJsonObject().get("name").getAsString();
-                check = colum.getAsJsonObject().get("answer").getAsBoolean();
+            // Determining the correct answers
+            JsonArray submissions = getSubmissions(userId, step);
+            JsonArray choices = submissions.get(0).getAsJsonObject().get("reply")
+                    .getAsJsonObject().getAsJsonArray("choices");
 
-                answersList.add(new Matrix(name_row, name_columns, check));
+            for (JsonElement choice : choices) {
+                String name_row = choice.getAsJsonObject().get("name_row").getAsString();
+                String name_columns;
+                boolean check;
+
+                JsonArray columns = choice.getAsJsonObject().get("columns").getAsJsonArray();
+                for (JsonElement colum : columns) {
+                    name_columns = colum.getAsJsonObject().get("name").getAsString();
+                    check = colum.getAsJsonObject().get("answer").getAsBoolean();
+
+                    answersList.add(new Matrix(name_row, name_columns, check));
+                }
             }
+
+            return answersList;
         }
 
-        return answersList;
+        return null;
     }
 
     // Select the correct answers in the matrix test
@@ -664,30 +746,36 @@ public class Automation {
         JsonArray attempts = getAttempts(userId, step);
         JsonObject dataset = attempts.get(0).getAsJsonObject().get("dataset").getAsJsonObject();
         JsonArray attemptsLines = dataset.getAsJsonArray("lines");
+        String status = attempts.get(0).getAsJsonObject().get("status").getAsString();
 
-        // Forming a list of possible answers
-        for (JsonElement line : attemptsLines) {
-            attemptsList.add(formatText(line.getAsString()));
+        if ("active".equals(status)) {
+
+            // Forming a list of possible answers
+            for (JsonElement line : attemptsLines) {
+                attemptsList.add(formatText(line.getAsString()));
+            }
+
+            // Determining the correct answers
+            JsonArray submissions = getSubmissions(userId, step);
+            JsonArray submissionsLines = submissions.get(0).getAsJsonObject().get("reply")
+                    .getAsJsonObject().getAsJsonArray("lines");
+
+            for (JsonElement line : submissionsLines) {
+                submissionsList.add(line);
+            }
+
+            for (int i = 0; i < attemptsList.size(); i++) {
+                answersList.add(new String[]{
+                        attemptsList.get(i),
+                        submissionsList.get(i).getAsJsonObject().get("line_number").getAsString(),
+                        submissionsList.get(i).getAsJsonObject().get("level").getAsString(),
+                });
+            }
+
+            return answersList.toArray(new String[0][]);
         }
 
-        // Determining the correct answers
-        JsonArray submissions = getSubmissions(userId, step);
-        JsonArray submissionsLines = submissions.get(0).getAsJsonObject().get("reply")
-                .getAsJsonObject().getAsJsonArray("lines");
-
-        for (JsonElement line : submissionsLines) {
-            submissionsList.add(line);
-        }
-
-        for (int i = 0; i < attemptsList.size(); i++) {
-            answersList.add(new String[]{
-                    attemptsList.get(i),
-                    submissionsList.get(i).getAsJsonObject().get("line_number").getAsString(),
-                    submissionsList.get(i).getAsJsonObject().get("level").getAsString(),
-            });
-        }
-
-        return answersList.toArray(new String[0][]);
+        return null;
     }
 
     // Select responses in lines test
@@ -752,16 +840,24 @@ public class Automation {
     private String[] getComponents(int userId, String step) {
         List<String> answersList = new ArrayList<>();
 
-        // Determining the correct answers
-        JsonArray submissions = getSubmissions(userId, step);
-        JsonArray blanks = submissions.get(0).getAsJsonObject().get("reply")
-                .getAsJsonObject().getAsJsonArray("blanks");
+        JsonArray attempts = getAttempts(userId, step);
+        String status = attempts.get(0).getAsJsonObject().get("status").getAsString();
 
-        for (JsonElement blank : blanks) {
-            answersList.add(blank.getAsString());
+        if ("active".equals(status)) {
+
+            // Determining the correct answers
+            JsonArray submissions = getSubmissions(userId, step);
+            JsonArray blanks = submissions.get(0).getAsJsonObject().get("reply")
+                    .getAsJsonObject().getAsJsonArray("blanks");
+
+            for (JsonElement blank : blanks) {
+                answersList.add(blank.getAsString());
+            }
+
+            return answersList.toArray(new String[0]);
         }
 
-        return answersList.toArray(new String[0]);
+        return null;
     }
 
     // Select responses in components test
