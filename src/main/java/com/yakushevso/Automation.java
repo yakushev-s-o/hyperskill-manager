@@ -19,15 +19,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static com.yakushevso.DataManager.*;
 import static com.yakushevso.Util.*;
 
 public class Automation {
     // Get all the correct answers and save them to a file one by one
-    public void getAnswers() {
+    public void getAnswers(int userId) {
         Gson gson = new Gson();
         File file = new File(JSON_PATH);
         List<Answer> listAnswers = new ArrayList<>();
-        int userId = getCurrent().get("id").getAsInt();
         boolean fileNotExistsOrEmpty = !file.exists() || file.length() == 0;
 
         try (FileReader reader = new FileReader(DATA_PATH)) {

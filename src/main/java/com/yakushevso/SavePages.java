@@ -13,6 +13,7 @@ import com.yakushevso.data.Data;
 import com.yakushevso.data.Step;
 import com.yakushevso.data.Project;
 
+import static com.yakushevso.DataManager.*;
 import static com.yakushevso.Util.*;
 
 public class SavePages {

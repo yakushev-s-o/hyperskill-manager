@@ -1,28 +1,57 @@
 package com.yakushevso;
 
+import com.yakushevso.data.Account;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.List;
 import java.util.Scanner;
 
-public class Main {
-    private static final Scanner sc = new Scanner(System.in);
+public class AppLauncher {
+    private static final Scanner SCANNER = new Scanner(System.in);
+    private static int track;
+    private static Account user;
 
     public static void main(String[] args) {
+        run();
+    }
+
+    private static void run() {
         // Close old drivers
         while (isProcessRunning()) {
             closeProcess();
         }
 
+        choiceUser();
         mainMenu();
     }
 
+    private static void choiceUser() {
+        System.out.println("Select a user: ");
+        List<Account> accounts = SettingsManager.loadSettings().getAccounts();
+
+        for (int i = 1; i <= accounts.size(); i++) {
+            System.out.println(i + ". " + accounts.get(i - 1).getLogin());
+        }
+
+        while (true) {
+            checkInputNum();
+            int userMode = SCANNER.nextInt();
+
+            if (userMode <= accounts.size() && userMode > 0) {
+                user = accounts.get(userMode - 1);
+                break;
+            } else {
+                System.out.println("Select a user from the list!");
+            }
+        }
+    }
+
     private static void mainMenu() {
-        System.out.println("Enter track number (https://hyperskill.org/tracks):");
+        System.out.println("Enter track number: ");
         checkInputNum();
-        int track = sc.nextInt();
-        Util util = new Util(track);
-        Automation test = new Automation();
+        track = SCANNER.nextInt();
 
         while (true) {
             System.out.println("""
@@ -32,17 +61,19 @@ public class Main {
                     3. Get answers
                     4. Send answers
                     5. Change track
+                    6. Change user
                     0. Exit""");
 
             checkInputNum();
-            int mode = sc.nextInt();
+            int mode = SCANNER.nextInt();
 
             switch (mode) {
-                case 1 -> getDataMenu(util);
-                case 2 -> savePagesMenu(util);
-                case 3 -> getAnswersMenu(util, test);
-                case 4 -> setAnswersMenu(util, test);
+                case 1 -> getDataMenu();
+                case 2 -> savePagesMenu();
+                case 3 -> getAnswersMenu();
+                case 4 -> setAnswersMenu();
                 case 5 -> mainMenu();
+                case 6 -> run();
                 case 0 -> System.exit(0);
                 default -> System.out.println("Invalid option, please try again.");
             }
@@ -51,7 +82,9 @@ public class Main {
         }
     }
 
-    private static void getDataMenu(Util util) {
+    private static void getDataMenu() {
+        DataManager dataManager = new DataManager();
+
         while (true) {
             System.out.println("""
                     Enter mode number:
@@ -60,22 +93,22 @@ public class Main {
                     0. Return""");
 
             checkInputNum();
-            int dataMode = sc.nextInt();
+            int dataMode = SCANNER.nextInt();
 
             switch (dataMode) {
                 case 1 -> {
-                    util.createDriver(false);
+                    Util.createDriver("hide");
                     System.out.println("In progress...");
-                    util.login();
-                    util.getData();
-                    util.printStats();
-                    util.closeDriver();
+                    Util.login(user.getLogin(), user.getPassword());
+                    dataManager.getData(track);
+                    dataManager.printStats();
+                    Util.closeDriver();
                 }
                 case 2 -> {
-                    util.createDriver(false);
+                    Util.createDriver("hide");
                     System.out.println("In progress...");
-                    util.login();
-                    util.printStats();
+                    Util.login(user.getLogin(), user.getPassword());
+                    dataManager.printStats();
                 }
                 case 0 -> {
                     return;
@@ -85,7 +118,7 @@ public class Main {
         }
     }
 
-    private static void savePagesMenu(Util util) {
+    private static void savePagesMenu() {
         while (true) {
             System.out.println("""
                     Enter mode number:
@@ -97,15 +130,15 @@ public class Main {
                     0. Return""");
 
             checkInputNum();
-            int saveMode = sc.nextInt();
+            int saveMode = SCANNER.nextInt();
 
             if (saveMode == 0) {
                 return;
             }
 
-            util.createDriver(false);
+            Util.createDriver("hide");
             System.out.println("In progress...");
-            util.login();
+            Util.login(user.getLogin(), user.getPassword());
 
             SavePages save = new SavePages();
             switch (saveMode) {
@@ -122,30 +155,32 @@ public class Main {
                 default -> System.out.println("Invalid option, please try again.");
             }
 
-            util.closeDriver();
+            Util.closeDriver();
         }
     }
 
-    private static void getAnswersMenu(Util util, Automation test) {
-        util.createDriver(false);
+    private static void getAnswersMenu() {
+        Automation automation = new Automation();
+        Util.createDriver("hide");
         System.out.println("In progress...");
-        util.login();
-        test.getAnswers();
-        util.closeDriver();
+        Util.login(user.getLogin(), user.getPassword());
+        automation.getAnswers(user.getId());
+        Util.closeDriver();
     }
 
-    private static void setAnswersMenu(Util util, Automation test) {
-        util.createDriver(true);
+    private static void setAnswersMenu() {
+        Automation automation = new Automation();
+//        createDriver("visible");
         System.out.println("In progress...");
-        util.login();
-        test.sendAnswers();
-//        util.closeDriver();
+//        login();
+        automation.sendAnswers();
+        Util.closeDriver();
     }
 
     private static void checkInputNum() {
-        while (!sc.hasNextInt()) {
+        while (!SCANNER.hasNextInt()) {
             System.out.println("That's not a number. Please enter a number:");
-            sc.next();
+            SCANNER.next();
         }
     }
 
