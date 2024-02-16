@@ -3,25 +3,21 @@ package com.yakushevso;
 import com.google.gson.*;
 import com.yakushevso.data.*;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 import java.io.*;
 import java.lang.reflect.Type;
 import java.util.*;
 
-import static com.yakushevso.Util.driver;
-
 public class DataManager {
-    public static String SITE_LINK;
-    public static String FOLDER_PATH;
-    public static String JSON_PATH;
-    public static String DATA_PATH;
+    private final WebDriver driver;
+    private final String siteLink;
+    private final String dataPath;
 
-    public DataManager() {
-        Settings settings = SettingsManager.loadSettings();
-        SITE_LINK = settings.getSite_link();
-        FOLDER_PATH = settings.getFolder_path();
-        JSON_PATH = settings.getJson_path();
-        DATA_PATH = settings.getData_path();
+    public DataManager(WebDriver driver, Settings settings) {
+        this.driver = driver;
+        this.siteLink = settings.getSite_link();
+        this.dataPath = settings.getData_path();
     }
 
     // Get track data and write to file
@@ -31,7 +27,7 @@ public class DataManager {
         List<Step> steps = getSteps(topic);
         List<Step> additionalSteps = getSteps(getAdditionalTopics(topic, steps));
 
-        try (FileWriter writer = new FileWriter(DATA_PATH)) {
+        try (FileWriter writer = new FileWriter(dataPath)) {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             gson.toJson(new Data(topic, projects, steps, additionalSteps), writer);
         } catch (IOException e) {
@@ -138,7 +134,7 @@ public class DataManager {
                         "?format=json&ids=project-" + project);
                 boolean completed = progressObj.get("is_completed").getAsBoolean();
 
-                projectList.add(new Project(id, completed, SITE_LINK + "projects/" + id,
+                projectList.add(new Project(id, completed, siteLink + "projects/" + id,
                         title, stagesIds));
             }
         }
@@ -216,7 +212,7 @@ public class DataManager {
             boolean skippedTopic = progressObj.get("is_skipped").getAsBoolean();
 
             listSteps.add(new Step(theory, topic, learnedTopic, skippedTopic, capacityTopic,
-                    SITE_LINK + "learn/step/" + theory, titleTheory,
+                    siteLink + "learn/step/" + theory, titleTheory,
                     learnedTheory, listStepTrue, listStepFalse));
 
         }
@@ -347,7 +343,7 @@ public class DataManager {
                 .getAsJsonArray("progresses").get(0).getAsJsonObject();
     }
 
-    public static JsonObject getCurrent() {
+    public JsonObject getCurrent() {
         driver.get("https://hyperskill.org/api/profiles/current?format=json");
 
         // Get page content as text

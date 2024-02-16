@@ -3,9 +3,6 @@ package com.yakushevso;
 import com.yakushevso.data.Account;
 import com.yakushevso.data.Settings;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Scanner;
 
@@ -15,11 +12,8 @@ public class AppLauncher {
     private static Account user;
 
     public static void main(String[] args) {
-        while (isProcessRunning()) {
-            closeProcess();
-        }
-
-        SettingsManager.initSettings();
+        Util.closeChromeDriverProcess();
+        SettingsManager.initSettings(SCANNER);
         choiceUser();
         mainMenu();
     }
@@ -48,11 +42,11 @@ public class AppLauncher {
                 case 4 -> setAnswersMenu();
                 case 5 -> choiceTrack();
                 case 6 -> settingsMenu();
-                case 0 -> System.exit(0);
+                case 0 -> {
+                    return;
+                }
                 default -> System.out.println("Invalid option, please try again.");
             }
-
-            System.out.println("Completed!");
         }
     }
 
@@ -78,45 +72,10 @@ public class AppLauncher {
 
             if (userMode <= accounts.size() && userMode != 0) {
                 user = accounts.get(userMode - 1);
-                break;
+                return;
             } else if (userMode == 0) {
                 user = addUser();
-                break;
-            } else {
-                System.out.println("Select a user from the list!");
-            }
-        }
-    }
-
-    private static Account addUser() {
-        Settings settings = SettingsManager.loadSettings();
-        Account account = SettingsManager.getAccount();
-        settings.addAccount(account);
-        SettingsManager.saveSettings(settings);
-        System.out.println("Account \"" + account.getLogin() + "\" added!");
-
-        return account;
-    }
-
-    private static void delUser() {
-        System.out.println("Select a user: ");
-        Settings settings = SettingsManager.loadSettings();
-        List<Account> accounts = settings.getAccounts();
-
-        for (int i = 1; i <= accounts.size(); i++) {
-            System.out.println(i + ". " + accounts.get(i - 1).getLogin());
-        }
-
-        while (true) {
-            checkInputNum();
-            int userMode = SCANNER.nextInt();
-
-            if (userMode <= accounts.size() && userMode != 0) {
-                System.out.println("Account \"" + accounts.get(userMode - 1).getLogin() + "\" deleted!");
-                settings.delAccount(userMode - 1);
-                SettingsManager.saveSettings(settings);
-                choiceUser();
-                break;
+                return;
             } else {
                 System.out.println("Select a user from the list!");
             }
@@ -142,12 +101,50 @@ public class AppLauncher {
                     mainMenu();
                 }
                 case 2 -> addUser();
-                case 3 -> delUser();
+                case 3 -> {
+                    delUser();
+                    return;
+                }
                 case 4 -> changePaths();
                 case 0 -> {
                     return;
                 }
                 default -> System.out.println("Invalid option, please try again.");
+            }
+        }
+    }
+
+    private static Account addUser() {
+        Settings settings = SettingsManager.loadSettings();
+        Account account = SettingsManager.getAccount(SCANNER);
+        settings.addAccount(account);
+        SettingsManager.saveSettings(settings);
+        System.out.println("Account \"" + account.getLogin() + "\" added!");
+
+        return account;
+    }
+
+    private static void delUser() {
+        System.out.println("Select a user: ");
+        Settings settings = SettingsManager.loadSettings();
+        List<Account> accounts = settings.getAccounts();
+
+        for (int i = 1; i <= accounts.size(); i++) {
+            System.out.println(i + ". " + accounts.get(i - 1).getLogin());
+        }
+
+        while (true) {
+            checkInputNum();
+            int userMode = SCANNER.nextInt();
+
+            if (userMode <= accounts.size() && userMode != 0) {
+                System.out.println("Account \"" + accounts.get(userMode - 1).getLogin() + "\" deleted!");
+                settings.delAccount(userMode - 1);
+                SettingsManager.saveSettings(settings);
+                choiceUser();
+                return;
+            } else {
+                System.out.println("Select a user from the list!");
             }
         }
     }
@@ -194,7 +191,8 @@ public class AppLauncher {
     }
 
     private static void getDataMenu() {
-        DataManager dataManager = new DataManager();
+        Settings settings = SettingsManager.loadSettings();
+        DataManager dataManager = new DataManager(Util.getDriver(), settings);
 
         while (true) {
             System.out.println("""
@@ -251,7 +249,9 @@ public class AppLauncher {
             System.out.println("In progress...");
             Util.login(user.getLogin(), user.getPassword());
 
-            SavePages save = new SavePages();
+            Settings settings = SettingsManager.loadSettings();
+            SavePages save = new SavePages(Util.getDriver(), settings);
+
             switch (saveMode) {
                 case 1 -> save.saveTopics();
                 case 2 -> save.saveProjects();
@@ -271,7 +271,8 @@ public class AppLauncher {
     }
 
     private static void getAnswersMenu() {
-        Automation automation = new Automation();
+        Settings settings = SettingsManager.loadSettings();
+        Automation automation = new Automation(Util.getDriver(), settings);
         Util.createDriver("hide");
         System.out.println("In progress...");
         Util.login(user.getLogin(), user.getPassword());
@@ -280,7 +281,8 @@ public class AppLauncher {
     }
 
     private static void setAnswersMenu() {
-        Automation automation = new Automation();
+        Settings settings = SettingsManager.loadSettings();
+        Automation automation = new Automation(Util.getDriver(), settings);
         Util.createDriver("visible");
         System.out.println("In progress...");
         Util.login(user.getLogin(), user.getPassword());
@@ -292,34 +294,6 @@ public class AppLauncher {
         while (!SCANNER.hasNextInt()) {
             System.out.println("That's not a number. Please enter a number:");
             SCANNER.next();
-        }
-    }
-
-    private static void closeProcess() {
-        try {
-            ProcessBuilder builder = new ProcessBuilder("taskkill", "/F", "/IM", "chromedriver.exe");
-            builder.start();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static boolean isProcessRunning() {
-        try {
-            ProcessBuilder builder = new ProcessBuilder("tasklist");
-            Process process = builder.start();
-            InputStream inputStream = process.getInputStream();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                if (line.contains("chromedriver.exe")) {
-                    return true;
-                }
-            }
-            return false;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
         }
     }
 }

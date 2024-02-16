@@ -1,7 +1,12 @@
 package com.yakushevso;
 
+import com.yakushevso.data.Data;
+import com.yakushevso.data.Project;
+import com.yakushevso.data.Settings;
+import com.yakushevso.data.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
@@ -9,27 +14,32 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
-import com.yakushevso.data.Data;
-import com.yakushevso.data.Step;
-import com.yakushevso.data.Project;
-
-import static com.yakushevso.DataManager.*;
-import static com.yakushevso.Util.*;
-
 public class SavePages {
+    private final WebDriver driver;
+    private final String siteLink;
+    private final String folderPath;
+    private final String dataPath;
+
+    public SavePages(WebDriver driver, Settings settings) {
+        this.driver = driver;
+        this.siteLink = settings.getSite_link();
+        this.folderPath = settings.getFolder_path();
+        this.dataPath = settings.getData_path();
+    }
+
     // Save pages with topics
     public void saveTopics() {
-        Data data = getFileData(Data.class, DATA_PATH);
+        Data data = DataManager.getFileData(Data.class, dataPath);
 
         for (Integer topic : data.getTopic_relations().getTopics()) {
-            if (isFileExists(FOLDER_PATH + "knowledge-map/", String.valueOf(topic))) {
-                driver.get(SITE_LINK + "knowledge-map/" + topic);
+            if (isFileExists(folderPath + "knowledge-map/", String.valueOf(topic))) {
+                driver.get(siteLink + "knowledge-map/" + topic);
 
-                waitDownloadElement("//div[@class='knowledge-map-node']");
-                delay(1000);
+                Util.waitDownloadElement("//div[@class='knowledge-map-node']");
+                Util.delay(1000);
 
                 if (isVisibleElement("//div[@class='loader-body card card-body']")) {
-                    waitDownloadElement("//div[@class='topic-block']");
+                    Util.waitDownloadElement("//div[@class='topic-block']");
                 }
 
                 save("knowledge-map/", String.valueOf(topic));
@@ -39,12 +49,12 @@ public class SavePages {
 
     // Save pages with projects
     public void saveProjects() {
-        Data data = getFileData(Data.class, DATA_PATH);
+        Data data = DataManager.getFileData(Data.class, dataPath);
 
         for (Project project : data.getProjects()) {
-            if (isFileExists(FOLDER_PATH + "projects/", String.valueOf(project.getId()))) {
-                driver.get(SITE_LINK + "projects/" + project.getId());
-                waitDownloadElement("//div[@class='collapse show']");
+            if (isFileExists(folderPath + "projects/", String.valueOf(project.getId()))) {
+                driver.get(siteLink + "projects/" + project.getId());
+                Util.waitDownloadElement("//div[@class='collapse show']");
 
                 List<WebElement> stageProjectClose = driver.findElements(By.xpath("//button[@class='btn " +
                         "section-collapse-title d-flex align-items-baseline btn-link']//div[@class='icon tw-text-sm']"));
@@ -52,11 +62,11 @@ public class SavePages {
                 Actions actions = new Actions(driver);
                 for (WebElement stage : stageProjectClose) {
                     actions.moveToElement(stage).click().perform();
-                    delay(1000);
+                    Util.delay(1000);
 
                     // Check for the throbber element
                     while (isVisibleElement("//div[@class='collapse show']//div[@class='loader-body']")) {
-                        delay(1000);
+                        Util.delay(1000);
                     }
                 }
 
@@ -67,14 +77,14 @@ public class SavePages {
 
     // Save project stages
     public void saveStages() {
-        Data data = getFileData(Data.class, DATA_PATH);
+        Data data = DataManager.getFileData(Data.class, dataPath);
 
         for (Project project : data.getProjects()) {
             for (String stages : project.getStages_ids()) {
-                if (isFileExists(FOLDER_PATH + "projects/" + project.getId() + "/stages/" + stages, "implement")) {
-                    driver.get(SITE_LINK + "projects/" + project.getId() + "/stages/" + stages + "/implement");
-                    waitDownloadElement("//div[@class='tabs']");
-                    delay(1000);
+                if (isFileExists(folderPath + "projects/" + project.getId() + "/stages/" + stages, "implement")) {
+                    driver.get(siteLink + "projects/" + project.getId() + "/stages/" + stages + "/implement");
+                    Util.waitDownloadElement("//div[@class='tabs']");
+                    Util.delay(1000);
                     save("projects/" + project.getId() + "/stages/" + stages + "/", "implement");
                 }
             }
@@ -83,12 +93,12 @@ public class SavePages {
 
     // Save pages with topics
     public void saveThemes() {
-        Data data = getFileData(Data.class, DATA_PATH);
+        Data data = DataManager.getFileData(Data.class, dataPath);
 
         for (Step steps : data.getSteps()) {
-            if (isFileExists(FOLDER_PATH + "learn/step/", String.valueOf(steps.getId()))) {
-                driver.get(SITE_LINK + "learn/step/" + steps.getId());
-                waitDownloadElement("//a[@class='text-gray']");
+            if (isFileExists(folderPath + "learn/step/", String.valueOf(steps.getId()))) {
+                driver.get(siteLink + "learn/step/" + steps.getId());
+                Util.waitDownloadElement("//a[@class='text-gray']");
 
                 // Check if the theory is solved and the page is fully expanded
                 if (isVisibleElement("//a[@class='ml-3' and starts-with(normalize-space(text()), 'Expand all')]")) {
@@ -96,10 +106,10 @@ public class SavePages {
                     WebElement element = driver.findElement(
                             By.xpath("//a[@class='ml-3' and starts-with(normalize-space(text()), 'Expand all')]"));
                     actions.moveToElement(element).click().perform();
-                    waitDownloadElement("//button[@click-event-target='start_practicing']");
+                    Util.waitDownloadElement("//button[@click-event-target='start_practicing']");
                 }
 
-                delay(1000);
+                Util.delay(1000);
 
                 save("learn/step/", String.valueOf(steps.getId()));
             }
@@ -134,7 +144,7 @@ public class SavePages {
 
     // Saving pages
     private void save(String path, String page) {
-        File file = new File(FOLDER_PATH + path);
+        File file = new File(folderPath + path);
 
         // Check if the folder exists and create it if necessary
         if (!file.exists()) {
@@ -162,7 +172,7 @@ public class SavePages {
 
         // Saving the page code to a file and saving the encoding
         try {
-            String filePath = FOLDER_PATH + path + page + ".html";
+            String filePath = folderPath + path + page + ".html";
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filePath), StandardCharsets.UTF_8));
             writer.write(pageSource);
             writer.close();

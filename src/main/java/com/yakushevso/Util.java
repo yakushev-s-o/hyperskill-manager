@@ -9,10 +9,13 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.time.Duration;
 
 public class Util {
-    public static WebDriver driver;
+    private static WebDriver driver;
 
     public static void createDriver(String visible) {
         // Set path to browser driver
@@ -22,13 +25,17 @@ public class Util {
         // Create an instance of the driver in the background if "true"
         if ("visible".equals(visible)) {
             options.addArguments("--start-maximized");
-        } else if ("hide".equals(visible)){
+        } else if ("hide".equals(visible)) {
             options.addArguments("--headless");
             options.addArguments("--disable-gpu");
             options.addArguments("--window-size=1920,1080");
         }
 
         driver = new ChromeDriver(options);
+    }
+
+    public static WebDriver getDriver() {
+        return driver;
     }
 
     // Perform authorization on the site
@@ -98,4 +105,35 @@ public class Util {
             driver.quit();
         }
     }
+
+    // Close all open processes in the system
+    public static void closeChromeDriverProcess() {
+        try {
+            // Check if the chromedriver.exe process is running
+            boolean isRunning = false;
+            ProcessBuilder checkBuilder = new ProcessBuilder("tasklist");
+            Process checkProcess = checkBuilder.start();
+            InputStream inputStream = checkProcess.getInputStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (line.contains("chromedriver.exe")) {
+                    isRunning = true;
+                    break;
+                }
+            }
+
+            // Kill the process if it is running
+            if (isRunning) {
+                ProcessBuilder killBuilder = new ProcessBuilder("taskkill", "/F", "/IM", "chromedriver.exe");
+                killBuilder.start();
+                System.out.println("chromedriver.exe process found and killed.");
+            } else {
+                System.out.println("chromedriver.exe process not found.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

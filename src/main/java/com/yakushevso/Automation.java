@@ -2,12 +2,10 @@ package com.yakushevso;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gson.*;
-import com.yakushevso.data.Answer;
-import com.yakushevso.data.Data;
-import com.yakushevso.data.Matrix;
-import com.yakushevso.data.Step;
+import com.yakushevso.data.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
@@ -19,37 +17,46 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static com.yakushevso.DataManager.*;
-import static com.yakushevso.Util.*;
-
 public class Automation {
+    private final WebDriver driver;
+    private final String siteLink;
+    private final String jsonPath;
+    private final String dataPath;
+
+    public Automation(WebDriver driver, Settings settings) {
+        this.driver = driver;
+        this.siteLink = settings.getSite_link();
+        this.jsonPath = settings.getJson_path();
+        this.dataPath = settings.getData_path();
+    }
+
     // Get all the correct answers and save them to a file one by one
     public void getAnswers(int userId) {
         Gson gson = new Gson();
-        File file = new File(JSON_PATH);
+        File file = new File(jsonPath);
         List<Answer> listAnswers = new ArrayList<>();
         boolean fileNotExistsOrEmpty = !file.exists() || file.length() == 0;
 
-        try (FileReader reader = new FileReader(DATA_PATH)) {
+        try (FileReader reader = new FileReader(dataPath)) {
             Data data = gson.fromJson(reader, Data.class);
 
             for (Step steps : data.getSteps()) {
                 for (String step : steps.getStepListTrue()) {
                     if (fileNotExistsOrEmpty || isNotMatchStep(step)) {
                         if (!fileNotExistsOrEmpty) {
-                            listAnswers = getFileData(new TypeToken<List<Answer>>() {
-                            }.getType(), JSON_PATH);
+                            listAnswers = DataManager.getFileData(new TypeToken<List<Answer>>() {
+                            }.getType(), jsonPath);
                         }
 
                         Answer answer = getAnswer(userId, step);
 
                         if (answer == null) {
-                            System.out.println("ANSWER_NOT_FOUND: " + SITE_LINK + "learn/step/" + step);
+                            System.out.println("ANSWER_NOT_FOUND: " + siteLink + "learn/step/" + step);
                             continue;
                         }
 
                         listAnswers.add(answer);
-                        saveToFile(listAnswers, JSON_PATH);
+                        DataManager.saveToFile(listAnswers, jsonPath);
                         fileNotExistsOrEmpty = false;
                     }
                 }
@@ -88,7 +95,7 @@ public class Automation {
 
     // Get the correct answer using the appropriate method
     private Answer getAnswer(int userId, String step) {
-        String page = SITE_LINK + "learn/step/" + step;
+        String page = siteLink + "learn/step/" + step;
         String text = getType(step);
 
         if (text.equals("choice")) {
@@ -148,21 +155,21 @@ public class Automation {
 
     // Fill in the correct answers from the file on the site
     public void sendAnswers() {
-        List<Answer> answers = getFileData(new TypeToken<List<Answer>>() {
-        }.getType(), JSON_PATH);
+        List<Answer> answers = DataManager.getFileData(new TypeToken<List<Answer>>() {
+        }.getType(), jsonPath);
 
         for (Answer answer : answers) {
             if (!answer.isChecked()) {
                 driver.get(answer.getUrl());
 
                 try {
-                    waitDownloadElement("//div[@class='step-problem']");
+                    Util.waitDownloadElement("//div[@class='step-problem']");
                 } catch (Exception e) {
                     System.out.println("LOADING_ERROR: " + answer.getUrl());
                     continue;
                 }
 
-                delay(500);
+                Util.delay(500);
 
                 if (checkButtons()) {
                     try {
@@ -188,11 +195,11 @@ public class Automation {
                 }
 
                 // Set value checked
-                if (waitDownloadElement("//strong[@class='text-success' and text()=' Correct. ']")) {
+                if (Util.waitDownloadElement("//strong[@class='text-success' and text()=' Correct. ']")) {
                     setChecked(answer);
                 }
 
-                delay(500);
+                Util.delay(500);
             }
         }
     }
@@ -209,17 +216,17 @@ public class Automation {
                 case "retry" -> {
                     actions.moveToElement(element).click().perform();
 
-                    waitDownloadElement("//button[@id='sendBtn']");
+                    Util.waitDownloadElement("//button[@id='sendBtn']");
                 }
                 case "reset" -> {
                     actions.moveToElement(element).click().perform();
 
-                    waitDownloadElement("//button[@class='btn btn-dark']");
+                    Util.waitDownloadElement("//button[@class='btn btn-dark']");
 
                     WebElement confirm = driver.findElement(By.xpath("//button[@class='btn btn-dark']"));
                     actions.moveToElement(confirm).click().perform();
 
-                    waitDownloadElement("//button[@id='sendBtn']");
+                    Util.waitDownloadElement("//button[@id='sendBtn']");
                 }
                 case "continue" -> {
                     return false;
@@ -235,15 +242,15 @@ public class Automation {
         Actions actions = new Actions(driver);
         WebElement signInButton = driver.findElement(By.xpath("//button[@id='sendBtn']"));
         actions.moveToElement(signInButton).click().perform();
-        delay(500);
+        Util.delay(500);
     }
 
     // Set the "check" value in the object to "true"
     private void setChecked(Answer a) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-        List<Answer> answers = getFileData(new TypeToken<List<Answer>>() {
-        }.getType(), JSON_PATH);
+        List<Answer> answers = DataManager.getFileData(new TypeToken<List<Answer>>() {
+        }.getType(), jsonPath);
 
         for (Answer answer : answers) {
             if (a.getUrl().equals(answer.getUrl())) {
@@ -252,7 +259,7 @@ public class Automation {
         }
 
         try {
-            FileWriter writer = new FileWriter(JSON_PATH);
+            FileWriter writer = new FileWriter(jsonPath);
             gson.toJson(answers, writer);
             writer.close();
         } catch (IOException e) {
@@ -262,11 +269,11 @@ public class Automation {
 
     // Check the link for a match in the file
     private boolean isNotMatchStep(String page) {
-        List<Answer> answers = getFileData(new TypeToken<List<Answer>>() {
-        }.getType(), JSON_PATH);
+        List<Answer> answers = DataManager.getFileData(new TypeToken<List<Answer>>() {
+        }.getType(), jsonPath);
 
         for (Answer answer : answers) {
-            if (answer.getUrl().equals(SITE_LINK + "learn/step/" + page)) {
+            if (answer.getUrl().equals(siteLink + "learn/step/" + page)) {
                 return false;
             }
         }
@@ -369,7 +376,7 @@ public class Automation {
 
     // Select one answer in the test
     private void sendTestSingle(String answer) {
-        waitDownloadElement("//label[@class='custom-control-label']");
+        Util.waitDownloadElement("//label[@class='custom-control-label']");
 
         Actions actions = new Actions(driver);
         WebElement element;
@@ -426,7 +433,7 @@ public class Automation {
 
     // Select multiple answers in the test
     private void sendTestMultiple(String[] answers) {
-        waitDownloadElement("//label[@class='custom-control-label']");
+        Util.waitDownloadElement("//label[@class='custom-control-label']");
 
         for (String answer : answers) {
             Actions actions = new Actions(driver);
@@ -463,7 +470,7 @@ public class Automation {
 
     // Write the answer in the field with the code
     private void sendCode(String code) {
-        waitDownloadElement("//div[@class='cm-content']");
+        Util.waitDownloadElement("//div[@class='cm-content']");
 
         WebElement element = driver.findElement(By.xpath("//div[@class='cm-content']"));
         element.clear();
@@ -495,7 +502,7 @@ public class Automation {
 
     // Write the answer to the text field
     private void sendTextNum(String answer) {
-        waitDownloadElement("//input[@type='number']");
+        Util.waitDownloadElement("//input[@type='number']");
 
         WebElement element = driver.findElement(By.xpath("//input[@type='number']"));
         element.sendKeys(answer);
@@ -520,7 +527,7 @@ public class Automation {
 
     // Write the answer to the text field
     private void sendTextShort(String answer) {
-        waitDownloadElement("//textarea");
+        Util.waitDownloadElement("//textarea");
 
         WebElement element = driver.findElement(By.xpath("//textarea"));
         element.sendKeys(answer);
@@ -818,7 +825,7 @@ public class Automation {
                     }
 
                     actions.moveToElement(arrow).click().perform();
-                    delay(500);
+                    Util.delay(500);
                 } else {
                     String rightLevel = "//div[@class='parsons-problem']" +
                             "//div/span/div[" + position + "]/div[1]/button[2]";

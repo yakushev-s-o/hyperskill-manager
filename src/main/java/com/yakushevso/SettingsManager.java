@@ -15,17 +15,15 @@ import java.util.Scanner;
 
 public class SettingsManager {
     private static final String SETTINGS_PATH = "src/main/resources/settings.json";
-    private static final Scanner SCANNER = new Scanner(System.in);
-    private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-    public static void initSettings() {
+    public static void initSettings(Scanner scanner) {
         File file = new File(SETTINGS_PATH);
 
         if (!file.exists() || file.length() == 0) {
             System.out.println("Enter path ChromeDriver: ");
-            String driver_path = SCANNER.next() + "chromedriver.exe";
+            String driver_path = scanner.next() + "chromedriver.exe";
             System.out.println("Enter path FolderPath: ");
-            String folder_path = SCANNER.next() + "TRACK_NUMBER/";
+            String folder_path = scanner.next() + "TRACK_NUMBER/";
 
             List<Account> accounts = new ArrayList<>();
             Settings settings = new Settings(accounts, driver_path, folder_path,
@@ -34,12 +32,14 @@ public class SettingsManager {
                     "https://hyperskill.org/");
 
             saveSettings(settings);
-            settings.addAccount(getAccount());
+            settings.addAccount(getAccount(scanner));
             saveSettings(settings);
         }
     }
 
     public static Settings loadSettings() {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
         try (FileReader reader = new FileReader(SETTINGS_PATH)) {
             return gson.fromJson(reader, Settings.class);
         } catch (IOException e) {
@@ -50,6 +50,7 @@ public class SettingsManager {
 
     public static void saveSettings(Settings settings) {
         File file = new File(SETTINGS_PATH);
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
         try (FileWriter writer = new FileWriter(file)) {
             gson.toJson(settings, writer);
@@ -58,16 +59,28 @@ public class SettingsManager {
         }
     }
 
-    public static Account getAccount() {
-        System.out.println("Enter login: ");
-        String login = SCANNER.next();
-        System.out.println("Enter password: ");
-        String password = SCANNER.next();
+    public static Account getAccount(Scanner scanner) {
+        String login;
+        String password;
+        int userId;
 
-        Util.createDriver("hide");
-        Util.login(login, password);
-        int userId = DataManager.getCurrent().get("id").getAsInt();
-        Util.closeDriver();
+        while (true) {
+            System.out.println("Enter login: ");
+            login = scanner.next();
+            System.out.println("Enter password: ");
+            password = scanner.next();
+
+            try {
+                Util.createDriver("hide");
+                Util.login(login, password);
+                userId = new DataManager(Util.getDriver(),
+                        loadSettings()).getCurrent().get("id").getAsInt();
+                Util.closeDriver();
+                break;
+            } catch (Exception e) {
+                System.out.println("Login or password is incorrect. Please try again.");
+            }
+        }
 
         return new Account(login, password, userId);
     }
