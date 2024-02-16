@@ -16,7 +16,7 @@ public class Util {
 
     public static void createDriver(String visible) {
         // Set path to browser driver
-        System.setProperty("webdriver.chrome.driver", SettingsManager.getDriver_path());
+        System.setProperty("webdriver.chrome.driver", SettingsManager.loadSettings().getChromedriver_path());
         ChromeOptions options = new ChromeOptions();
 
         // Create an instance of the driver in the background if "true"

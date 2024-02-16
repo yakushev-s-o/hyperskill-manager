@@ -3,7 +3,7 @@ package com.yakushevso.data;
 import java.util.List;
 
 public class Settings {
-    private List<Account> accounts;
+    private final List<Account> accounts;
     private String driver_path;
     private String folder_path;
     private String json_path;
@@ -24,8 +24,12 @@ public class Settings {
         return accounts;
     }
 
-    public void setAccounts(String login, String password, int id) {
-        this.accounts.add(new Account(login, password, id));
+    public void addAccount(Account account) {
+        accounts.add(account);
+    }
+
+    public void delAccount(int index) {
+        accounts.remove(index);
     }
 
     public String getChromedriver_path() {

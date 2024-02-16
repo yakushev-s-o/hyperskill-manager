@@ -16,51 +16,27 @@ import java.util.Scanner;
 public class SettingsManager {
     private static final String SETTINGS_PATH = "src/main/resources/settings.json";
     private static final Scanner SCANNER = new Scanner(System.in);
-    private static Gson gson = new Gson();
-    private static String driver_path;
+    private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-    public SettingsManager() {
+    public static void initSettings() {
         File file = new File(SETTINGS_PATH);
 
         if (!file.exists() || file.length() == 0) {
-            System.out.println("Enter login: ");
-            String login = SCANNER.next();
-            System.out.println("Enter password: ");
-            String password = SCANNER.next();
             System.out.println("Enter path ChromeDriver: ");
-            driver_path = SCANNER.next();
+            String driver_path = SCANNER.next() + "chromedriver.exe";
             System.out.println("Enter path FolderPath: ");
-            String folder_path = SCANNER.next();
-            System.out.println("Enter path JsonPath: ");
-            String json_path = SCANNER.next();
-            System.out.println("Enter path DataPath: ");
-            String data_path = SCANNER.next();
+            String folder_path = SCANNER.next() + "TRACK_NUMBER/";
 
-            Util.createDriver("hide");
-            Util.login(login, password);
-            int userId = DataManager.getCurrent().get("id").getAsInt();
-            Util.closeDriver();
+            List<Account> accounts = new ArrayList<>();
+            Settings settings = new Settings(accounts, driver_path, folder_path,
+                    "src/main/resources/answer-list-TRACK_NUMBER.json",
+                    "src/main/resources/data-list-TRACK_NUMBER.json",
+                    "https://hyperskill.org/");
 
-            List<Account> account = new ArrayList<>();
-            account.add(new Account(login, password, userId));
-            Settings settings = new Settings(account, driver_path,
-                    folder_path, json_path, data_path, "https://hyperskill.org/"
-            );
-
-            gson = new GsonBuilder().setPrettyPrinting().create();
-
-            try {
-                try (FileWriter writer = new FileWriter(file)) {
-                    gson.toJson(settings, writer);
-                }
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            saveSettings(settings);
+            settings.addAccount(getAccount());
+            saveSettings(settings);
         }
-    }
-
-    public static String getDriver_path() {
-        return driver_path;
     }
 
     public static Settings loadSettings() {
@@ -75,8 +51,6 @@ public class SettingsManager {
     public static void saveSettings(Settings settings) {
         File file = new File(SETTINGS_PATH);
 
-        gson = new GsonBuilder().setPrettyPrinting().create();
-
         try (FileWriter writer = new FileWriter(file)) {
             gson.toJson(settings, writer);
         } catch (IOException e) {
@@ -84,23 +58,17 @@ public class SettingsManager {
         }
     }
 
-    public static void addAccount() {
-        Settings settings = loadSettings();
+    public static Account getAccount() {
+        System.out.println("Enter login: ");
+        String login = SCANNER.next();
+        System.out.println("Enter password: ");
+        String password = SCANNER.next();
 
-        if (settings != null) {
-            System.out.println("Enter login: ");
-            String login = SCANNER.next();
-            System.out.println("Enter password: ");
-            String password = SCANNER.next();
+        Util.createDriver("hide");
+        Util.login(login, password);
+        int userId = DataManager.getCurrent().get("id").getAsInt();
+        Util.closeDriver();
 
-            Util.createDriver("hide");
-            Util.login(login, password);
-            int userId = DataManager.getCurrent().get("id").getAsInt();
-            Util.closeDriver();
-
-            settings.setAccounts(login, password, userId);
-
-            saveSettings(settings);
-        }
+        return new Account(login, password, userId);
     }
 }
