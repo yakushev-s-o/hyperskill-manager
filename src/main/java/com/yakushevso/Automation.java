@@ -18,26 +18,25 @@ import java.util.Collections;
 import java.util.List;
 
 public class Automation {
-    private final WebDriver driver;
-    private final String siteLink;
-    private final String jsonPath;
-    private final String dataPath;
+    private final WebDriver DRIVER;
+    private final String SITE_LINK = "https://hyperskill.org/";
+    private final String JSON_PATH;
+    private final String DATA_PATH;
 
     public Automation(WebDriver driver, Settings settings) {
-        this.driver = driver;
-        this.siteLink = settings.getSite_link();
-        this.jsonPath = settings.getJson_path();
-        this.dataPath = settings.getData_path();
+        DRIVER = driver;
+        JSON_PATH = settings.getJsonPath();
+        DATA_PATH = settings.getDataPath();
     }
 
     // Get all the correct answers and save them to a file one by one
     public void getAnswers(int userId) {
         Gson gson = new Gson();
-        File file = new File(jsonPath);
+        File file = new File(JSON_PATH);
         List<Answer> listAnswers = new ArrayList<>();
         boolean fileNotExistsOrEmpty = !file.exists() || file.length() == 0;
 
-        try (FileReader reader = new FileReader(dataPath)) {
+        try (FileReader reader = new FileReader(DATA_PATH)) {
             Data data = gson.fromJson(reader, Data.class);
 
             for (Step steps : data.getSteps()) {
@@ -45,18 +44,18 @@ public class Automation {
                     if (fileNotExistsOrEmpty || isNotMatchStep(step)) {
                         if (!fileNotExistsOrEmpty) {
                             listAnswers = DataManager.getFileData(new TypeToken<List<Answer>>() {
-                            }.getType(), jsonPath);
+                            }.getType(), JSON_PATH);
                         }
 
                         Answer answer = getAnswer(userId, step);
 
                         if (answer == null) {
-                            System.out.println("ANSWER_NOT_FOUND: " + siteLink + "learn/step/" + step);
+                            System.out.println("ANSWER_NOT_FOUND: " + SITE_LINK + "learn/step/" + step);
                             continue;
                         }
 
                         listAnswers.add(answer);
-                        DataManager.saveToFile(listAnswers, jsonPath);
+                        DataManager.saveToFile(listAnswers, JSON_PATH);
                         fileNotExistsOrEmpty = false;
                     }
                 }
@@ -70,10 +69,10 @@ public class Automation {
     private String getType(String step) {
         String url = "https://hyperskill.org/api/steps/" + step + "?format=json";
 
-        driver.get(url);
+        DRIVER.get(url);
 
         // Get page content as text
-        String pageSource = driver.findElement(By.tagName("pre")).getText();
+        String pageSource = DRIVER.findElement(By.tagName("pre")).getText();
 
         // Get JSON object with data
         JsonElement jsonElement = JsonParser.parseString(pageSource);
@@ -95,7 +94,7 @@ public class Automation {
 
     // Get the correct answer using the appropriate method
     private Answer getAnswer(int userId, String step) {
-        String page = siteLink + "learn/step/" + step;
+        String page = SITE_LINK + "learn/step/" + step;
         String text = getType(step);
 
         if (text.equals("choice")) {
@@ -156,14 +155,14 @@ public class Automation {
     // Fill in the correct answers from the file on the site
     public void sendAnswers() {
         List<Answer> answers = DataManager.getFileData(new TypeToken<List<Answer>>() {
-        }.getType(), jsonPath);
+        }.getType(), JSON_PATH);
 
         for (Answer answer : answers) {
             if (!answer.isChecked()) {
-                driver.get(answer.getUrl());
+                DRIVER.get(answer.getUrl());
 
                 try {
-                    Util.waitDownloadElement("//div[@class='step-problem']");
+                    Util.waitDownloadElement(DRIVER, "//div[@class='step-problem']");
                 } catch (Exception e) {
                     System.out.println("LOADING_ERROR: " + answer.getUrl());
                     continue;
@@ -195,7 +194,7 @@ public class Automation {
                 }
 
                 // Set value checked
-                if (Util.waitDownloadElement("//strong[@class='text-success' and text()=' Correct. ']")) {
+                if (Util.waitDownloadElement(DRIVER, "//strong[@class='text-success' and text()=' Correct. ']")) {
                     setChecked(answer);
                 }
 
@@ -206,27 +205,27 @@ public class Automation {
 
     // Check the buttons, if there is "continue", then return "false", the rest perform actions and return "true"
     private boolean checkButtons() {
-        List<WebElement> elements = driver.findElements(By.xpath("//button[@type='button'][@click-event-part='description']"));
+        List<WebElement> elements = DRIVER.findElements(By.xpath("//button[@type='button'][@click-event-part='description']"));
 
         for (WebElement element : elements) {
             String attribute = element.getAttribute("click-event-target");
-            Actions actions = new Actions(driver);
+            Actions actions = new Actions(DRIVER);
 
             switch (attribute) {
                 case "retry" -> {
                     actions.moveToElement(element).click().perform();
 
-                    Util.waitDownloadElement("//button[@id='sendBtn']");
+                    Util.waitDownloadElement(DRIVER, "//button[@id='sendBtn']");
                 }
                 case "reset" -> {
                     actions.moveToElement(element).click().perform();
 
-                    Util.waitDownloadElement("//button[@class='btn btn-dark']");
+                    Util.waitDownloadElement(DRIVER, "//button[@class='btn btn-dark']");
 
-                    WebElement confirm = driver.findElement(By.xpath("//button[@class='btn btn-dark']"));
+                    WebElement confirm = DRIVER.findElement(By.xpath("//button[@class='btn btn-dark']"));
                     actions.moveToElement(confirm).click().perform();
 
-                    Util.waitDownloadElement("//button[@id='sendBtn']");
+                    Util.waitDownloadElement(DRIVER, "//button[@id='sendBtn']");
                 }
                 case "continue" -> {
                     return false;
@@ -239,8 +238,8 @@ public class Automation {
 
     // Click on the "Send" button
     private void clickOnButtonSend() {
-        Actions actions = new Actions(driver);
-        WebElement signInButton = driver.findElement(By.xpath("//button[@id='sendBtn']"));
+        Actions actions = new Actions(DRIVER);
+        WebElement signInButton = DRIVER.findElement(By.xpath("//button[@id='sendBtn']"));
         actions.moveToElement(signInButton).click().perform();
         Util.delay(500);
     }
@@ -250,7 +249,7 @@ public class Automation {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
         List<Answer> answers = DataManager.getFileData(new TypeToken<List<Answer>>() {
-        }.getType(), jsonPath);
+        }.getType(), JSON_PATH);
 
         for (Answer answer : answers) {
             if (a.getUrl().equals(answer.getUrl())) {
@@ -259,7 +258,7 @@ public class Automation {
         }
 
         try {
-            FileWriter writer = new FileWriter(jsonPath);
+            FileWriter writer = new FileWriter(JSON_PATH);
             gson.toJson(answers, writer);
             writer.close();
         } catch (IOException e) {
@@ -270,10 +269,10 @@ public class Automation {
     // Check the link for a match in the file
     private boolean isNotMatchStep(String page) {
         List<Answer> answers = DataManager.getFileData(new TypeToken<List<Answer>>() {
-        }.getType(), jsonPath);
+        }.getType(), JSON_PATH);
 
         for (Answer answer : answers) {
-            if (answer.getUrl().equals(siteLink + "learn/step/" + page)) {
+            if (answer.getUrl().equals(SITE_LINK + "learn/step/" + page)) {
                 return false;
             }
         }
@@ -312,10 +311,10 @@ public class Automation {
         String urlAttempts = "https://hyperskill.org/api/attempts?format=json&page_size=100&step="
                 + step + "&user=" + userId;
 
-        driver.get(urlAttempts);
+        DRIVER.get(urlAttempts);
 
         // Get page content as text
-        String jsonAttempts = driver.findElement(By.tagName("pre")).getText();
+        String jsonAttempts = DRIVER.findElement(By.tagName("pre")).getText();
 
         // Get JSON object from text
         JsonElement attemptsElement = JsonParser.parseString(jsonAttempts);
@@ -328,10 +327,10 @@ public class Automation {
         String urlSubmissions = "https://hyperskill.org/api/submissions?format=json&page_size=100&step="
                 + step + "&user=" + userId;
 
-        driver.get(urlSubmissions);
+        DRIVER.get(urlSubmissions);
 
         // Get page content as text
-        String jsonSubmissions = driver.findElement(By.tagName("pre")).getText();
+        String jsonSubmissions = DRIVER.findElement(By.tagName("pre")).getText();
 
         // Get JSON object from text
         JsonElement submissionsElement = JsonParser.parseString(jsonSubmissions);
@@ -376,16 +375,16 @@ public class Automation {
 
     // Select one answer in the test
     private void sendTestSingle(String answer) {
-        Util.waitDownloadElement("//label[@class='custom-control-label']");
+        Util.waitDownloadElement(DRIVER, "//label[@class='custom-control-label']");
 
-        Actions actions = new Actions(driver);
+        Actions actions = new Actions(DRIVER);
         WebElement element;
 
         if (answer.contains("'")) {
-            element = driver.findElement(By.xpath("//label[@class='custom-control-label']" +
+            element = DRIVER.findElement(By.xpath("//label[@class='custom-control-label']" +
                     "[.//*[normalize-space()=\"" + answer + "\"]]"));
         } else {
-            element = driver.findElement(By.xpath("//label[@class='custom-control-label']" +
+            element = DRIVER.findElement(By.xpath("//label[@class='custom-control-label']" +
                     "[.//*[normalize-space()='" + answer + "']]"));
         }
 
@@ -433,17 +432,17 @@ public class Automation {
 
     // Select multiple answers in the test
     private void sendTestMultiple(String[] answers) {
-        Util.waitDownloadElement("//label[@class='custom-control-label']");
+        Util.waitDownloadElement(DRIVER, "//label[@class='custom-control-label']");
 
         for (String answer : answers) {
-            Actions actions = new Actions(driver);
+            Actions actions = new Actions(DRIVER);
             WebElement element;
 
             if (answer.contains("'")) {
-                element = driver.findElement(By.xpath("//label[@class='custom-control-label']" +
+                element = DRIVER.findElement(By.xpath("//label[@class='custom-control-label']" +
                         "[.//*[normalize-space()=\"" + answer + "\"]]"));
             } else {
-                element = driver.findElement(By.xpath("//label[@class='custom-control-label']" +
+                element = DRIVER.findElement(By.xpath("//label[@class='custom-control-label']" +
                         "[.//*[normalize-space()='" + answer + "']]"));
             }
 
@@ -470,12 +469,12 @@ public class Automation {
 
     // Write the answer in the field with the code
     private void sendCode(String code) {
-        Util.waitDownloadElement("//div[@class='cm-content']");
+        Util.waitDownloadElement(DRIVER, "//div[@class='cm-content']");
 
-        WebElement element = driver.findElement(By.xpath("//div[@class='cm-content']"));
+        WebElement element = DRIVER.findElement(By.xpath("//div[@class='cm-content']"));
         element.clear();
 
-        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        JavascriptExecutor executor = (JavascriptExecutor) DRIVER;
         // escape() - escape characters in code
         String escapedText = (String) executor.executeScript("return escape(arguments[0]);", code);
         // decodeURIComponent() - decode the escaped code
@@ -502,9 +501,9 @@ public class Automation {
 
     // Write the answer to the text field
     private void sendTextNum(String answer) {
-        Util.waitDownloadElement("//input[@type='number']");
+        Util.waitDownloadElement(DRIVER, "//input[@type='number']");
 
-        WebElement element = driver.findElement(By.xpath("//input[@type='number']"));
+        WebElement element = DRIVER.findElement(By.xpath("//input[@type='number']"));
         element.sendKeys(answer);
     }
 
@@ -527,9 +526,9 @@ public class Automation {
 
     // Write the answer to the text field
     private void sendTextShort(String answer) {
-        Util.waitDownloadElement("//textarea");
+        Util.waitDownloadElement(DRIVER, "//textarea");
 
-        WebElement element = driver.findElement(By.xpath("//textarea"));
+        WebElement element = DRIVER.findElement(By.xpath("//textarea"));
         element.sendKeys(answer);
     }
 
@@ -576,7 +575,7 @@ public class Automation {
     // Select responses in matched test
     private void sendMatch(String[][] correctAnswers) {
         for (int i = 1; i <= correctAnswers.length; i++) {
-            WebElement question = driver.findElement(By.xpath("//div[@class='step-problem']" +
+            WebElement question = DRIVER.findElement(By.xpath("//div[@class='step-problem']" +
                     "/div/div[1]/div[" + i + "]/span"));
             String textQuestion = question.getText();
             String[] res = null;
@@ -596,14 +595,14 @@ public class Automation {
                             "/div/div[2]/div/div[" + j + "]/div/div[2]/button[1]";
                     String downArrow = "//div[@class='step-problem']" +
                             "/div/div[2]/div/div[" + j + "]/div/div[2]/button[2]";
-                    WebElement answer = driver.findElement(By.xpath("//div[@class='step-problem']" +
+                    WebElement answer = DRIVER.findElement(By.xpath("//div[@class='step-problem']" +
                             "//div/div[2]/div/div[" + j + "]/div/span"));
                     String textAnswer = answer.getText();
 
                     if (textAnswer.equals(res[1])) {
                         if (i != j) {
-                            Actions actions = new Actions(driver);
-                            WebElement arrow = driver.findElement(By.xpath(i < j ? upArrow : downArrow));
+                            Actions actions = new Actions(DRIVER);
+                            WebElement arrow = DRIVER.findElement(By.xpath(i < j ? upArrow : downArrow));
                             actions.moveToElement(arrow).click().perform();
                         } else {
                             checkTrue = false;
@@ -665,13 +664,13 @@ public class Automation {
                             "/div/span/div[" + j + "]/div[2]/button[1]";
                     String downArrow = "//div[@class='step-problem']" +
                             "/div/span/div[" + j + "]/div[2]/button[2]";
-                    WebElement answer = driver.findElement(By.xpath("//div[@class='step-problem']" +
+                    WebElement answer = DRIVER.findElement(By.xpath("//div[@class='step-problem']" +
                             "/div/span/div[" + j + "]/div[1]/div[2]/span"));
 
                     if (answer.getText().equals(correctAnswers[i - 1])) {
                         if (i != j) {
-                            Actions actions = new Actions(driver);
-                            WebElement arrow = driver.findElement(By.xpath(i < j ? upArrow : downArrow));
+                            Actions actions = new Actions(DRIVER);
+                            WebElement arrow = DRIVER.findElement(By.xpath(i < j ? upArrow : downArrow));
                             actions.moveToElement(arrow).click().perform();
                         } else {
                             checkTrue = false;
@@ -718,11 +717,11 @@ public class Automation {
 
     // Select the correct answers in the matrix test
     private void sendMatrix(List<Matrix> matrixList) {
-        WebElement thead = driver.findElement(By.tagName("thead"));
+        WebElement thead = DRIVER.findElement(By.tagName("thead"));
         List<WebElement> head = thead.findElements(By.tagName("tr"));
         List<WebElement> columnsArr = head.get(0).findElements(By.tagName("th"));
 
-        WebElement tbody = driver.findElement(By.tagName("tbody"));
+        WebElement tbody = DRIVER.findElement(By.tagName("tbody"));
         List<WebElement> rowArr = tbody.findElements(By.tagName("tr"));
 
         for (int i = 1; i < rowArr.size() + 1; i++) {
@@ -735,7 +734,7 @@ public class Automation {
                                     .getText()) && matrix.isCheck()) {
                         String s = "//div[@class='table-problem']" +
                                 "/table/tbody/tr[" + i + "]/td[" + (j + 1) + "]/div/div";
-                        WebElement checkbox = driver.findElement(By.xpath(s));
+                        WebElement checkbox = DRIVER.findElement(By.xpath(s));
                         checkbox.click();
                     }
                 }
@@ -795,7 +794,7 @@ public class Automation {
                 String line = "//div[@class='parsons-problem']//div/span/div[" + j + "]/div[2]";
 
                 WebElement element;
-                element = driver.findElement(By.xpath(line));
+                element = DRIVER.findElement(By.xpath(line));
 
                 if (element.getText().equals(correctAnswer[0])) {
                     position = j;
@@ -813,14 +812,14 @@ public class Automation {
 
                 // Change the line position
                 if (position - 1 != Integer.parseInt(correctAnswer[1])) {
-                    Actions actions = new Actions(driver);
+                    Actions actions = new Actions(DRIVER);
                     WebElement arrow;
 
                     if (position - 1 > Integer.parseInt(correctAnswer[1])) {
-                        arrow = driver.findElement(By.xpath(upArrow));
+                        arrow = DRIVER.findElement(By.xpath(upArrow));
                         position--;
                     } else {
-                        arrow = driver.findElement(By.xpath(downArrow));
+                        arrow = DRIVER.findElement(By.xpath(downArrow));
                         position++;
                     }
 
@@ -832,8 +831,8 @@ public class Automation {
 
                     // Change indentation position
                     for (int i = 0; i < Integer.parseInt(correctAnswer[2]); i++) {
-                        Actions actions = new Actions(driver);
-                        WebElement level = driver.findElement(By.xpath(rightLevel));
+                        Actions actions = new Actions(DRIVER);
+                        WebElement level = DRIVER.findElement(By.xpath(rightLevel));
                         actions.moveToElement(level).click().perform();
                     }
 
@@ -870,8 +869,8 @@ public class Automation {
     // Select responses in components test
     private void sendComponents(String[] correctAnswers) {
         for (String answer : correctAnswers) {
-            Actions actions = new Actions(driver);
-            WebElement element = driver.findElement(By.xpath(
+            Actions actions = new Actions(DRIVER);
+            WebElement element = DRIVER.findElement(By.xpath(
                     "//span[@class='draggable' and text()='" + answer + "']"));
             actions.moveToElement(element).click().perform();
         }

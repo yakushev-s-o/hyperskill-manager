@@ -10,24 +10,23 @@ import java.lang.reflect.Type;
 import java.util.*;
 
 public class DataManager {
-    private final WebDriver driver;
-    private final String siteLink;
-    private final String dataPath;
+    private final int TRACK;
+    private final String DATA_PATH;
+    private final String SITE_LINK = "https://hyperskill.org/";
 
-    public DataManager(WebDriver driver, Settings settings) {
-        this.driver = driver;
-        this.siteLink = settings.getSite_link();
-        this.dataPath = settings.getData_path();
+    public DataManager(UserSession userSession, Settings settings) {
+        TRACK = userSession.getTrack();
+        DATA_PATH = settings.getDataPath();
     }
 
     // Get track data and write to file
-    public void getData(int track) {
-        Topic topic = getTopics(track);
-        List<Project> projects = getProjects(track);
-        List<Step> steps = getSteps(topic);
-        List<Step> additionalSteps = getSteps(getAdditionalTopics(topic, steps));
+    public void getData(WebDriver driver) {
+        Topic topic = getTopics(driver);
+        List<Project> projects = getProjects(driver);
+        List<Step> steps = getSteps(driver, topic);
+        List<Step> additionalSteps = getSteps(driver, getAdditionalTopics(driver, topic, steps));
 
-        try (FileWriter writer = new FileWriter(dataPath)) {
+        try (FileWriter writer = new FileWriter(DATA_PATH)) {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             gson.toJson(new Data(topic, projects, steps, additionalSteps), writer);
         } catch (IOException e) {
@@ -36,7 +35,7 @@ public class DataManager {
     }
 
     // Get the list of topics
-    private Topic getTopics(int track) {
+    private Topic getTopics(WebDriver driver) {
         List<Integer> listTopic = new ArrayList<>();
         List<Integer> listDescendants = new ArrayList<>();
 
@@ -46,7 +45,7 @@ public class DataManager {
         // While there is a next page, we loop
         while (isNext) {
             String urlTopics = "https://hyperskill.org/api/topic-relations?format=json&track_id="
-                    + track + "&page_size=100&page=" + i++ + "";
+                    + TRACK + "&page_size=100&page=" + i++ + "";
 
             driver.get(urlTopics);
 
@@ -85,10 +84,10 @@ public class DataManager {
     }
 
     // Get a list of projects
-    public List<Project> getProjects(int track) {
+    public List<Project> getProjects(WebDriver driver) {
         List<Project> projectList = new ArrayList<>();
 
-        String urlTrack = "https://hyperskill.org/api/tracks/" + track + "?format=json";
+        String urlTrack = "https://hyperskill.org/api/tracks/" + TRACK + "?format=json";
 
         driver.get(urlTrack);
 
@@ -130,11 +129,11 @@ public class DataManager {
                     stagesIds.add(stageId.getAsString());
                 }
 
-                JsonObject progressObj = getProgress("https://hyperskill.org/api/progresses" +
+                JsonObject progressObj = getProgress(driver, "https://hyperskill.org/api/progresses" +
                         "?format=json&ids=project-" + project);
                 boolean completed = progressObj.get("is_completed").getAsBoolean();
 
-                projectList.add(new Project(id, completed, siteLink + "projects/" + id,
+                projectList.add(new Project(id, completed, SITE_LINK + "projects/" + id,
                         title, stagesIds));
             }
         }
@@ -143,7 +142,7 @@ public class DataManager {
     }
 
     // Get a list of topics and tasks
-    private List<Step> getSteps(Topic topics) {
+    private List<Step> getSteps(WebDriver driver, Topic topics) {
         List<Step> listSteps = new ArrayList<>();
 
         for (Integer topic : topics.getDescendants()) {
@@ -203,7 +202,7 @@ public class DataManager {
                 }
             }
 
-            JsonObject progressObj = getProgress("https://hyperskill.org/api/progresses" +
+            JsonObject progressObj = getProgress(driver, "https://hyperskill.org/api/progresses" +
                     "?format=json&ids=topic-" + topic);
 
             // Progress of the topic
@@ -212,7 +211,7 @@ public class DataManager {
             boolean skippedTopic = progressObj.get("is_skipped").getAsBoolean();
 
             listSteps.add(new Step(theory, topic, learnedTopic, skippedTopic, capacityTopic,
-                    siteLink + "learn/step/" + theory, titleTheory,
+                    SITE_LINK + "learn/step/" + theory, titleTheory,
                     learnedTheory, listStepTrue, listStepFalse));
 
         }
@@ -221,7 +220,7 @@ public class DataManager {
     }
 
     // Get a list of topics and tasks outside track
-    private Topic getAdditionalTopics(Topic topics, List<Step> steps) {
+    private Topic getAdditionalTopics(WebDriver driver, Topic topics, List<Step> steps) {
         Set<Integer> followerList = new HashSet<>();
         List<Integer> additionalTopic = new ArrayList<>();
 
@@ -266,12 +265,12 @@ public class DataManager {
         return new Topic(null, additionalTopic);
     }
 
-    // Print statistics of the received data
-    private String getStatistics(int track, Topic topic, List<Project> projects, List<Step> steps,
+    // Get statistics of the received data
+    private String getStatistics(WebDriver driver, Topic topic, List<Project> projects, List<Step> steps,
                                  List<Step> additionalSteps) {
-        JsonObject currentObj = getCurrent().getAsJsonObject("gamification");
-        JsonObject progressObj = getProgress("https://hyperskill.org/api/progresses"
-                + "/track-" + track + "?format=json");
+        JsonObject currentObj = getCurrent(driver).getAsJsonObject("gamification");
+        JsonObject progressObj = getProgress(driver, "https://hyperskill.org/api/progresses"
+                + "/track-" + TRACK + "?format=json");
 
         int stepsSolved = steps.stream().mapToInt(countStep -> countStep
                 .getStepListTrue().size()).sum();
@@ -304,7 +303,7 @@ public class DataManager {
                         All completed theory:   %d
                         All solved steps:       %d
                         ================================""",
-                track,
+                TRACK,
                 topic.getTopics().size(),
                 progressObj.get("learned_topics_count").getAsInt(),
                 topic.getDescendants().size(),
@@ -331,7 +330,7 @@ public class DataManager {
 
     }
 
-    private JsonObject getProgress(String urlTopic) {
+    private JsonObject getProgress(WebDriver driver, String urlTopic) {
         driver.get(urlTopic);
 
         // Get page content as text
@@ -343,7 +342,7 @@ public class DataManager {
                 .getAsJsonArray("progresses").get(0).getAsJsonObject();
     }
 
-    public JsonObject getCurrent() {
+    public static JsonObject getCurrent(WebDriver driver) {
         driver.get("https://hyperskill.org/api/profiles/current?format=json");
 
         // Get page content as text

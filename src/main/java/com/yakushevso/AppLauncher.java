@@ -2,46 +2,48 @@ package com.yakushevso;
 
 import com.yakushevso.data.Account;
 import com.yakushevso.data.Settings;
+import com.yakushevso.data.UserSession;
+import org.openqa.selenium.WebDriver;
 
 import java.util.List;
 import java.util.Scanner;
 
 public class AppLauncher {
     private static final Scanner SCANNER = new Scanner(System.in);
-    private static int track;
-    private static Account user;
 
     public static void main(String[] args) {
         Util.closeChromeDriverProcess();
         SettingsManager.initSettings(SCANNER);
-        choiceUser();
-        mainMenu();
+        mainMenu(choiceUser());
     }
 
-    private static void mainMenu() {
-        choiceTrack();
+    private static void mainMenu(Account account) {
+        UserSession userSession = new UserSession();
+        userSession.setAccount(account);
+        userSession.setTrack(choiceTrack());
 
         while (true) {
+            System.out.println("Current: " + userSession.getAccount().getLogin()
+                    + "/" +  userSession.getTrack());
+
             System.out.println("""
                     Enter mode number:
                     1. Get data
                     2. Save pages
                     3. Get answers
                     4. Send answers
-                    5. Change track
-                    6. Settings
+                    5. Settings
                     0. Exit""");
 
             checkInputNum();
             int mode = SCANNER.nextInt();
 
             switch (mode) {
-                case 1 -> getDataMenu();
-                case 2 -> savePagesMenu();
-                case 3 -> getAnswersMenu();
-                case 4 -> setAnswersMenu();
-                case 5 -> choiceTrack();
-                case 6 -> settingsMenu();
+                case 1 -> getDataMenu(userSession);
+                case 2 -> savePagesMenu(userSession);
+                case 3 -> getAnswersMenu(userSession);
+                case 4 -> setAnswersMenu(userSession);
+                case 5 -> userSession.update(settingsMenu(userSession));
                 case 0 -> {
                     return;
                 }
@@ -50,13 +52,13 @@ public class AppLauncher {
         }
     }
 
-    private static void choiceTrack() {
+    private static int choiceTrack() {
         System.out.println("Enter track number: ");
         checkInputNum();
-        track = SCANNER.nextInt();
+        return SCANNER.nextInt();
     }
 
-    private static void choiceUser() {
+    private static Account choiceUser() {
         System.out.println("Select a user: ");
         List<Account> accounts = SettingsManager.loadSettings().getAccounts();
 
@@ -71,25 +73,24 @@ public class AppLauncher {
             int userMode = SCANNER.nextInt();
 
             if (userMode <= accounts.size() && userMode != 0) {
-                user = accounts.get(userMode - 1);
-                return;
+                return accounts.get(userMode - 1);
             } else if (userMode == 0) {
-                user = addUser();
-                return;
+                return addUser();
             } else {
                 System.out.println("Select a user from the list!");
             }
         }
     }
 
-    private static void settingsMenu() {
+    private static UserSession settingsMenu(UserSession userSession) {
         while (true) {
             System.out.println("""
                     Enter mode number:
-                    1. Change user
-                    2. Add user
-                    3. Delete user
-                    4. Change paths
+                    1. Change track
+                    2. Change user
+                    3. Add user
+                    4. Delete user
+                    5. Change paths
                     0. Return""");
 
             checkInputNum();
@@ -97,17 +98,30 @@ public class AppLauncher {
 
             switch (dataMode) {
                 case 1 -> {
-                    choiceUser();
-                    mainMenu();
+                    userSession.setTrack(choiceTrack());
+                    return userSession;
                 }
-                case 2 -> addUser();
+                case 2 -> {
+                    userSession.setAccount(choiceUser());
+                    userSession.setTrack(choiceTrack());
+                    return userSession;
+                }
                 case 3 -> {
-                    delUser();
-                    return;
+                    userSession.setAccount(addUser());
+                    userSession.setTrack(choiceTrack());
+                    return userSession;
                 }
-                case 4 -> changePaths();
+                case 4 -> {
+                    userSession.setAccount(delUser());
+                    userSession.setTrack(choiceTrack());
+                    return userSession;
+                }
+                case 5 -> {
+                    changePaths();
+                    return userSession;
+                }
                 case 0 -> {
-                    return;
+                    return userSession;
                 }
                 default -> System.out.println("Invalid option, please try again.");
             }
@@ -124,11 +138,11 @@ public class AppLauncher {
         return account;
     }
 
-    private static void delUser() {
-        System.out.println("Select a user: ");
+    private static Account delUser() {
         Settings settings = SettingsManager.loadSettings();
         List<Account> accounts = settings.getAccounts();
 
+        System.out.println("Select a user: ");
         for (int i = 1; i <= accounts.size(); i++) {
             System.out.println(i + ". " + accounts.get(i - 1).getLogin());
         }
@@ -141,8 +155,7 @@ public class AppLauncher {
                 System.out.println("Account \"" + accounts.get(userMode - 1).getLogin() + "\" deleted!");
                 settings.delAccount(userMode - 1);
                 SettingsManager.saveSettings(settings);
-                choiceUser();
-                return;
+                return choiceUser();
             } else {
                 System.out.println("Select a user from the list!");
             }
@@ -153,33 +166,32 @@ public class AppLauncher {
         while (true) {
             System.out.println("""
                     Enter mode number:
-                    1. Show paths
-                    2. Change driver path
-                    3. Change folder path
+                    1. Change driver path
+                    2. Change folder path
                     0. Return""");
 
             checkInputNum();
             int settingsMode = SCANNER.nextInt();
 
             Settings settings = SettingsManager.loadSettings();
+            System.out.printf("""
+                            driver_path: %s
+                            driver_path: %s
+                            """,
+                    settings.getChromedriverPath(),
+                    settings.getFolderPath());
 
             switch (settingsMode) {
-                case 1 -> System.out.printf("""
-                                driver_path: %s
-                                driver_path: %s
-                                """,
-                        settings.getChromedriver_path(),
-                        settings.getFolder_path());
-                case 2 -> {
+                case 1 -> {
                     System.out.println("Enter path ChromeDriver: ");
                     String driver_path = SCANNER.next() + "chromedriver.exe";
-                    settings.setChromedriver_path(driver_path);
+                    settings.setChromedriverPath(driver_path);
                     SettingsManager.saveSettings(settings);
                 }
                 case 3 -> {
                     System.out.println("Enter path FolderPath: ");
                     String folder_path = SCANNER.next() + "TRACK_NUMBER/";
-                    settings.setFolder_path(folder_path);
+                    settings.setFolderPath(folder_path);
                     SettingsManager.saveSettings(settings);
                 }
                 case 0 -> {
@@ -190,9 +202,9 @@ public class AppLauncher {
         }
     }
 
-    private static void getDataMenu() {
+    private static void getDataMenu(UserSession userSession) {
         Settings settings = SettingsManager.loadSettings();
-        DataManager dataManager = new DataManager(Util.getDriver(), settings);
+        DataManager dataManager = new DataManager(userSession, settings);
 
         while (true) {
             System.out.println("""
@@ -206,18 +218,21 @@ public class AppLauncher {
 
             switch (dataMode) {
                 case 1 -> {
-                    Util.createDriver("hide");
+                    WebDriver driver = Util.createDriver("hide");
                     System.out.println("In progress...");
-                    Util.login(user.getLogin(), user.getPassword());
-                    dataManager.getData(track);
+                    Util.login(driver, userSession.getAccount().getLogin(),
+                            userSession.getAccount().getPassword());
+                    dataManager.getData(driver);
                     dataManager.printStats();
-                    Util.closeDriver();
+                    Util.closeDriver(driver);
                 }
                 case 2 -> {
-                    Util.createDriver("hide");
+                    WebDriver driver = Util.createDriver("hide");
                     System.out.println("In progress...");
-                    Util.login(user.getLogin(), user.getPassword());
+                    Util.login(driver, userSession.getAccount().getLogin(),
+                            userSession.getAccount().getPassword());
                     dataManager.printStats();
+                    Util.closeDriver(driver);
                 }
                 case 0 -> {
                     return;
@@ -227,7 +242,7 @@ public class AppLauncher {
         }
     }
 
-    private static void savePagesMenu() {
+    private static void savePagesMenu(UserSession userSession) {
         while (true) {
             System.out.println("""
                     Enter mode number:
@@ -245,49 +260,53 @@ public class AppLauncher {
                 return;
             }
 
-            Util.createDriver("hide");
+            WebDriver driver = Util.createDriver("hide");
             System.out.println("In progress...");
-            Util.login(user.getLogin(), user.getPassword());
+            Util.login(driver, userSession.getAccount().getLogin(),
+                    userSession.getAccount().getPassword());
 
             Settings settings = SettingsManager.loadSettings();
-            SavePages save = new SavePages(Util.getDriver(), settings);
+            SavePages save = new SavePages(settings);
 
             switch (saveMode) {
-                case 1 -> save.saveTopics();
-                case 2 -> save.saveProjects();
-                case 3 -> save.saveStages();
-                case 4 -> save.saveThemes();
+                case 1 -> save.saveTopics(driver);
+                case 2 -> save.saveProjects(driver);
+                case 3 -> save.saveStages(driver);
+                case 4 -> save.saveThemes(driver);
                 case 5 -> {
-                    save.saveTopics();
-                    save.saveProjects();
-                    save.saveStages();
-                    save.saveThemes();
+                    save.saveTopics(driver);
+                    save.saveProjects(driver);
+                    save.saveStages(driver);
+                    save.saveThemes(driver);
                 }
                 default -> System.out.println("Invalid option, please try again.");
             }
 
-            Util.closeDriver();
+            Util.closeDriver(driver);
         }
     }
 
-    private static void getAnswersMenu() {
+    private static void getAnswersMenu(UserSession userSession) {
         Settings settings = SettingsManager.loadSettings();
-        Automation automation = new Automation(Util.getDriver(), settings);
-        Util.createDriver("hide");
+        WebDriver driver = Util.createDriver("hide");
+        Automation automation = new Automation(driver, settings);
         System.out.println("In progress...");
-        Util.login(user.getLogin(), user.getPassword());
-        automation.getAnswers(user.getId());
-        Util.closeDriver();
+        Util.login(driver, userSession.getAccount().getLogin(),
+                userSession.getAccount().getPassword());
+        automation.getAnswers(userSession.getAccount().getId());
+        Util.closeDriver(driver);
     }
 
-    private static void setAnswersMenu() {
+    private static void setAnswersMenu(UserSession userSession) {
         Settings settings = SettingsManager.loadSettings();
-        Automation automation = new Automation(Util.getDriver(), settings);
+        WebDriver driver = Util.createDriver("hide");
+        Automation automation = new Automation(driver, settings);
         Util.createDriver("visible");
         System.out.println("In progress...");
-        Util.login(user.getLogin(), user.getPassword());
+        Util.login(driver, userSession.getAccount().getLogin(),
+                userSession.getAccount().getPassword());
         automation.sendAnswers();
-        Util.closeDriver();
+        Util.closeDriver(driver);
     }
 
     private static void checkInputNum() {

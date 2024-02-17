@@ -4,20 +4,20 @@ import java.util.List;
 
 public class Settings {
     private final List<Account> accounts;
-    private String driver_path;
-    private String folder_path;
-    private String json_path;
-    private String data_path;
-    private String site_link;
+    private String driverPath;
+    private String folderPath;
+    private String jsonPath;
+    private String dataPath;
+    private String siteLink;
 
-    public Settings(List<Account> accounts, String chromedriver_path,
-                    String folder_path, String json_path, String data_path, String site_link) {
+    public Settings(List<Account> accounts, String driverPath,
+                    String folderPath, String jsonPath, String dataPath, String siteLink) {
         this.accounts = accounts;
-        this.driver_path = chromedriver_path;
-        this.folder_path = folder_path;
-        this.json_path = json_path;
-        this.data_path = data_path;
-        this.site_link = site_link;
+        this.driverPath = driverPath;
+        this.folderPath = folderPath;
+        this.jsonPath = jsonPath;
+        this.dataPath = dataPath;
+        this.siteLink = siteLink;
     }
 
     public List<Account> getAccounts() {
@@ -32,43 +32,43 @@ public class Settings {
         accounts.remove(index);
     }
 
-    public String getChromedriver_path() {
-        return driver_path;
+    public String getChromedriverPath() {
+        return driverPath;
     }
 
-    public void setChromedriver_path(String chromedriver_path) {
-        this.driver_path = chromedriver_path;
+    public void setChromedriverPath(String chromedriver_path) {
+        this.driverPath = chromedriver_path;
     }
 
-    public String getFolder_path() {
-        return folder_path;
+    public String getFolderPath() {
+        return folderPath;
     }
 
-    public void setFolder_path(String folder_path) {
-        this.folder_path = folder_path;
+    public void setFolderPath(String folderPath) {
+        this.folderPath = folderPath;
     }
 
-    public String getJson_path() {
-        return json_path;
+    public String getJsonPath() {
+        return jsonPath;
     }
 
-    public void setJson_path(String json_path) {
-        this.json_path = json_path;
+    public void setJsonPath(String jsonPath) {
+        this.jsonPath = jsonPath;
     }
 
-    public String getData_path() {
-        return data_path;
+    public String getDataPath() {
+        return dataPath;
     }
 
-    public void setData_path(String data_path) {
-        this.data_path = data_path;
+    public void setDataPath(String dataPath) {
+        this.dataPath = dataPath;
     }
 
-    public String getSite_link() {
-        return site_link;
+    public String getSiteLink() {
+        return siteLink;
     }
 
-    public void setSite_link(String site_link) {
-        this.site_link = site_link;
+    public void setSiteLink(String siteLink) {
+        this.siteLink = siteLink;
     }
 }

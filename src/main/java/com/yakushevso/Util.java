@@ -15,11 +15,9 @@ import java.io.InputStreamReader;
 import java.time.Duration;
 
 public class Util {
-    private static WebDriver driver;
-
-    public static void createDriver(String visible) {
+    public static WebDriver createDriver(String visible) {
         // Set path to browser driver
-        System.setProperty("webdriver.chrome.driver", SettingsManager.loadSettings().getChromedriver_path());
+        System.setProperty("webdriver.chrome.driver", SettingsManager.loadSettings().getChromedriverPath());
         ChromeOptions options = new ChromeOptions();
 
         // Create an instance of the driver in the background if "true"
@@ -31,18 +29,14 @@ public class Util {
             options.addArguments("--window-size=1920,1080");
         }
 
-        driver = new ChromeDriver(options);
-    }
-
-    public static WebDriver getDriver() {
-        return driver;
+        return new ChromeDriver(options);
     }
 
     // Perform authorization on the site
-    public static void login(String login, String password) {
+    public static void login(WebDriver driver, String login, String password) {
         driver.get("https://hyperskill.org/login");
 
-        waitDownloadElement("//input[@type='email']");
+        waitDownloadElement(driver, "//input[@type='email']");
 
         WebElement emailField = driver.findElement(By.xpath("//input[@type='email']"));
         WebElement passwordField = driver.findElement(By.xpath("//input[@type='password']"));
@@ -52,11 +46,11 @@ public class Util {
         passwordField.sendKeys(password);
         signInButton.click();
 
-        waitDownloadElement("//h1[@data-cy='curriculum-header']");
+        waitDownloadElement(driver, "//h1[@data-cy='curriculum-header']");
     }
 
     // Check if the element has loaded
-    public static boolean waitDownloadElement(String xpath) {
+    public static boolean waitDownloadElement(WebDriver driver, String xpath) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
         if (wait.until(ExpectedConditions.and(
@@ -66,10 +60,10 @@ public class Util {
             return true;
         } else {
             // Close banner "Do you want to pick up where you left off?"
-            closeBanner("//button[@class='btn btn-outline-dark' and text()= 'No, thanks']");
+            closeBanner(driver, "//button[@class='btn btn-outline-dark' and text()= 'No, thanks']");
 
             // Close banner "You probably already know this topic"
-            closeBanner("//button[@class='btn btn-outline-dark' and text()= 'Continue with theory']");
+            closeBanner(driver, "//button[@class='btn btn-outline-dark' and text()= 'Continue with theory']");
 
             delay(1000);
 
@@ -81,7 +75,7 @@ public class Util {
     }
 
     // Close drop-down banner
-    private static void closeBanner(String element) {
+    private static void closeBanner(WebDriver driver, String element) {
         try {
             WebElement banner = driver.findElement(By.xpath(element));
             Actions actions = new Actions(driver);
@@ -100,7 +94,7 @@ public class Util {
     }
 
     // Close ChromeDriver
-    public static void closeDriver() {
+    public static void closeDriver(WebDriver driver) {
         if (driver != null) {
             driver.quit();
         }
@@ -127,9 +121,7 @@ public class Util {
             if (isRunning) {
                 ProcessBuilder killBuilder = new ProcessBuilder("taskkill", "/F", "/IM", "chromedriver.exe");
                 killBuilder.start();
-                System.out.println("chromedriver.exe process found and killed.");
-            } else {
-                System.out.println("chromedriver.exe process not found.");
+                System.out.println("chromedriver.exe processes found and killed.");
             }
         } catch (Exception e) {
             e.printStackTrace();
