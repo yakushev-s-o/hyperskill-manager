@@ -2,22 +2,7 @@ package com.yakushevso.data;
 
 import java.util.List;
 
-public record Step(int id, int topic, boolean learned_topic, boolean skipped_topic,
-                   float capacity_topic, String url, String theory, boolean learned_theory,
+public record Step(int id, int topic, boolean learnedTopic, boolean skippedTopic,
+                   float capacityTopic, String url, String theory, boolean learnedTheory,
                    List<String> stepListTrue, List<String> stepListFalse) {
-
-    public List<String> getStepListTrue() {
-        return stepListTrue;
-    }
-
-    public List<String> getStepListFalse() {
-        return stepListFalse;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public int getTopic() {
-        return topic;}
 }

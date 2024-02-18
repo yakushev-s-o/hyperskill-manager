@@ -19,43 +19,42 @@ import java.util.List;
 
 public class Automation {
     private final WebDriver DRIVER;
-    private final String SITE_LINK = "https://hyperskill.org/";
-    private final String JSON_PATH;
-    private final String DATA_PATH;
+    private final int TRACK;
+    private final int USER_ID;
 
-    public Automation(WebDriver driver, Settings settings) {
+    public Automation(WebDriver driver, UserSession userSession) {
         DRIVER = driver;
-        JSON_PATH = settings.getJsonPath();
-        DATA_PATH = settings.getDataPath();
+        TRACK = userSession.getTrack();
+        USER_ID = userSession.getAccount().id();
     }
 
     // Get all the correct answers and save them to a file one by one
-    public void getAnswers(int userId) {
+    public void getAnswers() {
         Gson gson = new Gson();
-        File file = new File(JSON_PATH);
+        File file = new File("src/main/resources/answer-list-" + TRACK + ".json");
         List<Answer> listAnswers = new ArrayList<>();
         boolean fileNotExistsOrEmpty = !file.exists() || file.length() == 0;
 
-        try (FileReader reader = new FileReader(DATA_PATH)) {
+        try (FileReader reader = new FileReader("src/main/resources/data-list-" + TRACK + ".json")) {
             Data data = gson.fromJson(reader, Data.class);
 
-            for (Step steps : data.getSteps()) {
-                for (String step : steps.getStepListTrue()) {
+            for (Step steps : data.steps()) {
+                for (String step : steps.stepListTrue()) {
                     if (fileNotExistsOrEmpty || isNotMatchStep(step)) {
                         if (!fileNotExistsOrEmpty) {
                             listAnswers = DataManager.getFileData(new TypeToken<List<Answer>>() {
-                            }.getType(), JSON_PATH);
+                            }.getType(), "src/main/resources/answer-list-" + TRACK + ".json");
                         }
 
-                        Answer answer = getAnswer(userId, step);
+                        Answer answer = getAnswer(step);
 
                         if (answer == null) {
-                            System.out.println("ANSWER_NOT_FOUND: " + SITE_LINK + "learn/step/" + step);
+                            System.out.println("ANSWER_NOT_FOUND: https://hyperskill.org/learn/step/" + step);
                             continue;
                         }
 
                         listAnswers.add(answer);
-                        DataManager.saveToFile(listAnswers, JSON_PATH);
+                        DataManager.saveToFile(listAnswers, "src/main/resources/answer-list-" + TRACK + ".json");
                         fileNotExistsOrEmpty = false;
                     }
                 }
@@ -93,57 +92,57 @@ public class Automation {
     }
 
     // Get the correct answer using the appropriate method
-    private Answer getAnswer(int userId, String step) {
-        String page = SITE_LINK + "learn/step/" + step;
+    private Answer getAnswer(String step) {
+        String page = "https://hyperskill.org/learn/step/" + step;
         String text = getType(step);
 
         if (text.equals("choice")) {
-            String answer = getTestSingle(userId, step);
+            String answer = getTestSingle(step);
             if (answer != null) {
                 return new Answer(page, 1, answer);
             }
         } else if (text.equals("multiple_choice")) {
-            String[] answer = getTestMultiple(userId, step);
+            String[] answer = getTestMultiple(step);
             if (answer != null) {
                 return new Answer(page, 2, answer);
             }
         } else if (text.contains("code")) {
-            String answer = getCode(userId, step);
+            String answer = getCode(step);
             if (answer != null) {
                 return new Answer(page, 3, answer);
             }
         } else if (text.equals("number")) {
-            String answer = getTextNum(userId, step);
+            String answer = getTextNum(step);
             if (answer != null) {
                 return new Answer(page, 4, answer);
             }
         } else if (text.equals("string")) {
-            String answer = getTextShort(userId, step);
+            String answer = getTextShort(step);
             if (answer != null) {
                 return new Answer(page, 5, answer);
             }
         } else if (text.equals("matching")) {
-            String[][] answer = getMatch(userId, step);
+            String[][] answer = getMatch(step);
             if (answer != null) {
                 return new Answer(page, 6, answer);
             }
         } else if (text.equals("sorting")) {
-            String[] answer = getSort(userId, step);
+            String[] answer = getSort(step);
             if (answer != null) {
                 return new Answer(page, 7, answer);
             }
         } else if (text.equals("table")) {
-            List<Matrix> answer = getMatrix(userId, step);
+            List<Matrix> answer = getMatrix(step);
             if (answer != null) {
                 return new Answer(page, 8, answer);
             }
         } else if (text.equals("parsons")) {
-            String[][] answer = getLines(userId, step);
+            String[][] answer = getLines(step);
             if (answer != null) {
                 return new Answer(page, 9, answer);
             }
         } else if (text.equals("fill-blanks")) {
-            String[] answer = getComponents(userId, step);
+            String[] answer = getComponents(step);
             if (answer != null) {
                 return new Answer(page, 10, answer);
             }
@@ -155,51 +154,55 @@ public class Automation {
     // Fill in the correct answers from the file on the site
     public void sendAnswers() {
         List<Answer> answers = DataManager.getFileData(new TypeToken<List<Answer>>() {
-        }.getType(), JSON_PATH);
+        }.getType(), "src/main/resources/answer-list-" + TRACK + ".json");
 
-        for (Answer answer : answers) {
-            if (!answer.isChecked()) {
-                DRIVER.get(answer.getUrl());
+        if (answers != null) {
+            for (Answer answer : answers) {
+                if (!answer.isChecked()) {
+                    DRIVER.get(answer.getUrl());
 
-                try {
-                    Util.waitDownloadElement(DRIVER, "//div[@class='step-problem']");
-                } catch (Exception e) {
-                    System.out.println("LOADING_ERROR: " + answer.getUrl());
-                    continue;
-                }
-
-                Util.delay(500);
-
-                if (checkButtons()) {
                     try {
-                        switch (answer.getMode()) {
-                            case 1 -> sendTestSingle(answer.getAnswerStr());
-                            case 2 -> sendTestMultiple(answer.getAnswerArr());
-                            case 3 -> sendCode(answer.getAnswerStr());
-                            case 4 -> sendTextNum(answer.getAnswerStr());
-                            case 5 -> sendTextShort(answer.getAnswerStr());
-                            case 6 -> sendMatch(answer.getAnswerListArr());
-                            case 7 -> sendSort(answer.getAnswerArr());
-                            case 8 -> sendMatrix(answer.getMatrixAnswer());
-                            case 9 -> sendLines(answer.getAnswerListArr());
-                            case 10 -> sendComponents(answer.getAnswerArr());
-                        }
+                        Util.waitDownloadElement(DRIVER, "//div[@class='step-problem']");
                     } catch (Exception e) {
-                        System.out.println("RESPONSE_ERROR: " + answer.getUrl());
-                        e.printStackTrace();
+                        System.out.println("LOADING_ERROR: " + answer.getUrl());
                         continue;
                     }
 
-                    clickOnButtonSend();
-                }
+                    Util.delay(500);
 
-                // Set value checked
-                if (Util.waitDownloadElement(DRIVER, "//strong[@class='text-success' and text()=' Correct. ']")) {
-                    setChecked(answer);
-                }
+                    if (checkButtons()) {
+                        try {
+                            switch (answer.getMode()) {
+                                case 1 -> sendTestSingle(answer.getAnswerStr());
+                                case 2 -> sendTestMultiple(answer.getAnswerArr());
+                                case 3 -> sendCode(answer.getAnswerStr());
+                                case 4 -> sendTextNum(answer.getAnswerStr());
+                                case 5 -> sendTextShort(answer.getAnswerStr());
+                                case 6 -> sendMatch(answer.getAnswerListArr());
+                                case 7 -> sendSort(answer.getAnswerArr());
+                                case 8 -> sendMatrix(answer.getMatrixAnswer());
+                                case 9 -> sendLines(answer.getAnswerListArr());
+                                case 10 -> sendComponents(answer.getAnswerArr());
+                            }
+                        } catch (Exception e) {
+                            System.out.println("RESPONSE_ERROR: " + answer.getUrl());
+                            e.printStackTrace();
+                            continue;
+                        }
 
-                Util.delay(500);
+                        clickOnButtonSend();
+                    }
+
+                    // Set value checked
+                    if (Util.waitDownloadElement(DRIVER, "//strong[@class='text-success' and text()=' Correct. ']")) {
+                        setChecked(answer);
+                    }
+
+                    Util.delay(500);
+                }
             }
+        } else {
+            System.out.println("File \"data-list-" + TRACK + ".json\" does not exist, update the data!");
         }
     }
 
@@ -249,7 +252,7 @@ public class Automation {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
         List<Answer> answers = DataManager.getFileData(new TypeToken<List<Answer>>() {
-        }.getType(), JSON_PATH);
+        }.getType(), "src/main/resources/answer-list-" + TRACK + ".json");
 
         for (Answer answer : answers) {
             if (a.getUrl().equals(answer.getUrl())) {
@@ -258,7 +261,7 @@ public class Automation {
         }
 
         try {
-            FileWriter writer = new FileWriter(JSON_PATH);
+            FileWriter writer = new FileWriter("src/main/resources/answer-list-" + TRACK + ".json");
             gson.toJson(answers, writer);
             writer.close();
         } catch (IOException e) {
@@ -269,10 +272,10 @@ public class Automation {
     // Check the link for a match in the file
     private boolean isNotMatchStep(String page) {
         List<Answer> answers = DataManager.getFileData(new TypeToken<List<Answer>>() {
-        }.getType(), JSON_PATH);
+        }.getType(), "src/main/resources/answer-list-" + TRACK + ".json");
 
         for (Answer answer : answers) {
-            if (answer.getUrl().equals(SITE_LINK + "learn/step/" + page)) {
+            if (answer.getUrl().equals("https://hyperskill.org/learn/step/" + page)) {
                 return false;
             }
         }
@@ -307,9 +310,9 @@ public class Automation {
     }
 
     // Get a list of attempts
-    private JsonArray getAttempts(int userId, String step) {
+    private JsonArray getAttempts(String step) {
         String urlAttempts = "https://hyperskill.org/api/attempts?format=json&page_size=100&step="
-                + step + "&user=" + userId;
+                + step + "&user=" + USER_ID;
 
         DRIVER.get(urlAttempts);
 
@@ -323,9 +326,9 @@ public class Automation {
     }
 
     // Get a list of submissions
-    private JsonArray getSubmissions(int userId, String step) {
+    private JsonArray getSubmissions(String step) {
         String urlSubmissions = "https://hyperskill.org/api/submissions?format=json&page_size=100&step="
-                + step + "&user=" + userId;
+                + step + "&user=" + USER_ID;
 
         DRIVER.get(urlSubmissions);
 
@@ -339,12 +342,12 @@ public class Automation {
     }
 
     // Get one response from the test
-    private String getTestSingle(int userId, String step) {
+    private String getTestSingle(String step) {
         List<String> optionsList = new ArrayList<>();
         List<Boolean> choicesList = new ArrayList<>();
 
         // Forming a list of possible answers
-        JsonArray attempts = getAttempts(userId, step);
+        JsonArray attempts = getAttempts(step);
         JsonObject dataset = attempts.get(0).getAsJsonObject().get("dataset").getAsJsonObject();
         JsonArray options = dataset.getAsJsonArray("options");
         String status = attempts.get(0).getAsJsonObject().get("status").getAsString();
@@ -355,7 +358,7 @@ public class Automation {
             }
 
             // Determining the correct answer
-            JsonArray submissions = getSubmissions(userId, step);
+            JsonArray submissions = getSubmissions(step);
             JsonArray choices = submissions.get(0).getAsJsonObject().get("reply")
                     .getAsJsonObject().getAsJsonArray("choices");
 
@@ -392,13 +395,13 @@ public class Automation {
     }
 
     // Get multiple responses from the test
-    private String[] getTestMultiple(int userId, String step) {
+    private String[] getTestMultiple(String step) {
         List<String> optionsList = new ArrayList<>();
         List<Boolean> choicesList = new ArrayList<>();
         List<String> answersList = new ArrayList<>();
 
         // Forming a list of possible answers
-        JsonArray attempts = getAttempts(userId, step);
+        JsonArray attempts = getAttempts(step);
         JsonObject dataset = attempts.get(0).getAsJsonObject().get("dataset").getAsJsonObject();
         JsonArray options = dataset.getAsJsonArray("options");
         String status = attempts.get(0).getAsJsonObject().get("status").getAsString();
@@ -410,7 +413,7 @@ public class Automation {
             }
 
             // Determining the correct answers
-            JsonArray submissions = getSubmissions(userId, step);
+            JsonArray submissions = getSubmissions(step);
             JsonArray choices = submissions.get(0).getAsJsonObject().get("reply")
                     .getAsJsonObject().getAsJsonArray("choices");
 
@@ -451,14 +454,14 @@ public class Automation {
     }
 
     // Get the response from the field with the code
-    private String getCode(int userId, String step) {
-        JsonArray attempts = getAttempts(userId, step);
+    private String getCode(String step) {
+        JsonArray attempts = getAttempts(step);
         String status = attempts.get(0).getAsJsonObject().get("status").getAsString();
 
         if ("active".equals(status)) {
 
             // Determining the correct answer
-            JsonArray submissions = getSubmissions(userId, step);
+            JsonArray submissions = getSubmissions(step);
 
             return submissions.get(0).getAsJsonObject().get("reply")
                     .getAsJsonObject().get("code").getAsString();
@@ -483,14 +486,14 @@ public class Automation {
     }
 
     // Get response from text field
-    private String getTextNum(int userId, String step) {
-        JsonArray attempts = getAttempts(userId, step);
+    private String getTextNum(String step) {
+        JsonArray attempts = getAttempts(step);
         String status = attempts.get(0).getAsJsonObject().get("status").getAsString();
 
         if ("active".equals(status)) {
 
             // Determining the correct answer
-            JsonArray submissions = getSubmissions(userId, step);
+            JsonArray submissions = getSubmissions(step);
 
             return submissions.get(0).getAsJsonObject().get("reply")
                     .getAsJsonObject().get("number").getAsString();
@@ -508,14 +511,14 @@ public class Automation {
     }
 
     // Get response from text field
-    private String getTextShort(int userId, String step) {
-        JsonArray attempts = getAttempts(userId, step);
+    private String getTextShort(String step) {
+        JsonArray attempts = getAttempts(step);
         String status = attempts.get(0).getAsJsonObject().get("status").getAsString();
 
         if ("active".equals(status)) {
 
             // Determining the correct answer
-            JsonArray submissions = getSubmissions(userId, step);
+            JsonArray submissions = getSubmissions(step);
 
             return submissions.get(0).getAsJsonObject().get("reply")
                     .getAsJsonObject().get("text").getAsString();
@@ -533,13 +536,13 @@ public class Automation {
     }
 
     // Get the list of correct answers from the matching test
-    private String[][] getMatch(int userId, String step) {
+    private String[][] getMatch(String step) {
         List<JsonElement> optionsList = new ArrayList<>();
         List<Integer> choicesList = new ArrayList<>();
         List<String[]> answersList = new ArrayList<>();
 
         // Forming a list of possible answers
-        JsonArray attempts = getAttempts(userId, step);
+        JsonArray attempts = getAttempts(step);
         JsonObject dataset = attempts.get(0).getAsJsonObject().get("dataset").getAsJsonObject();
         JsonArray pairs = dataset.getAsJsonArray("pairs");
         String status = attempts.get(0).getAsJsonObject().get("status").getAsString();
@@ -552,7 +555,7 @@ public class Automation {
             }
 
             // Determining the correct answers
-            JsonArray submissions = getSubmissions(userId, step);
+            JsonArray submissions = getSubmissions(step);
             JsonArray ordering = submissions.get(0).getAsJsonObject().get("reply")
                     .getAsJsonObject().getAsJsonArray("ordering");
 
@@ -614,12 +617,12 @@ public class Automation {
     }
 
     // Get a list of correct answers from the test with sorting
-    private String[] getSort(int userId, String step) {
+    private String[] getSort(String step) {
         List<String> optionsList = new ArrayList<>();
         List<Integer> choicesList = new ArrayList<>();
 
         // Forming a list of possible answers
-        JsonArray attempts = getAttempts(userId, step);
+        JsonArray attempts = getAttempts(step);
         JsonObject dataset = attempts.get(0).getAsJsonObject().get("dataset").getAsJsonObject();
         JsonArray options = dataset.getAsJsonArray("options");
         String status = attempts.get(0).getAsJsonObject().get("status").getAsString();
@@ -632,7 +635,7 @@ public class Automation {
             }
 
             // Determining the correct answers
-            JsonArray submissions = getSubmissions(userId, step);
+            JsonArray submissions = getSubmissions(step);
             JsonArray ordering = submissions.get(0).getAsJsonObject().get("reply")
                     .getAsJsonObject().getAsJsonArray("ordering");
 
@@ -682,16 +685,16 @@ public class Automation {
     }
 
     // Get the matrix of correct answers from the test
-    private List<Matrix> getMatrix(int userId, String step) {
+    private List<Matrix> getMatrix(String step) {
         List<Matrix> answersList = new ArrayList<>();
 
-        JsonArray attempts = getAttempts(userId, step);
+        JsonArray attempts = getAttempts(step);
         String status = attempts.get(0).getAsJsonObject().get("status").getAsString();
 
         if ("active".equals(status)) {
 
             // Determining the correct answers
-            JsonArray submissions = getSubmissions(userId, step);
+            JsonArray submissions = getSubmissions(step);
             JsonArray choices = submissions.get(0).getAsJsonObject().get("reply")
                     .getAsJsonObject().getAsJsonArray("choices");
 
@@ -729,9 +732,9 @@ public class Automation {
                 List<WebElement> nameRow = rowArr.get(i - 1).findElements(By.tagName("td"));
 
                 for (Matrix matrix : matrixList) {
-                    if (matrix.getName_row().equals(nameRow.get(0).getText()) &&
-                            matrix.getName_columns().equals(columnsArr.get(j)
-                                    .getText()) && matrix.isCheck()) {
+                    if (matrix.nameRow().equals(nameRow.get(0).getText()) &&
+                            matrix.nameColumns().equals(columnsArr.get(j)
+                                    .getText()) && matrix.check()) {
                         String s = "//div[@class='table-problem']" +
                                 "/table/tbody/tr[" + i + "]/td[" + (j + 1) + "]/div/div";
                         WebElement checkbox = DRIVER.findElement(By.xpath(s));
@@ -743,13 +746,13 @@ public class Automation {
     }
 
     // Get a list of correct answers from the test with lines
-    private String[][] getLines(int userId, String step) {
+    private String[][] getLines(String step) {
         List<String> attemptsList = new ArrayList<>();
         List<JsonElement> submissionsList = new ArrayList<>();
         List<String[]> answersList = new ArrayList<>();
 
         // Forming a list of possible answers
-        JsonArray attempts = getAttempts(userId, step);
+        JsonArray attempts = getAttempts(step);
         JsonObject dataset = attempts.get(0).getAsJsonObject().get("dataset").getAsJsonObject();
         JsonArray attemptsLines = dataset.getAsJsonArray("lines");
         String status = attempts.get(0).getAsJsonObject().get("status").getAsString();
@@ -762,7 +765,7 @@ public class Automation {
             }
 
             // Determining the correct answers
-            JsonArray submissions = getSubmissions(userId, step);
+            JsonArray submissions = getSubmissions(step);
             JsonArray submissionsLines = submissions.get(0).getAsJsonObject().get("reply")
                     .getAsJsonObject().getAsJsonArray("lines");
 
@@ -843,16 +846,16 @@ public class Automation {
     }
 
     // Get a list of correct answers from the test with components
-    private String[] getComponents(int userId, String step) {
+    private String[] getComponents(String step) {
         List<String> answersList = new ArrayList<>();
 
-        JsonArray attempts = getAttempts(userId, step);
+        JsonArray attempts = getAttempts(step);
         String status = attempts.get(0).getAsJsonObject().get("status").getAsString();
 
         if ("active".equals(status)) {
 
             // Determining the correct answers
-            JsonArray submissions = getSubmissions(userId, step);
+            JsonArray submissions = getSubmissions(step);
             JsonArray blanks = submissions.get(0).getAsJsonObject().get("reply")
                     .getAsJsonObject().getAsJsonArray("blanks");
 

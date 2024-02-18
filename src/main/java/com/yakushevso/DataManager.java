@@ -11,12 +11,11 @@ import java.util.*;
 
 public class DataManager {
     private final int TRACK;
-    private final String DATA_PATH;
-    private final String SITE_LINK = "https://hyperskill.org/";
+    private final int USER;
 
-    public DataManager(UserSession userSession, Settings settings) {
+    public DataManager(UserSession userSession) {
         TRACK = userSession.getTrack();
-        DATA_PATH = settings.getDataPath();
+        USER = userSession.getAccount().id();
     }
 
     // Get track data and write to file
@@ -26,12 +25,11 @@ public class DataManager {
         List<Step> steps = getSteps(driver, topic);
         List<Step> additionalSteps = getSteps(driver, getAdditionalTopics(driver, topic, steps));
 
-        try (FileWriter writer = new FileWriter(DATA_PATH)) {
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            gson.toJson(new Data(topic, projects, steps, additionalSteps), writer);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        saveToFile(new Data(topic, projects, steps, additionalSteps),
+                "src/main/resources/data-list-" + TRACK + ".json");
+
+        saveToFile(getStatistics(driver, topic, projects, steps, additionalSteps),
+                "src/main/resources/statistics-" + USER + "-" + TRACK + ".json");
     }
 
     // Get the list of topics
@@ -84,7 +82,7 @@ public class DataManager {
     }
 
     // Get a list of projects
-    public List<Project> getProjects(WebDriver driver) {
+    private List<Project> getProjects(WebDriver driver) {
         List<Project> projectList = new ArrayList<>();
 
         String urlTrack = "https://hyperskill.org/api/tracks/" + TRACK + "?format=json";
@@ -133,7 +131,7 @@ public class DataManager {
                         "?format=json&ids=project-" + project);
                 boolean completed = progressObj.get("is_completed").getAsBoolean();
 
-                projectList.add(new Project(id, completed, SITE_LINK + "projects/" + id,
+                projectList.add(new Project(id, completed, "https://hyperskill.org/projects/" + id,
                         title, stagesIds));
             }
         }
@@ -145,7 +143,7 @@ public class DataManager {
     private List<Step> getSteps(WebDriver driver, Topic topics) {
         List<Step> listSteps = new ArrayList<>();
 
-        for (Integer topic : topics.getDescendants()) {
+        for (Integer topic : topics.descendants()) {
             JsonArray listStep = new JsonArray();
             boolean isNext = true;
             int pageNum = 1;
@@ -211,9 +209,8 @@ public class DataManager {
             boolean skippedTopic = progressObj.get("is_skipped").getAsBoolean();
 
             listSteps.add(new Step(theory, topic, learnedTopic, skippedTopic, capacityTopic,
-                    SITE_LINK + "learn/step/" + theory, titleTheory,
+                    "https://hyperskill.org/learn/step/" + theory, titleTheory,
                     learnedTheory, listStepTrue, listStepFalse));
-
         }
 
         return listSteps;
@@ -224,7 +221,7 @@ public class DataManager {
         Set<Integer> followerList = new HashSet<>();
         List<Integer> additionalTopic = new ArrayList<>();
 
-        for (Integer topic : topics.getDescendants()) {
+        for (Integer topic : topics.descendants()) {
             String urlFollowers = "https://hyperskill.org/api/topics?format=json&ids=" + topic;
 
             driver.get(urlFollowers);
@@ -247,12 +244,12 @@ public class DataManager {
         }
 
         // Formatting the Topics in HashSet
-        Set<Integer> topicSet = new HashSet<>(topics.getTopics());
+        Set<Integer> topicSet = new HashSet<>(topics.topics());
 
         // Formatting the Steps in HashSet
         Set<Integer> stepSet = new HashSet<>();
         for (Step step : steps) {
-            stepSet.add(step.getTopic());
+            stepSet.add(step.topic());
         }
 
         // Removing duplicates
@@ -265,71 +262,6 @@ public class DataManager {
         return new Topic(null, additionalTopic);
     }
 
-    // Get statistics of the received data
-    private String getStatistics(WebDriver driver, Topic topic, List<Project> projects, List<Step> steps,
-                                 List<Step> additionalSteps) {
-        JsonObject currentObj = getCurrent(driver).getAsJsonObject("gamification");
-        JsonObject progressObj = getProgress(driver, "https://hyperskill.org/api/progresses"
-                + "/track-" + TRACK + "?format=json");
-
-        int stepsSolved = steps.stream().mapToInt(countStep -> countStep
-                .getStepListTrue().size()).sum();
-        int stepsUnresolved = steps.stream().mapToInt(countStep -> countStep
-                .getStepListFalse().size()).sum();
-        int stepsAdditionalSolved = additionalSteps.stream().mapToInt(countStep -> countStep
-                .getStepListTrue().size()).sum();
-        int stepsAdditionalUnresolved = additionalSteps.stream().mapToInt(countStep -> countStep
-                .getStepListFalse().size()).sum();
-        long completedTheory = steps.stream().filter(Step::learned_theory).count();
-        long completedAdditionalTopics = additionalSteps.stream().filter(Step::learned_topic).count();
-        long completedAdditionalTheory = additionalSteps.stream().filter(Step::learned_theory).count();
-
-        return String.format("""
-                        ================================
-                        Track %d
-                        ================================
-                        Knowledge-map:          %d
-                        Topics                  %d/%d
-                        Projects:               %d/%d
-                        Theory:                 %d/%d
-                        Steps:                  %d/%d
-                        ================================
-                        Additional topics:      %d/%d
-                        Additional theory:      %d/%d
-                        Additional steps:       %d/%d
-                        ================================
-                        All completed topics:   %d
-                        All completed projects: %d
-                        All completed theory:   %d
-                        All solved steps:       %d
-                        ================================""",
-                TRACK,
-                topic.getTopics().size(),
-                progressObj.get("learned_topics_count").getAsInt(),
-                topic.getDescendants().size(),
-                progressObj.getAsJsonArray("completed_projects").size(),
-                projects.size(),
-                completedTheory,
-                topic.getDescendants().size(),
-                stepsSolved,
-                stepsSolved + stepsUnresolved,
-                completedAdditionalTopics,
-                additionalSteps.size(),
-                completedAdditionalTheory,
-                additionalSteps.size(),
-                stepsAdditionalSolved,
-                stepsAdditionalSolved + stepsAdditionalUnresolved,
-                currentObj.get("passed_topics").getAsInt(),
-                currentObj.get("passed_projects").getAsInt(),
-                currentObj.get("passed_theories").getAsInt(),
-                currentObj.get("passed_problems").getAsInt());
-    }
-
-    // Print the latest statistics
-    public void printStats() {
-
-    }
-
     private JsonObject getProgress(WebDriver driver, String urlTopic) {
         driver.get(urlTopic);
 
@@ -340,6 +272,91 @@ public class DataManager {
         JsonElement progressElement = JsonParser.parseString(jsonProgress);
         return progressElement.getAsJsonObject()
                 .getAsJsonArray("progresses").get(0).getAsJsonObject();
+    }
+
+    // Get statistics of the received data
+    private Statistics getStatistics(WebDriver driver, Topic topic, List<Project> projects, List<Step> steps,
+                                     List<Step> additionalSteps) {
+        JsonObject currentObj = getCurrent(driver).getAsJsonObject("gamification");
+        JsonObject progressObj = getProgress(driver, "https://hyperskill.org/api/progresses"
+                + "/track-" + TRACK + "?format=json");
+
+        int stepsSolved = steps.stream().mapToInt(countStep -> countStep
+                .stepListTrue().size()).sum();
+        int stepsUnresolved = steps.stream().mapToInt(countStep -> countStep
+                .stepListFalse().size()).sum();
+        int stepsAdditionalSolved = additionalSteps.stream().mapToInt(countStep -> countStep
+                .stepListTrue().size()).sum();
+        int stepsAdditionalUnresolved = additionalSteps.stream().mapToInt(countStep -> countStep
+                .stepListFalse().size()).sum();
+
+        int knowledgeMap = topic.topics().size();
+        int topicsLearned = progressObj.get("learned_topics_count").getAsInt();
+        int topicAll = topic.descendants().size();
+        int projectsLearned = progressObj.getAsJsonArray("completed_projects").size();
+        int projectsAll = projects.size();
+        long theoryLearned = steps.stream().filter(Step::learnedTheory).count();
+        int theoryAll = topic.descendants().size();
+        int stepsAll = stepsSolved + stepsUnresolved;
+        long additionalTopicsLearned = additionalSteps.stream().filter(Step::learnedTopic).count();
+        int additionalTopicsAll = additionalSteps.size();
+        long additionalTheoryLearned = additionalSteps.stream().filter(Step::learnedTheory).count();
+        int additionalTheoryAll = additionalSteps.size();
+        int additionalStepsAll = stepsAdditionalSolved + stepsAdditionalUnresolved;
+        int allCompletedTopics = currentObj.get("passed_topics").getAsInt();
+        int allCompletedProjects = currentObj.get("passed_projects").getAsInt();
+        int allCompletedTheory = currentObj.get("passed_theories").getAsInt();
+        int allSolvedSteps = currentObj.get("passed_problems").getAsInt();
+
+        return new Statistics(knowledgeMap, topicsLearned, topicAll, projectsLearned, projectsAll,
+                theoryLearned, theoryAll, stepsSolved, stepsAll, additionalTopicsLearned,
+                additionalTopicsAll, additionalTheoryLearned, additionalTheoryAll,
+                stepsAdditionalSolved, additionalStepsAll, allCompletedTopics,
+                allCompletedProjects, allCompletedTheory, allSolvedSteps);
+    }
+
+    // Print the latest statistics
+    public void printStats() {
+        try {
+            Statistics statistics = getFileData(Statistics.class,
+                    "src/main/resources/statistics-" + USER + "-" + TRACK + ".json");
+
+            System.out.printf("""
+                            ================================
+                            Track %d
+                            ================================
+                            Knowledge-map:          %d
+                            Topics                  %d/%d
+                            Projects:               %d/%d
+                            Theory:                 %d/%d
+                            Steps:                  %d/%d
+                            ================================
+                            Additional topics:      %d/%d
+                            Additional theory:      %d/%d
+                            Additional steps:       %d/%d
+                            ================================
+                            All completed topics:   %d
+                            All completed projects: %d
+                            All completed theory:   %d
+                            All solved steps:       %d
+                            ================================
+                            """,
+                    TRACK,
+                    statistics.knowledgeMap(),
+                    statistics.topicsLearned(), statistics.topicAll(),
+                    statistics.projectsLearned(), statistics.projectsAll(),
+                    statistics.theoryLearned(), statistics.theoryAll(),
+                    statistics.stepsLearned(), statistics.stepsAll(),
+                    statistics.additionalTopicsLearned(), statistics.additionalTopicsAll(),
+                    statistics.additionalTheoryLearned(), statistics.additionalTheoryAll(),
+                    statistics.additionalStepsLearned(), statistics.additionalStepsAll(),
+                    statistics.allCompletedTopics(),
+                    statistics.allCompletedProjects(),
+                    statistics.allCompletedTheory(),
+                    statistics.allSolvedSteps());
+        } catch (Exception e) {
+            System.out.println("There are no statistics, update the data!");
+        }
     }
 
     public static JsonObject getCurrent(WebDriver driver) {
@@ -383,14 +400,14 @@ public class DataManager {
     }
 
     // Save the object to a JSON file
-    public static <T> void saveToFile(List<T> list, String path) {
+    public static void saveToFile(Object object, String path) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         File file = new File(path);
 
         // Write updated data to file
         try {
             FileWriter writer = new FileWriter(file);
-            gson.toJson(list, writer);
+            gson.toJson(object, writer);
             writer.close();
         } catch (IOException e) {
             throw new RuntimeException(e);

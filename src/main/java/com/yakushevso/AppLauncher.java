@@ -23,8 +23,8 @@ public class AppLauncher {
         userSession.setTrack(choiceTrack());
 
         while (true) {
-            System.out.println("Current: " + userSession.getAccount().getLogin()
-                    + "/" +  userSession.getTrack());
+            System.out.println("Current: " + userSession.getAccount().login()
+                    + "/" + userSession.getTrack());
 
             System.out.println("""
                     Enter mode number:
@@ -53,7 +53,7 @@ public class AppLauncher {
     }
 
     private static int choiceTrack() {
-        System.out.println("Enter track number: ");
+        System.out.println("Enter track number (https://hyperskill.org/tracks): ");
         checkInputNum();
         return SCANNER.nextInt();
     }
@@ -63,7 +63,7 @@ public class AppLauncher {
         List<Account> accounts = SettingsManager.loadSettings().getAccounts();
 
         for (int i = 1; i <= accounts.size(); i++) {
-            System.out.println(i + ". " + accounts.get(i - 1).getLogin());
+            System.out.println(i + ". " + accounts.get(i - 1).login());
         }
 
         System.out.println("0. Add new user");
@@ -133,7 +133,7 @@ public class AppLauncher {
         Account account = SettingsManager.getAccount(SCANNER);
         settings.addAccount(account);
         SettingsManager.saveSettings(settings);
-        System.out.println("Account \"" + account.getLogin() + "\" added!");
+        System.out.println("Account \"" + account.login() + "\" added!");
 
         return account;
     }
@@ -144,7 +144,7 @@ public class AppLauncher {
 
         System.out.println("Select a user: ");
         for (int i = 1; i <= accounts.size(); i++) {
-            System.out.println(i + ". " + accounts.get(i - 1).getLogin());
+            System.out.println(i + ". " + accounts.get(i - 1).login());
         }
 
         while (true) {
@@ -152,7 +152,7 @@ public class AppLauncher {
             int userMode = SCANNER.nextInt();
 
             if (userMode <= accounts.size() && userMode != 0) {
-                System.out.println("Account \"" + accounts.get(userMode - 1).getLogin() + "\" deleted!");
+                System.out.println("Account \"" + accounts.get(userMode - 1).login() + "\" deleted!");
                 settings.delAccount(userMode - 1);
                 SettingsManager.saveSettings(settings);
                 return choiceUser();
@@ -164,6 +164,16 @@ public class AppLauncher {
 
     private static void changePaths() {
         while (true) {
+            Settings settings = SettingsManager.loadSettings();
+
+            System.out.printf("""
+                            Current path:
+                            driver path: %s
+                            folder path: %s
+                            """,
+                    settings.getChromedriverPath(),
+                    settings.getFolderPath());
+
             System.out.println("""
                     Enter mode number:
                     1. Change driver path
@@ -173,25 +183,17 @@ public class AppLauncher {
             checkInputNum();
             int settingsMode = SCANNER.nextInt();
 
-            Settings settings = SettingsManager.loadSettings();
-            System.out.printf("""
-                            driver_path: %s
-                            driver_path: %s
-                            """,
-                    settings.getChromedriverPath(),
-                    settings.getFolderPath());
-
             switch (settingsMode) {
                 case 1 -> {
                     System.out.println("Enter path ChromeDriver: ");
-                    String driver_path = SCANNER.next() + "chromedriver.exe";
-                    settings.setChromedriverPath(driver_path);
+                    String driverPath = SCANNER.next();
+                    settings.setChromedriverPath(driverPath);
                     SettingsManager.saveSettings(settings);
                 }
                 case 3 -> {
                     System.out.println("Enter path FolderPath: ");
-                    String folder_path = SCANNER.next() + "TRACK_NUMBER/";
-                    settings.setFolderPath(folder_path);
+                    String folderPath = SCANNER.next();
+                    settings.setFolderPath(folderPath);
                     SettingsManager.saveSettings(settings);
                 }
                 case 0 -> {
@@ -203,14 +205,13 @@ public class AppLauncher {
     }
 
     private static void getDataMenu(UserSession userSession) {
-        Settings settings = SettingsManager.loadSettings();
-        DataManager dataManager = new DataManager(userSession, settings);
+        DataManager dataManager = new DataManager(userSession);
 
         while (true) {
             System.out.println("""
                     Enter mode number:
                     1. Update data
-                    2. Get last statistic
+                    2. Last statistic
                     0. Return""");
 
             checkInputNum();
@@ -219,21 +220,15 @@ public class AppLauncher {
             switch (dataMode) {
                 case 1 -> {
                     WebDriver driver = Util.createDriver("hide");
-                    System.out.println("In progress...");
-                    Util.login(driver, userSession.getAccount().getLogin(),
-                            userSession.getAccount().getPassword());
+                    System.out.println("The process of retrieving data has started. Please, wait...");
+                    Util.login(driver, userSession.getAccount().login(),
+                            userSession.getAccount().password());
                     dataManager.getData(driver);
                     dataManager.printStats();
                     Util.closeDriver(driver);
+                    System.out.println("The data has been received successfully!");
                 }
-                case 2 -> {
-                    WebDriver driver = Util.createDriver("hide");
-                    System.out.println("In progress...");
-                    Util.login(driver, userSession.getAccount().getLogin(),
-                            userSession.getAccount().getPassword());
-                    dataManager.printStats();
-                    Util.closeDriver(driver);
-                }
+                case 2 -> dataManager.printStats();
                 case 0 -> {
                     return;
                 }
@@ -243,6 +238,9 @@ public class AppLauncher {
     }
 
     private static void savePagesMenu(UserSession userSession) {
+        Settings settings = SettingsManager.loadSettings();
+        SavePages save = new SavePages(userSession, settings);
+
         while (true) {
             System.out.println("""
                     Enter mode number:
@@ -261,12 +259,9 @@ public class AppLauncher {
             }
 
             WebDriver driver = Util.createDriver("hide");
-            System.out.println("In progress...");
-            Util.login(driver, userSession.getAccount().getLogin(),
-                    userSession.getAccount().getPassword());
-
-            Settings settings = SettingsManager.loadSettings();
-            SavePages save = new SavePages(settings);
+            System.out.println("The page loading has started. Please wait...");
+            Util.login(driver, userSession.getAccount().login(),
+                    userSession.getAccount().password());
 
             switch (saveMode) {
                 case 1 -> save.saveTopics(driver);
@@ -283,30 +278,30 @@ public class AppLauncher {
             }
 
             Util.closeDriver(driver);
+            System.out.println("The pages have been successfully loaded!");
         }
     }
 
     private static void getAnswersMenu(UserSession userSession) {
-        Settings settings = SettingsManager.loadSettings();
         WebDriver driver = Util.createDriver("hide");
-        Automation automation = new Automation(driver, settings);
-        System.out.println("In progress...");
-        Util.login(driver, userSession.getAccount().getLogin(),
-                userSession.getAccount().getPassword());
-        automation.getAnswers(userSession.getAccount().getId());
+        Automation automation = new Automation(driver, userSession);
+        System.out.println("The process of getting answers has started. Please wait...");
+        Util.login(driver, userSession.getAccount().login(),
+                userSession.getAccount().password());
+        automation.getAnswers();
         Util.closeDriver(driver);
+        System.out.println("The answers have been successfully received!");
     }
 
     private static void setAnswersMenu(UserSession userSession) {
-        Settings settings = SettingsManager.loadSettings();
-        WebDriver driver = Util.createDriver("hide");
-        Automation automation = new Automation(driver, settings);
-        Util.createDriver("visible");
-        System.out.println("In progress...");
-        Util.login(driver, userSession.getAccount().getLogin(),
-                userSession.getAccount().getPassword());
+        WebDriver driver = Util.createDriver("visible");
+        Automation automation = new Automation(driver, userSession);
+        System.out.println("The process of sending responses has begun. Please wait...");
+        Util.login(driver, userSession.getAccount().login(),
+                userSession.getAccount().password());
         automation.sendAnswers();
         Util.closeDriver(driver);
+        System.out.println("The answers have been successfully received!");
     }
 
     private static void checkInputNum() {

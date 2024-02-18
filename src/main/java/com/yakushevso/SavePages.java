@@ -1,9 +1,6 @@
 package com.yakushevso;
 
-import com.yakushevso.data.Data;
-import com.yakushevso.data.Project;
-import com.yakushevso.data.Settings;
-import com.yakushevso.data.Step;
+import com.yakushevso.data.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -15,22 +12,21 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 public class SavePages {
-    private final String DATA_PATH;
+    private final int TRACK;
     private final String FOLDER_PATH;
-    private final String SITE_LINK = "https://hyperskill.org/";
 
-    public SavePages(Settings settings) {
-        DATA_PATH = settings.getDataPath();
+    public SavePages(UserSession userSession, Settings settings) {
+        TRACK = userSession.getTrack();
         FOLDER_PATH = settings.getFolderPath();
     }
 
     // Save pages with topics
     public void saveTopics(WebDriver driver) {
-        Data data = DataManager.getFileData(Data.class, DATA_PATH);
+        Data data = DataManager.getFileData(Data.class, "src/main/resources/data-list-" + TRACK + ".json");
 
-        for (Integer topic : data.getTopic_relations().getTopics()) {
-            if (isFileExists(FOLDER_PATH + "knowledge-map/", String.valueOf(topic))) {
-                driver.get(SITE_LINK + "knowledge-map/" + topic);
+        for (Integer topic : data.topicRelations().topics()) {
+            if (isFileExists(FOLDER_PATH + "track/" + TRACK + "/knowledge-map/", String.valueOf(topic))) {
+                driver.get("https://hyperskill.org/knowledge-map/" + topic);
 
                 Util.waitDownloadElement(driver, "//div[@class='knowledge-map-node']");
                 Util.delay(1000);
@@ -39,18 +35,18 @@ public class SavePages {
                     Util.waitDownloadElement(driver, "//div[@class='topic-block']");
                 }
 
-                save(driver, "knowledge-map/", String.valueOf(topic));
+                save(driver, "/knowledge-map/", String.valueOf(topic));
             }
         }
     }
 
     // Save pages with projects
     public void saveProjects(WebDriver driver) {
-        Data data = DataManager.getFileData(Data.class, DATA_PATH);
+        Data data = DataManager.getFileData(Data.class, "src/main/resources/data-list-" + TRACK + ".json");
 
-        for (Project project : data.getProjects()) {
-            if (isFileExists(FOLDER_PATH + "projects/", String.valueOf(project.getId()))) {
-                driver.get(SITE_LINK + "projects/" + project.getId());
+        for (Project project : data.projects()) {
+            if (isFileExists(FOLDER_PATH + "track/" + TRACK + "/projects/", String.valueOf(project.id()))) {
+                driver.get("https://hyperskill.org/projects/" + project.id());
                 Util.waitDownloadElement(driver, "//div[@class='collapse show']");
 
                 List<WebElement> stageProjectClose = driver.findElements(By.xpath("//button[@class='btn " +
@@ -67,22 +63,24 @@ public class SavePages {
                     }
                 }
 
-                save(driver, "projects/", String.valueOf(project.getId()));
+                save(driver, "/projects/", String.valueOf(project.id()));
             }
         }
     }
 
     // Save project stages
     public void saveStages(WebDriver driver) {
-        Data data = DataManager.getFileData(Data.class, DATA_PATH);
+        Data data = DataManager.getFileData(Data.class, "src/main/resources/data-list-" + TRACK + ".json");
 
-        for (Project project : data.getProjects()) {
-            for (String stages : project.getStages_ids()) {
-                if (isFileExists(FOLDER_PATH + "projects/" + project.getId() + "/stages/" + stages, "implement")) {
-                    driver.get(SITE_LINK + "projects/" + project.getId() + "/stages/" + stages + "/implement");
+        for (Project project : data.projects()) {
+            for (String stages : project.stagesIds()) {
+                if (isFileExists(FOLDER_PATH + "track/" + TRACK + "/projects/" + project.id()
+                        + "/stages/" + stages, "implement")) {
+                    driver.get("https://hyperskill.org/projects/" + project.id()
+                            + "/stages/" + stages + "/implement");
                     Util.waitDownloadElement(driver, "//div[@class='tabs']");
                     Util.delay(1000);
-                    save(driver, "projects/" + project.getId() + "/stages/" + stages + "/", "implement");
+                    save(driver, "/projects/" + project.id() + "/stages/" + stages + "/", "implement");
                 }
             }
         }
@@ -90,15 +88,16 @@ public class SavePages {
 
     // Save pages with topics
     public void saveThemes(WebDriver driver) {
-        Data data = DataManager.getFileData(Data.class, DATA_PATH);
+        Data data = DataManager.getFileData(Data.class, "src/main/resources/data-list-" + TRACK + ".json");
 
-        for (Step steps : data.getSteps()) {
-            if (isFileExists(FOLDER_PATH + "learn/step/", String.valueOf(steps.getId()))) {
-                driver.get(SITE_LINK + "learn/step/" + steps.getId());
+        for (Step steps : data.steps()) {
+            if (isFileExists(FOLDER_PATH + "track/" + TRACK + "/learn/step/", String.valueOf(steps.id()))) {
+                driver.get("https://hyperskill.org/learn/step/" + steps.id());
                 Util.waitDownloadElement(driver, "//a[@class='text-gray']");
 
                 // Check if the theory is solved and the page is fully expanded
-                if (isVisibleElement(driver, "//a[@class='ml-3' and starts-with(normalize-space(text()), 'Expand all')]")) {
+                if (isVisibleElement(driver,
+                        "//a[@class='ml-3' and starts-with(normalize-space(text()), 'Expand all')]")) {
                     Actions actions = new Actions(driver);
                     WebElement element = driver.findElement(
                             By.xpath("//a[@class='ml-3' and starts-with(normalize-space(text()), 'Expand all')]"));
@@ -108,7 +107,7 @@ public class SavePages {
 
                 Util.delay(1000);
 
-                save(driver, "learn/step/", String.valueOf(steps.getId()));
+                save(driver, "/learn/step/", String.valueOf(steps.id()));
             }
         }
     }
@@ -141,7 +140,7 @@ public class SavePages {
 
     // Saving pages
     private void save(WebDriver driver, String path, String page) {
-        File file = new File(FOLDER_PATH + path);
+        File file = new File(FOLDER_PATH + "track/" + TRACK + path);
 
         // Check if the folder exists and create it if necessary
         if (!file.exists()) {
@@ -153,7 +152,8 @@ public class SavePages {
 
         // Get the HTML and CSS code of the page
         String pageSource = (String) ((JavascriptExecutor) driver).executeScript(
-                "var html = new XMLSerializer().serializeToString(document.doctype) + document.documentElement.outerHTML;" +
+                "var html = new XMLSerializer().serializeToString(document.doctype) " +
+                        "+ document.documentElement.outerHTML;" +
                         "var css = Array.from(document.styleSheets).reduce((cssCode, styleSheet) => {" +
                         "   try {" +
                         "       Array.from(styleSheet.cssRules).forEach(rule => {" +
@@ -169,8 +169,9 @@ public class SavePages {
 
         // Saving the page code to a file and saving the encoding
         try {
-            String filePath = FOLDER_PATH + path + page + ".html";
-            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filePath), StandardCharsets.UTF_8));
+            String filePath = FOLDER_PATH + "track/" + TRACK + path + page + ".html";
+            BufferedWriter writer = new BufferedWriter(
+                    new OutputStreamWriter(new FileOutputStream(filePath), StandardCharsets.UTF_8));
             writer.write(pageSource);
             writer.close();
         } catch (IOException e) {

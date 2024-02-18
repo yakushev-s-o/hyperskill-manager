@@ -9,23 +9,6 @@ HS-Manager is a tool designed to automate interactions with the educational plat
 - **Answer Retrieval:** Capable of reading answers to previously solved tests.
 - **Answer Submission:** Automates the test-taking process based on the collected data.
 
-## Configuration
-
-Edit `settings.json` for the program to work correctly:
-
-```json
-{
-  "login": "YOUR_LOGIN",
-  "password": "YOUR_PASSWORD",
-  "chromedriver_path": "C:/tools/chromedriver_win32/chromedriver.exe",
-  "folder_path": "C:/Users/Admin/Desktop/track/TRACK_NUMBER/",
-  "json_path": "src/main/resources/answer-list-TRACK_NUMBER.json",
-  "data_path": "src/main/resources/data-list-TRACK_NUMBER.json",
-  "site_link": "https://hyperskill.org/"
-}
-```
-Fill in your login and password, adjust paths as needed. **Do not change "TRACK_NUMBER"**; it's a required placeholder for the program's operation.
-
 ## Requirements
 
 To use this program, you must have `chromedriver` installed. `chromedriver` is essential for automating web browser interactions, and it must be compatible with the version of Chrome installed on your system. Ensure that `chromedriver` is correctly set up and accessible in your system's PATH.

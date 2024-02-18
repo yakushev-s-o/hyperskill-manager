@@ -1,0 +1,1411 @@
+[
+  {
+    "url": "https://hyperskill.org/learn/step/4709",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "class Main {\n    public static void main(String[] args) {\n        System.out.println(\"Hello, Sergey!\");\n    }\n}\n\n\n\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/18464",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "Write Once Run Anywhere"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2085",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "\u003d"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2082",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "A variable has a type",
+      "A variable can store a value",
+      "A variable has a name (identifier)"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2314",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "public class Main {\n\n    public static void main(String[] args) {\n        int a \u003d 3;\n        int b \u003d 5;\n        int c \u003d 4;\n\n        System.out.println(a + \" \" + b + \" \" + c);\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2486",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "class Main {\n    public static void main(String[] args) {\n        // Assign values to these four variables\n        int one \u003d 1;\n        int two \u003d 2;\n        int three \u003d 3;\n        int four \u003d 4;\n\n        System.out.printf(\"%d %d %d %d\", one, two, three, four);\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2512",
+    "checked": false,
+    "mode": 5,
+    "answerStr": "5"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/5029",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "\"hedgehog\", animal, String"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2026",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "6 5 4 3"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2027",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "The while loop checks its condition and then executes its body.",
+      "The while loop can be infinite.",
+      "The do-while loop executes its body and then tests its condition."
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2028",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "4"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2234",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "import java.util.Scanner;\n\nclass Main {\n    public static void main(String[] args) {\n        Scanner scanner \u003d new Scanner(System.in);\n        // start coding here\n        int n \u003d scanner.nextInt();\n        System.out.print(n);\n        while(n !\u003d 1) {\n            if(n % 2 \u003d\u003d 0) {\n                n \u003d n / 2;\n                System.out.print(\" \" + n);\n            } else {\n                n \u003d n * 3 + 1;\n                System.out.print(\" \" + n);\n            }\n        }\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/1996",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "a",
+      "b",
+      "c",
+      "d"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/1998",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "(1) int accumulator \u003d 1; (3) accumulator *\u003d i;"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/1999",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "The for loop can be nested inside another.",
+      "The most common form of the loop has an initialization, a termination condition, a post-processing statement, and a body."
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2187",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "import java.util.Scanner;\n\nclass Main {\n    public static void main(String[] args) {\n        Scanner scanner \u003d new Scanner(System.in);\n        // start coding here\n        int a \u003d scanner.nextInt();\n        int b \u003d scanner.nextInt();\n        int res \u003d 0;\n        for (int i \u003d a; i \u003c\u003d b; i++) {\n            res +\u003d i;\n        }\n        System.out.println(res);\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2189",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner scanner \u003d new Scanner(System.in);\n        int n \u003d scanner.nextInt();\n        int max_divisible_by_4 \u003d -1;\n        for (int i \u003d 0; i \u003c n; i++) {\n            int x \u003d scanner.nextInt();\n            if (x % 4 \u003d\u003d 0 \u0026\u0026 x \u003e max_divisible_by_4) {\n                max_divisible_by_4 \u003d x;\n            }\n        }\n        System.out.println(max_divisible_by_4);\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2191",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner scanner \u003d new Scanner(System.in);\n        int a \u003d scanner.nextInt();\n        int b \u003d scanner.nextInt();\n        \n        int count \u003d 0;\n        float result \u003d 0;\n\n        for (int i \u003d a; i \u003c\u003d b; i++) {\n            if (i % 3 \u003d\u003d 0) {\n                result +\u003d i;\n                count++;\n            }\n        }\n        System.out.println(result / count);\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2192",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "import java.util.Scanner;\n\nclass Main {\n    public static void main(String[] args) {\n        Scanner scanner \u003d new Scanner(System.in);\n        // start coding here\n        int many \u003d scanner.nextInt();\n        String s;\n        int a \u003d 0;\n        int b \u003d 0;\n        int c \u003d 0;\n        int d \u003d 0;\n\n        for(int i \u003d 0; i \u003c many; i++) {\n            s \u003d scanner.next();\n\n            if (\"A\".equals(s)) {\n                a++;\n            } else if (\"B\".equals(s)) {\n                b++;\n            } else if (\"C\".equals(s)) {\n                c++;\n            } else if (\"D\".equals(s)) {\n                d++;\n            }\n        }\n\n        System.out.println(d + \" \" + c + \" \" + b + \" \" + a);\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2193",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "import java.util.Scanner;\n\nclass Main {\n    public static void main(String[] args) {\n        Scanner scanner \u003d new Scanner(System.in);\n        // start coding here\n        int start \u003d scanner.nextInt();\n        int end \u003d scanner.nextInt();\n        for (int i \u003d start; i \u003c\u003d end; i++) {\n            if (i % 5 \u003d\u003d 0 \u0026\u0026 i % 3 \u003d\u003d 0) {\n                System.out.println(\"FizzBuzz\");\n            } else if (i % 5 \u003d\u003d 0) {\n                System.out.println(\"Buzz\");\n            } else if (i % 3 \u003d\u003d 0) {\n                System.out.println(\"Fizz\");\n            } else {\n                System.out.println(i);\n            }\n        }\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2194",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "import java.util.Scanner;\n\nclass Main {\n    public static void main(String[] args) {\n        Scanner scanner \u003d new Scanner(System.in);\n        // start coding here\n        int larger \u003d 0;\n        int smaller \u003d 0;\n        int perfect \u003d 0;\n\n        int num \u003d scanner.nextInt();\n        for (int i \u003d 0; i \u003c num; i++) {\n            int n \u003d scanner.nextInt();\n            if (n \u003d\u003d 1) {\n                larger++;\n            } else if (n \u003d\u003d -1) {\n                smaller++;\n            } else {\n                perfect++;\n            }\n        }\n        System.out.printf(\"%d %d %d\", perfect, larger, smaller);\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2742",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "import java.util.Scanner;\n\nclass Main {\n    public static void main(String[] args) {\n        Scanner scanner \u003d new Scanner(System.in);\n        // start coding here\n        int a \u003d scanner.nextInt();\n        int b \u003d scanner.nextInt();\n        int n \u003d 1;\n\n        for (int i \u003d a; i \u003c b; i++) {\n            n *\u003d i;\n        }\n        System.out.println(n);\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2154",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "a",
+      "c"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2665",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "break"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2731",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "import java.util.Scanner;\n\nclass Main {\n    public static void main(String[] args) {\n        Scanner scanner \u003d new Scanner(System.in);\n        // start coding here\n\n        final int limit \u003d 1000;\n        int sum \u003d 0;\n        int n \u003d scanner.nextInt();\n        \n        while (n !\u003d 0) {\n            sum +\u003d n;\n            if (sum \u003e\u003d limit) {\n                sum -\u003d limit;\n                break;\n            }\n            n \u003d scanner.nextInt();\n        }\n        System.out.println(sum);\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2733",
+    "checked": false,
+    "mode": 4,
+    "answerStr": "15"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3393",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "continue"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2297",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "import java.util.Scanner;\n\nclass Main {\n    private static void print(String s) {\n        System.out.println(\"You have chosen a \" + s);\n    }\n    \n    public static void main(String[] args) {\n        Scanner scanner \u003d new Scanner(System.in);\n        // start coding here\n        int n \u003d scanner.nextInt();\n        switch (n) {\n            case 1: print(\"square\"); break;\n            case 2: print(\"circle\"); break;\n            case 3: print(\"triangle\"); break;\n            case 4: print(\"rhombus\"); break;\n            default: System.out.println(\"There is no such shape!\");\n        }\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2299",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "import java.util.Scanner;\n\nclass Main {\n    public static void main(String[] args) {\n        Scanner scanner \u003d new Scanner(System.in);\n        // start coding here\n        long n1 \u003d scanner.nextLong();\n        String c \u003d scanner.next();\n        long n2 \u003d scanner.nextLong();\n\n        switch (c) {\n            case \"+\": System.out.println(n1 + n2);\n                break;\n            case \"-\": System.out.println(n1 - n2);\n                break;\n            case \"/\": \n                if (n2 \u003d\u003d 0) System.out.println(\"Division by 0!\");\n                else System.out.println(n1 / n2);\n                break;\n            case \"*\": System.out.println(n1 * n2);\n                break;\n            default: System.out.println(\"Unknown operator\");\n        }\n\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2300",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "import java.util.Scanner;\n\nclass Main {\n    public static void main(String[] args) {\n        Scanner scanner \u003d new Scanner(System.in);\n        // start coding here\n        String shape \u003d scanner.nextLine();\n        double a;\n        double b;\n        double c;\n        double r;\n\n        if (\"triangle\".equals(shape)) {\n            a \u003d scanner.nextDouble();\n            b \u003d scanner.nextDouble();\n            c \u003d scanner.nextDouble();\n            double pp \u003d (a + b + c) / 2.0;\n            System.out.println(Math.sqrt(pp * (pp - a) * (pp - b) * (pp - c)));\n        } else if (\"rectangle\".equals(shape)) {\n            a \u003d scanner.nextDouble();\n            b \u003d scanner.nextDouble();\n            System.out.println(a * b);\n        } else {\n            r \u003d scanner.nextDouble();\n            System.out.println(3.14 * (r * r));\n        }\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2737",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "import java.util.Scanner;\n\nclass Main {\n    public static void main(String[] args) {\n        Scanner scanner \u003d new Scanner(System.in);\n        // start coding here\n        int n \u003d scanner.nextInt();\n        switch(n) {\n            case 1: System.out.println(\"Yes!\"); break;\n            case 2: System.out.println(\"No!\"); break;\n            case 3: System.out.println(\"No!\"); break;\n            case 4: System.out.println(\"No!\"); break;\n            default: System.out.println(\"Unknown number\");\n        }\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2738",
+    "checked": false,
+    "mode": 4,
+    "answerStr": "125"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3481",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "import java.util.Scanner;\n\nclass Main {\n\n    private static void print(String s) {\n        System.out.println(s);\n    }\n    \n    public static void main(String[] args) {\n        Scanner scanner \u003d new Scanner(System.in);\n        // start coding here\n        String s \u003d scanner.nextLine();\n        switch (s) {\n            case \"gryffindor\": print(\"bravery\"); break;\n            case \"hufflepuff\": print(\"loyalty\"); break;\n            case \"slytherin\": print(\"cunning\"); break;\n            case \"ravenclaw\": print(\"intellect\"); break;\n            default: print(\"not a valid house\");\n        }\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2016",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "-128 to 127"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2047",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "int is 32 bits",
+      "byte is 8 bits",
+      "char is 16 bits",
+      "long is 64 bits"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2668",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "int",
+      "long",
+      "short",
+      "byte"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2669",
+    "checked": false,
+    "mode": 5,
+    "answerStr": "32 64"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2674",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "short: from -32768 to 32767",
+      "byte: from -128 to 127"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3382",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "4"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3383",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "64"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/12979",
+    "checked": false,
+    "mode": 5,
+    "answerStr": "boolean"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2310",
+    "checked": false,
+    "mode": 7,
+    "answerArr": [
+      "double",
+      "short",
+      "int",
+      "float",
+      "long",
+      "byte"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3389",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "The destination type has a larger range than the source type"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/30024",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "int myResult \u003d myObject.myMethod(myDouble);"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/10974",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "printSum(123, 13);",
+      "printSum(123L, 13);"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/10975",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "readLine",
+      "findUser"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/10977",
+    "checked": false,
+    "mode": 5,
+    "answerStr": "findNemo()"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/10978",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "It belongs to the Math library",
+      "This method calculates the absolute value of a double value",
+      "It is a built-in method"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/10979",
+    "checked": false,
+    "mode": 5,
+    "answerStr": "Math.pow(a,b)"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/10980",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "import java.util.Scanner;\n\npublic class Main {\n\n    public static void main(String[] args) {\n        // call the method here\n        callMeAwesome();\n    }\n\n    // Do not change code below\n    public static void callMeAwesome() {\n        Scanner scanner \u003d new Scanner(System.in);\n        String name \u003d scanner.next();\n        System.out.println(name + \", you\u0027re awesome!\");\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/10981",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "import java.util.Scanner;\n\npublic class Main {\n\n    public static void main(String[] args) {\n        // call the method here\n        Scanner sc \u003d new Scanner(System.in);\n        int b \u003d sc.nextInt();\n        int h \u003d sc.nextInt();\n        \n        countAreaOfParallelogram(b, h);\n    }\n\n    // Do not change code below   \n    public static void countAreaOfParallelogram(int b, int h) {\n        System.out.println(b * h);\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/10984",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "abs(int)"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/10989",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "import java.util.Scanner;\n\npublic class Main {\n\n    public static boolean isVowel(char ch) {\n        // write your code here\n        char[] chars \u003d {\u0027A\u0027, \u0027E\u0027, \u0027I\u0027, \u0027O\u0027, \u0027U\u0027};\n        for (char c : chars) {\n            if (Character.toUpperCase(ch) \u003d\u003d c) {\n                return true;\n            }\n        }\n        return false;\n    }\n\n    /* Do not change code below */\n    public static void main(String[] args) {\n        Scanner scanner \u003d new Scanner(System.in);\n        char letter \u003d scanner.nextLine().charAt(0);\n        System.out.println(isVowel(letter) ? \"YES\" : \"NO\");\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/10993",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "import java.util.Scanner;\n\npublic class Main {\n\n    public static long power(int n, int m) {\n        // write your code here\n        return (long) Math.pow(n, m);\n    }\n\n    /* Do not change code below */\n    public static void main(String[] args) {\n        final Scanner scanner \u003d new Scanner(System.in);\n        final int n \u003d scanner.nextInt();\n        final int m \u003d scanner.nextInt();\n        System.out.println(power(n, m));\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/10995",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "import java.util.Scanner;\n\npublic class Main {\n\n    public static int sign(int number) {\n        // write your code here\n        if (number \u003e 0) {\n            return 1;\n        } else if (number \u003c 0) {\n            return -1;\n        } else {\n            return 0;\n        }\n    }\n\n    /* Do not change code below */\n    public static void main(String[] args) {\n        final Scanner scanner \u003d new Scanner(System.in);\n        final int n \u003d scanner.nextInt();\n        System.out.println(sign(n));\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2070",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "No, it is impossible."
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2301",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "The method has an argument.",
+      "The method always returns nothing (void).",
+      "The method must be static."
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2304",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "The code will compile but throw an error during runtime"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2505",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "class Main {\n    public static void main(String[] args) {\n        System.out.println(\"We are robots!\");\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2507",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "class Main {\n\n    public static void main(String[] args) {\n        System.out.println(\"Hello, Java!\");\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2508",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "b",
+      "c",
+      "e"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/4336",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "class Main {\n\n    public static void main(String[] args) {\n        System.out.println(\"Hello, Java!\");\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/10571",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "Separate parts of code are easier to test.",
+      "The code is easier to reuse.",
+      "The code looks more readable."
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/10572",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "Create a number of separate methods to execute individual tasks"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/10574",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "methods"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/10575",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "3"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/10576",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "class SimpleCalculator {\n\n    // Implement your methods here\n    public static void subtractTwoNumbers(long a, long b) {\n        System.out.println(a - b);\n    }\n\n\n    public static void sumTwoNumbers(long a, long b) {\n        System.out.println(a + b);\n    }\n\n\n    public static void divideTwoNumbers(long a, long b) {\n        System.out.println(a \u003d\u003d 0 || b \u003d\u003d 0 ? \"Division by 0!\" : a / b);\n    }\n\n\n    public static void multiplyTwoNumbers(long a, long b) {\n        System.out.println(a * b);\n    }\n\n    // Implemented method\n    public static void power(long n, long p) {\n        long number \u003d n;\n        long power \u003d p;\n        long result \u003d 1;\n        while (power \u003e 0) {\n            if (power % 2 !\u003d 0) {\n                result *\u003d number;\n            }\n            power /\u003d 2;\n            number *\u003d number;\n        }\n        System.out.println(result);\n    }\n}\n\npublic class Main {\n\n    public static void main(String[] args) {\n\n        java.util.Scanner scanner \u003d new java.util.Scanner(System.in);\n        long num1 \u003d scanner.nextLong();\n        String operator \u003d scanner.next();\n        long num2 \u003d scanner.nextLong();\n\n        switch (operator) {\n            case \"^\":\n                SimpleCalculator.power(num1, num2);\n                break;\n            case \"+\":\n                SimpleCalculator.sumTwoNumbers(num1, num2);\n                break;\n            case \"-\":\n                SimpleCalculator.subtractTwoNumbers(num1, num2);\n                break;\n            case \"/\":\n                SimpleCalculator.divideTwoNumbers(num1, num2);\n                break;\n            case \"*\":\n                SimpleCalculator.multiplyTwoNumbers(num1, num2);\n                break;\n            default:\n                break;\n        }\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/10577",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "// Don\u0027t delete scanner import\nimport java.util.Scanner;\n\nclass Name {\n\n    public static void main(String[] args) {\n        Scanner scanner \u003d new Scanner(System.in);\n\n    // use this program as a source of inspiration for your method\n\n        String firstName1 \u003d scanner.next();\n        String lastName1 \u003d scanner.next();\n        System.out.println(createFullName(firstName1, lastName1));\n\n        String firstName2 \u003d scanner.next();\n        String lastName2 \u003d scanner.next();\n        System.out.println(createFullName(firstName2, lastName2));\n\n        String firstName3 \u003d scanner.next();\n        String lastName3 \u003d scanner.next();\n        System.out.println(createFullName(firstName3, lastName3));\n\n    }\n\n    //implement your method here\n    public static String createFullName(String firstName, String lastName) {\n        return firstName + \" \" + lastName;\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/10578",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "import java.util.Scanner;\n\nclass MultipleFunction {\n\n    public static void main(String[] args) {\n        Scanner scanner \u003d new Scanner(System.in);\n        double x \u003d scanner.nextDouble();\n        System.out.println(f(x));\n    }\n\n    public static double f(double x) {\n        //call your implemented methods here.   \n        if (x \u003c\u003d 0) {\n            return f1(x);\n        } else if (0 \u003c x \u0026\u0026 x \u003c 1) {\n            return f2(x);\n        }\n        return f3(x); \n    }\n\n    //implement your methods here\n    public static double f1(double x) {\n        return x * x + 1;\n    }\n\n    public static double f2(double x) {\n        return 1 / (x * x);\n    }\n\n    public static double f3(double x) {\n        return x * x - 1;\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/29752",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "a is primitive, b is primitive, str is reference"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2260",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "the address of data"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2263",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "null"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/5036",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "an address in memory where the data is located"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/16579",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "public class Main {\n    public static void main(String[] args) {\n        // put your code here\n        int a \u003d 1996;\n        System.out.print(a);\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/16580",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "public class Main {\n    public static void main(String[] args) {\n        // put your code here\n        String str \u003d \"Hello, learner!\";\n        System.out.println(str);\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/16581",
+    "checked": false,
+    "mode": 5,
+    "answerStr": "new"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/1957",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "int numbers[] \u003d new int[10];",
+      "int[] numbers \u003d new int[20];"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2127",
+    "checked": false,
+    "mode": 6,
+    "answerListArr": [
+      [
+        "numbers[0]",
+        "1"
+      ],
+      [
+        "numbers[6]",
+        "4"
+      ],
+      [
+        "numbers.length",
+        "7"
+      ],
+      [
+        "numbers[7]",
+        "ArrayIndexOutOfBoundsException"
+      ]
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2128",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "char[] array \u003d new char[1];",
+      "char[] array \u003d new char[0];",
+      "char[] array \u003d { \u0027a\u0027, \u0027b\u0027, \u0027c\u0027, \u0027d\u0027 };"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2706",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "import java.util.Arrays;\n\npublic class Main {\n\n    public static void main(String[] args) {\n\n        int[] numbers \u003d new int[] {12, 17, 8, 101, 33};\n\n        System.out.println(Arrays.toString(numbers));\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2710",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "numbers[numbers.length - 1]"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3388",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "new"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3391",
+    "checked": false,
+    "mode": 4,
+    "answerStr": "3"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3392",
+    "checked": false,
+    "mode": 4,
+    "answerStr": "8"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2493",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "Programs are executed on the Java Virtual Machine to reach platform independence."
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2494",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "Bytecode"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/10830",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "Add a new program to this system",
+      "Create a new app for a JVM machine"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/1974",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "class"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2939",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "// write a class here\n\nclass Point2D {\n    float x;\n    float y;\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2944",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "// write your class here\n class Time {\n     int hours, minutes, seconds;\n }\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2946",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "// write your class here\n\nclass Box {\n    double length, height, width;\n    Box innerBox;\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2947",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "String",
+      "int",
+      "boolean",
+      "MyClass"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2949",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "The class has three fields of the same type.",
+      "The following statement creates an object of the class: Point3D p \u003d new Point3D();"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2956",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "(1, 4)"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2950",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "class Patient {\n\n    String name;\n\n    // write your method here\n    void say() {\n        System.out.printf(\"Hello, my name is %s, I need a doctor.\", this.name);\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2951",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "\nclass Box {\n\n    double height;\n    double width;\n    double length;\n\n    // write a method here\n    public double getVolume() {\n        return height * width * length;\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2952",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "class Complex {\n\n    double real;\n    double image;\n\n    // write methods here\n\n    public void add(Complex num) {\n        this.real \u003d this.real + num.real;\n        this.image \u003d this.image + num.image;\n    }\n\n    public void subtract(Complex num) {\n        this.real \u003d this.real - num.real;\n        this.image \u003d this.image - num.image;\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2955",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "class Circle {\n\n    double radius;\n\n    // write methods here\n\n    public double getLength() {\n        return 2 * Math.PI * radius;\n    }\n\n    public double getArea() {\n        return Math.PI * (radius * radius);\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2957",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "public void method() { }"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2988",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "class Car {\n\n    int yearModel;\n    String make;\n    int speed;\n\n    public void accelerate() {\n        speed +\u003d 5;\n    }\n\n    public void brake() {\n        speed -\u003d 5;\n        if (speed \u003c 0) {\n            speed \u003d 0;\n        }\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2989",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "class Clock {\n\n    int hours \u003d 12;\n    int minutes \u003d 0;\n\n    void next() {\n        // implement me\n        minutes++;\n        if (minutes \u003e 59) {\n            hours++;\n            minutes \u003d 0;\n            if (hours \u003e 12) {\n                hours \u003d 1;\n            }\n        }\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3279",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "An instance method can access values of the fields.",
+      "A class can have multiple instance methods.",
+      "Calling the same instance method for different objects of a class can produce different result."
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3778",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "Instance methods don\u0027t have the keyword static in their declaration."
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3779",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "write the object name, dot and then the name of a method"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/1983",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "default no-arg constructor"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/1985",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "Constructor"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2158",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "constructor"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2160",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "import java.util.Optional;\n\npublic class Main {\n\n\n    public static void main(String[] args) {\n\n        // create an instance of Account here\n\n        User owner \u003d new User(\"demo-user\", \"Alexander\", \"Schmidt\");\n        Account account \u003d new Account(\"123456\", 1000, owner);\n        \n        // pass it into process method\n\n        process(account);\n    }\n\n    static class Account {\n\n        private String code;\n        private long balance;\n        private User owner;\n\n        public Account(String code, long balance, User owner) {\n            this.code \u003d code;\n            this.balance \u003d balance;\n            this.owner \u003d owner;\n        }\n\n        public String getCode() {\n            return code;\n        }\n\n        public long getBalance() {\n            return balance;\n        }\n\n        public User getOwner() {\n            return owner;\n        }\n    }\n\n    static class User {\n\n        private String login;\n        private String firstName;\n        private String lastName;\n\n        public User(String login, String firstName, String lastName) {\n            this.login \u003d login;\n            this.firstName \u003d firstName;\n            this.lastName \u003d lastName;\n        }\n\n        public String getLogin() {\n            return login;\n        }\n\n        public String getFirstName() {\n            return firstName;\n        }\n\n        public String getLastName() {\n            return lastName;\n        }\n    }\n\n\n    public static void process(Account account) {\n        try {\n            final Optional\u003cUser\u003e owner \u003d Optional.ofNullable(account.getOwner());\n\n            System.out.println(account.getCode());\n            System.out.println(account.getBalance());\n\n            owner.ifPresent(o -\u003e {\n                System.out.println(o.getLogin());\n                System.out.println(o.getFirstName());\n                System.out.println(o.getLastName());\n            });\n\n        } catch (Exception e) {\n            System.out.println(\"Something wrong...\");\n        }\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2171",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "Constructors can be considered as special types of methods.",
+      "Constructor name must be the same as its class name.",
+      "Constructor must not have an explicit return type."
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2173",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "SomeClass instance \u003d new SomeClass();"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2983",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "// write your class here\nclass User {\n    String login, firstName, lastName;\n\n    public User(String login, String firstName, String lastName) {\n        this.login \u003d login;\n        this.firstName \u003d firstName;\n        this.lastName \u003d lastName;\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2986",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "// write the class Complex here\n\nclass Complex {\n    double real;\n    double imaginary;\n\n    public Complex(double real, double imaginary) {\n        this.real \u003d real;\n        this.imaginary \u003d imaginary;\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2123",
+    "checked": false,
+    "mode": 8,
+    "matrixList": [
+      {
+        "nameRow": "class (not nested)",
+        "nameColumns": "public",
+        "check": true
+      },
+      {
+        "nameRow": "class (not nested)",
+        "nameColumns": "protected",
+        "check": false
+      },
+      {
+        "nameRow": "class (not nested)",
+        "nameColumns": "private",
+        "check": false
+      },
+      {
+        "nameRow": "class (not nested)",
+        "nameColumns": "no modifier",
+        "check": true
+      },
+      {
+        "nameRow": "field",
+        "nameColumns": "public",
+        "check": true
+      },
+      {
+        "nameRow": "field",
+        "nameColumns": "protected",
+        "check": true
+      },
+      {
+        "nameRow": "field",
+        "nameColumns": "private",
+        "check": true
+      },
+      {
+        "nameRow": "field",
+        "nameColumns": "no modifier",
+        "check": true
+      },
+      {
+        "nameRow": "method",
+        "nameColumns": "public",
+        "check": true
+      },
+      {
+        "nameRow": "method",
+        "nameColumns": "protected",
+        "check": true
+      },
+      {
+        "nameRow": "method",
+        "nameColumns": "private",
+        "check": true
+      },
+      {
+        "nameRow": "method",
+        "nameColumns": "no modifier",
+        "check": true
+      },
+      {
+        "nameRow": "constructor",
+        "nameColumns": "public",
+        "check": true
+      },
+      {
+        "nameRow": "constructor",
+        "nameColumns": "protected",
+        "check": true
+      },
+      {
+        "nameRow": "constructor",
+        "nameColumns": "private",
+        "check": true
+      },
+      {
+        "nameRow": "constructor",
+        "nameColumns": "no modifier",
+        "check": true
+      }
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2126",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "use special methods for accessing fields — getters"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2977",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "protected",
+      "public",
+      "private"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2978",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "1",
+      "3",
+      "4"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2979",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "1",
+      "2"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2981",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "You can create instances of MyClass using the keyword new inside the method2",
+      "You can\u0027t create instances of MyClass using the keyword new inside classes that belong to other packages."
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2982",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "package",
+      "class (regular, not inner/nested)"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3423",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "Do not write an access modifier"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3019",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "setAge"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3020",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "getTitle"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3021",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "isCompleted",
+      "setCompleted"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3022",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "class Complex {\n\n    private double real;\n    private double imaginary;\n\n    public double getReal() {\n        return this.real;\n    }\n\n    public void setReal(double real) {\n        this.real \u003d real;\n    }\n\n    public double getImaginary() {\n        return this.imaginary;\n    }\n\n    public void setImaginary(double imaginary) {\n        this.imaginary \u003d imaginary;\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3023",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "class Account {\n\n    private long balance;\n    private String ownerName;\n    private boolean locked;\n\n    public long getBalance() {\n        return balance;\n    }\n\n    public String getOwnerName() {\n        return ownerName;\n    }\n\n    public boolean isLocked() {\n        return locked;\n    }\n\n    public void setBalance(long balance) {\n        this.balance \u003d balance;\n    }\n\n    public void setOwnerName(String ownerName) {\n        this.ownerName \u003d ownerName;\n    }\n\n    public void setLocked(boolean locked) {\n        this.locked \u003d locked;\n    }\n    \n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3024",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "class Book {\n\n    private String title;\n    private int yearOfPublishing;\n    private String[] authors;   \n\n    public String getTitle() {\n        return title;\n    }\n\n    public int getYearOfPublishing() {\n        return yearOfPublishing;\n    }\n\n    public String[] getAuthors() {\n        return authors;\n    }\n\n    public void setTitle (String title) {\n        this.title \u003d title;\n    }\n\n    public void setYearOfPublishing (int yearOfPublishing) {\n        this.yearOfPublishing \u003d yearOfPublishing;\n    }\n\n    public void setAuthors (String[] authors) {\n        this.authors \u003d authors;\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/8261",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "class User {\n    private String firstName;\n    private String lastName;\n\n    public User() {\n        this.firstName \u003d \"\";\n        this.lastName \u003d \"\";\n    }\n\n    public void setFirstName(String firstName) {\n        if (firstName !\u003d null) {\n            this.firstName \u003d firstName;\n        } else {\n            this.firstName \u003d \"\";\n        }\n    }\n\n    public void setLastName(String lastName) {\n        if (lastName !\u003d null) {\n            this.lastName \u003d lastName;\n        } else {\n            this.lastName \u003d \"\";\n        }\n    }\n\n    public String getFullName() {\n        if (!firstName.equals(\"\") \u0026\u0026 !lastName.equals(\"\")) {\n            return firstName + \" \" + lastName;\n        } else if (firstName.equals(\"\") \u0026\u0026 !lastName.equals(\"\")) {\n            return lastName;\n        } else if (!firstName.equals(\"\")) {\n            return firstName;\n        }\n        return \"Unknown\";\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2205",
+    "checked": false,
+    "mode": 5,
+    "answerStr": "final"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3046",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "c"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3047",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "cadence",
+      "getSpeed()",
+      "speedUp(int increment)"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3048",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "getBirthDate()",
+      "getName()",
+      "name"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3424",
+    "checked": false,
+    "mode": 5,
+    "answerStr": "extends"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/8309",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "class Person {\n\n}\n\nclass Employee extends Person {\n\n}\n\nclass Doctor extends Employee {\n\n}\n\nclass Patient extends Person {\n\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2009",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "super as the first statement"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2204",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "to access fields of the base class",
+      "to invoke methods of the base class",
+      "to invoke constructors of the base class"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3044",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "The default constructor of a subclass automatically calls the no-argument constructor of the superclass.",
+      "We can invoke a parameterized constructor of the superclass using super(...) in a constructor of a subclass."
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3041",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "class Employee {\n\n    protected String name;\n    protected String birthDate;\n\n    public Employee(String name, String birthDate) {\n        this.name \u003d name;\n        this.birthDate \u003d birthDate;\n    }\n}\n\nclass RegularEmployee extends Employee {\n\n    protected long salary;\n    protected String hireDate;\n\n    public RegularEmployee(String name, String birthDate, long salary, String hireDate) {\n        super(name, birthDate);\n        this.salary \u003d salary;\n        this.hireDate \u003d hireDate;\n    }\n}\n\nclass ContractEmployee extends Employee {\n\n    protected long payPerHour;\n    protected String contractPeriod;\n\n    public ContractEmployee(String name, String birthDate, long payPerHour, String contractPeriod) {\n        super(name, birthDate);\n        this.payPerHour \u003d payPerHour;\n        this.contractPeriod \u003d contractPeriod;\n        \n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3042",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "class BankAccount {\n\n    protected String number;\n    protected Long balance;\n\n    public BankAccount(String number, Long balance) {\n        this.number \u003d number;\n        this.balance \u003d balance;\n    }\n}\n\nclass CheckingAccount extends BankAccount{\n    double fee;\n\n    public CheckingAccount(String number, Long balance, double fee) {\n        super(number, balance);\n        this.fee \u003d fee;\n    }\n}\n\nclass SavingsAccount extends BankAccount{\n    double interestRate;\n\n    public SavingsAccount(String number, Long balance, double interestRate) {\n        super(number, balance);\n        this.interestRate \u003d interestRate;\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3448",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "3",
+      "4"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/29809",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "E. The Circle class has an object constructor with a parameter",
+      "C. Both circle1 and circle2 have an attribute called radius and a method called getArea()",
+      "A. There are two instances of the Circle class"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2050",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "int[]",
+      "String"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3413",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "."
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3659",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "class Army {\n\n    public static void createArmy() {\n        // Create all objects here\n        for (int i \u003d 0; i \u003c 5; i++) {\n            Unit unit \u003d new Unit(\"1\");\n        }\n\n        for (int i \u003d 0; i \u003c 3; i++) {\n            Knight unit \u003d new Knight(\"1\");\n        }\n\n        General general \u003d new General(\"1\");\n        \n        Doctor doctor \u003d new Doctor(\"1\"); \n    }\n\n\n    // Don\u0027t change the code below\n    static class Unit {\n        static String nameUnit;\n        static int countUnit;\n\n        public Unit(String name) {\n            countUnit++;\n            nameUnit \u003d name;\n\n        }\n    }\n\n    static class Knight {\n        static String nameKnight;\n        static int countKnight;\n\n        public Knight(String name) {\n            countKnight++;\n            nameKnight \u003d name;\n\n        }\n    }\n\n    static class General {\n        static String nameGeneral;\n        static int countGeneral;\n\n        public General(String name) {\n            countGeneral++;\n            nameGeneral \u003d name;\n\n        }\n    }\n\n    static class Doctor {\n        static String nameDoctor;\n        static int countDoctor;\n\n        public Doctor(String name) {\n            countDoctor++;\n            nameDoctor \u003d name;\n\n        }\n    }\n\n    public static void main(String[] args) {\n        createArmy();\n        System.out.println(Unit.countUnit);\n        System.out.println(Knight.countKnight);\n        System.out.println(General.countGeneral);\n        System.out.println(Doctor.countDoctor);\n    }\n\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/5038",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "The value of an object of this class cannot be changed"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/5039",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "8"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/12689",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "5"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/12690",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "class Person {\n    String name;\n    int age;\n}\n\nclass MakingChanges {\n    public static void changeIdentities(Person p1, Person p2) {\n        // write your code here\n        String s \u003d p1.name;\n        p1.name \u003d p2.name;\n        p2.name \u003d s;\n        int n \u003d p1.age;\n        p1.age \u003d p2.age;\n        p2.age \u003d n;\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/19626",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "import java.util.Scanner;\n\nclass Solution {\n\n    public void printIsNull(Object o) {\n        // write your code here\n        if (o \u003d\u003d null) {\n            System.out.println(\"It\u0027s null\");\n        } else {\n            System.out.println(\"It\u0027s an object\");\n        }\n    }\n}\n\n// Do not change the code below\nclass Main {\n    public static void main(String[] args) {\n        Solution solution \u003d new Solution();\n        Scanner scanner \u003d new Scanner(System.in);\n        while (scanner.hasNextLine()) {\n            Object obj \u003d \"null\".equals(scanner.nextLine()) ? null : new Object();\n            solution.printIsNull(obj);\n        }\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2198",
+    "checked": false,
+    "mode": 5,
+    "answerStr": "final"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2200",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "class Animal {\n\n    public void say() {\n        System.out.println(\"...An incomprehensible sound...\");\n    }\n}\n\nclass Cat extends Animal {\n    @Override\n    public void say() {\n        System.out.println(\"meow-meow\");\n    }\n}\n\nclass Dog extends Animal {\n    @Override\n    public void say() {\n        System.out.println(\"arf-arf\");\n    }\n}\n\nclass Duck extends Animal {\n    @Override\n    public void say() {\n        System.out.println(\"quack-quack\");\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3059",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "doA",
+      "doE"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3062",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "public long calcSalary() { return yearsOfExperience * 500 + super.baseSalary; }"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3400",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "private instance methods",
+      "public static methods",
+      "final methods"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3823",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "class Shape {\n    public double area() {\n        return 0;\n    }\n}\n\nclass Triangle extends Shape {\n    double height;\n    double base;\n\n    // override the method here\n    @Override\n    public double area() {\n        return base * height / 2;\n    }\n}\n\nclass Circle extends Shape {\n    double radius;\n\n    // override the method here\n    @Override\n    public double area() {\n        return Math.PI * radius * radius;\n    }\n}\n\nclass Square extends Shape {\n    double side;\n\n    // override the method here\n    @Override\n    public double area() {\n        return side * side;\n    }\n}\n\nclass Rectangle extends Shape {\n    double width;\n    double height;\n\n    // override the method here\n    @Override\n    public double area() {\n        return width * height;\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2046",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "It outputs two lines. The first one is \"Derived class\". The second one is \"Base class\"."
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2258",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "Dynamic method dispatch"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3064",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "notif.show() outputs \"No problems\"",
+      "warn.getMsg() returns \"WARN: Money ends\"",
+      "alarm.show() outputs \"ALARM: The ship sank\""
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3065",
+    "checked": false,
+    "mode": 5,
+    "answerStr": "class-C"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3396",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "Run-time polymorphism"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3397",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "at compile time"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/4331",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "class Publication {\n\n    private String title;\n\n    public Publication(String title) {\n        this.title \u003d title;\n    }\n\n    public final String getInfo() {\n        // write your code here\n        return getType() + getDetails() + \": \" + title;\n    }\n\n    public String getType() {\n        return \"Publication\";\n    }\n\n    public String getDetails() {\n        return \"\";\n    }\n\n}\n\nclass Newspaper extends Publication {\n\n    private String source;\n\n    public Newspaper(String title, String source) {\n        super(title);\n        this.source \u003d source;\n    }\n\n    // write your code here\n    @Override\n    public String getType() {\n        return \"Newspaper\";\n    }\n\n    @Override\n    public String getDetails() {\n        return \" (source - \" + source + \")\";\n    }\n\n}\n\nclass Article extends Publication {\n\n    private String author;\n\n    public Article(String title, String author) {\n        super(title);\n        this.author \u003d author;\n    }\n\n    // write your code here\n    @Override\n    public String getType() {\n        return \"Article\";\n    }\n\n    @Override\n    public String getDetails() {\n        return \" (author - \" + author + \")\";\n    }\n\n}\n\nclass Announcement extends Publication {\n\n    private int daysToExpire;\n\n    public Announcement(String title, int daysToExpire) {\n        super(title);\n        this.daysToExpire \u003d daysToExpire;\n    }\n\n    // write your code here\n    @Override\n    public String getType() {\n        return \"Announcement\";\n    }\n\n    @Override\n    public String getDetails() {\n        return \" (days to expire - \" + daysToExpire + \")\";\n    }\n\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/1960",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "a",
+      "c"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2134",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "import java.util.*;\n\nclass Main {\n    public static void main(String[] args) {\n        // put your code here\n        Scanner scanner \u003d new Scanner(System.in);\n\n        int size \u003d scanner.nextInt();\n        int[] arr \u003d new int[size];\n\n        for (int i \u003d 0; i \u003c size; i++) {\n            arr[i] \u003d scanner.nextInt();\n        }\n\n        int n \u003d scanner.nextInt();\n\n        int res \u003d 0;\n        for (int i \u003d 0; i \u003c arr.length; i++) {\n            if (arr[i] \u003e n) {\n                res +\u003d arr[i];\n            }\n        }\n        System.out.println(res);\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2142",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "import java.util.Arrays;\nimport java.util.Scanner;\n\nclass Main {\n    public static void main(String[] args) {\n        // put your code here\n        Scanner scanner \u003d new Scanner(System.in);\n        int first \u003d scanner.nextInt();\n        int[] second \u003d new int[first];\n\n        for (int i \u003d 0; i \u003c first; i++) {\n            second[(i + 1) % first] \u003d scanner.nextInt();\n        }\n\n        for (int i : second) {\n            System.out.print(i + \" \");\n        }\n    }\n}"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3280",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "for (int i \u003d 0; i \u003c\u003d 3; i++) { System.out.println(nums[i]); }",
+      "for (int i \u003d nums.length - 1; i \u003e\u003d 0; i--) { System.out.println(nums[i]); }",
+      "for (int i \u003d 0; i \u003c nums.length; i++) { System.out.println(nums[i]); }"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/10613",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        // write your code here\n        Scanner scanner \u003d new Scanner(System.in);\n\n        int[] box1 \u003d {scanner.nextInt(), scanner.nextInt(), scanner.nextInt()};\n        int[] box2 \u003d {scanner.nextInt(), scanner.nextInt(), scanner.nextInt()};\n\n        Arrays.sort(box1);\n        Arrays.sort(box2);\n\n        if (box1[0] \u003e box2[0] \u0026\u0026 box1[1] \u003e box2[1] \u0026\u0026 box1[2] \u003e box2[2]) {\n            System.out.println(\"Box 1 \u003e Box 2\");\n        } else if (box1[0] \u003c box2[0] \u0026\u0026 box1[1] \u003c box2[1] \u0026\u0026 box1[2] \u003c box2[2]) {\n            System.out.println(\"Box 1 \u003c Box 2\");\n        } else {\n            System.out.println(\"Incompatible\");\n        }\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/9705",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "Graphical User Interface"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/9708",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "macOS",
+      "iOS",
+      "Microsoft Windows",
+      "Android"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/13982",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "It controls the communication between all the computer software and hardware"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/19902",
+    "checked": false,
+    "mode": 6,
+    "answerListArr": [
+      [
+        "Monolithic kernel",
+        "is a program that performs most of the OS functions"
+      ],
+      [
+        "Microkernel",
+        "performs a smaller subset of the OS functions, can be extended with additional modules - drivers"
+      ],
+      [
+        "Kernel",
+        "is a mandatory part of any OS, it\u0027s core"
+      ]
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/18005",
+    "checked": false,
+    "mode": 7,
+    "answerArr": [
+      "Registers",
+      "Disk drives",
+      "Cache",
+      "Main memory"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/18006",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "Access time",
+      "Capacity"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/18008",
+    "checked": false,
+    "mode": 6,
+    "answerListArr": [
+      [
+        "Access time",
+        "the time interval between the read/write request and the availability of the data in computer memory"
+      ],
+      [
+        "Capacity",
+        "the total amount/volume of data that the memory can store"
+      ],
+      [
+        "Cost per bit",
+        "the cost to manufacture one bit of that particular memory"
+      ]
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/18009",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "reference variables of a loop in each iteration"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/18056",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "It is used to store data from the secondary storage so that the CPU can access it.",
+      "It is used to store the data that is used specifically at that time."
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/21578",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "Heap memory"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/21580",
+    "checked": false,
+    "mode": 6,
+    "answerListArr": [
+      [
+        "Memory leakage",
+        "Occurs when an unused variable holds space"
+      ],
+      [
+        "Garbage collector",
+        "Automatically frees up memory that is no longer referenced or used"
+      ],
+      [
+        "Memory fragmentation",
+        "Side effect of random memory allocation"
+      ],
+      [
+        "Stack overflow",
+        "Caused by the program\u0027s excessive demand for more memory space than allocated"
+      ]
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/21582",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "When unused memory is not freed"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/21584",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "When using heap memory allocation"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/21586",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "Stack memory"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/21587",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "The overall memory on the system",
+      "The architecture of the computer on which the program runs",
+      "The language used to write the program"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/9707",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "Retrieving and displaying the content of the websites",
+      "Resource management",
+      "Data protection and secure access"
+    ]
+  }
+]

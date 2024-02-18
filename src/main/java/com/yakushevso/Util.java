@@ -17,7 +17,8 @@ import java.time.Duration;
 public class Util {
     public static WebDriver createDriver(String visible) {
         // Set path to browser driver
-        System.setProperty("webdriver.chrome.driver", SettingsManager.loadSettings().getChromedriverPath());
+        System.setProperty("webdriver.chrome.driver",
+                SettingsManager.loadSettings().getChromedriverPath() + "chromedriver.exe");
         ChromeOptions options = new ChromeOptions();
 
         // Create an instance of the driver in the background if "true"

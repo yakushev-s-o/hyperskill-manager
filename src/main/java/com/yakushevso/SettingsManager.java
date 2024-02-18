@@ -20,15 +20,12 @@ public class SettingsManager {
 
         if (!file.exists() || file.length() == 0) {
             System.out.println("Enter path ChromeDriver: ");
-            String driver_path = scanner.next() + "chromedriver.exe";
+            String driverPath = scanner.next();
             System.out.println("Enter path FolderPath: ");
-            String folder_path = scanner.next() + "TRACK_NUMBER/";
+            String folderPath = scanner.next();
 
             List<Account> accounts = new ArrayList<>();
-            Settings settings = new Settings(accounts, driver_path, folder_path,
-                    "src/main/resources/answer-list-TRACK_NUMBER.json",
-                    "src/main/resources/data-list-TRACK_NUMBER.json",
-                    "https://hyperskill.org/");
+            Settings settings = new Settings(accounts, driverPath, folderPath);
 
             saveSettings(settings);
             settings.addAccount(getAccount(scanner));
