@@ -1,6 +1,6 @@
 package com.yakushevso.data;
 
-public record Statistics(int knowledgeMap, int topicsLearned, int topicAll,
+public record Statistics(String data, int knowledgeMap, int topicsLearned, int topicAll,
                          int projectsLearned, int projectsAll, long theoryLearned,
                          int theoryAll, int stepsLearned, int stepsAll,
                          long additionalTopicsLearned, int additionalTopicsAll,

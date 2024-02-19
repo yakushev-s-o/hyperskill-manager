@@ -1,5 +1,6 @@
 package com.yakushevso;
 
+import com.google.common.reflect.TypeToken;
 import com.google.gson.*;
 import com.yakushevso.data.*;
 import org.openqa.selenium.By;
@@ -7,6 +8,8 @@ import org.openqa.selenium.WebDriver;
 
 import java.io.*;
 import java.lang.reflect.Type;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class DataManager {
@@ -21,9 +24,13 @@ public class DataManager {
     // Get track data and write to file
     public void getData(WebDriver driver) {
         Topic topic = getTopics(driver);
+        System.out.println("[1/4] Topic data has been received!");
         List<Project> projects = getProjects(driver);
+        System.out.println("[2/4] Project data has been received!");
         List<Step> steps = getSteps(driver, topic);
+        System.out.println("[3/4] The step data is received!");
         List<Step> additionalSteps = getSteps(driver, getAdditionalTopics(driver, topic, steps));
+        System.out.println("[4/4] Additional step data has been received!");
 
         saveToFile(new Data(topic, projects, steps, additionalSteps),
                 "src/main/resources/data-list-" + TRACK + ".json");
@@ -275,8 +282,12 @@ public class DataManager {
     }
 
     // Get statistics of the received data
-    private Statistics getStatistics(WebDriver driver, Topic topic, List<Project> projects, List<Step> steps,
-                                     List<Step> additionalSteps) {
+    private List<Statistics> getStatistics(WebDriver driver, Topic topic,
+                                           List<Project> projects, List<Step> steps,
+                                           List<Step> additionalSteps) {
+        List<Statistics> statisticsList = getFileData(new TypeToken<List<Statistics>>() {
+        }.getType(), "src/main/resources/statistics-" + USER + "-" + TRACK + ".json");
+
         JsonObject currentObj = getCurrent(driver).getAsJsonObject("gamification");
         JsonObject progressObj = getProgress(driver, "https://hyperskill.org/api/progresses"
                 + "/track-" + TRACK + "?format=json");
@@ -308,52 +319,75 @@ public class DataManager {
         int allCompletedTheory = currentObj.get("passed_theories").getAsInt();
         int allSolvedSteps = currentObj.get("passed_problems").getAsInt();
 
-        return new Statistics(knowledgeMap, topicsLearned, topicAll, projectsLearned, projectsAll,
-                theoryLearned, theoryAll, stepsSolved, stepsAll, additionalTopicsLearned,
-                additionalTopicsAll, additionalTheoryLearned, additionalTheoryAll,
-                stepsAdditionalSolved, additionalStepsAll, allCompletedTopics,
-                allCompletedProjects, allCompletedTheory, allSolvedSteps);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        String dataNow = formatter.format(LocalDateTime.now());
+
+        if (statisticsList == null) {
+            statisticsList = new ArrayList<>();
+        }
+
+        statisticsList.add(new Statistics(dataNow, knowledgeMap, topicsLearned, topicAll,
+                projectsLearned, projectsAll, theoryLearned, theoryAll, stepsSolved,
+                stepsAll, additionalTopicsLearned, additionalTopicsAll,
+                additionalTheoryLearned, additionalTheoryAll, stepsAdditionalSolved,
+                additionalStepsAll, allCompletedTopics, allCompletedProjects,
+                allCompletedTheory, allSolvedSteps));
+
+        return statisticsList;
     }
 
     // Print the latest statistics
-    public void printStats() {
+    public void printStats(int lastStats) {
         try {
-            Statistics statistics = getFileData(Statistics.class,
+            List<Statistics> statisticsList = getFileData(new TypeToken<List<Statistics>>() {
+                    }.getType(),
                     "src/main/resources/statistics-" + USER + "-" + TRACK + ".json");
 
-            System.out.printf("""
-                            ================================
-                            Track %d
-                            ================================
-                            Knowledge-map:          %d
-                            Topics                  %d/%d
-                            Projects:               %d/%d
-                            Theory:                 %d/%d
-                            Steps:                  %d/%d
-                            ================================
-                            Additional topics:      %d/%d
-                            Additional theory:      %d/%d
-                            Additional steps:       %d/%d
-                            ================================
-                            All completed topics:   %d
-                            All completed projects: %d
-                            All completed theory:   %d
-                            All solved steps:       %d
-                            ================================
-                            """,
-                    TRACK,
-                    statistics.knowledgeMap(),
-                    statistics.topicsLearned(), statistics.topicAll(),
-                    statistics.projectsLearned(), statistics.projectsAll(),
-                    statistics.theoryLearned(), statistics.theoryAll(),
-                    statistics.stepsLearned(), statistics.stepsAll(),
-                    statistics.additionalTopicsLearned(), statistics.additionalTopicsAll(),
-                    statistics.additionalTheoryLearned(), statistics.additionalTheoryAll(),
-                    statistics.additionalStepsLearned(), statistics.additionalStepsAll(),
-                    statistics.allCompletedTopics(),
-                    statistics.allCompletedProjects(),
-                    statistics.allCompletedTheory(),
-                    statistics.allSolvedSteps());
+            // Output data from the end of the list
+            int start = Math.max(statisticsList.size() - lastStats, 0);
+            for (int i = statisticsList.size() - 1; i >= start; i--) {
+                System.out.printf("""
+                                ================================
+                                Track %d (%s)
+                                ================================
+                                Knowledge-map:          %d
+                                Topics                  %d/%d
+                                Projects:               %d/%d
+                                Theory:                 %d/%d
+                                Steps:                  %d/%d
+                                ================================
+                                Additional topics:      %d/%d
+                                Additional theory:      %d/%d
+                                Additional steps:       %d/%d
+                                ================================
+                                All completed topics:   %d
+                                All completed projects: %d
+                                All completed theory:   %d
+                                All solved steps:       %d
+                                ================================
+                                """,
+                        TRACK,
+                        statisticsList.get(i).data(),
+                        statisticsList.get(i).knowledgeMap(),
+                        statisticsList.get(i).topicsLearned(),
+                        statisticsList.get(i).topicAll(),
+                        statisticsList.get(i).projectsLearned(),
+                        statisticsList.get(i).projectsAll(),
+                        statisticsList.get(i).theoryLearned(),
+                        statisticsList.get(i).theoryAll(),
+                        statisticsList.get(i).stepsLearned(),
+                        statisticsList.get(i).stepsAll(),
+                        statisticsList.get(i).additionalTopicsLearned(),
+                        statisticsList.get(i).additionalTopicsAll(),
+                        statisticsList.get(i).additionalTheoryLearned(),
+                        statisticsList.get(i).additionalTheoryAll(),
+                        statisticsList.get(i).additionalStepsLearned(),
+                        statisticsList.get(i).additionalStepsAll(),
+                        statisticsList.get(i).allCompletedTopics(),
+                        statisticsList.get(i).allCompletedProjects(),
+                        statisticsList.get(i).allCompletedTheory(),
+                        statisticsList.get(i).allSolvedSteps());
+            }
         } catch (Exception e) {
             System.out.println("There are no statistics, update the data!");
         }

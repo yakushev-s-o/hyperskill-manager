@@ -167,7 +167,7 @@ public class AppLauncher {
             Settings settings = SettingsManager.loadSettings();
 
             System.out.printf("""
-                            Current path:
+                            Current paths:
                             driver path: %s
                             folder path: %s
                             """,
@@ -224,11 +224,16 @@ public class AppLauncher {
                     Util.login(driver, userSession.getAccount().login(),
                             userSession.getAccount().password());
                     dataManager.getData(driver);
-                    dataManager.printStats();
+                    dataManager.printStats(1);
                     Util.closeDriver(driver);
                     System.out.println("The data has been received successfully!");
                 }
-                case 2 -> dataManager.printStats();
+                case 2 -> {
+                    System.out.println("Enter the number of statistics to output:");
+                    checkInputNum();
+                    int lastStats = SCANNER.nextInt();
+                    dataManager.printStats(lastStats);
+                }
                 case 0 -> {
                     return;
                 }
