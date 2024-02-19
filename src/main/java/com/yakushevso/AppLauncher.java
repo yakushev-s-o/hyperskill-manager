@@ -60,7 +60,8 @@ public class AppLauncher {
 
     private static Account choiceUser() {
         System.out.println("Select a user: ");
-        List<Account> accounts = SettingsManager.loadSettings().getAccounts();
+        Settings settings = SettingsManager.loadSettings();
+        List<Account> accounts = settings.getAccounts();
 
         for (int i = 1; i <= accounts.size(); i++) {
             System.out.println(i + ". " + accounts.get(i - 1).login());
@@ -283,7 +284,6 @@ public class AppLauncher {
             }
 
             Util.closeDriver(driver);
-            System.out.println("The pages have been successfully loaded!");
         }
     }
 
@@ -295,7 +295,6 @@ public class AppLauncher {
                 userSession.getAccount().password());
         automation.getAnswers();
         Util.closeDriver(driver);
-        System.out.println("The answers have been successfully received!");
     }
 
     private static void setAnswersMenu(UserSession userSession) {
@@ -306,7 +305,6 @@ public class AppLauncher {
                 userSession.getAccount().password());
         automation.sendAnswers();
         Util.closeDriver(driver);
-        System.out.println("The answers have been successfully received!");
     }
 
     private static void checkInputNum() {

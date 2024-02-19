@@ -9,6 +9,9 @@ import org.openqa.selenium.interactions.Actions;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 public class SavePages {
@@ -38,6 +41,8 @@ public class SavePages {
                 save(driver, "/knowledge-map/", String.valueOf(topic));
             }
         }
+
+        System.out.println("The topics have been successfully loaded!");
     }
 
     // Save pages with projects
@@ -66,6 +71,8 @@ public class SavePages {
                 save(driver, "/projects/", String.valueOf(project.id()));
             }
         }
+
+        System.out.println("The projects have been successfully loaded!");
     }
 
     // Save project stages
@@ -84,6 +91,8 @@ public class SavePages {
                 }
             }
         }
+
+        System.out.println("The stages have been successfully loaded!");
     }
 
     // Save pages with topics
@@ -110,22 +119,17 @@ public class SavePages {
                 save(driver, "/learn/step/", String.valueOf(steps.id()));
             }
         }
+
+        System.out.println("The themes have been successfully loaded!");
     }
 
     // Check if the file exists
     private boolean isFileExists(String path, String fileName) {
-        File dir = new File(path);
-        File[] files = dir.listFiles();
+        // Creating a Path object representing the path to the file
+        Path filePath = Paths.get(path, fileName + ".html");
 
-        if (files != null) {
-            for (File file : files) {
-                if (file.getName().equals(fileName + ".html")) {
-                    return false;
-                }
-            }
-        }
-
-        return true;
+        // Using the File.exists() method to check the existence of the file
+        return !Files.exists(filePath);
     }
 
     // Check for element visibility
@@ -170,10 +174,10 @@ public class SavePages {
         // Saving the page code to a file and saving the encoding
         try {
             String filePath = FOLDER_PATH + "track/" + TRACK + path + page + ".html";
-            BufferedWriter writer = new BufferedWriter(
-                    new OutputStreamWriter(new FileOutputStream(filePath), StandardCharsets.UTF_8));
-            writer.write(pageSource);
-            writer.close();
+            try (BufferedWriter writer = new BufferedWriter(
+                    new OutputStreamWriter(new FileOutputStream(filePath), StandardCharsets.UTF_8))) {
+                writer.write(pageSource);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

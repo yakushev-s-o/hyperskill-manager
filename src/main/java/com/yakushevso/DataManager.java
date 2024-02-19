@@ -24,13 +24,9 @@ public class DataManager {
     // Get track data and write to file
     public void getData(WebDriver driver) {
         Topic topic = getTopics(driver);
-        System.out.println("[1/4] Topic data has been received!");
         List<Project> projects = getProjects(driver);
-        System.out.println("[2/4] Project data has been received!");
         List<Step> steps = getSteps(driver, topic);
-        System.out.println("[3/4] The step data is received!");
         List<Step> additionalSteps = getSteps(driver, getAdditionalTopics(driver, topic, steps));
-        System.out.println("[4/4] Additional step data has been received!");
 
         saveToFile(new Data(topic, projects, steps, additionalSteps),
                 "src/main/resources/data-list-" + TRACK + ".json");
@@ -84,6 +80,8 @@ public class DataManager {
                 isNext = false;
             }
         }
+
+        System.out.println("[1/4] Topic data has been received!");
 
         return new Topic(listTopic, listDescendants);
     }
@@ -142,6 +140,8 @@ public class DataManager {
                         title, stagesIds));
             }
         }
+
+        System.out.println("[2/4] Project data has been received!");
 
         return projectList;
     }
@@ -220,6 +220,8 @@ public class DataManager {
                     learnedTheory, listStepTrue, listStepFalse));
         }
 
+        System.out.println("[3/4] The step data is received!");
+
         return listSteps;
     }
 
@@ -265,6 +267,8 @@ public class DataManager {
                 additionalTopic.add(follower);
             }
         }
+
+        System.out.println("[4/4] Additional step data has been received!");
 
         return new Topic(null, additionalTopic);
     }
@@ -426,7 +430,7 @@ public class DataManager {
 
                 reader.close();
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
             }
         }
 
@@ -444,7 +448,7 @@ public class DataManager {
             gson.toJson(object, writer);
             writer.close();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 }

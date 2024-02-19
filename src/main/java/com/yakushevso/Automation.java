@@ -59,8 +59,10 @@ public class Automation {
                     }
                 }
             }
+
+            System.out.println("The answers have been successfully received!");
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("File \"answer-list-" + TRACK + ".json\" was not found!");
         }
     }
 
@@ -201,6 +203,8 @@ public class Automation {
                     Util.delay(500);
                 }
             }
+
+            System.out.println("The answers have been successfully received!");
         } else {
             System.out.println("File \"data-list-" + TRACK + ".json\" does not exist, update the data!");
         }
