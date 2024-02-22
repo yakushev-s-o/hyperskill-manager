@@ -18,14 +18,6 @@ public class Settings {
         return accounts;
     }
 
-    public void addAccount(Account account) {
-        accounts.add(account);
-    }
-
-    public void delAccount(int index) {
-        accounts.remove(index);
-    }
-
     public String getChromedriverPath() {
         return driverPath;
     }

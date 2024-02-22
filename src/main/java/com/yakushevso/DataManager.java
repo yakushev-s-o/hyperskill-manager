@@ -5,6 +5,8 @@ import com.google.gson.*;
 import com.yakushevso.data.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.lang.reflect.Type;
@@ -15,6 +17,7 @@ import java.util.*;
 public class DataManager {
     private final int TRACK;
     private final int USER;
+    private static final Logger log = LoggerFactory.getLogger(DataManager.class);
 
     public DataManager(UserSession userSession) {
         TRACK = userSession.getTrack();
@@ -23,20 +26,31 @@ public class DataManager {
 
     // Get track data and write to file
     public void getData(WebDriver driver) {
-        Topic topic = getTopics(driver);
-        List<Project> projects = getProjects(driver);
-        List<Step> steps = getSteps(driver, topic);
-        List<Step> additionalSteps = getSteps(driver, getAdditionalTopics(driver, topic, steps));
+        log.info("Starting data collection process for track: {}", TRACK);
 
-        saveToFile(new Data(topic, projects, steps, additionalSteps),
-                "src/main/resources/data-list-" + TRACK + ".json");
+        try {
+            Topic topic = getTopics(driver);
+            List<Project> projects = getProjects(driver);
+            List<Step> steps = getSteps(driver, topic);
+            List<Step> additionalSteps = getSteps(driver, getAdditionalTopics(driver, topic, steps));
 
-        saveToFile(getStatistics(driver, topic, projects, steps, additionalSteps),
-                "src/main/resources/statistics-" + USER + "-" + TRACK + ".json");
+            Data data = new Data(topic, projects, steps, additionalSteps);
+            String dataListPath = "src/main/resources/data-list-" + TRACK + ".json";
+            saveToFile(data, dataListPath);
+            log.info("Data saved successfully to {}", dataListPath);
+
+            List<Statistics> statistics = getStatistics(driver, topic, projects, steps, additionalSteps);
+            String statisticsPath = "src/main/resources/statistics-" + USER + "-" + TRACK + ".json";
+            saveToFile(statistics, statisticsPath);
+            log.info("Statistics saved successfully to {}", statisticsPath);
+        } catch (Exception e) {
+            log.error("An error occurred during data collection: {}", e.getMessage(), e);
+        }
     }
 
     // Get the list of topics
     private Topic getTopics(WebDriver driver) {
+        log.info("Starting to retrieve topics for track: {}", TRACK);
         List<Integer> listTopic = new ArrayList<>();
         List<Integer> listDescendants = new ArrayList<>();
 
@@ -81,13 +95,13 @@ public class DataManager {
             }
         }
 
-        System.out.println("[1/4] Topic data has been received!");
-
+        log.info("[1/4] Topic data has been received successfully. Total topics: {}", listTopic.size());
         return new Topic(listTopic, listDescendants);
     }
 
     // Get a list of projects
     private List<Project> getProjects(WebDriver driver) {
+        log.info("Starting to retrieve projects for track: {}", TRACK);
         List<Project> projectList = new ArrayList<>();
 
         String urlTrack = "https://hyperskill.org/api/tracks/" + TRACK + "?format=json";
@@ -141,13 +155,13 @@ public class DataManager {
             }
         }
 
-        System.out.println("[2/4] Project data has been received!");
-
+        log.info("[2/4] Project data has been received successfully. Total topics: {}", projectList.size());
         return projectList;
     }
 
     // Get a list of topics and tasks
     private List<Step> getSteps(WebDriver driver, Topic topics) {
+        log.info("Starting to retrieve steps for track: {}", TRACK);
         List<Step> listSteps = new ArrayList<>();
 
         for (Integer topic : topics.descendants()) {
@@ -220,13 +234,13 @@ public class DataManager {
                     learnedTheory, listStepTrue, listStepFalse));
         }
 
-        System.out.println("[3/4] The step data is received!");
-
+        log.info("[3/4] Steps data has been received successfully. Total topics: {}", listSteps.size());
         return listSteps;
     }
 
     // Get a list of topics and tasks outside track
     private Topic getAdditionalTopics(WebDriver driver, Topic topics, List<Step> steps) {
+        log.info("Starting to retrieve additional topics for track: {}", TRACK);
         Set<Integer> followerList = new HashSet<>();
         List<Integer> additionalTopic = new ArrayList<>();
 
@@ -268,8 +282,7 @@ public class DataManager {
             }
         }
 
-        System.out.println("[4/4] Additional step data has been received!");
-
+        log.info("[4/4] Additional step data has been received successfully. Total topics: {}", additionalTopic.size());
         return new Topic(null, additionalTopic);
     }
 
@@ -342,10 +355,20 @@ public class DataManager {
 
     // Print the latest statistics
     public void printStats(int lastStats) {
+        log.info("Attempting to print the last {} statistics for user: {} and track: {}", lastStats, USER, TRACK);
+
         try {
             List<Statistics> statisticsList = getFileData(new TypeToken<List<Statistics>>() {
                     }.getType(),
                     "src/main/resources/statistics-" + USER + "-" + TRACK + ".json");
+
+            if (statisticsList == null || statisticsList.isEmpty()) {
+                log.warn("Statistics list is empty or null. No data to display.");
+                System.out.println("There are no statistics, update the data!");
+                return;
+            }
+
+            log.debug("Statistics data loaded successfully. Preparing to display the last {} entries.", lastStats);
 
             // Output data from the end of the list
             int start = Math.max(statisticsList.size() - lastStats, 0);
@@ -392,8 +415,10 @@ public class DataManager {
                         statisticsList.get(i).allCompletedTheory(),
                         statisticsList.get(i).allSolvedSteps());
             }
+
+            log.info("Statistics for the last {} entries displayed successfully.", lastStats);
         } catch (Exception e) {
-            System.out.println("There are no statistics, update the data!");
+            log.error("Failed to load or display statistics: {}", e.getMessage(), e);
         }
     }
 
@@ -411,27 +436,32 @@ public class DataManager {
 
     // Get a list of objects from a file
     public static <T> T getFileData(Type type, String path) {
+        log.debug("Loading data of the {} type from a file: {}", type, path);
         Gson gson = new Gson();
         File file = new File(path);
         T result = null;
 
         if (file.exists() && file.length() != 0) {
-            try {
-                BufferedReader reader = new BufferedReader(new FileReader(file));
+            try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
                 JsonElement jsonElement = gson.fromJson(reader, JsonElement.class);
-
-                if (jsonElement.isJsonArray()) {
-                    // Read the list of objects
-                    result = gson.fromJson(jsonElement, type);
+                if (jsonElement != null) {
+                    if (jsonElement.isJsonArray()) {
+                        // Read the list of objects
+                        result = gson.fromJson(jsonElement, type);
+                        log.debug("Successfully loaded a list of objects from {}", path);
+                    } else {
+                        // Read single object
+                        result = gson.fromJson(jsonElement.getAsJsonObject(), type);
+                        log.debug("Successfully loaded a single object from {}", path);
+                    }
                 } else {
-                    // Read single object
-                    result = gson.fromJson(jsonElement.getAsJsonObject(), type);
+                    log.warn("No JSON content found in file {}", path);
                 }
-
-                reader.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                log.error("Failed to load data from file {}: {}", path, e.getMessage(), e);
             }
+        } else {
+            log.warn("File does not exist or is empty: {}", path);
         }
 
         return result;
@@ -439,16 +469,18 @@ public class DataManager {
 
     // Save the object to a JSON file
     public static void saveToFile(Object object, String path) {
+        log.debug("Attempt to save data to a file: {}", path);
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         File file = new File(path);
 
         // Write updated data to file
         try {
-            FileWriter writer = new FileWriter(file);
-            gson.toJson(object, writer);
-            writer.close();
+            try (FileWriter writer = new FileWriter(file)) {
+                gson.toJson(object, writer);
+                log.info("The data was successfully saved to a file: {}", path);
+            }
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("Failed to save data to file {}: {}", path, e.getMessage(), e);
         }
     }
 }

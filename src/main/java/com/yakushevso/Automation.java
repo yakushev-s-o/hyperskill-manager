@@ -8,6 +8,8 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileReader;
@@ -21,6 +23,7 @@ public class Automation {
     private final WebDriver DRIVER;
     private final int TRACK;
     private final int USER_ID;
+    private static final Logger log = LoggerFactory.getLogger(Automation.class);
 
     public Automation(WebDriver driver, UserSession userSession) {
         DRIVER = driver;
@@ -30,6 +33,8 @@ public class Automation {
 
     // Get all the correct answers and save them to a file one by one
     public void getAnswers() {
+        log.info("Starting the process to get answers for track: {}", TRACK);
+
         Gson gson = new Gson();
         File file = new File("src/main/resources/answer-list-" + TRACK + ".json");
         List<Answer> listAnswers = new ArrayList<>();
@@ -49,19 +54,23 @@ public class Automation {
                         Answer answer = getAnswer(step);
 
                         if (answer == null) {
+                            log.error("Answer not found for step: https://hyperskill.org/learn/step/{}", step);
                             System.out.println("ANSWER_NOT_FOUND: https://hyperskill.org/learn/step/" + step);
                             continue;
                         }
 
                         listAnswers.add(answer);
                         DataManager.saveToFile(listAnswers, "src/main/resources/answer-list-" + TRACK + ".json");
+                        log.info("Answer for step: {} added and saved.", step);
                         fileNotExistsOrEmpty = false;
                     }
                 }
             }
 
+            log.info("All answers have been successfully retrieved and saved for track: {}", TRACK);
             System.out.println("The answers have been successfully received!");
         } catch (IOException e) {
+            log.error("Failed to load data list file for track: {}. Error: {}", TRACK, e.getMessage(), e);
             System.out.println("File \"answer-list-" + TRACK + ".json\" was not found!");
         }
     }
@@ -95,66 +104,97 @@ public class Automation {
 
     // Get the correct answer using the appropriate method
     private Answer getAnswer(String step) {
-        String page = "https://hyperskill.org/learn/step/" + step;
-        String text = getType(step);
+        log.debug("Retrieving answer for step: {}", step);
 
-        if (text.equals("choice")) {
-            String answer = getTestSingle(step);
-            if (answer != null) {
-                return new Answer(page, 1, answer);
+        String page = "https://hyperskill.org/learn/step/" + step;
+        String type = getType(step);
+
+        try {
+            switch (type) {
+                case "choice" -> {
+                    String answerChoice = getTestSingle(step);
+                    if (answerChoice != null) {
+                        log.info("'Single' choice answer retrieved for step ID: {}", step);
+                        return new Answer(page, 1, answerChoice);
+                    }
+                }
+                case "multiple_choice" -> {
+                    String[] answerMultiple = getTestMultiple(step);
+                    if (answerMultiple != null) {
+                        log.info("'Multiple' choice answers retrieved for step ID: {}", step);
+                        return new Answer(page, 2, answerMultiple);
+                    }
+                }
+                case "code" -> {
+                    String answerCode = getCode(step);
+                    if (answerCode != null) {
+                        log.info("'Code' choice answers retrieved for step ID: {}", step);
+                        return new Answer(page, 3, answerCode);
+                    }
+                }
+                case "number" -> {
+                    String answerNumber = getTextNum(step);
+                    if (answerNumber != null) {
+                        log.info("'Number' choice answers retrieved for step ID: {}", step);
+                        return new Answer(page, 4, answerNumber);
+                    }
+                }
+                case "string" -> {
+                    String answerString = getTextShort(step);
+                    if (answerString != null) {
+                        log.info("'String' choice answers retrieved for step ID: {}", step);
+                        return new Answer(page, 5, answerString);
+                    }
+                }
+                case "matching" -> {
+                    String[][] answerMatching = getMatch(step);
+                    if (answerMatching != null) {
+                        log.info("'Matching' choice answers retrieved for step ID: {}", step);
+                        return new Answer(page, 6, answerMatching);
+                    }
+                }
+                case "sorting" -> {
+                    String[] answerSorting = getSort(step);
+                    if (answerSorting != null) {
+                        log.info("'Sorting' choice answers retrieved for step ID: {}", step);
+                        return new Answer(page, 7, answerSorting);
+                    }
+                }
+                case "table" -> {
+                    List<Matrix> answerTable = getMatrix(step);
+                    if (answerTable != null) {
+                        log.info("'Table' choice answers retrieved for step ID: {}", step);
+                        return new Answer(page, 8, answerTable);
+                    }
+                }
+                case "parsons" -> {
+                    String[][] answerParsons = getLines(step);
+                    if (answerParsons != null) {
+                        log.info("'Parsons' choice answers retrieved for step ID: {}", step);
+                        return new Answer(page, 9, answerParsons);
+                    }
+                }
+                case "fill-blanks" -> {
+                    String[] answerFill = getComponents(step);
+                    if (answerFill != null) {
+                        log.info("'Fill-blanks' choice answers retrieved for step ID: {}", step);
+                        return new Answer(page, 10, answerFill);
+                    }
+                }
+                default -> log.warn("Unhandled question type '{}' for step ID: {}", type, step);
             }
-        } else if (text.equals("multiple_choice")) {
-            String[] answer = getTestMultiple(step);
-            if (answer != null) {
-                return new Answer(page, 2, answer);
-            }
-        } else if (text.contains("code")) {
-            String answer = getCode(step);
-            if (answer != null) {
-                return new Answer(page, 3, answer);
-            }
-        } else if (text.equals("number")) {
-            String answer = getTextNum(step);
-            if (answer != null) {
-                return new Answer(page, 4, answer);
-            }
-        } else if (text.equals("string")) {
-            String answer = getTextShort(step);
-            if (answer != null) {
-                return new Answer(page, 5, answer);
-            }
-        } else if (text.equals("matching")) {
-            String[][] answer = getMatch(step);
-            if (answer != null) {
-                return new Answer(page, 6, answer);
-            }
-        } else if (text.equals("sorting")) {
-            String[] answer = getSort(step);
-            if (answer != null) {
-                return new Answer(page, 7, answer);
-            }
-        } else if (text.equals("table")) {
-            List<Matrix> answer = getMatrix(step);
-            if (answer != null) {
-                return new Answer(page, 8, answer);
-            }
-        } else if (text.equals("parsons")) {
-            String[][] answer = getLines(step);
-            if (answer != null) {
-                return new Answer(page, 9, answer);
-            }
-        } else if (text.equals("fill-blanks")) {
-            String[] answer = getComponents(step);
-            if (answer != null) {
-                return new Answer(page, 10, answer);
-            }
+        } catch (Exception e) {
+            log.error("Error while retrieving answer for step ID: {}. Type: {}. Error: {}", step, type, e.getMessage(), e);
         }
 
+        log.warn("No answer found or failed to retrieve answer for step ID: {}. Type: {}", step, type);
         return null;
     }
 
     // Fill in the correct answers from the file on the site
     public void sendAnswers() {
+        log.info("Starting the process to send answers for track: {}", TRACK);
+
         List<Answer> answers = DataManager.getFileData(new TypeToken<List<Answer>>() {
         }.getType(), "src/main/resources/answer-list-" + TRACK + ".json");
 
@@ -166,6 +206,7 @@ public class Automation {
                     try {
                         Util.waitDownloadElement(DRIVER, "//div[@class='step-problem']");
                     } catch (Exception e) {
+                        log.error("Page loading error: {}", answer.getUrl());
                         System.out.println("LOADING_ERROR: " + answer.getUrl());
                         continue;
                     }
@@ -187,8 +228,8 @@ public class Automation {
                                 case 10 -> sendComponents(answer.getAnswerArr());
                             }
                         } catch (Exception e) {
+                            log.error("Error sending the response: {} : {}. Error: {}", answer.getUrl(), e.getMessage(), e);
                             System.out.println("RESPONSE_ERROR: " + answer.getUrl());
-                            e.printStackTrace();
                             continue;
                         }
 
@@ -204,9 +245,11 @@ public class Automation {
                 }
             }
 
+            log.info("All answers have been successfully sent for track: {}", TRACK);
             System.out.println("The answers have been successfully received!");
         } else {
-            System.out.println("File \"data-list-" + TRACK + ".json\" does not exist, update the data!");
+            log.warn("The list of answers is empty. Update the data.");
+            System.out.println("File \"data-list-" + TRACK + ".json\" does not exist. Please update the data.");
         }
     }
 

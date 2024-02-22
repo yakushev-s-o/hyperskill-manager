@@ -19,9 +19,4 @@ public class UserSession {
     public void setTrack(int track) {
         this.track = track;
     }
-
-    public void update(UserSession userSession) {
-        account = userSession.getAccount();
-        track = userSession.getTrack();
-    }
 }

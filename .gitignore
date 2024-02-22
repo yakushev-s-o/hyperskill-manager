@@ -5,3 +5,4 @@ target/
 out/
 /src/main/resources/settings.json
 /src/main/resources/statistics*.json
+/src/main/resources/logs/
