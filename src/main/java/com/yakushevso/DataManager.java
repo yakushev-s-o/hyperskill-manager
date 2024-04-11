@@ -60,7 +60,7 @@ public class DataManager {
         // While there is a next page, we loop
         while (isNext) {
             String urlTopics = "https://hyperskill.org/api/topic-relations?format=json&track_id="
-                    + TRACK + "&page_size=100&page=" + i++ + "";
+                    + TRACK + "&page_size=100&page=" + i++;
 
             driver.get(urlTopics);
 
@@ -172,7 +172,7 @@ public class DataManager {
             // While there is a next page, we loop
             while (isNext) {
                 String url = "https://hyperskill.org/api/steps?format=json&topic=" + topic +
-                        "&page_size=100&page=" + pageNum++ + "";
+                        "&page_size=100&page=" + pageNum++;
 
                 driver.get(url);
 

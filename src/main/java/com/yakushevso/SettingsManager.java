@@ -80,7 +80,7 @@ public class SettingsManager {
             log.debug("Login entered: *****");
 
             try {
-                WebDriver driver = Util.createDriver("hide");
+                WebDriver driver = Util.createDriver(false);
                 Util.login(driver, login, password);
                 userId = DataManager.getCurrent(driver).get("id").getAsInt();
                 log.info("Account data obtained successfully. User ID: {}", userId);

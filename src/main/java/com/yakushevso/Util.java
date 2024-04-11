@@ -27,7 +27,7 @@ public class Util {
         return SCANNER;
     }
 
-    public static WebDriver createDriver(String visible) {
+    public static WebDriver createDriver(boolean visible) {
         log.debug("The process of creating a WebDriver. Visibility mode: {}", visible);
 
         // Set path to browser driver
@@ -39,10 +39,10 @@ public class Util {
         ChromeOptions options = new ChromeOptions();
 
         // Create an instance of the driver in the background if "true"
-        if ("visible".equals(visible)) {
+        if (visible) {
             options.addArguments("--start-maximized");
             log.debug("WebDriver is set to visible mode.");
-        } else if ("hide".equals(visible)) {
+        } else {
             options.addArguments("--headless");
             options.addArguments("--disable-gpu");
             options.addArguments("--window-size=1920,1080");
@@ -83,7 +83,7 @@ public class Util {
             passwordField.sendKeys(password);
 
             signInButton.click();
-            waitDownloadElement(driver, "//h1[@data-cy='curriculum-header']");
+            waitDownloadElement(driver, "//div[@class='tw-flex-1 -tw-mt-px']");
             log.info("Successfully logged in. User: {}", login);
         } catch (Exception e) {
             log.error("Account login error: {}", e.getMessage(), e);

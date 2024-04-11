@@ -261,7 +261,7 @@ public class AppLauncher {
                         log.info("Updating data for user: {}", userSession.getAccount().login());
                         System.out.println("The process of retrieving data has started. Please, wait...");
 
-                        WebDriver driver = Util.createDriver("hide");
+                        WebDriver driver = Util.createDriver(false);
                         Util.login(driver, userSession.getAccount().login(),
                                 userSession.getAccount().password());
                         dataManager.getData(driver);
@@ -319,7 +319,7 @@ public class AppLauncher {
             }
 
             try {
-                WebDriver driver = Util.createDriver("hide");
+                WebDriver driver = Util.createDriver(false);
                 log.info("WebDriver created. Starting page loading for saving...");
                 System.out.println("The page loading has started. Please wait...");
                 Util.login(driver, userSession.getAccount().login(),
@@ -343,6 +343,7 @@ public class AppLauncher {
                 }
 
                 log.info("Data saved successfully for mode: {}", saveMode);
+                System.out.println("All pages are successfully saved.");
                 Util.closeDriver(driver);
             } catch (Exception e) {
                 log.error("Error occurred while saving data for mode {}: {}", saveMode, e.getMessage(), e);
@@ -354,7 +355,7 @@ public class AppLauncher {
         log.info("Starting the process to get answers for user: {}", userSession.getAccount().login());
 
         try {
-            WebDriver driver = Util.createDriver("hide");
+            WebDriver driver = Util.createDriver(false);
             Automation automation = new Automation(driver, userSession);
             System.out.println("The process of getting answers has started. Please wait...");
 
@@ -373,7 +374,7 @@ public class AppLauncher {
     private static void setAnswersMenu(UserSession userSession) {
         log.info("Initiating the process to send responses for user: {}", userSession.getAccount().login());
         try {
-            WebDriver driver = Util.createDriver("visible");
+            WebDriver driver = Util.createDriver(true);
             Automation automation = new Automation(driver, userSession);
             System.out.println("The process of sending responses has begun. Please wait...");
 

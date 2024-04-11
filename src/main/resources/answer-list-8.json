@@ -1132,93 +1132,57 @@
     "mode": 8,
     "matrixList": [
       {
-        "name_row": "float val \u003d 2F; toString(val);",
-        "name_columns": "toString(int num)",
         "check": false
       },
       {
-        "name_row": "float val \u003d 2F; toString(val);",
-        "name_columns": "toString(long num)",
         "check": false
       },
       {
-        "name_row": "float val \u003d 2F; toString(val);",
-        "name_columns": "None of these",
         "check": true
       },
       {
-        "name_row": "long val \u003d 2L; toString(val);",
-        "name_columns": "toString(int num)",
         "check": false
       },
       {
-        "name_row": "long val \u003d 2L; toString(val);",
-        "name_columns": "toString(long num)",
         "check": true
       },
       {
-        "name_row": "long val \u003d 2L; toString(val);",
-        "name_columns": "None of these",
         "check": false
       },
       {
-        "name_row": "int val \u003d 2; toString(val);",
-        "name_columns": "toString(int num)",
         "check": true
       },
       {
-        "name_row": "int val \u003d 2; toString(val);",
-        "name_columns": "toString(long num)",
         "check": false
       },
       {
-        "name_row": "int val \u003d 2; toString(val);",
-        "name_columns": "None of these",
         "check": false
       },
       {
-        "name_row": "byte val \u003d 2; toString(val);",
-        "name_columns": "toString(int num)",
         "check": true
       },
       {
-        "name_row": "byte val \u003d 2; toString(val);",
-        "name_columns": "toString(long num)",
         "check": false
       },
       {
-        "name_row": "byte val \u003d 2; toString(val);",
-        "name_columns": "None of these",
         "check": false
       },
       {
-        "name_row": "char val \u003d 2; toString(val);",
-        "name_columns": "toString(int num)",
         "check": true
       },
       {
-        "name_row": "char val \u003d 2; toString(val);",
-        "name_columns": "toString(long num)",
         "check": false
       },
       {
-        "name_row": "char val \u003d 2; toString(val);",
-        "name_columns": "None of these",
         "check": false
       },
       {
-        "name_row": "double val \u003d 2; toString(val);",
-        "name_columns": "toString(int num)",
         "check": false
       },
       {
-        "name_row": "double val \u003d 2; toString(val);",
-        "name_columns": "toString(long num)",
         "check": false
       },
       {
-        "name_row": "double val \u003d 2; toString(val);",
-        "name_columns": "None of these",
         "check": true
       }
     ]
@@ -1818,83 +1782,51 @@
     "mode": 8,
     "matrixList": [
       {
-        "name_row": "class (not nested)",
-        "name_columns": "public",
         "check": true
       },
       {
-        "name_row": "class (not nested)",
-        "name_columns": "protected",
         "check": false
       },
       {
-        "name_row": "class (not nested)",
-        "name_columns": "private",
         "check": false
       },
       {
-        "name_row": "class (not nested)",
-        "name_columns": "no modifier",
         "check": true
       },
       {
-        "name_row": "field",
-        "name_columns": "public",
         "check": true
       },
       {
-        "name_row": "field",
-        "name_columns": "protected",
         "check": true
       },
       {
-        "name_row": "field",
-        "name_columns": "private",
         "check": true
       },
       {
-        "name_row": "field",
-        "name_columns": "no modifier",
         "check": true
       },
       {
-        "name_row": "method",
-        "name_columns": "public",
         "check": true
       },
       {
-        "name_row": "method",
-        "name_columns": "protected",
         "check": true
       },
       {
-        "name_row": "method",
-        "name_columns": "private",
         "check": true
       },
       {
-        "name_row": "method",
-        "name_columns": "no modifier",
         "check": true
       },
       {
-        "name_row": "constructor",
-        "name_columns": "public",
         "check": true
       },
       {
-        "name_row": "constructor",
-        "name_columns": "protected",
         "check": true
       },
       {
-        "name_row": "constructor",
-        "name_columns": "private",
         "check": true
       },
       {
-        "name_row": "constructor",
-        "name_columns": "no modifier",
         "check": true
       }
     ]
@@ -2327,43 +2259,27 @@
     "mode": 8,
     "matrixList": [
       {
-        "name_row": "incorrect keyword",
-        "name_columns": "compile-time",
         "check": true
       },
       {
-        "name_row": "incorrect keyword",
-        "name_columns": "run-time (\"bugs\")",
         "check": false
       },
       {
-        "name_row": "incorrect text output",
-        "name_columns": "compile-time",
         "check": false
       },
       {
-        "name_row": "incorrect text output",
-        "name_columns": "run-time (\"bugs\")",
         "check": true
       },
       {
-        "name_row": "missed semi-colon",
-        "name_columns": "compile-time",
         "check": true
       },
       {
-        "name_row": "missed semi-colon",
-        "name_columns": "run-time (\"bugs\")",
         "check": false
       },
       {
-        "name_row": "a program cannot open a file",
-        "name_columns": "compile-time",
         "check": false
       },
       {
-        "name_row": "a program cannot open a file",
-        "name_columns": "run-time (\"bugs\")",
         "check": true
       }
     ]
@@ -3479,6 +3395,210 @@
     "answerArr": [
       "Ctrl + `",
       "^ + `"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/38628",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "public class Main {\n    public static void main(String[] args) {\n        System.out.println(\"Java is powerful!\");\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3270",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "int max \u003d a \u003c b ? b : a;",
+      "int max \u003d a \u003e b ? a : b;"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2670",
+    "checked": false,
+    "mode": 7,
+    "answerArr": [
+      "long",
+      "int",
+      "short",
+      "byte"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2675",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "d"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/10983",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "public static void findAirports(String city) { /*...*/ }",
+      "public void findAirports(String city) { /*...*/ }"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/10987",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "A method name",
+      "Return type, or void",
+      "A list of parameters",
+      "A body of the method",
+      "Modifiers"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2709",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "int[] numbers \u003d new int[10];",
+      "int numbers[] \u003d new int[10];"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/1970",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "It may be considered as an unsigned integer value in the range from 0 to 65535.",
+      "It represents a single character such as \u00270\u0027, \u0027A\u0027, \u0027b\u0027.",
+      "It has a minimum value of \u0027\\u0000\u0027 and a maximum value of \u0027\\uffff\u0027."
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2693",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "f"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2714",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "1",
+      "3"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2973",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "org.demo.B",
+      "org.demo.A",
+      "java.lang.String"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2987",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "News news \u003d new News(\"A title\", \"A text\");"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2175",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "val \u003d 50, str \u003d \"some-value\""
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2483",
+    "checked": false,
+    "mode": 8,
+    "matrixList": [
+      {
+        "nameRow": "NullPointerException",
+        "nameColumns": "Checked",
+        "check": false
+      },
+      {
+        "nameRow": "NullPointerException",
+        "nameColumns": "Unchecked",
+        "check": true
+      },
+      {
+        "nameRow": "RuntimeException",
+        "nameColumns": "Checked",
+        "check": false
+      },
+      {
+        "nameRow": "RuntimeException",
+        "nameColumns": "Unchecked",
+        "check": true
+      },
+      {
+        "nameRow": "Exception",
+        "nameColumns": "Checked",
+        "check": true
+      },
+      {
+        "nameRow": "Exception",
+        "nameColumns": "Unchecked",
+        "check": false
+      },
+      {
+        "nameRow": "IOException",
+        "nameColumns": "Checked",
+        "check": true
+      },
+      {
+        "nameRow": "IOException",
+        "nameColumns": "Unchecked",
+        "check": false
+      },
+      {
+        "nameRow": "IndexOutOfBoundsException",
+        "nameColumns": "Checked",
+        "check": false
+      },
+      {
+        "nameRow": "IndexOutOfBoundsException",
+        "nameColumns": "Unchecked",
+        "check": true
+      },
+      {
+        "nameRow": "ClassCastException",
+        "nameColumns": "Checked",
+        "check": false
+      },
+      {
+        "nameRow": "ClassCastException",
+        "nameColumns": "Unchecked",
+        "check": true
+      },
+      {
+        "nameRow": "ClassNotFoundException",
+        "nameColumns": "Checked",
+        "check": true
+      },
+      {
+        "nameRow": "ClassNotFoundException",
+        "nameColumns": "Unchecked",
+        "check": false
+      }
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/8983",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "terminal returns the name of the directory you are currently using"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/11515",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "Enumeration helps to avoid errors in the code.",
+      "Enum makes the code readable and concise.",
+      "An enum type enables a variable to be a value from a set of predefined constants."
     ]
   }
 ]

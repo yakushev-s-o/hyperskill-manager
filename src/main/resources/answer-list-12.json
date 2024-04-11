@@ -1519,93 +1519,57 @@
     "mode": 8,
     "matrixList": [
       {
-        "name_row": "float val \u003d 2F; toString(val);",
-        "name_columns": "toString(int num)",
         "check": false
       },
       {
-        "name_row": "float val \u003d 2F; toString(val);",
-        "name_columns": "toString(long num)",
         "check": false
       },
       {
-        "name_row": "float val \u003d 2F; toString(val);",
-        "name_columns": "None of these",
         "check": true
       },
       {
-        "name_row": "long val \u003d 2L; toString(val);",
-        "name_columns": "toString(int num)",
         "check": false
       },
       {
-        "name_row": "long val \u003d 2L; toString(val);",
-        "name_columns": "toString(long num)",
         "check": true
       },
       {
-        "name_row": "long val \u003d 2L; toString(val);",
-        "name_columns": "None of these",
         "check": false
       },
       {
-        "name_row": "int val \u003d 2; toString(val);",
-        "name_columns": "toString(int num)",
         "check": true
       },
       {
-        "name_row": "int val \u003d 2; toString(val);",
-        "name_columns": "toString(long num)",
         "check": false
       },
       {
-        "name_row": "int val \u003d 2; toString(val);",
-        "name_columns": "None of these",
         "check": false
       },
       {
-        "name_row": "byte val \u003d 2; toString(val);",
-        "name_columns": "toString(int num)",
         "check": true
       },
       {
-        "name_row": "byte val \u003d 2; toString(val);",
-        "name_columns": "toString(long num)",
         "check": false
       },
       {
-        "name_row": "byte val \u003d 2; toString(val);",
-        "name_columns": "None of these",
         "check": false
       },
       {
-        "name_row": "char val \u003d 2; toString(val);",
-        "name_columns": "toString(int num)",
         "check": true
       },
       {
-        "name_row": "char val \u003d 2; toString(val);",
-        "name_columns": "toString(long num)",
         "check": false
       },
       {
-        "name_row": "char val \u003d 2; toString(val);",
-        "name_columns": "None of these",
         "check": false
       },
       {
-        "name_row": "double val \u003d 2; toString(val);",
-        "name_columns": "toString(int num)",
         "check": false
       },
       {
-        "name_row": "double val \u003d 2; toString(val);",
-        "name_columns": "toString(long num)",
         "check": false
       },
       {
-        "name_row": "double val \u003d 2; toString(val);",
-        "name_columns": "None of these",
         "check": true
       }
     ]
@@ -1945,43 +1909,27 @@
     "mode": 8,
     "matrixList": [
       {
-        "name_row": "incorrect keyword",
-        "name_columns": "compile-time",
         "check": true
       },
       {
-        "name_row": "incorrect keyword",
-        "name_columns": "run-time (\"bugs\")",
         "check": false
       },
       {
-        "name_row": "incorrect text output",
-        "name_columns": "compile-time",
         "check": false
       },
       {
-        "name_row": "incorrect text output",
-        "name_columns": "run-time (\"bugs\")",
         "check": true
       },
       {
-        "name_row": "missed semi-colon",
-        "name_columns": "compile-time",
         "check": true
       },
       {
-        "name_row": "missed semi-colon",
-        "name_columns": "run-time (\"bugs\")",
         "check": false
       },
       {
-        "name_row": "a program cannot open a file",
-        "name_columns": "compile-time",
         "check": false
       },
       {
-        "name_row": "a program cannot open a file",
-        "name_columns": "run-time (\"bugs\")",
         "check": true
       }
     ]
@@ -2261,83 +2209,51 @@
     "mode": 8,
     "matrixList": [
       {
-        "name_row": "class (not nested)",
-        "name_columns": "public",
         "check": true
       },
       {
-        "name_row": "class (not nested)",
-        "name_columns": "protected",
         "check": false
       },
       {
-        "name_row": "class (not nested)",
-        "name_columns": "private",
         "check": false
       },
       {
-        "name_row": "class (not nested)",
-        "name_columns": "no modifier",
         "check": true
       },
       {
-        "name_row": "field",
-        "name_columns": "public",
         "check": true
       },
       {
-        "name_row": "field",
-        "name_columns": "protected",
         "check": true
       },
       {
-        "name_row": "field",
-        "name_columns": "private",
         "check": true
       },
       {
-        "name_row": "field",
-        "name_columns": "no modifier",
         "check": true
       },
       {
-        "name_row": "method",
-        "name_columns": "public",
         "check": true
       },
       {
-        "name_row": "method",
-        "name_columns": "protected",
         "check": true
       },
       {
-        "name_row": "method",
-        "name_columns": "private",
         "check": true
       },
       {
-        "name_row": "method",
-        "name_columns": "no modifier",
         "check": true
       },
       {
-        "name_row": "constructor",
-        "name_columns": "public",
         "check": true
       },
       {
-        "name_row": "constructor",
-        "name_columns": "protected",
         "check": true
       },
       {
-        "name_row": "constructor",
-        "name_columns": "private",
         "check": true
       },
       {
-        "name_row": "constructor",
-        "name_columns": "no modifier",
         "check": true
       }
     ]
@@ -3068,6 +2984,3422 @@
     "answerArr": [
       "It\u0027s possible to mix built-in and external annotations in a .java file.",
       "Some annotations can mark classes, methods, fields, and variables."
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/38628",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "public class Main {\n    public static void main(String[] args) {\n        System.out.println(\"Java is powerful!\");\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/34802",
+    "checked": false,
+    "mode": 9,
+    "answerListArr": [
+      [
+        "}",
+        "5",
+        "0"
+      ],
+      [
+        "public static void main(String[] args) {",
+        "1",
+        "1"
+      ],
+      [
+        "String greeting \u003d \"Hello, Java!\";",
+        "2",
+        "2"
+      ],
+      [
+        "System.out.println(greeting);",
+        "3",
+        "2"
+      ],
+      [
+        "}",
+        "4",
+        "1"
+      ],
+      [
+        "public class Main {",
+        "0",
+        "0"
+      ]
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/35253",
+    "checked": false,
+    "mode": 9,
+    "answerListArr": [
+      [
+        "public class HelloWorld {",
+        "0",
+        "0"
+      ],
+      [
+        "String greeting \u003d \"Hello, World!\";",
+        "5",
+        "1"
+      ],
+      [
+        "}",
+        "1",
+        "2"
+      ],
+      [
+        "}",
+        "4",
+        "2"
+      ],
+      [
+        "System.out.println(greeting);",
+        "2",
+        "1"
+      ],
+      [
+        "public static void main(String[] args) {",
+        "3",
+        "0"
+      ]
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/30024",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "int myResult \u003d myObject.myMethod(myDouble);"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/29752",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "a is primitive, b is primitive, str is reference"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2128",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "char[] array \u003d new char[1];",
+      "char[] array \u003d new char[0];",
+      "char[] array \u003d { \u0027a\u0027, \u0027b\u0027, \u0027c\u0027, \u0027d\u0027 };"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2706",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "import java.util.Arrays;\n\npublic class Main {\n\n    public static void main(String[] args) {\n\n        int[] numbers \u003d new int[] {12, 17, 8, 101, 33};\n\n        System.out.println(Arrays.toString(numbers));\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2710",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "numbers[numbers.length - 1]"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3388",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "new"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3391",
+    "checked": false,
+    "mode": 4,
+    "answerStr": "3"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3392",
+    "checked": false,
+    "mode": 4,
+    "answerStr": "8"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/41487",
+    "checked": false,
+    "mode": 10,
+    "answerArr": [
+      "public static void",
+      "System.out.println"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2245",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "import java.util.Arrays;\nimport java.util.Scanner;\n\npublic class Main {\n\n    public static void sort(int[] numbers) {\n        // write your code here\n        int cancel \u003d 1;\n        while (cancel \u003c numbers.length) {\n            int tmp;\n            cancel \u003d 1;\n            for (int i \u003d 1; i \u003c numbers.length; i++) {\n                if (numbers[i] \u003c numbers[i - 1]) {\n                    tmp \u003d numbers[i - 1];\n                    numbers[i - 1] \u003d numbers[i];\n                    numbers[i] \u003d tmp;\n                } else {\n                    cancel++;\n                }\n            }\n        }\n    }\n\n    /* Do not change code below */\n    public static void main(String[] args) {\n        final Scanner scanner \u003d new Scanner(System.in);\n        String[] values \u003d scanner.nextLine().split(\"\\\\s+\");\n        int[] numbers \u003d Arrays.stream(values)\n                .mapToInt(Integer::parseInt)\n                .toArray();\n        sort(numbers);\n        Arrays.stream(numbers).forEach(e -\u003e System.out.print(e + \" \"));\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/6635",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "WWW",
+      "W3",
+      "Web"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/6636",
+    "checked": false,
+    "mode": 6,
+    "answerListArr": [
+      [
+        "The World Wide Web",
+        "is a collection of information resources scattered around the world that are linked together by reference"
+      ],
+      [
+        "A browser",
+        "is a special program for downloading and viewing web pages"
+      ],
+      [
+        "A web page",
+        "is a single document on the Internet that contains text, graphics, sound, and so on"
+      ],
+      [
+        "A website",
+        "is a group of web pages that share a common content theme, design and links to each other"
+      ]
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/6637",
+    "checked": false,
+    "mode": 7,
+    "answerArr": [
+      "People can only search and read information posted on the Internet",
+      "People can communicate with each other or share their content",
+      "Improved content analysis and accelerated time of its finding"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/6639",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "The Internet connects computers around the world, and the Web disseminates information."
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/6641",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "www"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/6642",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "browsers"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/17669",
+    "checked": false,
+    "mode": 7,
+    "answerArr": [
+      "Picking up a user device",
+      "Establishing an internet connection",
+      "Search in a browser",
+      "Browsing a web site with its respective web pages"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/21840",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "Firefox",
+      "Chrome",
+      "Safari"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/1972",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "\u0027\\n\u0027 - new line, \u0027\\\\\u0027 - backslash, \u0027\\r\u0027 - carriage return, \u0027\\t\u0027 - tab"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/5022",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "\u0027\\u003F\u0027"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/7432",
+    "checked": false,
+    "mode": 5,
+    "answerStr": "3 5"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2042",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "org.hyperskill.java.DemoClass"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2043",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "import static java.lang.System.out;"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2252",
+    "checked": false,
+    "mode": 6,
+    "answerListArr": [
+      [
+        "a",
+        "It\u0026#x27;s always automatically imported"
+      ],
+      [
+        "b",
+        "Allows us to declare a variable of type Scanner without writing full class name"
+      ],
+      [
+        "c",
+        "Allows us to use the method Math.max(1, 2) as max(1, 2)"
+      ]
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2976",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "1",
+      "2",
+      "4"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3409",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "java.lang"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/9896",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "class ArraySorting {\n    /**\n     * @param array unordered sequence of strings\n     * @return ordered array of strings\n     */\n    public static String[] sortArray(String[] array) {\n        // write your code here\n        java.util.Arrays.sort(array);\n        return array;\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2978",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "1",
+      "3",
+      "4"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/29809",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "E. The Circle class has an object constructor with a parameter",
+      "C. Both circle1 and circle2 have an attribute called radius and a method called getArea()",
+      "A. There are two instances of the Circle class"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/19626",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "import java.util.Scanner;\n\nclass Solution {\n\n    public void printIsNull(Object o) {\n        // write your code here\n        if (o \u003d\u003d null) {\n            System.out.println(\"It\u0027s null\");\n        } else {\n            System.out.println(\"It\u0027s an object\");\n        }\n    }\n}\n\n// Do not change the code below\nclass Main {\n    public static void main(String[] args) {\n        Solution solution \u003d new Solution();\n        Scanner scanner \u003d new Scanner(System.in);\n        while (scanner.hasNextLine()) {\n            Object obj \u003d \"null\".equals(scanner.nextLine()) ? null : new Object();\n            solution.printIsNull(obj);\n        }\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/4913",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "0",
+      "1",
+      "2"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/4912",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "random.nextInt(upper - lower + 1) + lower"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/4911",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "Truly random sequences"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/4940",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner scanner \u003d new Scanner(System.in);\n\n        int a \u003d scanner.nextInt();\n        int b \u003d scanner.nextInt();\n        int n \u003d scanner.nextInt();\n        int k \u003d scanner.nextInt();\n\n        int seed \u003d a;\n        int min \u003d Integer.MAX_VALUE;\n\n        for (int i \u003d a; i \u003c b; i++) {\n            Random random \u003d new Random(i);\n            int max \u003d 0;\n            for (int j \u003d 0; j \u003c n; j++) {\n                int temp \u003d random.nextInt(k);\n                if (temp \u003e max) {\n                    max \u003d temp;\n                }\n            }\n\n            if (max \u003c min) {\n                min \u003d max;\n                seed \u003d i;\n            }\n        }\n\n        System.out.println(seed + \"\\n\" + min);\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/7675",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "a value between 0.0 and 1.0"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/7676",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "they are completely determined by seeds"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/7677",
+    "checked": false,
+    "mode": 5,
+    "answerStr": "2 1 0"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/40118",
+    "checked": false,
+    "mode": 10,
+    "answerArr": [
+      "JRE"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/40120",
+    "checked": false,
+    "mode": 10,
+    "answerArr": [
+      "JRE"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2022",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "Java Compiler",
+      "JRE"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2223",
+    "checked": false,
+    "mode": 6,
+    "answerListArr": [
+      [
+        "JDK",
+        "A toolkit for developing programs including the Java compiler."
+      ],
+      [
+        "JRE",
+        "A toolkit for running programs, including the JVM."
+      ],
+      [
+        "JVM",
+        "The Java Virtual Machine."
+      ],
+      [
+        "JCL",
+        "A set of standard class libraries."
+      ],
+      [
+        "JAR",
+        "An archive format for packing programs."
+      ]
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/6963",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "The program is executed up to the line with an exception, then fails"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/6964",
+    "checked": false,
+    "mode": 4,
+    "answerStr": "2"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/6965",
+    "checked": false,
+    "mode": 4,
+    "answerStr": "112"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/12686",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "Converting an unsuitable string into an integer number",
+      "Impossible arithmetic operation"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/19627",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "int number \u003d Integer.parseInt(input);",
+      "int divResult \u003d 22 / number;"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2461",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "Throwable"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2463",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "RuntimeException extends Exception, Exception extends Throwable"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2464",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "RuntimeException"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2808",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "NullPointerException, ArithmeticException"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2810",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "IOException, RuntimeException"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2812",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "java.lang.Throwable, java.lang.Exception"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/16171",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "// update the class\nclass BadRequestException extends Exception{\n\n    public BadRequestException(String message) {\n        super(message);\n    }\n    \n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/16173",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "// update the class\nclass MyException extends Throwable{\n    public MyException(String message) {\n        super(message);\n    }\n}\n\n//do not change the code\nclass Main {\n    public static void main(String[] args) {\n        MyException myException \u003d new MyException(\"This is a custom exception\");\n        System.out.println(myException.getMessage());\n        Class\u003c?\u003e superClass \u003d myException.getClass().getSuperclass();\n        System.out.println(superClass.equals(Throwable.class));\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2475",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "A runtime exception occurred",
+      "Finally!"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2478",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "class Converter {\n\n    /**\n     * It returns a double value or 0 if an exception occurred\n     */\n    public static double convertStringToDouble(String input) {\n        try {\n            return Double.parseDouble(input);    \n        } catch (Exception e) {\n            return 0;\n        }\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2479",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "import java.util.*;\n\npublic class Main {\n\n    private static String array \u003d null;\n\n    public static void methodCatchingSomeExceptions() {\n        // invoke methodThrowingExceptions here and catch some types of exceptions\n        \n         try {\n            methodThrowingExceptions();\n        } catch (ArrayIndexOutOfBoundsException e) {\n             System.out.println(\"ArrayIndexOutOfBoundsException\");\n        } catch (NumberFormatException e) {\n             System.out.println(\"NumberFormatException\");\n        }\n    }\n\n    /* Do not change code below */\n    public static void methodThrowingExceptions() {\n        if (array \u003d\u003d null) {\n            return;\n        }\n        int[] integers \u003d Arrays.stream(array.split(\" \"))\n                .mapToInt(Integer::parseInt)\n                .toArray();\n        Object someValue \u003d integers[integers[0]];\n        if (integers[0] + integers[1] \u003d\u003d integers[2]) {\n            integers \u003d null;\n        }\n        int sum \u003d 0;\n        for (int i : integers) {\n            sum +\u003d i;\n        }\n        int meanValue \u003d integers.length / sum;\n        if (integers[2] \u003d\u003d integers[3]) {\n            String string \u003d (String) someValue;\n            System.out.print(\"Random value is \" + string);\n        }\n        System.out.print(\"Mean is \" + meanValue);\n    }\n\n\n    public static void main(String[] args) {\n        Scanner scanner \u003d new Scanner(System.in);\n        array \u003d scanner.nextLine();\n        try {\n            methodCatchingSomeExceptions();\n        } catch (Exception e) {\n            System.out.println(\"Caught: \" + e.getClass().getName());\n        }\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2829",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "Throwable"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2830",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "In a method that has sufficient information to make the correct decision"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2052",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "NullPointerException"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/1947",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "import java.util.Scanner;\nimport java.util.Locale;\n\npublic class Main {\n\n    /* Fix this method */\n    public static String toUpperCase(String str) {\n        return str \u003d\u003d null ? \"\" : str.toUpperCase(Locale.ENGLISH); \n    }\n\n    /* Do not change code below */\n    public static void main(String[] args) {\n        Scanner scanner \u003d new Scanner(System.in);\n        String line \u003d scanner.nextLine();\n        line \u003d \"none\".equalsIgnoreCase(line) ? null : line;\n        System.out.println(toUpperCase(line));\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/1946",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "name.length()",
+      "name.equals(surname)"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/1944",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "city.equals(\"Sydney\")"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3822",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "import java.util.*;\n\nclass FixingNullPointerException {\n\n    public static void main(String[] args) {\n        Scanner scanner \u003d new Scanner(System.in);\n        String string \u003d scanner.nextLine();\n        string \u003d \"null\".equals(string) ? null : string;\n        /* Do not change code above */\n        if (string \u003d\u003d null) {\n            System.out.println(\"NPE!\");\n        } else {\n            System.out.println(string.toLowerCase());   \n        }\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/13206",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "import java.util.*;\n\n\npublic class Main {\n\n    public static String concatStrings(String str1, String str2) {\n        /* write your code here */\n        if (Objects.equals(str1, str2)) {\n            return \"\";\n        } else if (str1 !\u003d null \u0026\u0026 str2 \u003d\u003d null) {\n            return str1;\n        } else if (str2 !\u003d null \u0026\u0026 str1 \u003d\u003d null) {\n            return str2;\n        }\n        return str1.concat(str2);\n    }\n\n    /* Do not change code below */\n    public static void main(String[] args) {\n        Scanner scanner \u003d new Scanner(System.in);\n\n        String str1 \u003d scanner.nextLine();\n        String str2 \u003d scanner.nextLine();\n        str1 \u003d \"null\".equalsIgnoreCase(str1) ? null : str1;\n        str2 \u003d \"null\".equalsIgnoreCase(str2) ? null : str2;\n\n        System.out.println(concatStrings(str1, str2));\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/13821",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "class Util {\n    // correct this method to avoid NPE\n    public static void printLength(String name) {\n        if (name !\u003d null) {\n            System.out.println(name.length());\n        }  \n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/1960",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "a",
+      "c"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2134",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "import java.util.*;\n\nclass Main {\n    public static void main(String[] args) {\n        // put your code here\n        Scanner scanner \u003d new Scanner(System.in);\n\n        int size \u003d scanner.nextInt();\n        int[] arr \u003d new int[size];\n\n        for (int i \u003d 0; i \u003c size; i++) {\n            arr[i] \u003d scanner.nextInt();\n        }\n\n        int n \u003d scanner.nextInt();\n\n        int res \u003d 0;\n        for (int i \u003d 0; i \u003c arr.length; i++) {\n            if (arr[i] \u003e n) {\n                res +\u003d arr[i];\n            }\n        }\n        System.out.println(res);\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2142",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "import java.util.Arrays;\nimport java.util.Scanner;\n\nclass Main {\n    public static void main(String[] args) {\n        // put your code here\n        Scanner scanner \u003d new Scanner(System.in);\n        int first \u003d scanner.nextInt();\n        int[] second \u003d new int[first];\n\n        for (int i \u003d 0; i \u003c first; i++) {\n            second[(i + 1) % first] \u003d scanner.nextInt();\n        }\n\n        for (int i : second) {\n            System.out.print(i + \" \");\n        }\n    }\n}"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3280",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "for (int i \u003d 0; i \u003c\u003d 3; i++) { System.out.println(nums[i]); }",
+      "for (int i \u003d nums.length - 1; i \u003e\u003d 0; i--) { System.out.println(nums[i]); }",
+      "for (int i \u003d 0; i \u003c nums.length; i++) { System.out.println(nums[i]); }"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/10613",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        // write your code here\n        Scanner scanner \u003d new Scanner(System.in);\n\n        int[] box1 \u003d {scanner.nextInt(), scanner.nextInt(), scanner.nextInt()};\n        int[] box2 \u003d {scanner.nextInt(), scanner.nextInt(), scanner.nextInt()};\n\n        Arrays.sort(box1);\n        Arrays.sort(box2);\n\n        if (box1[0] \u003e box2[0] \u0026\u0026 box1[1] \u003e box2[1] \u0026\u0026 box1[2] \u003e box2[2]) {\n            System.out.println(\"Box 1 \u003e Box 2\");\n        } else if (box1[0] \u003c box2[0] \u0026\u0026 box1[1] \u003c box2[1] \u0026\u0026 box1[2] \u003c box2[2]) {\n            System.out.println(\"Box 1 \u003c Box 2\");\n        } else {\n            System.out.println(\"Incompatible\");\n        }\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/34701",
+    "checked": false,
+    "mode": 10,
+    "answerArr": [
+      "radle",
+      "aven"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/4288",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "It performs multiple tasks: downloads external libraries, compiles source code, runs tests and so on."
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/7852",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "You would like to generate a production-ready application archive easily.",
+      "You always need to run automated tests after changes in the application.",
+      "The project depends on large number of external libraries."
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/16513",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "automates creating executable applications from the source code"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/16515",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "link and package the code into a usable or executable form",
+      "compile sources"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/16516",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "we need to automate a larger project compiling"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/9705",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "Graphical User Interface"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/9707",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "Retrieving and displaying the content of the websites",
+      "Resource management",
+      "Data protection and secure access"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/9708",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "macOS",
+      "iOS",
+      "Microsoft Windows",
+      "Android"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/13982",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "It controls the communication between all the computer software and hardware"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/19902",
+    "checked": false,
+    "mode": 6,
+    "answerListArr": [
+      [
+        "Monolithic kernel",
+        "is a program that performs most of the OS functions"
+      ],
+      [
+        "Microkernel",
+        "performs a smaller subset of the OS functions, can be extended with additional modules - drivers"
+      ],
+      [
+        "Kernel",
+        "is a mandatory part of any OS, it\u0027s core"
+      ]
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/8978",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "A way to interact with computer via text commands"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/19905",
+    "checked": false,
+    "mode": 5,
+    "answerStr": "whoami"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/19906",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "function solve() {\n    # add your solution using shell here\nls\n\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/9748",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "the directory one level above the current directory"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/9751",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "you have moved to the root directory"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2024",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "javac"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2492",
+    "checked": false,
+    "mode": 5,
+    "answerStr": "TheArmyOfRabbitsApplication.class"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3406",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "compile a program"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3407",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "run a program"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/30887",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "It will print \u0027Example.txt exists\u0027 and delete the file only if the file exists.",
+      "It will print \u0027File not found\u0027 only if the file does not exist."
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3625",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "file.isDirectory()",
+      "file.exists()"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3626",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "None of them"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3627",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "It is possible to create an instance of java.io.File that represents a non-existing file",
+      "It is possible to create an object of java.io.File by passing a string that represents the path to a file"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3628",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "The file does not exist in the file system"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/7699",
+    "checked": false,
+    "mode": 6,
+    "answerListArr": [
+      [
+        "D:",
+        "It starts an absolute path to a file on Windows."
+      ],
+      [
+        "/",
+        "It starts an absolute path to a file on a Unix-like system."
+      ],
+      [
+        ".",
+        "It starts a relative path to a file from this directory."
+      ],
+      [
+        "..",
+        "It starts a relative path to a file from the parent directory."
+      ]
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/7700",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "starts from your working directory"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/8093",
+    "checked": false,
+    "mode": 5,
+    "answerStr": "isDirectory()"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/8094",
+    "checked": false,
+    "mode": 5,
+    "answerStr": "isFile()"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/8095",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "import java.io.File;\n\nclass Siblings {\n\n    public static boolean areSiblings(File f1, File f2) {\n        // implement me\n        if (f1.getParent().equals(f2.getParent())) {\n            return true;\n        }\n        return false;\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/11516",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "1",
+      "2",
+      "3"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/11517",
+    "checked": false,
+    "mode": 4,
+    "answerStr": "2"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/11518",
+    "checked": false,
+    "mode": 6,
+    "answerListArr": [
+      [
+        "System.out.println(capricorn.name());",
+        "\"CAPRICORN\" is printed"
+      ],
+      [
+        "Zodiac taurus \u003d Zodiac.valueOf(\"TAURUS\");",
+        "Zodiac.TAURUS object is assigned"
+      ],
+      [
+        "Zodiac virgo \u003d Zodiac.valueOf(\"virgo\");",
+        "IllegalArgumentException is thrown"
+      ],
+      [
+        "System.out.println(leo.equals(Zodiac.TAURUS));",
+        "it prints \"false\""
+      ],
+      [
+        "System.out.println(Zodiac.AQUARIUS.ordinal());",
+        "it prints 10"
+      ]
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/11519",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "// declare your enum here\n\nenum Currency {\n    USD,\n    EUR,\n    GBP,\n    RUB,\n    UAH,\n    KZT,\n    CAD,\n    JPY,\n    CNY\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/11520",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "// declare your enum here\nenum DayOfWeek {\n    SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        for (DayOfWeek day : DayOfWeek.values()) {\n            System.out.println(day);\n        }\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/11521",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "public class Main {\n\n    public static void main(String[] args) {\n        int counter \u003d 0;\n\n        // write your code here\n        for (Secret s : Secret.values()) {\n            if (s.ordinal() \u003e\u003d Secret.START.ordinal()) {\n                counter++;\n            }\n        }\n\n        System.out.println(counter);\n    }\n}\n\n/* sample enum for inspiration\nenum Secret {\n    STAR, CRASH, START, // ...\n}\n*/\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/14850",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "unstable"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/14853",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "create a set of input values and run the program manually",
+      "write automated tests"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/5541",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "Error"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/5543",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "Info"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/12343",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "statistics",
+      "finding a problem"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/12344",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "log message",
+      "time",
+      "log level",
+      "date"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/13777",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "Fail fast"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/13778",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "Use a debugging tool to examine the code",
+      "Log expected and actual values in critical parts of the code",
+      "Add assertions to localize broken invariants"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/13779",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "It throws an Error if the condition in the parentheses is evaluated to be false"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/13780",
+    "checked": false,
+    "mode": 5,
+    "answerStr": "name\u003dnull, age\u003d0"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/13781",
+    "checked": false,
+    "mode": 5,
+    "answerStr": "assert (name !\u003d null)"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/13782",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "import java.util.Scanner;\n\nclass Util {\n    public static int[] swapInts(int[] ints) {\n        return new int[]{ints[1], ints[0]};\n    }\n}\n\nclass Main {\n    public static void main(String[] args) {\n        Scanner scanner \u003d new Scanner(System.in);\n\n        int[] ints \u003d new int[2];\n        ints[0] \u003d Integer.parseInt(scanner.nextLine());\n        ints[1] \u003d Integer.parseInt(scanner.nextLine());\n\n        ints \u003d Util.swapInts(ints);\n\n        System.out.println(ints[0]);\n        System.out.println(ints[1]);\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/13783",
+    "checked": false,
+    "mode": 6,
+    "answerListArr": [
+      [
+        "Assertion",
+        "A boolean expression that throws an error when some condition is not met"
+      ],
+      [
+        "Debugger",
+        "A tool that allows you to get detailed information about the program while it is running"
+      ],
+      [
+        "Logging",
+        "The technique that involves writing runtime events to the console or a file"
+      ]
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2064",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "\" abcda\""
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2282",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc \u003d new Scanner(System.in);\n\n        String[] arr \u003d sc.nextLine().split(\" \");\n        String s \u003d arr[0];\n\n        int i \u003d 0;\n        while (i \u003c arr.length) {\n            if (s.length() \u003c arr[i].length()) {\n                s \u003d arr[i];\n            }\n            i++;\n        }\n        System.out.println(s);\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2283",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "import java.util.*;\n\nclass Main {\n    public static boolean isPalindrome(String s) {\n        String normalizedText \u003d normalize(s);\n        return normalizedText.equals(reverse(normalizedText));\n    }\n\n    private static String normalize(String s) {\n        return s.toLowerCase().replaceAll(\"\\\\W+\", \"\");\n    }\n\n    private static String reverse(String s) {\n        return new StringBuilder(s).reverse().toString();\n    }\n\n    public static void printPalindromes(String s) {\n        System.out.println(isPalindrome(s) ? \"yes\" : \"no\");\n    }\n\n    public static void main(String[] args) {\n        Scanner sc \u003d new Scanner(System.in);\n        printPalindromes(sc.nextLine());\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2292",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc \u003d new Scanner(System.in);\n\n        char[] input \u003d sc.nextLine().toCharArray();\n\n        char ch;\n        int i \u003d 0;\n        int count;\n\n        while (i \u003c input.length) {\n            ch \u003d input[i];\n            count \u003d 0;\n\n            System.out.print(input[i]);\n\n            while (input[i] \u003d\u003d ch) {\n                count++;\n                i++;\n                if (i \u003d\u003d input.length) {\n                    break;\n                }\n            }\n            System.out.print(count);\n        }\n\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2293",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "import java.util.Scanner;\n\nclass Main {\n    public static void main(String[] args) {\n        // put your code here\n        Scanner sc \u003d new Scanner(System.in);\n        String s \u003d sc.next();\n        int n \u003d sc.nextInt();\n        \n        System.out.println(n \u003e s.length() ? s : s.substring(n) + s.substring(0, n));\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2294",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc \u003d new Scanner(System.in);\n\n        char[] input \u003d sc.nextLine().toCharArray();\n\n        int i \u003d 0;\n        while (i \u003c input.length) {\n            System.out.printf(\"%s%s\", input[i], input[i]);\n            i++;\n        }\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3287",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "\"avaJ ,olle\""
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3288",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "\"SKILL\""
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3789",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner scanner \u003d new Scanner(System.in);\n        int A \u003d scanner.nextInt();\n        int B \u003d scanner.nextInt();\n        int C \u003d scanner.nextInt();\n        int N \u003d scanner.nextInt();\n\n        char charUpper \u003d \u0027A\u0027;\n        char charLower \u003d \u0027a\u0027;\n        char charNew \u003d \u0027C\u0027;\n        int num \u003d 1;\n        int count;\n\n        int i \u003d 0;\n        while (i \u003c N) {\n            count \u003d A;\n            while (count \u003e 0 \u0026\u0026 i \u003c N) {\n                if (charUpper \u003d\u003d \u0027A\u0027) {\n                    charUpper \u003d \u0027B\u0027;\n                    System.out.print(\"A\");\n                } else {\n                    charUpper \u003d \u0027A\u0027;\n                    System.out.print(\"B\");\n                }\n                count--;\n                i++;\n            }\n\n            count \u003d B;\n            while (count \u003e 0 \u0026\u0026 i \u003c N) {\n                if (charLower \u003d\u003d \u0027a\u0027) {\n                    charLower \u003d \u0027b\u0027;\n                    System.out.print(\"a\");\n                } else {\n                    charLower \u003d \u0027a\u0027;\n                    System.out.print(\"b\");\n                }\n                count--;\n                i++;\n            }\n\n            count \u003d C;\n            while (count \u003e 0 \u0026\u0026 i \u003c N) {\n                if (num \u003d\u003d 1) {\n                    System.out.print(num);\n                    num++;\n                } else {\n                    System.out.print(num);\n                    num--;\n                }\n                count--;\n                i++;\n            }\n\n            if (A + B + C \u003d\u003d 0) {\n                if (charNew \u003d\u003d \u0027C\u0027) {\n                    charNew \u003d \u0027D\u0027;\n                    System.out.print(\"C\");\n                } else {\n                    charNew \u003d \u0027C\u0027;\n                    System.out.print(\"D\");\n                }\n                i++;\n            }\n        }\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3791",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner input \u003d new Scanner(System.in);\n        String word \u003d input.nextLine();\n        input.close();\n        int numInsertions \u003d countInsertions(word);\n        System.out.println(numInsertions);\n    }\n\n    public static int countInsertions(String word) {\n        char[] letters \u003d word.toCharArray();\n        int numInsertions \u003d 0;\n        for (int i \u003d 0; i \u003c letters.length - 2; i++) {\n            if (isProblematic(letters[i], letters[i + 1], letters[i + 2])) {\n                numInsertions++;\n                i++;\n            }\n        }\n        return numInsertions;\n    }\n\n    public static boolean isProblematic(char c1, char c2, char c3) {\n        return (isVowel(c1) \u0026\u0026 isVowel(c2) \u0026\u0026 isVowel(c3))\n                || (isConsonant(c1) \u0026\u0026 isConsonant(c2) \u0026\u0026 isConsonant(c3));\n    }\n\n    public static boolean isVowel(char c) {\n        return \"aeiouy\".indexOf(Character.toLowerCase(c)) !\u003d -1;\n    }\n\n    public static boolean isConsonant(char c) {\n        return !isVowel(c) \u0026\u0026 Character.isLetter(c);\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3691",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "\"ftp\"",
+      "\"smtp\"",
+      "\"http\"",
+      "\"https\""
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3726",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "\"23 dollars\"",
+      "\"22 dollars\"",
+      "\"5 dollars\""
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/7582",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "Special metacharacters"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/7584",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "?"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/7589",
+    "checked": false,
+    "mode": 4,
+    "answerStr": "9"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/7590",
+    "checked": false,
+    "mode": 4,
+    "answerStr": "4"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/8986",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "matches zero or one occurrences of the preceding character."
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3668",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "\\\\....."
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3669",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "......"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3727",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "\"1 tree\"",
+      "\"17 trees\"",
+      "\"7 trees\""
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/8987",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "two backslashes \\\\ before it."
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/8988",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "put three backslashes before it: the result is \"\\\\\\\\\""
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3671",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "(cat|bat|rat)",
+      "[bcr]at"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3698",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "\"v8\"",
+      "\"J9\""
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3699",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "\"y\u003d7\"",
+      "\"x\u003c5\""
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3700",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "\"1471\"",
+      "\"1681\""
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3728",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "\"Hello.\"",
+      "\"Hello,\"",
+      "\"Hello!\""
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3729",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "\"regex\"",
+      "\"[a-z]ege[a-z]\"",
+      "\"[reg]egex\""
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3681",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "[0-9]+"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3683",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "It matches 1 or more repetitions of the preceding character."
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3684",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "abbbbc",
+      "abbc"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3692",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "1c1a3de4-c711-4e9c-bed2-e75fd69ce920"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3695",
+    "checked": false,
+    "mode": 8,
+    "matrixList": [
+      {
+        "nameRow": "aa",
+        "nameColumns": "ab+a",
+        "check": false
+      },
+      {
+        "nameRow": "aa",
+        "nameColumns": "ab*a",
+        "check": true
+      },
+      {
+        "nameRow": "aa",
+        "nameColumns": "ab{0,3}a",
+        "check": true
+      },
+      {
+        "nameRow": "aa",
+        "nameColumns": "ab{3,}a",
+        "check": false
+      },
+      {
+        "nameRow": "aba",
+        "nameColumns": "ab+a",
+        "check": true
+      },
+      {
+        "nameRow": "aba",
+        "nameColumns": "ab*a",
+        "check": true
+      },
+      {
+        "nameRow": "aba",
+        "nameColumns": "ab{0,3}a",
+        "check": true
+      },
+      {
+        "nameRow": "aba",
+        "nameColumns": "ab{3,}a",
+        "check": false
+      },
+      {
+        "nameRow": "abbba",
+        "nameColumns": "ab+a",
+        "check": true
+      },
+      {
+        "nameRow": "abbba",
+        "nameColumns": "ab*a",
+        "check": true
+      },
+      {
+        "nameRow": "abbba",
+        "nameColumns": "ab{0,3}a",
+        "check": true
+      },
+      {
+        "nameRow": "abbba",
+        "nameColumns": "ab{3,}a",
+        "check": true
+      },
+      {
+        "nameRow": "abbbbba",
+        "nameColumns": "ab+a",
+        "check": true
+      },
+      {
+        "nameRow": "abbbbba",
+        "nameColumns": "ab*a",
+        "check": true
+      },
+      {
+        "nameRow": "abbbbba",
+        "nameColumns": "ab{0,3}a",
+        "check": false
+      },
+      {
+        "nameRow": "abbbbba",
+        "nameColumns": "ab{3,}a",
+        "check": true
+      }
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/26046",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "String regex \u003d \"\\\\b\\\\S{5,11}\\\\b\";"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3675",
+    "checked": false,
+    "mode": 6,
+    "answerListArr": [
+      [
+        "[0-9]",
+        "\\d"
+      ],
+      [
+        "[A-Z]",
+        "No such shorthand"
+      ],
+      [
+        "[a-zA-Z_0-9]",
+        "\\w"
+      ],
+      [
+        "[^0-9]",
+        "\\D"
+      ],
+      [
+        "[ \\t\\n\\x0B\\f\\r]",
+        "\\s"
+      ]
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3676",
+    "checked": false,
+    "mode": 6,
+    "answerListArr": [
+      [
+        "\\\\d",
+        "matches all digits"
+      ],
+      [
+        "\\\\s",
+        "matches spaces"
+      ],
+      [
+        "\\\\w",
+        "matches alpha-numeric characters including \u0026#x27;_\u0026#x27;"
+      ],
+      [
+        "\\\\S",
+        "matches non-spaces"
+      ]
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3678",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "\"a2c\"",
+      "\"77a\"",
+      "\"b3\u0026\""
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3679",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "\\\\s represent a whitespace character including tab and newline"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3705",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "\"[0-9]\""
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3706",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "\"[a-zA-Z_0-9]\""
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/18005",
+    "checked": false,
+    "mode": 7,
+    "answerArr": [
+      "Registers",
+      "Disk drives",
+      "Cache",
+      "Main memory"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/18006",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "Access time",
+      "Capacity"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/18008",
+    "checked": false,
+    "mode": 6,
+    "answerListArr": [
+      [
+        "Access time",
+        "the time interval between the read/write request and the availability of the data in computer memory"
+      ],
+      [
+        "Capacity",
+        "the total amount/volume of data that the memory can store"
+      ],
+      [
+        "Cost per bit",
+        "the cost to manufacture one bit of that particular memory"
+      ]
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/18009",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "reference variables of a loop in each iteration"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/18056",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "It is used to store data from the secondary storage so that the CPU can access it.",
+      "It is used to store the data that is used specifically at that time."
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/21578",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "Heap memory"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/21580",
+    "checked": false,
+    "mode": 6,
+    "answerListArr": [
+      [
+        "Memory leakage",
+        "Occurs when an unused variable holds space"
+      ],
+      [
+        "Garbage collector",
+        "Automatically frees up memory that is no longer referenced or used"
+      ],
+      [
+        "Memory fragmentation",
+        "Side effect of random memory allocation"
+      ],
+      [
+        "Stack overflow",
+        "Caused by the program\u0027s excessive demand for more memory space than allocated"
+      ]
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/21582",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "When unused memory is not freed"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/21584",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "When using heap memory allocation"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/21586",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "Stack memory"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/21587",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "The overall memory on the system",
+      "The architecture of the computer on which the program runs",
+      "The language used to write the program"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/19214",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "PermGen stored the String pool up to the Java 7",
+      "PermGen used to be a section of the heap until Java 8"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2182",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "import java.util.Scanner;\n\nclass Main {\n    public static void main(String[] args) {\n        Scanner scanner \u003d new Scanner(System.in);\n        // put your code here\n        System.out.println(scanner.nextDouble() / scanner.nextInt());\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2186",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "import java.util.Scanner;\n\nclass Main {\n    public static void main(String[] args) {\n        Scanner scanner \u003d new Scanner(System.in);\n        // put your code here\n        double x \u003d scanner.nextDouble();\n        \n        System.out.println(x * x * x + x * x + x + 1);\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2673",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "float",
+      "double"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2703",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "import java.util.Scanner;\n\nclass Main {\n    public static void main(String[] args) {\n        Scanner scanner \u003d new Scanner(System.in);\n        // put your code here\n        double first \u003d scanner.nextDouble();\n        double second \u003d scanner.nextDouble();\n        System.out.println(second - first);\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2704",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "import java.util.Scanner;\n\nclass Main {\n    public static void main(String[] args) {\n        Scanner scanner \u003d new Scanner(System.in);\n        // put your code here\n        double a \u003d scanner.nextDouble();\n        double b \u003d scanner.nextDouble();\n        double c \u003d scanner.nextDouble();\n\n        System.out.println((c - b) / a);\n    }\n}\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3454",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "2.7"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/15165",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "RAM"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/15166",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "System.gc()",
+      "Runtime.getRuntime().gc()"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/15167",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "The GC works automatically while a program is running"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/15169",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/15170",
+    "checked": false,
+    "mode": 6,
+    "answerListArr": [
+      [
+        "After step 1",
+        "None of the mentioned objects"
+      ],
+      [
+        "After step 2",
+        "bookNames and bookPages arrays"
+      ],
+      [
+        "After step 3",
+        "Objects of the Book class"
+      ]
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/5545",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "0",
+      "1"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/5548",
+    "checked": false,
+    "mode": 4,
+    "answerStr": "6"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/5549",
+    "checked": false,
+    "mode": 6,
+    "answerListArr": [
+      [
+        "2",
+        "010"
+      ],
+      [
+        "4",
+        "100"
+      ],
+      [
+        "6",
+        "110"
+      ],
+      [
+        "7",
+        "111"
+      ]
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/5550",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "1010"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/5551",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "\u003cpre\u003e1000\u003c/pre\u003e"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/5552",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "110"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/5626",
+    "checked": false,
+    "mode": 6,
+    "answerListArr": [
+      [
+        "100010",
+        "34"
+      ],
+      [
+        "100110",
+        "38"
+      ],
+      [
+        "100101",
+        "37"
+      ],
+      [
+        "101101",
+        "45"
+      ]
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3270",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "int max \u003d a \u003c b ? b : a;",
+      "int max \u003d a \u003e b ? a : b;"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2670",
+    "checked": false,
+    "mode": 7,
+    "answerArr": [
+      "long",
+      "int",
+      "short",
+      "byte"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2675",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "d"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/10983",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "public static void findAirports(String city) { /*...*/ }",
+      "public void findAirports(String city) { /*...*/ }"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/10987",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "A method name",
+      "Return type, or void",
+      "A list of parameters",
+      "A body of the method",
+      "Modifiers"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2709",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "int[] numbers \u003d new int[10];",
+      "int numbers[] \u003d new int[10];"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/38375",
+    "checked": false,
+    "mode": 8,
+    "matrixList": [
+      {
+        "nameRow": "connects computers around the world",
+        "nameColumns": "Internet",
+        "check": true
+      },
+      {
+        "nameRow": "connects computers around the world",
+        "nameColumns": "World Wide Web",
+        "check": false
+      },
+      {
+        "nameRow": "uses HTTP",
+        "nameColumns": "Internet",
+        "check": false
+      },
+      {
+        "nameRow": "uses HTTP",
+        "nameColumns": "World Wide Web",
+        "check": true
+      },
+      {
+        "nameRow": "distributes data that contains links to other data",
+        "nameColumns": "Internet",
+        "check": false
+      },
+      {
+        "nameRow": "distributes data that contains links to other data",
+        "nameColumns": "World Wide Web",
+        "check": true
+      },
+      {
+        "nameRow": "originated in late 1960s",
+        "nameColumns": "Internet",
+        "check": true
+      },
+      {
+        "nameRow": "originated in late 1960s",
+        "nameColumns": "World Wide Web",
+        "check": false
+      },
+      {
+        "nameRow": "invented in late 1980s",
+        "nameColumns": "Internet",
+        "check": false
+      },
+      {
+        "nameRow": "invented in late 1980s",
+        "nameColumns": "World Wide Web",
+        "check": true
+      },
+      {
+        "nameRow": "uses TCP/IP",
+        "nameColumns": "Internet",
+        "check": true
+      },
+      {
+        "nameRow": "uses TCP/IP",
+        "nameColumns": "World Wide Web",
+        "check": false
+      }
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/13981",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "Because HTTP\u0027s data transfer was unencrypted"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/6570",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "Client-Server"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/6572",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "HTTPS provides secure data transfer"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/6573",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "Yes"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/6574",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "She should transfer to HTTPS to make connections secure"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/6575",
+    "checked": false,
+    "mode": 5,
+    "answerStr": "https"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/6576",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "Data transfer on this resource occurs without encryption"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/15859",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "set of rules by which programs or devices communicate with each other, exchange data, and handle errors"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/26569",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "HyperText Transfer Protocol"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/26570",
+    "checked": false,
+    "mode": 6,
+    "answerListArr": [
+      [
+        "HTTP/0.9",
+        "1991"
+      ],
+      [
+        "HTTP/1.1",
+        "1999"
+      ],
+      [
+        "HTTP/2.0",
+        "2015"
+      ]
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/34706",
+    "checked": false,
+    "mode": 10,
+    "answerArr": [
+      "web applications",
+      "websites"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/13933",
+    "checked": false,
+    "mode": 6,
+    "answerListArr": [
+      [
+        "Frontend development",
+        "client-side programming"
+      ],
+      [
+        "Backend development",
+        "server-side programming"
+      ],
+      [
+        "Non-existent name",
+        "side programming"
+      ]
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/13936",
+    "checked": false,
+    "mode": 8,
+    "matrixList": [
+      {
+        "nameRow": "Write the basic business logic of the application",
+        "nameColumns": "Frontend developer",
+        "check": false
+      },
+      {
+        "nameRow": "Write the basic business logic of the application",
+        "nameColumns": "Backend developer",
+        "check": true
+      },
+      {
+        "nameRow": "Make the site display correctly on devices with different screen sizes",
+        "nameColumns": "Frontend developer",
+        "check": true
+      },
+      {
+        "nameRow": "Make the site display correctly on devices with different screen sizes",
+        "nameColumns": "Backend developer",
+        "check": false
+      },
+      {
+        "nameRow": "Organize information storage in databases",
+        "nameColumns": "Frontend developer",
+        "check": false
+      },
+      {
+        "nameRow": "Organize information storage in databases",
+        "nameColumns": "Backend developer",
+        "check": true
+      },
+      {
+        "nameRow": "Write  the logic of interaction with users",
+        "nameColumns": "Frontend developer",
+        "check": true
+      },
+      {
+        "nameRow": "Write  the logic of interaction with users",
+        "nameColumns": "Backend developer",
+        "check": false
+      }
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/13938",
+    "checked": false,
+    "mode": 7,
+    "answerArr": [
+      "Client sends a request to the server to retrieve or modify data using the HTTP protocol.",
+      "Backend processes this request and returns the response via HTTP.",
+      "Frontend receives the response and processes it, and then displays the result to the user."
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/29979",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "The code outputs a message to the browser\u0027s console."
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/39534",
+    "checked": false,
+    "mode": 10,
+    "answerArr": [
+      "shoutToTheWorld",
+      "console.log",
+      "()"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/32687",
+    "checked": false,
+    "mode": 10,
+    "answerArr": [
+      "var",
+      "console.log"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/32639",
+    "checked": false,
+    "mode": 10,
+    "answerArr": [
+      "let",
+      "console.log"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/8018",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "scripts"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/8019",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "ECMAScript"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/8020",
+    "checked": false,
+    "mode": 3,
+    "answerStr": "console.log(\"I like JavaScript!\");\n\n\n\n"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/16140",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "It was just a marketing move, JavaScript is not related to Java"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2693",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "f"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2714",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "1",
+      "3"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2973",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "org.demo.B",
+      "org.demo.A",
+      "java.lang.String"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2175",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "val \u003d 50, str \u003d \"some-value\""
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2579",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "@CreatedBy(name \u003d \"John Coder\")",
+      "@CreatedBy(name \u003d \"Unknown\")"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2583",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "@Entity",
+      "@Entity(name \u003d \"MyEntity\")"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2003",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "The method must not have the modifier static.",
+      "The return type should be the same type or a subtype of the return type declared in the method of the superclass."
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/45668",
+    "checked": false,
+    "mode": 6,
+    "answerListArr": [
+      [
+        "class Task implements Question {}",
+        "Allows declared class use all the properties and methods of the Question interface"
+      ],
+      [
+        "interface Question {}",
+        "Interface declaration. Multiple classes now can implement and build functionality based on this interface"
+      ],
+      [
+        "class Task {}",
+        "Declaring class without interface inheritance"
+      ]
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/34745",
+    "checked": false,
+    "mode": 9,
+    "answerListArr": [
+      [
+        "class Dog implements Animal {",
+        "6",
+        "0"
+      ],
+      [
+        "System.out.println(dog.makeSound());",
+        "3",
+        "1"
+      ],
+      [
+        "public String makeSound() {",
+        "9",
+        "0"
+      ],
+      [
+        "String makeSound();",
+        "0",
+        "0"
+      ],
+      [
+        "}",
+        "2",
+        "1"
+      ],
+      [
+        "public static void main(String[] args) {",
+        "13",
+        "2"
+      ],
+      [
+        "interface Animal {",
+        "8",
+        "1"
+      ],
+      [
+        "}",
+        "11",
+        "0"
+      ],
+      [
+        "}",
+        "12",
+        "0"
+      ],
+      [
+        "}",
+        "5",
+        "1"
+      ],
+      [
+        "Animal dog \u003d new Dog();",
+        "10",
+        "2"
+      ],
+      [
+        "}",
+        "1",
+        "2"
+      ],
+      [
+        "public class Main {",
+        "4",
+        "1"
+      ],
+      [
+        "return \"Woof!\";",
+        "7",
+        "0"
+      ]
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/1952",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "abstract, default, private or static methods, and final static fields"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2119",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "It\u0027s possible to create an instance of an interface.",
+      "A class that implements an interface must implement default and static methods declared in the interface."
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3432",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "static methods",
+      "non-static methods"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2483",
+    "checked": false,
+    "mode": 8,
+    "matrixList": [
+      {
+        "nameRow": "NullPointerException",
+        "nameColumns": "Checked",
+        "check": false
+      },
+      {
+        "nameRow": "NullPointerException",
+        "nameColumns": "Unchecked",
+        "check": true
+      },
+      {
+        "nameRow": "RuntimeException",
+        "nameColumns": "Checked",
+        "check": false
+      },
+      {
+        "nameRow": "RuntimeException",
+        "nameColumns": "Unchecked",
+        "check": true
+      },
+      {
+        "nameRow": "Exception",
+        "nameColumns": "Checked",
+        "check": true
+      },
+      {
+        "nameRow": "Exception",
+        "nameColumns": "Unchecked",
+        "check": false
+      },
+      {
+        "nameRow": "IOException",
+        "nameColumns": "Checked",
+        "check": true
+      },
+      {
+        "nameRow": "IOException",
+        "nameColumns": "Unchecked",
+        "check": false
+      },
+      {
+        "nameRow": "IndexOutOfBoundsException",
+        "nameColumns": "Checked",
+        "check": false
+      },
+      {
+        "nameRow": "IndexOutOfBoundsException",
+        "nameColumns": "Unchecked",
+        "check": true
+      },
+      {
+        "nameRow": "ClassCastException",
+        "nameColumns": "Checked",
+        "check": false
+      },
+      {
+        "nameRow": "ClassCastException",
+        "nameColumns": "Unchecked",
+        "check": true
+      },
+      {
+        "nameRow": "ClassNotFoundException",
+        "nameColumns": "Checked",
+        "check": true
+      },
+      {
+        "nameRow": "ClassNotFoundException",
+        "nameColumns": "Unchecked",
+        "check": false
+      }
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/8983",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "terminal returns the name of the directory you are currently using"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/10150",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "A step-by-step sequence of actions one needs to perform to achieve some useful result."
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/20725",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "A set of assembly instructions for building a piece of furniture",
+      "A recipe for baking a cake",
+      "A guide “How to wash a cat”",
+      "A list of instructions provided by a GPS navigator"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/20726",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "Learn to leverage existing algorithms from libraries for efficient solutions, and also develop the skill to design and implement your own algorithms when necessary.",
+      "To enhance problem-solving skills, enabling you to tackle a wide array of challenges in programming.",
+      "Learn to harness algorithmic efficiency, to optimize code performance and make the most of computing resources.",
+      "To acquire the capability to navigate complex problems with structured approaches, leading to streamlined solutions that are easier to implement and maintain."
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/20727",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "Hamlet left the kettle without water",
+      "Hamlet didn\u0027t add coffee beans",
+      "Hamlet forgot to add sugar"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/20728",
+    "checked": false,
+    "mode": 4,
+    "answerStr": "11"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/34939",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "EABFCD"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/4994",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "It describes the upper bound or worst-case scenario of an algorithm\u0027s growth rate concerning input size.",
+      "It can be used to measure the efficiency of algorithms."
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/13993",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "$O(n^2)$"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/13994",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "The first"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/1973",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "An object is an instance of some class.",
+      "Classes are used to create objects"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2967",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "A class describes a common structure for a set of objects.",
+      "Fields store the state of an object."
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/17538",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "car brand",
+      "passenger capacity",
+      "price"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/41809",
+    "checked": false,
+    "mode": 10,
+    "answerArr": [
+      "Integer",
+      "valueOf",
+      "toString"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/37132",
+    "checked": false,
+    "mode": 9,
+    "answerListArr": [
+      [
+        "}",
+        "6",
+        "0"
+      ],
+      [
+        "}",
+        "7",
+        "1"
+      ],
+      [
+        "System.out.println(\"Unboxed Integer: \" + unboxedInt);",
+        "4",
+        "2"
+      ],
+      [
+        "System.out.println(\"Boxed Integer: \" + boxedInt);",
+        "5",
+        "2"
+      ],
+      [
+        "Integer boxedInt \u003d Integer.valueOf(10);",
+        "3",
+        "2"
+      ],
+      [
+        "int unboxedInt \u003d boxedInt.intValue();",
+        "2",
+        "2"
+      ],
+      [
+        "public class Main {",
+        "0",
+        "1"
+      ],
+      [
+        "public static void main(String[] args) {",
+        "1",
+        "0"
+      ]
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/1964",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "Character; Integer"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2147",
+    "checked": false,
+    "mode": 4,
+    "answerStr": "8"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2148",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "Long val \u003d 4321L;",
+      "Long val \u003d Long.parseLong(\"4321\");",
+      "Long val \u003d Long.valueOf(\"4321\");"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2805",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "NullPointerException"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/11515",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "Enumeration helps to avoid errors in the code.",
+      "Enum makes the code readable and concise.",
+      "An enum type enables a variable to be a value from a set of predefined constants."
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/41617",
+    "checked": false,
+    "mode": 10,
+    "answerArr": [
+      "mathematical",
+      "essential",
+      "unnecessary",
+      "Encapsulation",
+      "external operations",
+      "Abstract Data Types (ADTs)"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/41612",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "Overall behavior and functions of data structures"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/41615",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "ADTs focus on overall behavior, while CDTs emphasize precise representations."
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/41611",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "Combining data and code into a single entity"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/32994",
+    "checked": false,
+    "mode": 10,
+    "answerArr": [
+      "push",
+      "pop",
+      "top",
+      "is_empty"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/33130",
+    "checked": false,
+    "mode": 10,
+    "answerArr": [
+      "push",
+      "pop",
+      "peek"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/5291",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "last-in-first-out (LIFO)"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/5292",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "Plates stacked over one another."
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/5296",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "c a b"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/24706",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "a plate with pancakes",
+      "a stack of CDs"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/4805",
+    "checked": false,
+    "mode": 5,
+    "answerStr": "https://github.com/yakushevso"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/4806",
+    "checked": false,
+    "mode": 5,
+    "answerStr": "https://github.com/yakushevso/my-first-project-with-java"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/4807",
+    "checked": false,
+    "mode": 6,
+    "answerListArr": [
+      [
+        "Issues",
+        "contains ideas, enhancements, bugs, questions, and so on."
+      ],
+      [
+        "Pull requests",
+        "contains proposals to make some changes in the project"
+      ],
+      [
+        "Insight",
+        "contains some stats and information about this repository."
+      ]
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/4808",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "Create an issue.",
+      "Open files within the code section."
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/16091",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "a container for project and its data"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/21849",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "main"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/21850",
+    "checked": false,
+    "mode": 5,
+    "answerStr": ".gitignore"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/21851",
+    "checked": false,
+    "mode": 5,
+    "answerStr": "https://github.com/frk1/steamhourboostv2/issues/68"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/3704",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "\"\\\\w\\\\w\\\\w-\\\\w\\\\w\\\\w\"",
+      "\"\\\\d\\\\d\\\\w\\\\W\\\\d\\\\d\\\\w\"",
+      "\"\\\\S\\\\S\\\\S\\\\S\\\\S\\\\S\\\\S\""
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/36800",
+    "checked": false,
+    "mode": 9,
+    "answerListArr": [
+      [
+        "git add .",
+        "6",
+        "0"
+      ],
+      [
+        "# Check status",
+        "5",
+        "0"
+      ],
+      [
+        "# Commit the changes",
+        "4",
+        "0"
+      ],
+      [
+        "git commit -m \"Initial commit\"",
+        "0",
+        "0"
+      ],
+      [
+        "# Add all files to the staging area",
+        "2",
+        "0"
+      ],
+      [
+        "git init",
+        "3",
+        "0"
+      ],
+      [
+        "# Initialize a new Git repository",
+        "1",
+        "0"
+      ],
+      [
+        "git status",
+        "7",
+        "0"
+      ]
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/32997",
+    "checked": false,
+    "mode": 10,
+    "answerArr": [
+      "git init",
+      "git config",
+      "git clone",
+      "git status"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/10896",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "on your hard drive",
+      "on a special online service"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/10897",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "repository"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/10898",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "track changes in your code",
+      "record changes in files",
+      "add files to GitHub"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/11056",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "local",
+      "remote"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/16119",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "a set of console utilities to store, control, change, and merge your codes"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/21112",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "git config --global user.name \"Ayubu\""
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/10902",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "the state of the repository at a specific point in time"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/10905",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "a special directory that contains programs in development"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/10907",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "-m \"commit text\""
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/10908",
+    "checked": false,
+    "mode": 5,
+    "answerStr": "git status"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/17536",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "git add program.py"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/17537",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "git commit"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/12301",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "git clone"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/12302",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "git push"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/12303",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "git push origin current_tasks"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/12304",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "git pull"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/12305",
+    "checked": false,
+    "mode": 7,
+    "answerArr": [
+      "git push origin main",
+      "git clone https://github.com/my_repository/code.git",
+      "git commit"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/12306",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "All team members have access to the current version of the project",
+      "It stores all the project data in one place"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/34861",
+    "checked": false,
+    "mode": 10,
+    "answerArr": [
+      "pull",
+      "origin"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/11190",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "checks out if the branch exists"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/11192",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "a copy of the original project"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/11193",
+    "checked": false,
+    "mode": 5,
+    "answerStr": "new_branch"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/11195",
+    "checked": false,
+    "mode": 5,
+    "answerStr": "git branch -d new_branch"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/19363",
+    "checked": false,
+    "mode": 5,
+    "answerStr": "git checkout my_branch"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/23831",
+    "checked": false,
+    "mode": 7,
+    "answerArr": [
+      "git commit -m \"Awesome routine! Finally done!” ",
+      "git checkout main",
+      "git checkout experimental",
+      "git branch experimental",
+      "git add Tom-Paris-holodeck-routine.hs",
+      "git branch"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/23832",
+    "checked": false,
+    "mode": 7,
+    "answerArr": [
+      "git merge experimental",
+      "git branch",
+      "git status",
+      "git checkout redundant",
+      "git checkout main",
+      "git branch -d redundant"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/11446",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "develop",
+      "main"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/11447",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "develop"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/11449",
+    "checked": false,
+    "mode": 5,
+    "answerStr": "git flow init"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/11450",
+    "checked": false,
+    "mode": 6,
+    "answerListArr": [
+      [
+        "develop",
+        "most recent published changes"
+      ],
+      [
+        "master",
+        "the source code ready to production"
+      ],
+      [
+        "",
+        "all files from your desktop"
+      ]
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/11451",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "initialize a gitflow repository",
+      "install gitflow"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/11452",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "master"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/16848",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "merge all changes into master"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/34862",
+    "checked": false,
+    "mode": 10,
+    "answerArr": [
+      "main",
+      "develop"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/11454",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "git flow release publish my_release 1.0"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/11459",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "git flow release pull"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/11460",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "develop"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/11455",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "pushed on a server"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/11457",
+    "checked": false,
+    "mode": 7,
+    "answerArr": [
+      "create a feature branch",
+      "merge feature into develop",
+      "merge the final version into master",
+      "initialize a repository",
+      "work on final steps in release branch",
+      "start working on the develop branch"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/11458",
+    "checked": false,
+    "mode": 6,
+    "answerListArr": [
+      [
+        "feature",
+        "new methods, functions and properties"
+      ],
+      [
+        "hotfix",
+        "errors to be mended"
+      ],
+      [
+        "release",
+        "the source code almost ready to production"
+      ],
+      [
+        "",
+        "most recent published changes"
+      ]
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/11678",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "git flow feature finish new_feature"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/17674",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "feature",
+      "release",
+      "hotfix"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/11542",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "move some changes to the target branch and rewrite history"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/11543",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "their whole history is preserved"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/11544",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "git merge",
+      "git rebase"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/11545",
+    "checked": false,
+    "mode": 5,
+    "answerStr": "pick"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/11546",
+    "checked": false,
+    "mode": 5,
+    "answerStr": "reword"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/11547",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "$ git checkout feature"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/11548",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "simplifies change history"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/11463",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "saving your current project version"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/11464",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "staged",
+      "modified",
+      "committed"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/11465",
+    "checked": false,
+    "mode": 7,
+    "answerArr": [
+      "change files in working directory",
+      "add files to the staging area",
+      "commit changes"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/11467",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "settings for working with your repository"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/11679",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "project version image"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/10912",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "any user who has access to the repository"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/10913",
+    "checked": false,
+    "mode": 6,
+    "answerListArr": [
+      [
+        "git log",
+        "shows the list of all commits and their IDs"
+      ],
+      [
+        "commit --amend",
+        "changes commit after making it"
+      ],
+      [
+        "git revert",
+        "rolls back all changes made in the commit"
+      ],
+      [
+        "git show",
+        "shows what\u0027s new in the commit"
+      ],
+      [
+        "git checkout",
+        " switch to a branch or a commit"
+      ]
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/10915",
+    "checked": false,
+    "mode": 5,
+    "answerStr": "git commit --amend"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/10917",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "only the new_file.txt with its text"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/10918",
+    "checked": false,
+    "mode": 5,
+    "answerStr": "The algorithm of the future project will be described here."
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/16845",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "git diff"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/11535",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "commit hash",
+      "author\u0027s name",
+      "commit time and date"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/11536",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "finds commits with the keyword in the description"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/11539",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "all commits with changes in code.py"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/11534",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "git log -G new code.py"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/11537",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "Commit message with changed files list"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/11538",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "git log -n 1 code.py"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/11540",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "git show",
+      "git log"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/2490",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "Bytecode verifier",
+      "Garbage collector",
+      "Class loader",
+      "Bytecode interpreter and/or just-in-time (JIT) compiler"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/30965",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "Cache memory acts as a buffer between CPU and main memory.",
+      "ROM (Read Only Memory) falls under primary memory."
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/18050",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "Dynamic Random Access Memory"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/18051",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "the registers and the main memory"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/18052",
+    "checked": false,
+    "mode": 6,
+    "answerListArr": [
+      [
+        "Registers",
+        "Fastest and smallest memory built into the CPU"
+      ],
+      [
+        "Cache",
+        "Memory that is inserted in between the CPU and main memory"
+      ],
+      [
+        "Non-Volatile Memory",
+        "Memory that can store data permanently even when power is not supplied"
+      ]
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/18053",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "Hard disk",
+      "Solid State Drives",
+      "DVD"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/18054",
+    "checked": false,
+    "mode": 6,
+    "answerListArr": [
+      [
+        "Address register",
+        "holds addresses"
+      ],
+      [
+        "Data register",
+        "holds data in the form of bits for integers, characters, an array of bits, etc"
+      ],
+      [
+        "Condition register",
+        "holds truth value; a boolean"
+      ],
+      [
+        "Instruction register",
+        "holds the instructions that are being executed by the processor"
+      ]
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/18055",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "Secondary storage"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/5136",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "local variables",
+      "return address of the method",
+      "parameters"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/6726",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "the method is completed"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/6728",
+    "checked": false,
+    "mode": 7,
+    "answerArr": [
+      "push main frame",
+      "push printMult frame",
+      "pop main frame",
+      "pop mult frame",
+      "push mult frame",
+      "pop printMult frame"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/6729",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "g()"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/15164",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "To clean the memory from unused objects"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/13934",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "Full-stack developer"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/13937",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "XML",
+      "HTML"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/20511",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "Server-side",
+      "Client-side"
+    ]
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/25521",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "JSON"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/19907",
+    "checked": false,
+    "mode": 1,
+    "answerStr": "Batch script - chain of commands in batch file on Windows OS"
+  },
+  {
+    "url": "https://hyperskill.org/learn/step/14851",
+    "checked": false,
+    "mode": 2,
+    "answerArr": [
+      "misunderstanding requirements as they were not clear"
     ]
   }
 ]
