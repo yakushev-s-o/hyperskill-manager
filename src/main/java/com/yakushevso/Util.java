@@ -41,6 +41,7 @@ public class Util {
         // Create an instance of the driver in the background if "true"
         if (visible) {
             options.addArguments("--start-maximized");
+            options.addArguments("--lang=es");
             log.debug("WebDriver is set to visible mode.");
         } else {
             options.addArguments("--headless");

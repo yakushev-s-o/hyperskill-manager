@@ -332,15 +332,15 @@ public class Automation {
 
     // Remove unnecessary characters
     private String formatText(String text) {
-        text = text.replaceAll("\u0026amp;", "\u0026")
-                .replaceAll("\u0026gt;", "\u003e")
-                .replaceAll("\u0026lt;", "\u003c")
-                .replaceAll("\u0026le;", "\u2264")
-                .replaceAll("\u0026ge;", "\u2265")
-                .replaceAll("\u0026#x27;", "\u0027")
-                .replaceAll("\u003cbr\u003e", "")
-                .replaceAll("\u003cb\u003e", "")
-                .replaceAll("\u003c/b\u003e", "")
+        text = text.replaceAll("&amp;", "&")
+                .replaceAll("&gt;", ">")
+                .replaceAll("&lt;", "<")
+                .replaceAll("&le;", "\u2264")
+                .replaceAll("&ge;", "\u2265")
+                .replaceAll("&#x27;", "'")
+                .replaceAll("<br>", "")
+                .replaceAll("<b>", "")
+                .replaceAll("</b>", "")
                 .replaceAll("<code>", "")
                 .replaceAll("</code>", "")
                 .replaceAll("&quot;", "\"");
@@ -519,9 +519,9 @@ public class Automation {
 
     // Write the answer in the field with the code
     private void sendCode(String code) {
-        Util.waitDownloadElement(DRIVER, "//div[@class='cm-content']");
+        Util.waitDownloadElement(DRIVER, "//div[@class='cm-content'][@contenteditable='true']");
 
-        WebElement element = DRIVER.findElement(By.xpath("//div[@class='cm-content']"));
+        WebElement element = DRIVER.findElement(By.xpath("//div[@class='cm-content'][@contenteditable='true']"));
         element.clear();
 
         JavascriptExecutor executor = (JavascriptExecutor) DRIVER;
@@ -710,12 +710,10 @@ public class Automation {
             boolean checkTrue = true;
             while (checkTrue) {
                 for (int j = 1; j <= correctAnswers.length; j++) {
-                    String upArrow = "//div[@class='step-problem']" +
-                            "/div/span/div[" + j + "]/div[2]/button[1]";
-                    String downArrow = "//div[@class='step-problem']" +
-                            "/div/span/div[" + j + "]/div[2]/button[2]";
-                    WebElement answer = DRIVER.findElement(By.xpath("//div[@class='step-problem']" +
-                            "/div/span/div[" + j + "]/div[1]/div[2]/span"));
+                    String upArrow = "//div[@class='step-problem']//div[" + j + "]/div[2]/button[1]";
+                    String downArrow = "//div[@class='step-problem']//div[" + j + "]/div[2]/button[2]";
+                    WebElement answer = DRIVER.findElement(By.xpath(
+                            "//div[@class='step-problem']//div[" + j + "]/div[1]/div[2]/span"));
 
                     if (answer.getText().equals(correctAnswers[i - 1])) {
                         if (i != j) {
@@ -841,12 +839,10 @@ public class Automation {
 
             // Determine the current line position
             for (int j = 1; j <= correctAnswers.length; j++) {
-                String line = "//div[@class='parsons-problem']//div/span/div[" + j + "]/div[2]";
+                String line = "//div[@class='parsons-problem']//div/div/div[" + j + "]/div[2]/div/pre/code";
+                String textLine = DRIVER.findElement(By.xpath(line)).getText();
 
-                WebElement element;
-                element = DRIVER.findElement(By.xpath(line));
-
-                if (element.getText().equals(correctAnswer[0])) {
+                if (textLine.equals(correctAnswer[0])) {
                     position = j;
                     break;
                 }
@@ -854,11 +850,8 @@ public class Automation {
 
             boolean check = true;
             while (check) {
-                String upArrow = "//div[@class='parsons-problem']" +
-                        "//div/span/div[" + position + "]/div[3]/button[1]";
-
-                String downArrow = "//div[@class='parsons-problem']" +
-                        "//div/span/div[" + position + "]/div[3]/button[2]";
+                String upArrow = "//div[@class='parsons-problem']//div[" + position + "]/div[3]/button[1]";
+                String downArrow = "//div[@class='parsons-problem']//div[" + position + "]/div[3]/button[2]";
 
                 // Change the line position
                 if (position - 1 != Integer.parseInt(correctAnswer[1])) {
@@ -876,8 +869,7 @@ public class Automation {
                     actions.moveToElement(arrow).click().perform();
                     Util.delay(500);
                 } else {
-                    String rightLevel = "//div[@class='parsons-problem']" +
-                            "//div/span/div[" + position + "]/div[1]/button[2]";
+                    String rightLevel = "//div[@class='parsons-problem']//div[" + position + "]/div[1]/button[2]";
 
                     // Change indentation position
                     for (int i = 0; i < Integer.parseInt(correctAnswer[2]); i++) {
