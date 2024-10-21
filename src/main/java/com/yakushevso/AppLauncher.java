@@ -30,7 +30,7 @@ public class AppLauncher {
 
             System.out.println("""
                     Enter mode number:
-                    1. Get data
+                    1. Data
                     2. Save pages
                     3. Get answers
                     4. Send answers
@@ -249,6 +249,7 @@ public class AppLauncher {
                     Enter mode number:
                     1. Update data
                     2. Last statistic
+                    3. Un skip themes
                     0. Return""");
 
             checkInputNum();
@@ -280,6 +281,23 @@ public class AppLauncher {
                     int lastStats = Util.getScanner().nextInt();
                     log.info("Displaying the latest {} statistics entries.", lastStats);
                     dataManager.printStats(lastStats);
+                }
+                case 3 -> {
+                    System.out.println("The process of canceling the skipping of topics has been started:");
+
+                    try {
+                        WebDriver driver = Util.createDriver(true);
+                        Automation automation = new Automation(driver, userSession);
+
+                        Util.login(driver, userSession.getAccount().login(),
+                                userSession.getAccount().password());
+                        automation.unSkipThemes(driver);
+
+                        Util.closeDriver(driver);
+                    } catch (Exception e) {
+                        log.error("An error occurred in the process of canceling the topic passes: {}", e.getMessage(), e);
+                        System.out.println("An error occurred in the process of canceling the topic passe.");
+                    }
                 }
                 case 0 -> {
                     log.info("Returning from Data Menu.");

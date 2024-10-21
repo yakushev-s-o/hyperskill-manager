@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class Automation {
     private final WebDriver DRIVER;
@@ -29,6 +30,50 @@ public class Automation {
         DRIVER = driver;
         TRACK = userSession.getTrack();
         USER_ID = userSession.getAccount().id();
+    }
+
+    public void unSkipThemes(WebDriver driver) {
+        log.info("Starting to unSkip themes for track: {}", TRACK);
+
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        Data data = DataManager.getFileData(Data.class, "src/main/resources/data-list-" + TRACK + ".json");
+
+        if (data == null) {
+            log.error("Failed to load data for track: {}. It is not possible to continue canceling the skipping of themes.", TRACK);
+            return;
+        }
+
+        for (Step step : data.steps()) {
+            if (step.skippedTopic()) {
+                try {
+                    log.debug("Loading theme page: {}", step.id());
+                    driver.get("https://hyperskill.org/learn/step/" + step.id());
+                    String unSkipButton = "//button//span[text() = 'Un skip this topic']";
+                    Util.waitDownloadElement(driver, unSkipButton);
+                    Util.delay(1000);
+                    WebElement element = driver.findElement(By.xpath(unSkipButton));
+                    new Actions(driver).moveToElement(element).click().perform();
+                    log.debug("Skipping a topic has been canceled: {}", step.id());
+                    Util.delay(1000);
+                    String skipButton = "//button//span[text() = 'Skip this topic']\n";
+                    Util.waitDownloadElement(driver, skipButton);
+
+                    step.setSkippedTopic(false);
+
+                    try {
+                        FileWriter writer = new FileWriter("src/main/resources/data-list-" + TRACK + ".json");
+                        gson.toJson(data, writer);
+                        writer.close();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                } catch (Exception e) {
+                    log.error("Failed to unSkip theme {}: {}", step.id(), e.getMessage(), e);
+                }
+            }
+        }
+
+        log.info("The skipping of topics has been successfully canceled for track: {}", TRACK);
     }
 
     // Get all the correct answers and save them to a file one by one
@@ -261,7 +306,7 @@ public class Automation {
             String attribute = element.getAttribute("click-event-target");
             Actions actions = new Actions(DRIVER);
 
-            switch (attribute) {
+            switch (Objects.requireNonNull(attribute)) {
                 case "retry" -> {
                     actions.moveToElement(element).click().perform();
 
@@ -335,8 +380,8 @@ public class Automation {
         text = text.replaceAll("&amp;", "&")
                 .replaceAll("&gt;", ">")
                 .replaceAll("&lt;", "<")
-                .replaceAll("&le;", "\u2264")
-                .replaceAll("&ge;", "\u2265")
+                .replaceAll("&le;", "≤")
+                .replaceAll("&ge;", "≥")
                 .replaceAll("&#x27;", "'")
                 .replaceAll("<br>", "")
                 .replaceAll("<b>", "")

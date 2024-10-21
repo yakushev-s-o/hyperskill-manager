@@ -84,7 +84,7 @@ public class Util {
             passwordField.sendKeys(password);
 
             signInButton.click();
-            waitDownloadElement(driver, "//div[@class='tw-flex-1 -tw-mt-px']");
+            waitDownloadElement(driver, "//*[@id=\"main\"]/div");
             log.info("Successfully logged in. User: {}", login);
         } catch (Exception e) {
             log.error("Account login error: {}", e.getMessage(), e);
